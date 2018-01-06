@@ -86,7 +86,8 @@ KEYWORDS: ionic liquids, spectroscopic map, carbon capture, vibrational spectros
 
 The primary challenge for connecting molecular dynamics (MD) simulations to linear and two-dimensional infrared (2D-IR) measurements is the calculation of the vibrational frequency for the chromophore of interest. Computing the vibrational frequency at each time step of the simulation with a quantum mechanical method like density functional theory (DFT) is generally prohibitively expensive. One approach to circumnavigate this problem is the use of spectroscopic maps.  Spectroscopic maps are empirical relationships that correlate the frequency of interest to properties of the surrounding solvent that are readily accessible in the MD simulation. Here, we develop a spectroscopic map for the asymmetric stretch of \ce{CO2} in the 1-butyl-3-methylimidazolium hexafluorophosphate (\ce{[C4C1im][PF6]}) ionic liquid (IL). DFT is used to compute the vibrational frequency of 500 statistically independent \ce{CO2}-\ce{[C4C1im][PF6]} clusters extracted from an MD simulation. When the map was tested on a 500 different \ce{CO2}-\ce{[C4C1im][PF6]} clusters, the correlation coefficient between the benchmark frequencies and the predicted frequencies was R = 0.94 and the root mean squared error was 2.7 cm\textsuperscript{-1}. The calculated distribution of frequencies also agrees well with experiment. The spectroscopic map required information about the \ce{CO2} angle, the electrostatics of the surrounding solvent, and the Lennard-Jones interaction between the \ce{CO2} and the IL. The contribution of each term in the map was investigated with symmetry-adapted perturbation theory (SAPT) calculations.
 
-\textbf{I. Introduction}
+\section{Introduction}
+\label{paper_03:sec:I}
 
 Ionic liquids (ILs) have attracted tremendous attention because of their properties as environmentally friendly alternatives to volatile organic solvents, and their applications involving the production, storage, and efficient utilization of energy.\textsuperscript{1--5} ILs exhibit unique physical properties relative to conventional liquids in terms of vapor pressure, viscosity, electrical and thermal conductivity, solubility of polar and nonpolar molecules, and melting point.\textsuperscript{5--9} Moreover, these properties can be tuned to specific applications by chemically modifying the molecules that comprise the liquid. For example, by functionalizing the molecules of an IL to react with \ce{CO2}, improved design for preferentially separating \ce{CO2} from gas mixtures was achieved.\textsuperscript{9--13} Thus, ILs offer a promising new direction for the removal of environmentally harmful \ce{CO2} from postcombustion flue gas.
 
@@ -106,55 +107,63 @@ In addition to the intermolecular interactions, \ce{CO2} has an important intram
 
 The paper is organized as follows. In Section II the details of the MD simulations and the anharmonic vibrational frequency calculations are described. In Section III, the spectroscopic map is constructed. In Section IV, the spectroscopic map is validated by comparison to experiment. In Section V, the contributions of the electrostatic, exchange repulsion, and dispersive interactions in the spectroscopic map are analyzed with ALMO and SAPT calculations. Finally, in Section VI we provide some concluding remarks.
 
-\textbf{II. Computational Methods}
+\section{Computational Methods}
+\label{paper_03:sec:II}
 
 Molecular dynamics (MD) simulations were performed using the large-scale atomic/molecular massively parallel simulator (LAMMPS)\textsuperscript{72} with a time step of 2 fs. 256 ion pairs of \ce{[C4C1im][PF6]} and one molecule of \ce{CO2} were simulated at 300 K in a cubic box with periodic boundary conditions. Previous studies have confirmed that 256 ion pairs is a sufficiently large simulation box to mitigate finite-size effects.\textsuperscript{73} The original atomic coordinates and box size (45 Å) were generated from a previous study of \ce{[C4C1im][PF6]} containing a single water solute, which had been subjected to a rigorous equilibration protocol.\textsuperscript{61} The water was replaced with a \ce{CO2} solute, and was subjected to the following equilibration procedure: (1) 1 ns in the NVT ensemble at 300 K, (2) heating to 600 K over 1 ns, (3) cooling to 300 K over 1 ns, (4) 1 ns in the NVT ensemble at 300 K, and (5) 1 ns in the NVE ensemble. Production run trajectories were collected in the NVE ensemble. Energy conservation was excellent, with fits to the energy and temperature over 10 ns revealing slopes of 3.3 × 10\textsuperscript{-5} kcal mol\textsuperscript{-1} ps\textsuperscript{-1} and 9.8 × 10\textsuperscript{-6} K ps\textsuperscript{-1}, respectively. All molecules were modeled as fully flexible except for bonds containing hydrogen, which were held fixed at their equilibrium lengths using the SHAKE algorithm.\textsuperscript{74,75} Also, in certain cases (see below), the \ce{CO2} bond lengths and angle were held fixed at their equilibrium values using the LAMMPS rigid integrator.\textsuperscript{72} The force fields for \ce{[C4C1im][PF6]} were the same as in our previous simulation studies involving this IL.\textsuperscript{61} Briefly, the bends, bonds, dihedrals, and Lennard-Jones parameters for {[}C\textsubscript{4}C\textsubscript{1}im{]}\textsuperscript{+} are from the generalized Amber force field (GAFF),\textsuperscript{76,77} and partial charges were obtained from DFT calculations.\textsuperscript{78} The {[}PF\textsubscript{6}{]}\textsuperscript{−} force field parameters were from the work of Liu \emph{et al}.\textsuperscript{79} Charges on the ions were scaled by 0.84 to empirically account for charge transfer and polarization effects in the IL.\textsuperscript{80,81} \ce{CO2} was modeled using the TraPPE force field, with additional terms developed by Perez-Blanco and Maginn for flexible bond lengths and angle.\textsuperscript{82,83} Lennard-Jones interactions were truncated at 15 Å and the long-ranged electrostatics were computed using particle-mesh Ewald summation with a 15 Å real space cutoff.\textsuperscript{84}
 
 In order to create a spectroscopic map, 1000 statistically independent snapshots separated by 50 ps were collected from a pair of 50 ns simulations, one with a fully flexible \ce{CO2} and a second with a fully rigid \ce{CO2}. For each snapshot, the Born-Oppenheimer potential energy surface (PES) for \ce{CO2} stretching modes was obtained from single point energy calculations performed as the CO bond lengths were stretched from 0.955 Å to 1.45 Å in 0.045 Å steps. During these calculations, the nearest two pairs of ions by center of mass were included quantum mechanically, and the remaining ions within 20 Å were included as their point charges from the MD force field. The resulting PES was included in a discretized construction of the Hamiltonian for CO stretches, which was then diagonalized, producing the asymmetric stretch frequency. More details about this method can be found in paper 1 of this series. Least squares multiple linear regression was used to empirically fit the electric field due to the anions and cations along the CO bonds and the Lennard-Jones potential energy on the \ce{CO2} carbon and oxygens to the asymmetric stretch of \ce{CO2} for 500 of the flexible snapshots, and the accuracy of the resulting fit was tested using the remaining 500 snapshots. 500 of the rigid snapshots were used as a secondary test set. This is described in more detail in section IV.  In certain cases, the \ce{CO2} angle from the flexible simulation was relaxed holding all other degrees-of-freedom and the \ce{CO2} center of mass fixed prior to vibrational frequency calculations for further analysis. This is discussed further in Section V.B.
 
-\textbf{III. Spectroscopic Map for \ce{CO2} Vibrations}
+\section{Spectroscopic Map for \ce{CO2} Vibrations}
+\label{paper_03:sec:III}
 
 Empirical spectroscopic maps relate the instantaneous vibrational frequency of an IR reporter to properties of its surroundings that can be readily accessed in MD simulations.\textsuperscript{47,61,85} Once a spectroscopic map has been parameterized, it can be used to calculate IR absorption spectra, 2D-IR spectra, and frequency fluctuation time correlation functions from a MD simulation. For the asymmetric stretch of \ce{CO2} in \ce{[C4C1im][PF6]}, we were unable to obtain a suitably accurate spectroscopic map from electrostatics alone. Instead, we needed to include information about the \ce{CO2} bend angle, as well as the Lennard-Jones (LJ) interactions between \ce{CO2} and the surrounding IL. The spectroscopic map has the following form
 
-\[\omega_{a} = \ \omega_{g} + \Delta\omega_{\mathrm{\theta}} + \ \Delta\omega_{\mathrm{\text{solvent}}}\]
+\begin{equation}
+  \label{paper_03:eq:1}
+  \omega_{a} = \omega_{g} + \Delta\omega_{\theta} + \Delta\omega_{\text{solvent}}
+\end{equation}
 
-(1)
+where \(\omega_{a}\) is the predicted \ce{CO2} asymmetric stretch vibrational frequency, \(\omega_{g}\) is the experimental gas phase frequency (2349.1 cm\textsuperscript{-1}), \(\Delta\omega_{\mathrm{\theta}}\) is the dependence of the frequency on the OCO bend angle, and \(\Delta\omega_{\mathrm{\text{solvent}}}\) captures the change in the vibrational frequency due to interactions with the IL solvent. Figure~\ref{paper_03:fig3} shows the dependence of the \ce{CO2} asymmetric stretch vibrational frequency on the OCO angle, \(\theta\), calculated for \ce{CO2} isolated in the gas-phase.  The calculated data are fit exquisitely well (\(R^{2}\) = 0.999) by the single-parameter function
 
-where \(\omega_{a}\) is the predicted \ce{CO2} asymmetric stretch vibrational frequency, \(\omega_{g}\) is the experimental gas phase frequency (2349.1 cm\textsuperscript{-1}), \(\Delta\omega_{\mathrm{\theta}}\) is the dependence of the frequency on the OCO bend angle, and \(\Delta\omega_{\mathrm{\text{solvent}}}\) captures the change in the vibrational frequency due to interactions with the IL solvent. Figure 3 shows the dependence of the \ce{CO2} asymmetric stretch vibrational frequency on the OCO angle, \(\theta\), calculated for \ce{CO2} isolated in the gas-phase.  The calculated data are fit exquisitely well (\(R^{2}\) = 0.999) by the single-parameter function
+\begin{equation}
+  \label{paper_03:eq:2}
+  \Delta\omega_{\theta} = a(1 + \cos{\theta})
+\end{equation}
 
-\[\Delta\omega_{\theta} = a(1 + \cos{\theta)}\]
+where \(a = -1160.9\ \mathrm{cm}^{\mathrm{-1}}\).
 
-(2)
-
-where \(a = - 1160.9\ \mathrm{c}\mathrm{m}^{\mathrm{- 1}}.\)
-
-Figure 3 also shows the vibrational frequency of 500 statistically independent \ce{CO2}/\ce{[C4C1im][PF6]} snapshots. The vibrational frequencies were calculated using the DVR approach described in paper 1 in this series. In these calculations, the \ce{CO2} and the closest two pairs of {[}C­\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} molecules -- determined using the distance between the center-of-mass of the IL molecule and the \ce{CO2} carbon atom -- were treated quantum mechanically at the B3LYP/6-311++G(d,p) level of theory. Any IL molecule whose center-of-mass was within 20 Å was modeled using its molecular mechanics partial atomic charges, which then polarize the quantum mechanical region. IL molecules were added to the molecular mechanics region in pairs to maintain charge neutrality. The overall trend in the vibrational frequencies roughly follows the angle dependence in the gas phase, but there is significant scatter due to interactions with the IL.
+Figure~\ref{paper_03:fig3} also shows the vibrational frequency of 500 statistically independent \ce{CO2}/\ce{[C4C1im][PF6]} snapshots. The vibrational frequencies were calculated using the DVR approach described in paper 1 in this series. In these calculations, the \ce{CO2} and the closest two pairs of {[}C­\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} molecules -- determined using the distance between the center-of-mass of the IL molecule and the \ce{CO2} carbon atom -- were treated quantum mechanically at the B3LYP/6-311++G(d,p) level of theory. Any IL molecule whose center-of-mass was within 20 \AA{} was modeled using its molecular mechanics partial atomic charges, which then polarize the quantum mechanical region. IL molecules were added to the molecular mechanics region in pairs to maintain charge neutrality. The overall trend in the vibrational frequencies roughly follows the angle dependence in the gas phase, but there is significant scatter due to interactions with the IL.
 
 A map for the solvent effects on the asymmetric \ce{CO2} vibrational frequency was constructed assuming the following form,
 
-\[\Delta\omega_{\mathrm{\text{solvent}}} = b_{1}E_{\mathrm{O}}^{\text{Cation}} + b_{2}E_{\mathrm{O}}^{\text{Anion}} + c_{1}U_{\mathrm{O}} + c_{2}U_{\mathrm{C}}\]
+\begin{equation}
+  \label{paper_03:eq:3}
+  \Delta\omega_{\text{solvent}} = b_{1}E_{\ce{O}}^{\text{Cation}} + b_{2}E_{\ce{O}}^{\text{Anion}} + c_{1}U_{\ce{O}} + c_{2}U_{\ce{C}}
+\end{equation}
 
-(3)
+where \(E\) and \(U\) represent contributions from the electric field and Lennard-Jones (LJ) interactions with the solvent, respectively. The subscript, \ce{C} or \ce{O}, indicates whether the interaction is computed at the location of the \ce{CO2} central carbon or at the oxygen atoms. For \(E_{\ce{O}}\) and \(U_{\ce{O}}\), the value used in Eq.~(\ref{paper_03:eq:3}) is the average for the two \ce{CO2} oxygen sites. The LJ interaction is computed using the expression,
 
-where \(E\) and \(U\) represent contributions from the electric field and Lennard-Jones (LJ) interactions with the solvent, respectively. The subscript, C or O, indicates whether the interaction is computed at the location of the \ce{CO2} central carbon or at the oxygen atoms. For \(E_{O}\) and \(U_{O}\), the value used in Eq. (3) is the average for the two \ce{CO2} oxygen sites. The LJ interaction is computed using the expression,
+\begin{equation}
+  \label{paper_03:eq:4}
+  U = \ \sum_{j}^{}\varepsilon_{j}\left\lbrack \left( \frac{\sigma_{j}}{r_{j}} \right)^{12} - \left( \frac{\sigma_{j}}{r_{j}} \right)^{6} \right\rbrack
+\end{equation}
 
-\[U = \ \sum_{j}^{}\varepsilon_{j}\left\lbrack \left( \frac{\sigma_{j}}{r_{j}} \right)^{12} - \left( \frac{\sigma_{j}}{r_{j}} \right)^{6} \right\rbrack\]
+where the sum is over all atoms in the surrounding liquid, \(\varepsilon_{j}\) and \(\sigma_{j}\) are the LJ parameters for the atom, and \(r_{j}\) is the distance to the atom. The electric fields are calculated with respect to the oxygen atoms of \ce{CO2} and are projected along the relevant \ce{CO} bond,
 
-(4)
+\begin{equation}
+  \label{paper_03:eq:5}
+  E = {\hat{r}}_{\ce{CO}} \cdot \sum_{j}^{}\frac{q_{j}{\hat{r}}_{j}}{r_{j}^{2}}
+\end{equation}
 
-where the sum is over all atoms in the surrounding liquid, \(\varepsilon_{j}\) and \(\sigma_{j}\) are the LJ parameters for the atom, and \(r_{j}\) is the distance to the atom. The electric fields are calculated with respect to the oxygen atoms of \ce{CO2} and are projected along the relevant CO bond,
+where the sum is over all relevant atoms in in the surrounding liquid (i.e. those associated with the cations for \(E_{\ce{O}}^{\text{Cation}}\) and those associated with the anions for \(E_{\ce{O}}^{\text{Anion}}\)), \(q_{j}\) is the partial atomic charge, \(r_{j}\) is the distance to the charge, \({\hat{r}}_{j}\) is a unit-vector directed toward the site of the charge, and \({\hat{r}}_{\ce{CO}}\) is a unit vector from the carbon atom of \ce{CO2} to the relevant oxygen atom. Long range electrostatics are corrected using the damped shifted force method.\textsuperscript{86}
 
-\[E = {\widehat{r}}_{\mathrm{\text{CO}}} \cdot \sum_{j}^{}\frac{q_{j}{\widehat{r}}_{j}}{r_{j}^{2}}\]
+The four parameters, \(b_{1}\), \(b_{2}\), \(c_{1}\), and \(c_{2}\), in Eq.~(\ref{paper_03:eq:3}) were determined empirically by applying multiple linear regression using the 500 calculated frequencies in the training set (Table 1). The quality of the fit was evaluated using the 500 different frequencies contained in the test set (Figure~\ref{paper_03:fig2}). The root-mean-square (RMS) deviation between the test set frequencies and those predicted by Eq.~(\ref{paper_03:eq:3}) was 2.7 cm\textsuperscript{-1}, and the value of correlation coefficient for the fit was R = 0.94. By both metrics, the quality of the spectroscopic map for predicting the \ce{CO2} asymmetric stretch vibrational frequencies in the {[}C\textsubscript{4}C\textsubscript{1}IM{]}{[}PF\textsubscript{6}{]} IL is as good or better than previously published maps for other vibrational reporters in conventional solvents. Additionally, when 500 rigid \ce{CO2} snapshots are used as the test set, the same level of accuracy is obtained.
 
-(5)
+The Condon approximation, that the magnitude of the transition dipole moment is independent of the vibrational frequency of a mode, fails for some solutes that interact in a strong local way with their environment.  The most important example is the OH stretch of liquid water. The hydrogen bonds in water polarize the OH bond, increasing the oscillator strength on the red side of the vibrational band, which has a significant effect on the IR absorption line shape.\textsuperscript{63,64,87} Similar to the hydrogen bonding of water, the strong local interactions of \ce{CO2} with the ionic liquid anion could, in principle, cause the Condon approximation to fail. However, we find that the Condon approximation for the main band is adequate (Figure~\ref{paper_03:fig3}). We calculated the transition dipole moment integral, \(\mu_{01}\), of the asymmetric stretch of \ce{CO2} in 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters. The details of the transition dipole moment integral calculations are provided in the Supporting Information (SI). A plot of \(\mu_{01}\) scaled by \(\mu_{01}^{g}\), the transition dipole moment integral of the asymmetric stretch of \ce{CO2} in the gas-phase, versus the asymmetric stretch vibrational frequency, \(\omega_{a}\), has a slope close to zero. This confirms that it is reasonable to regard the transition dipole as a constant factor that scales the intensity of linear and non-linear spectra but does not modify their shapes. As a result, we do not treat the environmental dependence of the transition dipole moment in our spectroscopic map; we need only treat the vibrational frequencies.
 
-where the sum is over all relevant atoms in in the surrounding liquid (i.e. those associated with the cations for \(E_{\mathrm{O}}^{\text{Cation}}\) and those associated with the anions for \(E_{\mathrm{O}}^{\text{Anion}}\)), \(q_{j}\) is the partial atomic charge, \(r_{j}\) is the distance to the charge, \({\widehat{r}}_{j}\) is a unit-vector directed toward the site of the charge, and \({\widehat{r}}_{\mathrm{\text{CO}}}\) is a unit vector from the carbon atom of \ce{CO2} to the relevant oxygen atom. Long range electrostatics are corrected using the damped shifted force method.\textsuperscript{86}
-
-The four parameters, \(b_{1}\), \(b_{2}\), \(c_{1}\), and \(c_{2}\), in Eq. (3) were determined empirically by applying multiple linear regression using the 500 calculated frequencies in the training set (Table 1). The quality of the fit was evaluated using the 500 different frequencies contained in the test set (Figure 2). The root-mean-square (RMS) deviation between the test set frequencies and those predicted by Eq. (3) was 2.7 cm\textsuperscript{-1}, and the value of correlation coefficient for the fit was R = 0.94. By both metrics, the quality of the spectroscopic map for predicting the \ce{CO2} asymmetric stretch vibrational frequencies in the {[}C\textsubscript{4}C\textsubscript{1}IM{]}{[}PF\textsubscript{6}{]} IL is as good or better than previously published maps for other vibrational reporters in conventional solvents. Additionally, when 500 rigid \ce{CO2} snapshots are used as the test set, the same level of accuracy is obtained.
-
-The Condon approximation, that the magnitude of the transition dipole moment is independent of the vibrational frequency of a mode, fails for some solutes that interact in a strong local way with their environment.  The most important example is the OH stretch of liquid water. The hydrogen bonds in water polarize the OH bond, increasing the oscillator strength on the red side of the vibrational band, which has a significant effect on the IR absorption line shape.\textsuperscript{63,64,87} Similar to the hydrogen bonding of water, the strong local interactions of \ce{CO2} with the ionic liquid anion could, in principle, cause the Condon approximation to fail. However, we find that the Condon approximation for the main band is adequate (Figure 3). We calculated the transition dipole moment integral, \(\mu_{01}\), of the asymmetric stretch of \ce{CO2} in 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters. The details of the transition dipole moment integral calculations are provided in the Supporting Information (SI). A plot of \(\mu_{01}\) scaled by \(\mu_{01}^{g}\), the transition dipole moment integral of the asymmetric stretch of \ce{CO2} in the gas-phase, versus the asymmetric stretch vibrational frequency, \(\omega_{a}\), has a slope close to zero. This confirms that it is reasonable to regard the transition dipole as a constant factor that scales the intensity of linear and non-linear spectra but does not modify their shapes. As a result, we do not treat the environmental dependence of the transition dipole moment in our spectroscopic map; we need only treat the vibrational frequencies.
-
-\textbf{IV. Physical Interpretation of the Spectroscopic Map}
+\section{Physical Interpretation of the Spectroscopic Map}
+\label{paper_03:sec:IV}
 
 The average contribution to the \ce{CO2} asymmetric stretch vibrational frequency from each of the map components is listed in Table 2. This data demonstrates that the Lennard-Jones potential energy is an important predictor of the vibrational frequency of \ce{CO2} solvated in \ce{[C4C1im][PF6]}, while the electrostatic potential plays a secondary role. This contrasts many prior spectroscopic maps where solvatochromic frequency shifts were based purely on the electrostatics of the environment.\textsuperscript{47,62,88} This finding is perhaps surprising at first, because one might expect electrostatics to dominate the interactions of a solute with charged solvent molecules; however, one has to consider that (1) \ce{CO2} is not dipolar or charged, and as such will not interact with uniform electric fields very strongly, and (2) the ionic liquid, particularly the {[}C\textsubscript{4}C\textsubscript{1}im{]} butyl tails, have large domains where the dominant interactions are dispersive. These points make it conceivable that van der Waals effects dominate the \ce{CO2}-IL interaction.
 
@@ -162,63 +171,71 @@ To further unravel the origin of the impact of \ce{CO2}-IL interactions on the v
 
 It is likely that LJ components will be an important component of a spectroscopic map for any neutral and nonpolar solute, or any solvent where dispersive interactions, quantum effects (Pauli exchange, for instance), or higher order electrostatic interactions are particularly important. In our case, it seems logical that a higher potential at the carbon would increase the optimal length of the CO bonds, thus decreasing the local mode and normal mode frequencies. Meanwhile, at the oxygen, a larger potential would generally shorten the bond, increasing the frequency. A similar finding was observed by Brinzer \emph{et al}.\textsuperscript{23} However, these components only allow the \ce{CO2} vibration to respond to local effects -- the electric field components allow it to respond to longer-range interactions. As in prior works for different solvents and solutes, the coefficients for the two electric field components are different from each other, in this case by a substantial margin. It has been previously established that \ce{CO2} interacts with the anions more strongly than with the cations in an ionic liquid.\textsuperscript{13,89--93} This is reflected in the magnitude of the coefficients related to the two components, and in their average frequency contribution (Tables 1 and 2). In particular, \ce{CO2} is a Lewis acid and should generally interact with negatively charged moieties differently from positively charged ones.
 
-\textbf{V. Validation }
+\section{Validation}
+\label{paper_03:sec:V}
 
-\textbf{A. Experimental Frequency Distribution }
+\subsection{Experimental Frequency Distribution}
+\label{paper_03:ssec:V-A}
 
 In order to compare our calculated distributions of \ce{CO2} vibrational frequencies with experiment, we must account for the effects that broaden or narrow the IR absorption line shape beyond the underlying distribution of frequencies. The finite population lifetime of the asymmetric stretch vibration, reorientation of the \ce{CO2} molecule, and a variety of other effects can broaden the absorption spectrum. On the other hand, fast dynamics can narrow the absorption spectrum (i.e. motional narrowing). A faithful comparison to experiment requires a deconvolution of these contributions to estimate the range of instantaneous frequencies experienced by \ce{CO2}.
 
 2D-IR spectra contain sufficient information to recover the distribution of frequencies, which would be difficult to extract from the linear IR absorption spectrum alone.\textsuperscript{23} Within the Kubo multi-exponential ansatz, the width of the frequency distribution is determined by the frequency fluctuation correlation function
 
-\[\left\langle \delta\omega(t) \delta\omega(0) \right\rangle = \ \sum_{i}^{N}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)}\]
-
-(6)
+\begin{equation}
+  \label{paper_03:eq:6}
+  \left\langle \delta\omega(t) \delta\omega(0) \right\rangle = \sum_{i}^{N}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)}
+\end{equation}
 
 where \(\Delta_{i}^{2}\) are the variances of frequency modulations, and \(\tau_{i}\) are the timescales for the respective frequency fluctuations. The width of the frequency distribution is the sum of squares of the different broadening processes
 
-\[\left\langle \delta\omega^{2} \right\rangle = \sum_{i}^{N}\Delta_{i}^{2}\]
-
-(7)
+\begin{equation}
+  \label{paper_03:eq:7}
+  \left\langle \delta\omega^{2} \right\rangle = \sum_{i}^{N}\Delta_{i}^{2}
+\end{equation}
 
 The contribution of homogeneous processes whose frequency fluctuations are too fast to be resolved (specifically when \(\Delta_{i}\tau_{i} \ll 1\)) can be approximated as \(\delta\left( t \right)\Delta_{H}^{2}\tau_{H}\), which results in a frequency correlation function:
 
-\[\left\langle \delta\omega(t) \delta\omega(0) \right\rangle = \delta\left( t \right)\Delta_{H}^{2}\tau_{H} + \sum_{i}^{N - 1}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)} = \frac{\delta\left( t \right)}{T_{2}^{*}} + \sum_{i}^{N - 1}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)}\]
+\begin{equation}
+  \label{paper_03:eq:8}
+  \left\langle \delta\omega(t) \delta\omega(0) \right\rangle = \delta\left( t \right)\Delta_{H}^{2}\tau_{H} + \sum_{i}^{N - 1}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)} = \frac{\delta\left( t \right)}{T_{2}^{*}} + \sum_{i}^{N - 1}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)}
+\end{equation}
 
-(8)
+where \(T_{2}^{*} \equiv \left( \Delta_{H}^{2}\tau_{H} \right)^{- 1}\) is the pure dephasing time and \(\delta\left( t \right)\) is the Dirac delta function. The pure dephasing time depends on the variance of the fast frequency fluctuations, \(\Delta_{H}^{2}\), and the correlation time for fast motions, \(\tau_{H}\), and the two parameters cannot be independently determined. Analyzing the change in shape of the 2D-IR spectra as a function of the waiting time can directly determine the magnitude of frequency modulations related to the sum of exponential decays, \(\sum_{i}^{N - 1}\Delta_{i}^{2}\), in Eq.~(\ref{paper_03:eq:8}). For \ce{CO2} in \ce{[C4C1im][PF6]} this sum is approximately 2 cm\textsuperscript{-1}.\textsuperscript{23}
 
-where \(T_{2}^{*} \equiv \left( \Delta_{H}^{2}\tau_{H} \right)^{- 1}\) is the pure dephasing time and \(\delta\left( t \right)\) is the Dirac delta function. The pure dephasing time depends on the variance of the fast frequency fluctuations, \(\Delta_{H}^{2}\), and the correlation time for fast motions, \(\tau_{H}\), and the two parameters cannot be independently determined. Analyzing the change in shape of the 2D-IR spectra as a function of the waiting time can directly determine the magnitude of frequency modulations related to the sum of exponential decays, \(\sum_{i}^{N - 1}\Delta_{i}^{2}\), in Eq. (8). For \ce{CO2} in \ce{[C4C1im][PF6]} this sum is approximately 2 cm\textsuperscript{-1}.\textsuperscript{23}
+Determining the magnitude of frequency modulations that give rise to the first term in Eq.~(\ref{paper_03:eq:8}) is more complicated. The pure dephasing time (\(T_{2}^{*}\)) is only one contributor to the experimentally determined dephasing time (\(T_{2}\)), which also depends on the population (\(T_{1}\)), and reorientational (\(T_{\text{or}}\)) motions of the molecule
 
-Determining the magnitude of frequency modulations that give rise to the first term in Eq. (8) is more complicated. The pure dephasing time (\(T_{2}^{*}\)) is only one contributor to the experimentally determined dephasing time (\(T_{2}\)), which also depends on the population (\(T_{1}\)), and reorientational (\(T_{\text{or}}\)) motions of the molecule
-
-\[\frac{1}{T_{2}}\  = \frac{1}{T_{2}^{*}} + \frac{1}{2T_{1}} + \frac{1}{3T_{\text{or}}}\]
-
-(9)
+\begin{equation}
+  \label{paper_03:eq:9}
+  \frac{1}{T_{2}}\  = \frac{1}{T_{2}^{*}} + \frac{1}{2T_{1}} + \frac{1}{3T_{\text{or}}}
+\end{equation}
 
 The experimental dephasing time, \(T_{2}\), of the asymmetric stretch of \ce{CO2} in the \ce{[C4C1im][PF6]} IL is 3.3 ps.\textsuperscript{23} Since the experiment was performed in an all-parallel polarization, we cannot unambiguously determine the population and orientation relaxation times. We can estimate them, however, based on the rate of signal decay and the orientational correlation functions determined in a similar ionic liquid.\textsuperscript{24,25} Estimates of \(T_{1} =\) 20 ps and \(T_{\mathrm{\text{or}}} =\) 10 ps, suggest that vast majority contribution to \(T_{2}\) for \ce{CO2} in \ce{[C4C1im][PF6]} comes from pure dephasing. Population relaxation and orientational relaxation have a minor effect on the total dephasing time. We estimate a pure dephasing time of \(T_{2}^{*} =\) 4 ps.
 
-Finally, the variance of the frequency fluctuations, \(\Delta_{H}^{2}\), can be limited to a range by physical constraints on the values of \(\tau_{H}\). The lower limit on \(\tau_{H}\) is governed by the inertial motions of \ce{CO2} and its ionic liquid solvent shells. The timescale of the inertial response in liquid water is in the sub-60 fs range, while that of acetonitrile is 70 fs.\textsuperscript{29,94,95} Using 70 fs as a lower limit for \(\tau_{H}\ \)places an upper limit on \(\Delta_{H}\) of 9.7 cm\textsuperscript{-1}. Fits to analytical response functions suggests that \(\Delta_{H}\ \tau_{H} \approx 0.2\) is a reasonable estimate of the dynamics that can be resolved using global fitting of the experimental data, which gives an upper limit on \(\tau_{H}\) of 200 fs, with a corresponding lower limit on \(\Delta_{H}\) of 6 cm\textsuperscript{-1}. Our estimate for the homogeneous width is thus, \(6 < \Delta_{H} < 10\) cm\textsuperscript{‑1}. Combining the broadening due to fast and slow motions, the experimentally estimated total frequency width for \ce{CO2} in \ce{[C4C1im][PF6]} is between 6.3 and 10.2 cm\textsuperscript{-1} (Figure 4).
+Finally, the variance of the frequency fluctuations, \(\Delta_{H}^{2}\), can be limited to a range by physical constraints on the values of \(\tau_{H}\). The lower limit on \(\tau_{H}\) is governed by the inertial motions of \ce{CO2} and its ionic liquid solvent shells. The timescale of the inertial response in liquid water is in the sub-60 fs range, while that of acetonitrile is 70 fs.\textsuperscript{29,94,95} Using 70 fs as a lower limit for \(\tau_{H}\ \)places an upper limit on \(\Delta_{H}\) of 9.7 cm\textsuperscript{-1}. Fits to analytical response functions suggests that \(\Delta_{H}\ \tau_{H} \approx 0.2\) is a reasonable estimate of the dynamics that can be resolved using global fitting of the experimental data, which gives an upper limit on \(\tau_{H}\) of 200 fs, with a corresponding lower limit on \(\Delta_{H}\) of 6 cm\textsuperscript{-1}. Our estimate for the homogeneous width is thus, \(6 < \Delta_{H} < 10\) cm\textsuperscript{‑1}. Combining the broadening due to fast and slow motions, the experimentally estimated total frequency width for \ce{CO2} in \ce{[C4C1im][PF6]} is between 6.3 and 10.2 cm\textsuperscript{-1} (Figure~\ref{paper_03:fig4}).
 
-\textbf{B. Calculated Frequency Distributions}
+\subsection{Calculated Frequency Distributions}
+\label{paper_03:ssec:V-B}
 
-Figure 5a shows the distribution of \ce{CO2} asymmetric stretch vibrational frequencies computed using the spectroscopic map for 1000 statistically independent snapshots collected from an MD simulation of flexible \ce{CO2} in \ce{[C4C1im][PF6]}.  These are the same snapshots that were used to parametrize and validate the spectroscopic map in Section III. The distribution is peaked at approximately 2344 cm\textsuperscript{-1} and its standard deviation is 7.4 cm\textsuperscript{-1}. Both of these values are in reasonable agreement with experiment (2342.5 cm\textsuperscript{-1} and 6.3 -- 10.2 cm\textsuperscript{-1}). Qualitatively, the distribution exhibits a significant asymmetry with a mean frequency of 2339.9 cm\textsuperscript{-1} that is about 4 cm\textsuperscript{-1} to the red of the peak frequency. The experimental IR absorption line shape, however, does not show signs of such asymmetry in the underlying distribution of frequencies.
+Figure~\ref{paper_03:fig5}a shows the distribution of \ce{CO2} asymmetric stretch vibrational frequencies computed using the spectroscopic map for 1000 statistically independent snapshots collected from an MD simulation of flexible \ce{CO2} in \ce{[C4C1im][PF6]}.  These are the same snapshots that were used to parametrize and validate the spectroscopic map in Section III. The distribution is peaked at approximately 2344 cm\textsuperscript{-1} and its standard deviation is 7.4 cm\textsuperscript{-1}. Both of these values are in reasonable agreement with experiment (2342.5 cm\textsuperscript{-1} and 6.3 -- 10.2 cm\textsuperscript{-1}). Qualitatively, the distribution exhibits a significant asymmetry with a mean frequency of 2339.9 cm\textsuperscript{-1} that is about 4 cm\textsuperscript{-1} to the red of the peak frequency. The experimental IR absorption line shape, however, does not show signs of such asymmetry in the underlying distribution of frequencies.
 
-The source of the asymmetry in the distribution of frequencies in Figure 5a is the contribution to the spectroscopic map from the \ce{CO2} bend angle, Eq. (2). This is illustrated in Figure 5c, where we have calculated the distribution of \ce{CO2} asymmetric stretch vibrational frequencies for 1000 statistically independent snapshots collected from an MD simulation of rigid \ce{CO2} in \ce{[C4C1im][PF6]}.  Since the \ce{CO2} molecule has an angle of 180º in each of the snapshots, the contribution to the calculated vibrational frequency from the \ce{CO2} bend angle is zero. The resulting distribution is correctly symmetric with a mean frequency of 2346.5 cm\textsuperscript{-1} and a standard deviation of 2.3 cm\textsuperscript{-1}. The calculated distribution is centered 4 cm\textsuperscript{-1} to the blue of the experimental distribution, and it is narrower than the lower estimate of the experimental distribution by 4 cm\textsuperscript{-1}.
+The source of the asymmetry in the distribution of frequencies in Figure~\ref{paper_03:fig5}a is the contribution to the spectroscopic map from the \ce{CO2} bend angle, Eq.~(\ref{paper_03:eq:2}). This is illustrated in Figure~\ref{paper_03:fig5}c, where we have calculated the distribution of \ce{CO2} asymmetric stretch vibrational frequencies for 1000 statistically independent snapshots collected from an MD simulation of rigid \ce{CO2} in \ce{[C4C1im][PF6]}. Since the \ce{CO2} molecule has an angle of 180º in each of the snapshots, the contribution to the calculated vibrational frequency from the \ce{CO2} bend angle is zero. The resulting distribution is correctly symmetric with a mean frequency of 2346.5 cm\textsuperscript{-1} and a standard deviation of 2.3 cm\textsuperscript{-1}. The calculated distribution is centered 4 cm\textsuperscript{-1} to the blue of the experimental distribution, and it is narrower than the lower estimate of the experimental distribution by 4 cm\textsuperscript{-1}.
 
-The results in Figure 5a and 5c represent two extremes -- one where the \ce{CO2} bend is treated classically (Figure 5a) and another where the \ce{CO2} bend is effectively neglected (Figure 5c).  When the \ce{CO2} bend is classical, it is assumed that the \ce{CO2} asymmetric stretch vibrational frequency depends on the instantaneous value of the bend angle, Figure 1 and Eq. (2).  However, the asymmetric distribution suggests that this approach is incorrect. In fact, a simple thought experiment reinforces the problems associated with regarding the \ce{CO2} bend as a classical variable. Consider a non-rotating \ce{CO2} molecule isolated in the gas-phase. If all of the vibrations of the \ce{CO2} molecule are quantum mechanical, the distribution of each of the four vibrations is a delta function. However, if the bend is classical with a kinetic energy commensurate with room temperature, the distribution of asymmetric stretch vibrational frequencies will incorrectly have a finite width. One solution to this conundrum is to adopt a fully quantum mechanical treatment of the \ce{CO2} vibrations. This would require the construction of a four-dimensional potential energy surface for each of the 1000 benchmark \ce{CO2}-\ce{[C4C1im][PF6]} clusters, which is computationally intractable.
+The results in Figure~\ref{paper_03:fig5}a~and~\ref{paper_03:fig5}c represent two extremes -- one where the \ce{CO2} bend is treated classically (Figure~\ref{paper_03:fig5}a) and another where the \ce{CO2} bend is effectively neglected (Figure~\ref{paper_03:fig5}c).  When the \ce{CO2} bend is classical, it is assumed that the \ce{CO2} asymmetric stretch vibrational frequency depends on the instantaneous value of the bend angle, Figure~\ref{paper_03:fig1} and Eq.~(\ref{paper_03:eq:2}).  However, the asymmetric distribution suggests that this approach is incorrect. In fact, a simple thought experiment reinforces the problems associated with regarding the \ce{CO2} bend as a classical variable. Consider a non-rotating \ce{CO2} molecule isolated in the gas-phase. If all of the vibrations of the \ce{CO2} molecule are quantum mechanical, the distribution of each of the four vibrations is a delta function. However, if the bend is classical with a kinetic energy commensurate with room temperature, the distribution of asymmetric stretch vibrational frequencies will incorrectly have a finite width. One solution to this conundrum is to adopt a fully quantum mechanical treatment of the \ce{CO2} vibrations. This would require the construction of a four-dimensional potential energy surface for each of the 1000 benchmark \ce{CO2}-\ce{[C4C1im][PF6]} clusters, which is computationally intractable.
 
-An alternate strategy is to treat the influence of the \ce{CO2} bend on the asymmetric stretch vibrational frequency using first-order perturbation theory. Instead of utilizing the instantaneous \ce{CO2} angle in Eq. (2), \(\theta\), we would instead use the average angle, \(\left\langle \theta \right\rangle = \left\langle \varphi_{0} \middle| \theta \middle| \varphi_{0} \right\rangle\), where \(\varphi_{0}(\theta)\) is the ground vibrational wavefunction for the \ce{CO2} bend. Returning to the \ce{CO2} in the gas-phase thought experiment, the average angle is constant and equal to 180º. Thus, there would correctly be no contribution to \ce{CO2} asymmetric stretch vibrational frequency. In contrast, the instantaneous average bend angle will fluctuate away from 180º in an IL because of asymmetric solvation by the solvent. Of course, we do not have access to vibrational wavefunction for the \ce{CO2} bend for the benchmark \ce{CO2}-\ce{[C4C1im][PF6]} clusters, nor when we wanted to utilize the spectroscopic map to analyze an MD simulation. An additional approximation is necessary. If we were to regard the \ce{CO2} bend as harmonic, then the average angle is given by the instantaneous distortion of the \ce{CO2} geometry by the environment. For the benchmark clusters, the geometry distortion can be determined by optimizing the geometry of the \ce{CO2} molecule using the classical MD force field and a conjugate gradient minimization while holding fixed both the center-of-mass of the \ce{CO2}, as well as the configuration of the IL solvent. The map is then used to calculate the vibrational frequency for the relaxed snapshot.
+An alternate strategy is to treat the influence of the \ce{CO2} bend on the asymmetric stretch vibrational frequency using first-order perturbation theory. Instead of utilizing the instantaneous \ce{CO2} angle in Eq.~(\ref{paper_03:eq:2}), \(\theta\), we would instead use the average angle, \(\left\langle \theta \right\rangle = \left\langle \varphi_{0} \middle| \theta \middle| \varphi_{0} \right\rangle\), where \(\varphi_{0}(\theta)\) is the ground vibrational wavefunction for the \ce{CO2} bend. Returning to the \ce{CO2} in the gas-phase thought experiment, the average angle is constant and equal to 180º. Thus, there would correctly be no contribution to \ce{CO2} asymmetric stretch vibrational frequency. In contrast, the instantaneous average bend angle will fluctuate away from 180º in an IL because of asymmetric solvation by the solvent. Of course, we do not have access to vibrational wavefunction for the \ce{CO2} bend for the benchmark \ce{CO2}-\ce{[C4C1im][PF6]} clusters, nor when we wanted to utilize the spectroscopic map to analyze an MD simulation. An additional approximation is necessary. If we were to regard the \ce{CO2} bend as harmonic, then the average angle is given by the instantaneous distortion of the \ce{CO2} geometry by the environment. For the benchmark clusters, the geometry distortion can be determined by optimizing the geometry of the \ce{CO2} molecule using the classical MD force field and a conjugate gradient minimization while holding fixed both the center-of-mass of the \ce{CO2}, as well as the configuration of the IL solvent. The map is then used to calculate the vibrational frequency for the relaxed snapshot.
 
-Figure 5b shows the distribution of \ce{CO2} asymmetric stretch vibrational frequencies computed using the spectroscopic map for 1000 statistically independent snapshots collected from an MD simulation of flexible \ce{CO2} in \ce{[C4C1im][PF6]} where the \ce{CO2} bend angle has been relaxed. On average, the relaxed bend angle is 178.4º, and the distribution of frequencies is nearly symmetric with a mean frequency of 2343.8 cm\textsuperscript{-1} and a standard deviation of 2.4 cm\textsuperscript{-1}. The mean frequency is in excellent agreement with experiment and differs by only 1.3 cm\textsuperscript{-1}. Note that this agreement implies that the spectroscopic map is able to accurately capture the solvatochromic shift of the \ce{CO2} asymmetric stretch vibrational frequency from the gas-phase to the \ce{[C4C1im][PF6]} IL. The width of the distribution is too narrow compared to the estimated width of the experimental distribution of 6.3 -- 10.2 cm\textsuperscript{-1}. There are several possible sources for the discrepancy in the width of the distribution, including inaccuracies associated with the approximate perturbative approach for the effect of the bend on the asymmetric stretch frequency. However, the overall agreement with experiment is encouraging.
+Figure~\ref{paper_03:fig5}b shows the distribution of \ce{CO2} asymmetric stretch vibrational frequencies computed using the spectroscopic map for 1000 statistically independent snapshots collected from an MD simulation of flexible \ce{CO2} in \ce{[C4C1im][PF6]} where the \ce{CO2} bend angle has been relaxed. On average, the relaxed bend angle is 178.4º, and the distribution of frequencies is nearly symmetric with a mean frequency of 2343.8 cm\textsuperscript{-1} and a standard deviation of 2.4 cm\textsuperscript{-1}. The mean frequency is in excellent agreement with experiment and differs by only 1.3 cm\textsuperscript{-1}. Note that this agreement implies that the spectroscopic map is able to accurately capture the solvatochromic shift of the \ce{CO2} asymmetric stretch vibrational frequency from the gas-phase to the \ce{[C4C1im][PF6]} IL. The width of the distribution is too narrow compared to the estimated width of the experimental distribution of 6.3 -- 10.2 cm\textsuperscript{-1}. There are several possible sources for the discrepancy in the width of the distribution, including inaccuracies associated with the approximate perturbative approach for the effect of the bend on the asymmetric stretch frequency. However, the overall agreement with experiment is encouraging.
 
-It is instructive to compare the distributions in Figures 5b (relaxed \ce{CO2}) and 5c (rigid \ce{CO2}). Both distributions are symmetric and they have nearly the same widths: 2.4 and 2.3 cm\textsuperscript{-1}, respectively. Thus, within the approximate perturbative approach, the bend has very little influence on the width of the distribution. The averages of the distributions differ more significantly: 2343.8 and 2346.5 cm\textsuperscript{-1}, respectively. The bend shifts the distribution to the red and into better agreement with experiment. Overall, the role of the bend is relatively minor resulting in a redshift of the distribution by 2.7 cm\textsuperscript{-1}. These results suggest several options for how the bend is treated when the map is applied in conjunction with MD simulations to understand the spectroscopy and spectral diffusion dynamics of \ce{CO2} in the \ce{[C4C1im][PF6]} IL in Paper III in this series. The simplest strategy is to hold the \ce{CO2} rigid and to shift the calculated frequencies by 2.7 cm\textsuperscript{-1}. In essence, this would just account for the average effect of the \ce{CO2} angle on the asymmetric stretch frequencies. A more computationally intensive strategy is a simulation with \ce{CO2} flexible, but where the geometry of the \ce{CO2} is optimized using the classical force field.  The efficacy of these approaches will be evaluated in Paper III.
+It is instructive to compare the distributions in Figures~\ref{paper_03:fig5}b (relaxed \ce{CO2}) and~\ref{paper_03:fig5}c (rigid \ce{CO2}). Both distributions are symmetric and they have nearly the same widths: 2.4 and 2.3 cm\textsuperscript{-1}, respectively. Thus, within the approximate perturbative approach, the bend has very little influence on the width of the distribution. The averages of the distributions differ more significantly: 2343.8 and 2346.5 cm\textsuperscript{-1}, respectively. The bend shifts the distribution to the red and into better agreement with experiment. Overall, the role of the bend is relatively minor resulting in a redshift of the distribution by 2.7 cm\textsuperscript{-1}. These results suggest several options for how the bend is treated when the map is applied in conjunction with MD simulations to understand the spectroscopy and spectral diffusion dynamics of \ce{CO2} in the \ce{[C4C1im][PF6]} IL in Paper III in this series. The simplest strategy is to hold the \ce{CO2} rigid and to shift the calculated frequencies by 2.7 cm\textsuperscript{-1}. In essence, this would just account for the average effect of the \ce{CO2} angle on the asymmetric stretch frequencies. A more computationally intensive strategy is a simulation with \ce{CO2} flexible, but where the geometry of the \ce{CO2} is optimized using the classical force field.  The efficacy of these approaches will be evaluated in Paper III.
 
-\textbf{VI. Conclusions}
+\section{Conclusions}
+\label{paper_03:sec:VI}
 
 In this paper we have developed and validated a spectroscopic map that is the foundation for a molecular interpretation of ultrafast vibrational spectroscopy of \ce{CO2} in ionic liquids. In addition, we have established important insights into the solvatochromic shift of the \ce{CO2} asymmetric stretch vibrational frequency in ILs. We analyzed the physical origin of the vibrational frequency shifts using SAPT energy decomposition schemes. Unlike other vibrational chromophores, electrostatics alone poorly predict the vibrational frequency. While the most important contributor to the electrostatic part of the spectroscopic map is the field from the anion, both attractive dispersion interactions and repulsive charge overlap forces (Pauli repulsion) play additional important roles. Finally, while the \ce{CO2} bend angle influences the asymmetric stretch frequency, we have shown that the geometry of the \ce{CO2} molecule is only slightly perturbed by the IL, so regarding the \ce{CO2} as rigid is generally sufficient to capture the structural relaxation of the IL relative to the \ce{CO2}.
 
 \textbf{Supporting Information}
 
-Details regarding the transition dipole moment integral calculations in Figure 3 are included in the Supporting Information. This material is available free of charge.
+Details regarding the transition dipole moment integral calculations in Figure~\ref{paper_03:fig3} are included in the Supporting Information. This material is available free of charge.
 
 \textbf{Acknowledgements}
 
@@ -667,80 +684,88 @@ Solvation Dynamics in Acetonitrile: Observation of the Inertial
 Contribution to the Solvent Response. \emph{J. Chem. Phys.}
 \textbf{1991}, \emph{95} (6), 4715.
 
-\textbf{\\
-}
+\begin{table}
+  \centering
+  \caption{Parameters of the spectroscopic map for the \ce{CO2} asymmetric stretch frequency in \ce{[C4C1im][PF6]}.  This map predicts the \ce{CO2} with a regression coefficient \(R = 0.94\) and a root mean square error of 2.7 cm\textsuperscript{-1}. The average shift, \(\left\langle \Delta\omega \right\rangle\), and standard deviation, \(\sigma(\Delta\omega)\), are reported for each term in the map.}
+  \label{paper_03:tab1}
+  \begin{longtable}[]{@{}cccc@{}}
+    \toprule
+    & & \(\left\langle \Delta\omega \right\rangle\) (cm\textsuperscript{-1}) &
+    \(\sigma(\Delta\omega)\) (cm\textsuperscript{-1})\tabularnewline
+    \midrule
+    \endhead
+    \(\omega_{g}\) & 2349.1 cm\textsuperscript{-1} & 0.0 &
+    0.0\tabularnewline
+    \emph{a} & --1160.9 cm\textsuperscript{-1} & --6.6 & 7.0\tabularnewline
+    \emph{b}\textsubscript{1} & 64.4 cm\textsuperscript{-1}
+    au\textsuperscript{-1} & --0.1 & 0.4\tabularnewline
+    \emph{b}\textsubscript{2} & 93.2 cm\textsuperscript{-1}
+    au\textsuperscript{-1} & --1.8 & 0.7\tabularnewline
+    \emph{c}\textsubscript{1} & 4.70 cm\textsuperscript{-1}
+    kcal\textsuperscript{-1} mol & --9.5 & 2.0\tabularnewline
+    \emph{c}\textsubscript{2} & --3.55 cm\textsuperscript{-1}
+    kcal\textsuperscript{-1} mol & 7.3 & 2.1\tabularnewline
+    \bottomrule
+  \end{longtable}
+\end{table}
 
-\textbf{Table 1.} Parameters of the spectroscopic map for the \ce{CO2} asymmetric stretch frequency in \ce{[C4C1im][PF6]}.  This map predicts the \ce{CO2} with a regression coefficient \(R = 0.94\) and a root mean square error of 2.7 cm\textsuperscript{-1}. The average shift, \(\left\langle \Delta\omega \right\rangle\), and standard deviation, \(\sigma(\Delta\omega)\), are reported for each term in the map.
+\begin{table}
+  \centering
+  \caption{Decomposition of the average LJ contribution to the spectroscopic map for the \ce{CO2} asymmetric stretch frequency in \ce{[C4C1im][PF6]} into attractive and repulsive components.}
+  \label{paper_03:tab2}
+  \begin{longtable}[]{@{}ccc@{}}
+    \toprule
+    LJ Component & Site & \(\left\langle \Delta\omega \right\rangle\)
+    (cm\textsuperscript{-1})\tabularnewline
+    \midrule
+    \endhead
+    Attractive & O & --21.7\tabularnewline
+    & C & 14.8\tabularnewline
+    & Sum & --6.9\tabularnewline
+    Repulsive & O & 12.3\tabularnewline
+    & C & --7.4\tabularnewline
+    & Sum & 4.9\tabularnewline
+    Total & O & --9.4\tabularnewline
+    & C & 7.3\tabularnewline
+    & Sum & --2.1\tabularnewline
+    \bottomrule
+  \end{longtable}
+\end{table}
 
-\begin{longtable}[]{@{}cccc@{}}
-\toprule
-& & \(\left\langle \Delta\omega \right\rangle\) (cm\textsuperscript{-1}) &
-\(\sigma(\Delta\omega)\) (cm\textsuperscript{-1})\tabularnewline
-\midrule
-\endhead
-\(\omega_{g}\) & 2349.1 cm\textsuperscript{-1} & 0.0 &
-0.0\tabularnewline
-\emph{a} & --1160.9 cm\textsuperscript{-1} & --6.6 & 7.0\tabularnewline
-\emph{b}\textsubscript{1} & 64.4 cm\textsuperscript{-1}
-au\textsuperscript{-1} & --0.1 & 0.4\tabularnewline
-\emph{b}\textsubscript{2} & 93.2 cm\textsuperscript{-1}
-au\textsuperscript{-1} & --1.8 & 0.7\tabularnewline
-\emph{c}\textsubscript{1} & 4.70 cm\textsuperscript{-1}
-kcal\textsuperscript{-1} mol & --9.5 & 2.0\tabularnewline
-\emph{c}\textsubscript{2} & --3.55 cm\textsuperscript{-1}
-kcal\textsuperscript{-1} mol & 7.3 & 2.1\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{figure}
+  \centering
+  \includegraphics[width=6.43125in,height=5.7659in]{figure1.png}
+  \caption{Relationship between the \ce{CO2} asymmetric stretch vibrational frequency and the OCO angle, \(\theta_{\text{OCO}}\), for \ce{CO2} in the gas-phase (green circles) and in the \ce{[C4C1im][PF6]} IL (black circles). The gas-phase data are perfectly correlated with \(1 + cos(\theta_{\text{OCO}})\). The vibrational frequencies for \ce{CO2} in the \ce{[C4C1im][PF6]} solvent also show this relationship, but additional solvation effects on the frequency are also present.}
+  \label{paper_03:fig1}
+\end{figure}
 
-\textbf{\\
-}
+\begin{figure}
+  \centering
+  \includegraphics[width=6.22356in,height=6.29517in]{figure2.png}
+  \caption{Relationship between \ce{CO2} asymmetric stretch frequencies in the \ce{[C4C1im][PF6]} IL calculated using the DVR method and those calculated using the spectroscopic map for the 500 test set clusters (black circles). The red line represents a perfect correlation and the 95\% prediction interval is indicated with green lines. The spectroscopic map has a regression coefficient of R = 0.94 and a root means squared error of 2.7 cm\textsuperscript{-1}.}
+  \label{paper_03:fig2}
+\end{figure}
 
-\textbf{Table 2.} Decomposition of the average LJ contribution to the spectroscopic map for the \ce{CO2} asymmetric stretch frequency in \ce{[C4C1im][PF6]} into attractive and repulsive components.
+\begin{figure}
+  \centering
+  \includegraphics[width=6.49062in,height=6.25278in]{figure3.png}
+  \caption{Transition dipole moment integral, \(\mu_{01}\), of the asymmetric stretch of \ce{CO2} in 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters versus the asymmetric stretch vibrational frequency, \(\omega_{a}\), where \(\mu_{01}^{g}\) is the transition dipole moment integral of the asymmetric stretch of \ce{CO2} in the gas-phase (blue circles). A linear fit of the data (black line) has a slope close to zero indicating that the Condon approximation is reasonable for the asymmetric stretch of \ce{CO2} in the \ce{[C4C1im][PF6]} IL.}
+  \label{paper_03:fig3}
+\end{figure}
 
-\begin{longtable}[]{@{}ccc@{}}
-\toprule
-LJ Component & Site & \(\left\langle \Delta\omega \right\rangle\)
-(cm\textsuperscript{-1})\tabularnewline
-\midrule
-\endhead
-Attractive & O & --21.7\tabularnewline
-& C & 14.8\tabularnewline
-& Sum & --6.9\tabularnewline
-Repulsive & O & 12.3\tabularnewline
-& C & --7.4\tabularnewline
-& Sum & 4.9\tabularnewline
-Total & O & --9.4\tabularnewline
-& C & 7.3\tabularnewline
-& Sum & --2.1\tabularnewline
-\bottomrule
-\end{longtable}
+\begin{figure}
+  \centering
+  \includegraphics[width=6.45821in,height=4.31466in]{figure4.png}
+  \caption{Homogeneous instantaneous linewidth as a function of correlation time for fast motions, with \(T_{2}^{*} = 4\) ps, with upper and lower bounds estimated for \({\widetilde{\Delta}}_{H}\). The upper bound, based on an estimated fastest allowed inertial response timescale, and the lower bound, based on a threshold value of \(\Delta_{H}\tau_{H}\), are indicated by dashed horizontal lines. The resulting instantaneous frequency range for homogeneous motions is between 6 and 10 cm\textsuperscript{-1}.}
+  \label{paper_03:fig4}
+\end{figure}
 
-\emph{\\
-}
 
-% \includegraphics[width=6.43125in,height=5.7659in]{media/image1.emf}
-\includegraphics[width=6.43125in,height=5.7659in]{figure1.png}
-
-\textbf{Figure 1.} Relationship between the \ce{CO2} asymmetric stretch vibrational frequency and the OCO angle, \(\theta_{\text{OCO}}\), for \ce{CO2} in the gas-phase (green circles) and in the \ce{[C4C1im][PF6]} IL (black circles). The gas-phase data are perfectly correlated with \(1 + cos(\theta_{\text{OCO}})\). The vibrational frequencies for \ce{CO2} in the \ce{[C4C1im][PF6]} solvent also show this relationship, but additional solvation effects on the frequency are also present.
-
-% \includegraphics[width=6.22356in,height=6.29517in]{media/image2.emf}
-\includegraphics[width=6.22356in,height=6.29517in]{figure2.png}
-
-\textbf{Figure 2.} Relationship between \ce{CO2} asymmetric stretch frequencies in the \ce{[C4C1im][PF6]} IL calculated using the DVR method and those calculated using the spectroscopic map for the 500 test set clusters (black circles). The red line represents a perfect correlation and the 95\% prediction interval is indicated with green lines. The spectroscopic map has a regression coefficient of R = 0.94 and a root means squared error of 2.7 cm\textsuperscript{-1}.
-
-% \includegraphics[width=6.49062in,height=6.25278in]{media/image3.emf}
-\includegraphics[width=6.49062in,height=6.25278in]{figure3.png}
-
-\textbf{Figure 3.} Transition dipole moment integral, \(\mu_{01}\), of the asymmetric stretch of \ce{CO2} in 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters versus the asymmetric stretch vibrational frequency, \(\omega_{a}\), where \(\mu_{01}^{g}\) is the transition dipole moment integral of the asymmetric stretch of \ce{CO2} in the gas-phase (blue circles). A linear fit of the data (black line) has a slope close to zero indicating that the Condon approximation is reasonable for the asymmetric stretch of \ce{CO2} in the \ce{[C4C1im][PF6]} IL.
-
-% \includegraphics[width=6.45821in,height=4.31466in]{media/image4.png}
-\includegraphics[width=6.45821in,height=4.31466in]{figure4.png}
-
-\textbf{Figure 4.} Homogeneous instantaneous linewidth as a function of correlation time for fast motions, with \(T_{2}^{*} = 4\) ps, with upper and lower bounds estimated for \({\widetilde{\Delta}}_{H}\). The upper bound, based on an estimated fastest allowed inertial response timescale, and the lower bound, based on a threshold value of \(\Delta_{H}\tau_{H}\), are indicated by dashed horizontal lines. The resulting instantaneous frequency range for homogeneous motions is between 6 and 10 cm\textsuperscript{-1}.
-
-% \includegraphics[width=6.43125in,height=6.41597in]{media/image5.emf}
-\includegraphics[width=6.43125in,height=6.41597in]{figure5.png}
-
-\textbf{Figure 5.} Histograms of the \ce{CO2} asymmetric stretch vibrational frequency, \(\omega_{a}\), for 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters. (a) Clusters extracted from an MD simulation of flexible \ce{CO2} in the \ce{[C4C1im][PF6]} IL. (b) Clusters extracted from an MD simulation of flexible \ce{CO2} in the \ce{[C4C1im][PF6]} IL, but where the \ce{CO2} geometry is relaxed. (c) Clusters extracted from an MD simulation of rigid \ce{CO2} in the \ce{[C4C1im][PF6]} IL.
+\begin{figure}
+  \centering
+  \includegraphics[width=6.43125in,height=6.41597in]{figure5.png}
+  \caption{Histograms of the \ce{CO2} asymmetric stretch vibrational frequency, \(\omega_{a}\), for 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters. (a) Clusters extracted from an MD simulation of flexible \ce{CO2} in the \ce{[C4C1im][PF6]} IL. (b) Clusters extracted from an MD simulation of flexible \ce{CO2} in the \ce{[C4C1im][PF6]} IL, but where the \ce{CO2} geometry is relaxed. (c) Clusters extracted from an MD simulation of rigid \ce{CO2} in the \ce{[C4C1im][PF6]} IL.}
+  \label{paper_03:fig5}
+\end{figure}
 
 \end{document}
