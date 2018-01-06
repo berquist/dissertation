@@ -1,0 +1,1414 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{longtable,booktabs}
+% Fix footnotes in tables (requires footnote package)
+\IfFileExists{footnote.sty}{\usepackage{footnote}\makesavenoteenv{longtable}}{}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+
+\date{}
+
+\begin{document}
+
+Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: II.
+Spectroscopic Map
+
+Clyde A. Daly Jr.,\textsuperscript{1} Eric J.
+Berquist,\textsuperscript{2,3} Thomas Brinzer,\textsuperscript{2,3} Sean
+Garrett-Roe,\textsuperscript{2,3} Daniel S.
+Lambrecht,\textsuperscript{2,3} and Steven A.
+Corcelli\textsuperscript{1}
+
+\textsuperscript{1} Department of Chemistry and Biochemistry, University
+of Notre Dame, 251 Nieuwland Science Hall, Notre Dame, Indiana 46656
+
+\textsuperscript{2} Department of Chemistry, University of Pittsburgh,
+219 Parkman Ave., Pittsburgh, Pennsylvania 15260
+
+\textsuperscript{3} Pittsburgh Quantum Institute, University of
+Pittsburgh, 3943 O'Hara St., Pittsburgh, Pennsylvania 15260
+
+KEYWORDS: ionic liquids, spectroscopic map, carbon capture, vibrational
+spectroscopy, 2D-IR spectroscopy
+
+\textbf{Abstract}
+
+The primary challenge for connecting molecular dynamics (MD) simulations
+to linear and two-dimensional infrared (2D-IR) measurements is the
+calculation of the vibrational frequency for the chromophore of
+interest. Computing the vibrational frequency at each time step of the
+simulation with a quantum mechanical method like density functional
+theory (DFT) is generally prohibitively expensive. One approach to
+circumnavigate this problem is the use of spectroscopic maps.
+Spectroscopic maps are empirical relationships that correlate the
+frequency of interest to properties of the surrounding solvent that are
+readily accessible in the MD simulation. Here, we develop a
+spectroscopic map for the asymmetric stretch of CO\textsubscript{2} in
+the 1-butyl-3-methylimidazolium hexafluorophosphate
+({[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]})
+ionic liquid (IL). DFT is used to compute the vibrational frequency of
+500 statistically independent
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters extracted from an MD simulation. When the map was tested on a
+500 different
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters, the correlation coefficient between the benchmark frequencies
+and the predicted frequencies was R = 0.94 and the root mean squared
+error was 2.7 cm\textsuperscript{-1}. The calculated distribution of
+frequencies also agrees well with experiment. The spectroscopic map
+required information about the CO\textsubscript{2} angle, the
+electrostatics of the surrounding solvent, and the Lennard-Jones
+interaction between the CO\textsubscript{2} and the IL. The contribution
+of each term in the map was investigated with symmetry-adapted
+perturbation theory (SAPT) calculations.
+
+\textbf{I. Introduction}
+
+Ionic liquids (ILs) have attracted tremendous attention because of their
+properties as environmentally friendly alternatives to volatile organic
+solvents, and their applications involving the production, storage, and
+efficient utilization of energy.\textsuperscript{1--5} ILs exhibit
+unique physical properties relative to conventional liquids in terms of
+vapor pressure, viscosity, electrical and thermal conductivity,
+solubility of polar and nonpolar molecules, and melting
+point.\textsuperscript{5--9} Moreover, these properties can be tuned to
+specific applications by chemically modifying the molecules that
+comprise the liquid. For example, by functionalizing the molecules of an
+IL to react with CO\textsubscript{2}, improved design for preferentially
+separating CO\textsubscript{2} from gas mixtures was
+achieved.\textsuperscript{9--13} Thus, ILs offer a promising new
+direction for the removal of environmentally harmful CO\textsubscript{2}
+from postcombustion flue gas.
+
+It is essential that the fundamental structure and dynamics of ILs be
+understood to aid in the design of new ILs for unique applications.
+Unlike conventional solvents, ILs exhibit heterogeneous structure and
+dynamics that have profound implications for their physical properties.
+Two-dimensional infrared (2D-IR) spectroscopy offers several unique
+advantages for interrogating the structure and dynamics of liquids
+because of its exquisite time and spatial
+resolution.\textsuperscript{14--17} The spatial resolution results from
+the size of suitably chosen vibrational chromophores. The vibrational
+frequencies of these reporters depend sensitively on their local
+environment.\textsuperscript{15,18--22} As that local environment
+evolves, so too will the vibrational frequency of the probe -- a process
+called spectral diffusion. 2D-IR spectroscopy measures these frequency
+fluctuation dynamics, which relate back to the intrinsic dynamics of the
+surroundings of the vibrational chromophore.
+
+Recently, Brinzer \emph{et al}. have demonstrated that the asymmetric
+stretch of CO\textsubscript{2} (ν\textsubscript{3}) is an excellent
+vibrational reporter of its local environment in
+ILs.\textsuperscript{23} In particular, these experiments have
+established (1) that the asymmetric stretch of CO\textsubscript{2}
+exhibits a significant solvatochromic shift with respect to the choice
+of anion in a series of imidazolium-based ILs, (2) that the
+CO\textsubscript{2} vibrational population lifetime is sufficiently long
+to measure 2D-IR spectra on a 100 ps timescale, and (3) that the longest
+spectral diffusion timescale correlates empirically with the viscosity
+of the IL.\textsuperscript{23} Fayer and coworkers have also studied
+CO\textsubscript{2} in ILs with 2D-IR spectroscopy, including detailed
+measurements and modeling of the rotational dynamics of
+CO\textsubscript{2} and how this motion results in
+reorientational-induced spectral diffusion (RISD). Through analysis of
+polarization-selective 2D-IR measurements, the RISD contribution to the
+overall spectral diffusion process was
+quantified.\textsuperscript{24,25} The RISD analysis assumed that shifts
+in the CO\textsubscript{2} vibrational frequency were governed by a
+second-order Stark effect.
+
+Among multidimensional vibrational spectroscopy's great successes was
+revealing the dynamics of hydrogen-bond network rearrangements in liquid
+water.\textsuperscript{26--39} However, these profound insights were
+only possible in conjunction with a robust theoretical
+effort.\textsuperscript{21,29--31,40--59} Much of that theoretical
+effort focused on the development and application of empirical
+relationships connecting the instantaneous vibrational frequency of
+interest to structural properties -- usually the electrostatics -- of
+the surrounding condensed-phase environment.\textsuperscript{22,41,60}
+Such relationships have come to be known as ``spectroscopic maps.'' With
+a spectroscopic map in hand, quantities such as the linear IR absorption
+spectrum, 2D-IR spectra, and the frequency fluctuation correlation
+function that quantifies spectral diffusion, can be readily calculated
+in a conventional molecular dynamics (MD)
+simulation.\textsuperscript{47,60,61} With the emergence of 2D-IR
+measurements on CO\textsubscript{2} in ILs, there is ample motivation to
+develop a spectroscopic map for the asymmetric stretch of
+CO\textsubscript{2} in an IL.
+
+In paper I, we developed and validated a robust quantum
+mechanics/molecular mechanics (QM/MM) protocol for calculating
+anharmonic CO\textsubscript{2} vibrational frequencies in the
+1-butyl-3-methylimidazolium hexafluorophosphate
+({[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]})
+IL. Here, we have used the protocol to calculate the asymmetric stretch
+vibrational frequency of CO\textsubscript{2} in 1000 statistically
+independent snapshots extracted from an MD simulation. For each
+frequency calculation, the CO\textsubscript{2} molecule and two pairs of
+IL molecules are treated quantum mechanically with density functional
+theory (DFT). The rest of the solvent is included in the calculation as
+point charges that polarize the quantum mechanical region. The
+two-dimensional potential energy surface for the CO\textsubscript{2}
+stretches is constructed on a 12 × 12 grid and the resulting vibrational
+Schrödinger equation is solved using a discrete variable representation
+(DVR) method. Once the vibrational frequencies were calculated, 500 of
+these snapshots were used to parameterize the spectroscopic map and the
+other 500 snapshots were used to quantify the accuracy of the
+spectroscopic map.
+
+Previous spectroscopic maps have primarily been based on
+electrostatics,\textsuperscript{19,42,62--66} but our initial quantum
+chemistry investigations\textsuperscript{23,67} indicate that the
+antisymmetric stretch of CO\textsubscript{2} is sensitive to other
+physical effects, including charge transfer, dispersion, exchange
+repulsion, and electrostatics. Accordingly, we found that a suitably
+accurate spectroscopic map could not be constructed using only
+electrostatic properties of the IL environment. Instead, we had to
+include both electrostatic and Lennard-Jones (LJ) terms in the map.
+Błasiak and Cho previously found that including dispersion interactions
+resulted in an improved spectroscopic map for the amide I vibration of
+\emph{N}-methylacetamide.\textsuperscript{68} In addition, since the
+CO\textsubscript{2} molecule was modeled as flexible in solution, the
+map also has a dependence on the CO\textsubscript{2} bend angle whose
+contribution was investigated in detail.
+
+Spectroscopic maps are inherently empirical and can, in principle,
+utilize any variable that is sufficiently correlated with the
+vibrational frequencies, even if that variable is not the cause of the
+vibrational frequency shifts. Therefore, the dual goals of this work are
+to develop and validate a spectroscopic map, and to understand how the
+causal variables manifest themselves in the map. To achieve the first
+goal, the average frequency and distribution of vibrational frequencies
+were compared to inhomogeneous vibrational spectra extracted from 2D-IR
+measurements. To achieve the second goal a selection of snapshots were
+analyzed with symmetry adapted perturbation theory
+(SAPT)\textsuperscript{69--71} calculations.
+
+In addition to the intermolecular interactions, CO\textsubscript{2} has
+an important intramolecular degree of freedom, the bending mode. Our
+previous work\textsuperscript{23} has implicated the bending mode in the
+experimentally observed solvatochromic shifts. At room temperature, the
+bending mode has an energy of approximately \(3k_{B}T\), placing it in
+an intermediate regime where it is not clear if a flexible (classical)
+or a rigid (quantum) model should be more appropriate. To better
+understand the role of CO\textsubscript{2} flexibility in the
+spectroscopic map, we calculated histograms of vibrational frequencies
+for a rigid (bond angle = \(180deg\)) and a flexible model of
+CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+IL. We also examined a third possibility where the CO\textsubscript{2}
+is modeled as flexible in the MD simulation, but the bend angle is
+relaxed prior to applying the spectroscopic map.
+
+The paper is organized as follows. In Section II the details of the MD
+simulations and the anharmonic vibrational frequency calculations are
+described. In Section III, the spectroscopic map is constructed. In
+Section IV, the spectroscopic map is validated by comparison to
+experiment. In Section V, the contributions of the electrostatic,
+exchange repulsion, and dispersive interactions in the spectroscopic map
+are analyzed with ALMO and SAPT calculations. Finally, in Section VI we
+provide some concluding remarks.
+
+\textbf{II. Computational Methods}
+
+Molecular dynamics (MD) simulations were performed using the large-scale
+atomic/molecular massively parallel simulator
+(LAMMPS)\textsuperscript{72} with a time step of 2 fs. 256 ion pairs of
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+and one molecule of CO\textsubscript{2} were simulated at 300 K in a
+cubic box with periodic boundary conditions. Previous studies have
+confirmed that 256 ion pairs is a sufficiently large simulation box to
+mitigate finite-size effects.\textsuperscript{73} The original atomic
+coordinates and box size (45 Å) were generated from a previous study of
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+containing a single water solute, which had been subjected to a rigorous
+equilibration protocol.\textsuperscript{61} The water was replaced with
+a CO\textsubscript{2} solute, and was subjected to the following
+equilibration procedure: (1) 1 ns in the NVT ensemble at 300 K, (2)
+heating to 600 K over 1 ns, (3) cooling to 300 K over 1 ns, (4) 1 ns in
+the NVT ensemble at 300 K, and (5) 1 ns in the NVE ensemble. Production
+run trajectories were collected in the NVE ensemble. Energy conservation
+was excellent, with fits to the energy and temperature over 10 ns
+revealing slopes of 3.3 × 10\textsuperscript{-5} kcal
+mol\textsuperscript{-1} ps\textsuperscript{-1} and 9.8 ×
+10\textsuperscript{-6} K ps\textsuperscript{-1}, respectively. All
+molecules were modeled as fully flexible except for bonds containing
+hydrogen, which were held fixed at their equilibrium lengths using the
+SHAKE algorithm.\textsuperscript{74,75} Also, in certain cases (see
+below), the CO\textsubscript{2} bond lengths and angle were held fixed
+at their equilibrium values using the LAMMPS rigid
+integrator.\textsuperscript{72} The force fields for
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+were the same as in our previous simulation studies involving this
+IL.\textsuperscript{61} Briefly, the bends, bonds, dihedrals, and
+Lennard-Jones parameters for
+{[}C\textsubscript{4}C\textsubscript{1}im{]}\textsuperscript{+} are from
+the generalized Amber force field (GAFF),\textsuperscript{76,77} and
+partial charges were obtained from DFT calculations.\textsuperscript{78}
+The {[}PF\textsubscript{6}{]}\textsuperscript{−} force field parameters
+were from the work of Liu \emph{et al}.\textsuperscript{79} Charges on
+the ions were scaled by 0.84 to empirically account for charge transfer
+and polarization effects in the IL.\textsuperscript{80,81}
+CO\textsubscript{2} was modeled using the TraPPE force field, with
+additional terms developed by Perez-Blanco and Maginn for flexible bond
+lengths and angle.\textsuperscript{82,83} Lennard-Jones interactions
+were truncated at 15 Å and the long-ranged electrostatics were computed
+using particle-mesh Ewald summation with a 15 Å real space
+cutoff.\textsuperscript{84}
+
+In order to create a spectroscopic map, 1000 statistically independent
+snapshots separated by 50 ps were collected from a pair of 50 ns
+simulations, one with a fully flexible CO\textsubscript{2} and a second
+with a fully rigid CO\textsubscript{2}. For each snapshot, the
+Born-Oppenheimer potential energy surface (PES) for CO\textsubscript{2}
+stretching modes was obtained from single point energy calculations
+performed as the CO bond lengths were stretched from 0.955 Å to 1.45 Å
+in 0.045 Å steps. During these calculations, the nearest two pairs of
+ions by center of mass were included quantum mechanically, and the
+remaining ions within 20 Å were included as their point charges from the
+MD force field. The resulting PES was included in a discretized
+construction of the Hamiltonian for CO stretches, which was then
+diagonalized, producing the asymmetric stretch frequency. More details
+about this method can be found in paper 1 of this series. Least squares
+multiple linear regression was used to empirically fit the electric
+field due to the anions and cations along the CO bonds and the
+Lennard-Jones potential energy on the CO\textsubscript{2} carbon and
+oxygens to the asymmetric stretch of CO\textsubscript{2} for 500 of the
+flexible snapshots, and the accuracy of the resulting fit was tested
+using the remaining 500 snapshots. 500 of the rigid snapshots were used
+as a secondary test set. This is described in more detail in section IV.
+In certain cases, the CO\textsubscript{2} angle from the flexible
+simulation was relaxed holding all other degrees-of-freedom and the
+CO\textsubscript{2} center of mass fixed prior to vibrational frequency
+calculations for further analysis. This is discussed further in Section
+V.B.
+
+\textbf{III. Spectroscopic Map for CO\textsubscript{2} Vibrations}
+
+Empirical spectroscopic maps relate the instantaneous vibrational
+frequency of an IR reporter to properties of its surroundings that can
+be readily accessed in MD simulations.\textsuperscript{47,61,85} Once a
+spectroscopic map has been parameterized, it can be used to calculate IR
+absorption spectra, 2D-IR spectra, and frequency fluctuation time
+correlation functions from a MD simulation. For the asymmetric stretch
+of CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]},
+we were unable to obtain a suitably accurate spectroscopic map from
+electrostatics alone. Instead, we needed to include information about
+the CO\textsubscript{2} bend angle, as well as the Lennard-Jones (LJ)
+interactions between CO\textsubscript{2} and the surrounding IL. The
+spectroscopic map has the following form
+
+\[\omega_{a} = \ \omega_{g} + \Delta\omega_{\mathrm{\theta}} + \ \Delta\omega_{\mathrm{\text{solvent}}}\]
+
+(1)
+
+where \(\omega_{a}\) is the predicted CO\textsubscript{2} asymmetric
+stretch vibrational frequency, \(\omega_{g}\) is the experimental gas
+phase frequency (2349.1 cm\textsuperscript{-1}),
+\(\Delta\omega_{\mathrm{\theta}}\) is the dependence of the frequency on
+the OCO bend angle, and \(\Delta\omega_{\mathrm{\text{solvent}}}\)
+captures the change in the vibrational frequency due to interactions
+with the IL solvent. Figure 3 shows the dependence of the
+CO\textsubscript{2} asymmetric stretch vibrational frequency on the OCO
+angle, θ, calculated for CO\textsubscript{2} isolated in the gas-phase.
+The calculated data are fit exquisitely well (\(R^{2}\) = 0.999) by the
+single-parameter function
+
+\[\Delta\omega_{\theta} = a(1 + \cos{\theta)}\]
+
+(2)
+
+where \(a = - 1160.9\ \mathrm{c}\mathrm{m}^{\mathrm{- 1}}.\)
+
+Figure 3 also shows the vibrational frequency of 500 statistically
+independent
+CO\textsubscript{2}/{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+snapshots. The vibrational frequencies were calculated using the DVR
+approach described in paper 1 in this series. In these calculations, the
+CO\textsubscript{2} and the closest two pairs of
+{[}C­\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+molecules -- determined using the distance between the center-of-mass of
+the IL molecule and the CO\textsubscript{2} carbon atom -- were treated
+quantum mechanically at the B3LYP/6-311++G(d,p) level of theory. Any IL
+molecule whose center-of-mass was within 20 Å was modeled using its
+molecular mechanics partial atomic charges, which then polarize the
+quantum mechanical region. IL molecules were added to the molecular
+mechanics region in pairs to maintain charge neutrality. The overall
+trend in the vibrational frequencies roughly follows the angle
+dependence in the gas phase, but there is significant scatter due to
+interactions with the IL.
+
+A map for the solvent effects on the asymmetric CO\textsubscript{2}
+vibrational frequency was constructed assuming the following form,
+
+\[\Delta\omega_{\mathrm{\text{solvent}}} = b_{1}E_{\mathrm{O}}^{\text{Cation}} + b_{2}E_{\mathrm{O}}^{\text{Anion}} + c_{1}U_{\mathrm{O}} + c_{2}U_{\mathrm{C}}\]
+
+(3)
+
+where \(E\) and \(U\) represent contributions from the electric field
+and Lennard-Jones (LJ) interactions with the solvent, respectively. The
+subscript, C or O, indicates whether the interaction is computed at the
+location of the CO\textsubscript{2} central carbon or at the oxygen
+atoms. For \(E_{O}\) and \(U_{O}\), the value used in Eq. (3) is the
+average for the two CO\textsubscript{2} oxygen sites. The LJ interaction
+is computed using the expression,
+
+\[U = \ \sum_{j}^{}\varepsilon_{j}\left\lbrack \left( \frac{\sigma_{j}}{r_{j}} \right)^{12} - \left( \frac{\sigma_{j}}{r_{j}} \right)^{6} \right\rbrack\]
+
+(4)
+
+where the sum is over all atoms in the surrounding liquid,
+\(\varepsilon_{j}\) and \(\sigma_{j}\) are the LJ parameters for the
+atom, and \(r_{j}\) is the distance to the atom. The electric fields are
+calculated with respect to the oxygen atoms of CO\textsubscript{2} and
+are projected along the relevant CO bond,
+
+\[E = {\widehat{r}}_{\mathrm{\text{CO}}} \bullet \sum_{j}^{}\frac{q_{j}{\widehat{r}}_{j}}{r_{j}^{2}}\]
+
+(5)
+
+where the sum is over all relevant atoms in in the surrounding liquid
+(i.e. those associated with the cations for
+\(E_{\mathrm{O}}^{\text{Cation}}\) and those associated with the anions
+for \(E_{\mathrm{O}}^{\text{Anion}}\)), \(q_{j}\) is the partial atomic
+charge, \(r_{j}\) is the distance to the charge, \({\widehat{r}}_{j}\)
+is a unit-vector directed toward the site of the charge, and
+\({\widehat{r}}_{\mathrm{\text{CO}}}\) is a unit vector from the carbon
+atom of CO\textsubscript{2} to the relevant oxygen atom. Long range
+electrostatics are corrected using the damped shifted force
+method.\textsuperscript{86}
+
+The four parameters, \(b_{1}\), \(b_{2}\), \(c_{1}\), and \(c_{2}\), in
+Eq. (3) were determined empirically by applying multiple linear
+regression using the 500 calculated frequencies in the training set
+(Table 1). The quality of the fit was evaluated using the 500 different
+frequencies contained in the test set (Figure 2). The root-mean-square
+(RMS) deviation between the test set frequencies and those predicted by
+Eq. (3) was 2.7 cm\textsuperscript{-1}, and the value of correlation
+coefficient for the fit was R = 0.94. By both metrics, the quality of
+the spectroscopic map for predicting the CO\textsubscript{2} asymmetric
+stretch vibrational frequencies in the
+{[}C\textsubscript{4}C\textsubscript{1}IM{]}{[}PF\textsubscript{6}{]} IL
+is as good or better than previously published maps for other
+vibrational reporters in conventional solvents. Additionally, when 500
+rigid CO\textsubscript{2} snapshots are used as the test set, the same
+level of accuracy is obtained.
+
+The Condon approximation, that the magnitude of the transition dipole
+moment is independent of the vibrational frequency of a mode, fails for
+some solutes that interact in a strong local way with their environment.
+The most important example is the OH stretch of liquid water. The
+hydrogen bonds in water polarize the OH bond, increasing the oscillator
+strength on the red side of the vibrational band, which has a
+significant effect on the IR absorption line
+shape.\textsuperscript{63,64,87} Similar to the hydrogen bonding of
+water, the strong local interactions of CO\textsubscript{2} with the
+ionic liquid anion could, in principle, cause the Condon approximation
+to fail. However, we find that the Condon approximation for the main
+band is adequate (Figure 3). We calculated the transition dipole moment
+integral, \(\mu_{01}\), of the asymmetric stretch of CO\textsubscript{2}
+in 1000
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters. The details of the transition dipole moment integral
+calculations are provided in the Supporting Information (SI). A plot of
+\(\mu_{01}\) scaled by \(\mu_{01}^{g}\), the transition dipole moment
+integral of the asymmetric stretch of CO\textsubscript{2} in the
+gas-phase, versus the asymmetric stretch vibrational frequency,
+\(\omega_{a}\), has a slope close to zero. This confirms that it is
+reasonable to regard the transition dipole as a constant factor that
+scales the intensity of linear and non-linear spectra but does not
+modify their shapes. As a result, we do not treat the environmental
+dependence of the transition dipole moment in our spectroscopic map; we
+need only treat the vibrational frequencies.
+
+\textbf{IV. Physical Interpretation of the Spectroscopic Map}
+
+The average contribution to the CO\textsubscript{2} asymmetric stretch
+vibrational frequency from each of the map components is listed in Table
+2. This data demonstrates that the Lennard-Jones potential energy is an
+important predictor of the vibrational frequency of CO\textsubscript{2}
+solvated in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]},
+while the electrostatic potential plays a secondary role. This contrasts
+many prior spectroscopic maps where solvatochromic frequency shifts were
+based purely on the electrostatics of the
+environment.\textsuperscript{47,62,88} This finding is perhaps
+surprising at first, because one might expect electrostatics to dominate
+the interactions of a solute with charged solvent molecules; however,
+one has to consider that (1) CO\textsubscript{2} is not dipolar or
+charged, and as such will not interact with uniform electric fields very
+strongly, and (2) the ionic liquid, particularly the
+{[}C\textsubscript{4}C\textsubscript{1}im{]} butyl tails, have large
+domains where the dominant interactions are dispersive. These points
+make it conceivable that van der Waals effects dominate the
+CO\textsubscript{2}-IL interaction.
+
+To further unravel the origin of the impact of CO\textsubscript{2}-IL
+interactions on the vibrational signature of CO\textsubscript{2}, we use
+the fact that the LJ contributions to the spectroscopic map can be
+further decomposed. In particular, we separate the LJ term into its
+repulsive (\({\sim r}^{- 12}\)) and attractive (\(\sim r^{- 6}\))
+contributions (Table 2). We find that the attractive and repulsive LJ
+terms contribute --7.0 cm\textsuperscript{-1} and +4.9
+cm\textsuperscript{-1}, respectively, to the overall LJ vibrational
+shift of --2.1 cm\textsuperscript{-1}. The large contribution from the
+repulsive LJ term is yet another surprise. To aid in identifying the
+physical origins of the large repulsive LJ contribution, we performed
+symmetry adapted perturbation theory (SAPT)\textsuperscript{71}
+calculations that decompose the total interaction energy into physically
+meaningful components. This analysis should be contrasted with the
+empirical spectroscopic map, where a good fit implies correlation but
+not necessarily causation. Our SAPT calculations yield energy
+contributions, but it should nevertheless be possible to estimate the
+relative importance of different interactions for vibrational
+frequencies. The SAPT decomposition supports the previous discussion in
+that electrostatic interactions (electrostatics, induction) plus the
+exchange (exchange repulsion, exchange-induction) roughly cancel (total
+‑1.3 kcal/mol), whereas dispersive interactions dominate the interaction
+(total ­--4.7 kcal/mol from dispersion plus exchange-dispersion).
+However, the SAPT data also reveals that exchange-dispersion (the
+repulsive dispersion part) is over an order of magnitude smaller than
+the attractive dispersion contribution (10.1\% of the total dispersion
+interaction). This result has to be contrasted with the
+\textasciitilde{}40\% contribution that the repulsive LJ potential makes
+to the vibrations. Since the repulsive LJ contribution is the dominant
+repulsive interaction incorporated in our model, the SAPT results
+suggest that the repulsive part of the LJ potential fits an agglomerate
+of exchange (Pauli) repulsion stemming from charge overlap (74.7\% of
+the repulsive interactions), exchange induction (20.7\%) plus exchange
+dispersion (4.6\%).
+
+It is likely that LJ components will be an important component of a
+spectroscopic map for any neutral and nonpolar solute, or any solvent
+where dispersive interactions, quantum effects (Pauli exchange, for
+instance), or higher order electrostatic interactions are particularly
+important. In our case, it seems logical that a higher potential at the
+carbon would increase the optimal length of the CO bonds, thus
+decreasing the local mode and normal mode frequencies. Meanwhile, at the
+oxygen, a larger potential would generally shorten the bond, increasing
+the frequency. A similar finding was observed by Brinzer \emph{et
+al}.\textsuperscript{23} However, these components only allow the
+CO\textsubscript{2} vibration to respond to local effects -- the
+electric field components allow it to respond to longer-range
+interactions. As in prior works for different solvents and solutes, the
+coefficients for the two electric field components are different from
+each other, in this case by a substantial margin. It has been previously
+established that CO\textsubscript{2} interacts with the anions more
+strongly than with the cations in an ionic
+liquid.\textsuperscript{13,89--93} This is reflected in the magnitude of
+the coefficients related to the two components, and in their average
+frequency contribution (Tables 1 and 2). In particular,
+CO\textsubscript{2} is a Lewis acid and should generally interact with
+negatively charged moieties differently from positively charged ones.
+
+\textbf{V. Validation }
+
+\textbf{A. Experimental Frequency Distribution }
+
+In order to compare our calculated distributions of CO\textsubscript{2}
+vibrational frequencies with experiment, we must account for the effects
+that broaden or narrow the IR absorption line shape beyond the
+underlying distribution of frequencies. The finite population lifetime
+of the asymmetric stretch vibration, reorientation of the
+CO\textsubscript{2} molecule, and a variety of other effects can broaden
+the absorption spectrum. On the other hand, fast dynamics can narrow the
+absorption spectrum (i.e. motional narrowing). A faithful comparison to
+experiment requires a deconvolution of these contributions to estimate
+the range of instantaneous frequencies experienced by
+CO\textsubscript{2}.
+
+2D-IR spectra contain sufficient information to recover the distribution
+of frequencies, which would be difficult to extract from the linear IR
+absorption spectrum alone.\textsuperscript{23} Within the Kubo
+multi-exponential ansatz, the width of the frequency distribution is
+determined by the frequency fluctuation correlation function
+
+\[\left\langle \text{δω}\left( t \right)\text{δω}\left( 0 \right) \right\rangle = \ \sum_{i}^{N}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)}\]
+
+(6)
+
+where \(\Delta_{i}^{2}\) are the variances of frequency modulations, and
+\(\tau_{i}\) are the timescales for the respective frequency
+fluctuations. The width of the frequency distribution is the sum of
+squares of the different broadening processes
+
+\[\left\langle \delta\omega^{2} \right\rangle = \sum_{i}^{N}\Delta_{i}^{2}\]
+
+(7)
+
+The contribution of homogeneous processes whose frequency fluctuations
+are too fast to be resolved (specifically when
+\(\Delta_{i}\tau_{i} \ll 1\)) can be approximated as
+\(\delta\left( t \right)\Delta_{H}^{2}\tau_{H}\), which results in a
+frequency correlation function:
+
+\[\left\langle \text{δω}\left( t \right)\text{δω}\left( 0 \right) \right\rangle = \delta\left( t \right)\Delta_{H}^{2}\tau_{H} + \sum_{i}^{N - 1}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)} = \frac{\delta\left( t \right)}{T_{2}^{*}} + \sum_{i}^{N - 1}{\Delta_{i}^{2}\exp\left( - \frac{t}{\tau_{i}} \right)}\]
+
+(8)
+
+where \(T_{2}^{*} \equiv \left( \Delta_{H}^{2}\tau_{H} \right)^{- 1}\)
+is the pure dephasing time and \(\delta\left( t \right)\) is the Dirac
+delta function. The pure dephasing time depends on the variance of the
+fast frequency fluctuations, \(\Delta_{H}^{2}\), and the correlation
+time for fast motions, \(\tau_{H}\), and the two parameters cannot be
+independently determined. Analyzing the change in shape of the 2D-IR
+spectra as a function of the waiting time can directly determine the
+magnitude of frequency modulations related to the sum of exponential
+decays, \(\sum_{i}^{N - 1}\Delta_{i}^{2}\), in Eq. (8). For
+CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+this sum is approximately 2 cm\textsuperscript{-1}.\textsuperscript{23}
+
+Determining the magnitude of frequency modulations that give rise to the
+first term in Eq. (8) is more complicated. The pure dephasing time
+(\(T_{2}^{*}\)) is only one contributor to the experimentally determined
+dephasing time (\(T_{2}\)), which also depends on the population
+(\(T_{1}\)), and reorientational (\(T_{\text{or}}\)) motions of the
+molecule
+
+\[\frac{1}{T_{2}}\  = \frac{1}{T_{2}^{*}} + \frac{1}{2T_{1}} + \frac{1}{3T_{\text{or}}}\]
+
+(9)
+
+The experimental dephasing time, \(T_{2}\), of the asymmetric stretch of
+CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} IL
+is 3.3 ps.\textsuperscript{23} Since the experiment was performed in an
+all-parallel polarization, we cannot unambiguously determine the
+population and orientation relaxation times. We can estimate them,
+however, based on the rate of signal decay and the orientational
+correlation functions determined in a similar ionic
+liquid.\textsuperscript{24,25} Estimates of \(T_{1} =\) 20 ps and
+\(T_{\mathrm{\text{or}}} =\) 10 ps, suggest that vast majority
+contribution to \(T_{2}\) for CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+comes from pure dephasing. Population relaxation and orientational
+relaxation have a minor effect on the total dephasing time. We estimate
+a pure dephasing time of \(T_{2}^{*} =\) 4 ps.
+
+Finally, the variance of the frequency fluctuations, \(\Delta_{H}^{2}\),
+can be limited to a range by physical constraints on the values of
+\(\tau_{H}\). The lower limit on \(\tau_{H}\) is governed by the
+inertial motions of CO\textsubscript{2} and its ionic liquid solvent
+shells. The timescale of the inertial response in liquid water is in the
+sub-60 fs range, while that of acetonitrile is 70
+fs.\textsuperscript{29,94,95} Using 70 fs as a lower limit for
+\(\tau_{H}\ \)places an upper limit on \(\Delta_{H}\) of 9.7
+cm\textsuperscript{-1}. Fits to analytical response functions suggests
+that \(\Delta_{H}\ \tau_{H} \approx 0.2\) is a reasonable estimate of
+the dynamics that can be resolved using global fitting of the
+experimental data, which gives an upper limit on \(\tau_{H}\) of 200 fs,
+with a corresponding lower limit on \(\Delta_{H}\) of 6
+cm\textsuperscript{-1}. Our estimate for the homogeneous width is thus,
+\(6 < \Delta_{H} < 10\) cm\textsuperscript{‑1}. Combining the broadening
+due to fast and slow motions, the experimentally estimated total
+frequency width for CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} is
+between 6.3 and 10.2 cm\textsuperscript{-1} (Figure 4).
+
+\textbf{B. Calculated Frequency Distributions}
+
+Figure 5a shows the distribution of CO\textsubscript{2} asymmetric
+stretch vibrational frequencies computed using the spectroscopic map for
+1000 statistically independent snapshots collected from an MD simulation
+of flexible CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}.
+These are the same snapshots that were used to parametrize and validate
+the spectroscopic map in Section III. The distribution is peaked at
+approximately 2344 cm\textsuperscript{-1} and its standard deviation is
+7.4 cm\textsuperscript{-1}. Both of these values are in reasonable
+agreement with experiment (2342.5 cm\textsuperscript{-1} and 6.3 -- 10.2
+cm\textsuperscript{-1}). Qualitatively, the distribution exhibits a
+significant asymmetry with a mean frequency of 2339.9
+cm\textsuperscript{-1} that is about 4 cm\textsuperscript{-1} to the red
+of the peak frequency. The experimental IR absorption line shape,
+however, does not show signs of such asymmetry in the underlying
+distribution of frequencies.
+
+The source of the asymmetry in the distribution of frequencies in Figure
+5a is the contribution to the spectroscopic map from the
+CO\textsubscript{2} bend angle, Eq. (2). This is illustrated in Figure
+5c, where we have calculated the distribution of CO\textsubscript{2}
+asymmetric stretch vibrational frequencies for 1000 statistically
+independent snapshots collected from an MD simulation of rigid
+CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}.
+Since the CO\textsubscript{2} molecule has an angle of 180º in each of
+the snapshots, the contribution to the calculated vibrational frequency
+from the CO\textsubscript{2} bend angle is zero. The resulting
+distribution is correctly symmetric with a mean frequency of 2346.5
+cm\textsuperscript{-1} and a standard deviation of 2.3
+cm\textsuperscript{-1}. The calculated distribution is centered 4
+cm\textsuperscript{-1} to the blue of the experimental distribution, and
+it is narrower than the lower estimate of the experimental distribution
+by 4 cm\textsuperscript{-1}.
+
+The results in Figure 5a and 5c represent two extremes -- one where the
+CO\textsubscript{2} bend is treated classically (Figure 5a) and another
+where the CO\textsubscript{2} bend is effectively neglected (Figure 5c).
+When the CO\textsubscript{2} bend is classical, it is assumed that the
+CO\textsubscript{2} asymmetric stretch vibrational frequency depends on
+the instantaneous value of the bend angle, Figure 1 and Eq. (2).
+However, the asymmetric distribution suggests that this approach is
+incorrect. In fact, a simple thought experiment reinforces the problems
+associated with regarding the CO\textsubscript{2} bend as a classical
+variable. Consider a non-rotating CO\textsubscript{2} molecule isolated
+in the gas-phase. If all of the vibrations of the CO\textsubscript{2}
+molecule are quantum mechanical, the distribution of each of the four
+vibrations is a delta function. However, if the bend is classical with a
+kinetic energy commensurate with room temperature, the distribution of
+asymmetric stretch vibrational frequencies will incorrectly have a
+finite width. One solution to this conundrum is to adopt a fully quantum
+mechanical treatment of the CO\textsubscript{2} vibrations. This would
+require the construction of a four-dimensional potential energy surface
+for each of the 1000 benchmark
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters, which is computationally intractable.
+
+An alternate strategy is to treat the influence of the
+CO\textsubscript{2} bend on the asymmetric stretch vibrational frequency
+using first-order perturbation theory. Instead of utilizing the
+instantaneous CO\textsubscript{2} angle in Eq. (2), \(\theta\), we would
+instead use the average angle,
+\(\left\langle \theta \right\rangle = \left\langle \varphi_{0} \middle| \theta \middle| \varphi_{0} \right\rangle\),
+where \(\varphi_{0}(\theta)\) is the ground vibrational wavefunction for
+the CO\textsubscript{2} bend. Returning to the CO\textsubscript{2} in
+the gas-phase thought experiment, the average angle is constant and
+equal to 180º. Thus, there would correctly be no contribution to
+CO\textsubscript{2} asymmetric stretch vibrational frequency. In
+contrast, the instantaneous average bend angle will fluctuate away from
+180º in an IL because of asymmetric solvation by the solvent. Of course,
+we do not have access to vibrational wavefunction for the
+CO\textsubscript{2} bend for the benchmark
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters, nor when we wanted to utilize the spectroscopic map to analyze
+an MD simulation. An additional approximation is necessary. If we were
+to regard the CO\textsubscript{2} bend as harmonic, then the average
+angle is given by the instantaneous distortion of the
+CO\textsubscript{2} geometry by the environment. For the benchmark
+clusters, the geometry distortion can be determined by optimizing the
+geometry of the CO\textsubscript{2} molecule using the classical MD
+force field and a conjugate gradient minimization while holding fixed
+both the center-of-mass of the CO\textsubscript{2}, as well as the
+configuration of the IL solvent. The map is then used to calculate the
+vibrational frequency for the relaxed snapshot.
+
+Figure 5b shows the distribution of CO\textsubscript{2} asymmetric
+stretch vibrational frequencies computed using the spectroscopic map for
+1000 statistically independent snapshots collected from an MD simulation
+of flexible CO\textsubscript{2} in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+where the CO\textsubscript{2} bend angle has been relaxed. On average,
+the relaxed bend angle is 178.4º, and the distribution of frequencies is
+nearly symmetric with a mean frequency of 2343.8 cm\textsuperscript{-1}
+and a standard deviation of 2.4 cm\textsuperscript{-1}. The mean
+frequency is in excellent agreement with experiment and differs by only
+1.3 cm\textsuperscript{-1}. Note that this agreement implies that the
+spectroscopic map is able to accurately capture the solvatochromic shift
+of the CO\textsubscript{2} asymmetric stretch vibrational frequency from
+the gas-phase to the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+IL. The width of the distribution is too narrow compared to the
+estimated width of the experimental distribution of 6.3 -- 10.2
+cm\textsuperscript{-1}. There are several possible sources for the
+discrepancy in the width of the distribution, including inaccuracies
+associated with the approximate perturbative approach for the effect of
+the bend on the asymmetric stretch frequency. However, the overall
+agreement with experiment is encouraging.
+
+It is instructive to compare the distributions in Figures 5b (relaxed
+CO\textsubscript{2}) and 5c (rigid CO\textsubscript{2}). Both
+distributions are symmetric and they have nearly the same widths: 2.4
+and 2.3 cm\textsuperscript{-1}, respectively. Thus, within the
+approximate perturbative approach, the bend has very little influence on
+the width of the distribution. The averages of the distributions differ
+more significantly: 2343.8 and 2346.5 cm\textsuperscript{-1},
+respectively. The bend shifts the distribution to the red and into
+better agreement with experiment. Overall, the role of the bend is
+relatively minor resulting in a redshift of the distribution by 2.7
+cm\textsuperscript{-1}. These results suggest several options for how
+the bend is treated when the map is applied in conjunction with MD
+simulations to understand the spectroscopy and spectral diffusion
+dynamics of CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} IL
+in Paper III in this series. The simplest strategy is to hold the
+CO\textsubscript{2} rigid and to shift the calculated frequencies by 2.7
+cm\textsuperscript{-1}. In essence, this would just account for the
+average effect of the CO\textsubscript{2} angle on the asymmetric
+stretch frequencies. A more computationally intensive strategy is a
+simulation with CO\textsubscript{2} flexible, but where the geometry of
+the CO\textsubscript{2} is optimized using the classical force field.
+The efficacy of these approaches will be evaluated in Paper III.
+
+\textbf{VI. Conclusions}
+
+In this paper we have developed and validated a spectroscopic map that
+is the foundation for a molecular interpretation of ultrafast
+vibrational spectroscopy of CO\textsubscript{2} in ionic liquids. In
+addition, we have established important insights into the solvatochromic
+shift of the CO\textsubscript{2} asymmetric stretch vibrational
+frequency in ILs. We analyzed the physical origin of the vibrational
+frequency shifts using SAPT energy decomposition schemes. Unlike other
+vibrational chromophores, electrostatics alone poorly predict the
+vibrational frequency. While the most important contributor to the
+electrostatic part of the spectroscopic map is the field from the anion,
+both attractive dispersion interactions and repulsive charge overlap
+forces (Pauli repulsion) play additional important roles. Finally, while
+the CO\textsubscript{2} bend angle influences the asymmetric stretch
+frequency, we have shown that the geometry of the CO\textsubscript{2}
+molecule is only slightly perturbed by the IL, so regarding the
+CO\textsubscript{2} as rigid is generally sufficient to capture the
+structural relaxation of the IL relative to the CO\textsubscript{2}.
+
+\textbf{Supporting Information}
+
+Details regarding the transition dipole moment integral calculations in
+Figure 3 are included in the Supporting Information. This material is
+available free of charge.
+
+\textbf{Acknowledgements}
+
+The authors thank Prof. Kenneth D. Jordan for helpful discussions. SAC
+is grateful for financial support from the National Science Foundation
+(CHE-1565471), the American Chemical Society Petroleum Research Fund
+(52648-ND6), and the Sustainable Energy Initiative at the University of
+Notre Dame. SAC and CAD are also thankful for high performance computing
+resources and support from the Center for Research Computing at the
+University of Notre Dame. Computational resources were also provided by
+the Center for Simulation and Modeling at the University of Pittsburgh.
+SGR acknowledges financial support from the National Science Foundation
+(CHE-1454105).
+
+\textbf{References}
+
+(1) Karadas, F.; Atilhan, M.; Aparicio, S. Review on the Use of Ionic
+Liquids (ILs) as Alternative Fluids for CO\textsubscript{2} Capture and
+Natural Gas Sweetening. \emph{Energy and Fuels} \textbf{2010}, \emph{24}
+(11), 5817--5828.
+
+(2) Wishart, J. F. Energy Applications of Ionic Liquids. \emph{Energy
+Environ. Sci.} \textbf{2009}, \emph{2} (9), 956--961.
+
+(3) Armand, M.; Endres, F.; MacFarlane, D. R.; Ohno, H.; Scrosati, B.
+Ionic-Liquid Materials for the Electrochemical Challenges of the Future.
+\emph{Nat. Mater.} \textbf{2009}, \emph{8} (8), 621--629.
+
+(4) Patel, D. D.; Lee, J. M. Applications of Ionic Liquids. \emph{Chem.
+Rec.} \textbf{2012}, \emph{12} (3), 329--355.
+
+(5) Bara, J. E.; Camper, D. E.; Gin, D. L.; Noble, R. D.
+Room-Temperature Ionic Liquids and Composite Materials: Platform
+Technologies for CO\textsubscript{2} Capture. \emph{Acc. Chem. Res.}
+\textbf{2010}, \emph{43} (1), 152--159.
+
+(6) Crosthwaite, J. M.; Muldoon, M. J.; Dixon, J. K.; Anderson, J. L.;
+Brennecke, J. F. Phase Transition and Decomposition Temperatures, Heat
+Capacities and Viscosities of Pyridinium Ionic Liquids. \emph{J. Chem.
+Thermodyn.} \textbf{2005}, \emph{37} (6), 559--568.
+
+(7) Seki, S.; Kobayashi, T.; Kobayashi, Y.; Takei, K.; Miyashiro, H.;
+Hayamizu, K.; Tsuzuki, S.; Mitsugi, T.; Umebayashi, Y. Effects of Cation
+and Anion on Physical Properties of Room-Temperature Ionic Liquids.
+\emph{J. Mol. Liq.} \textbf{2010}, \emph{152} (1--3), 9--13.
+
+(8) Tokuda, H.; Hayamizu, K.; Ishii, K.; Susan, M. A. B. H.; Watanabe,
+M. Physicochemical Properties and Structures of Room Temperature Ionic
+Liquids. 2. Variation of Alkyl Chain Length in Imidazolium Cation.
+\emph{J. Phys. Chem. B} \textbf{2005}, \emph{109} (13), 6103--6110.
+
+(9) Anthony, J. L.; Maginn, E. J.; Brennecke, J. F. Solubilities and
+Thermodynamic Properties of Gases in the Ionic Liquid
+1-N-Butyl-3-Methylimidazolium Hexafluorophosphate. \emph{J. Phys. Chem.
+B} \textbf{2002}, \emph{106} (29), 7315--7320.
+
+(10) Seo, S.; Quiroz-Guzman, M.; Desilva, M. A.; Lee, T. B.; Huang, Y.;
+Goodrich, B. F.; Schneider, W. F.; Brennecke, J. F. Chemically Tunable
+Ionic Liquids with Aprotic Heterocyclic Anion (AHA) for
+CO\textsubscript{2} Capture. \emph{J. Phys. Chem. B} \textbf{2014},
+\emph{118} (21), 5740--5751.
+
+(11) Shiflett, M. B.; Yokozeki, A. Solubilities and Diffusivities of
+Carbon Dioxide in Ionic Liquids: {[}bmim{]}{[}PF\textsubscript{6}{]} and
+{[}bmim{]}{[}BF\textsubscript{4}{]}. \emph{Ind. Eng. Chem. Res.}
+\textbf{2005}, \emph{44} (12), 4453--4464.
+
+(12) Gurkan, B. E.; De La Fuente, J. C.; Mindrup, E. M.; Ficke, L. E.;
+Goodrich, B. F.; Price, E. A.; Schneider, W. F.; Brennecke, J. F.
+Equimolar CO\textsubscript{2} Absorption by Anion-Functionalized Ionic
+Liquids. \emph{J. Am. Chem. Soc.} \textbf{2010}, \emph{132} (7),
+2116--2117.
+
+(13) Cadena, C.; Anthony, J. L.; Shah, J. K.; Morrow, T. I.; Brennecke,
+J. F.; Maginn, E. J. Why Is CO\textsubscript{2} so Soluble in
+Imidazolium-Based Ionic Liquids? \emph{J. Am. Chem. Soc.} \textbf{2004},
+\emph{126} (16), 5300--5308.
+
+(14) Tamimi, A.; Fayer, M. D. Ionic Liquid Dynamics Measured with 2D IR
+and IR Pump--Probe Experiments on a Linear Anion and the Influence of
+Potassium Cations. \emph{J. Phys. Chem. B} \textbf{2016}, \emph{120}
+(26), 5842--5854.
+
+(15) Ren, Z.; Ivanova, A. S.; Couchot-Vore, D.; Garrett-Roe, S.
+Ultrafast Structure and Dynamics in Ionic Liquids: 2D-IR Spectroscopy
+Probes the Molecular Origin of Viscosity. \emph{J. Phys. Chem. Lett.}
+\textbf{2014}, \emph{5} (9), 1541--1546.
+
+(16) Hamm, P.; Zanni, M. \emph{Concepts and Methods of 2D Infrared
+Spectroscopy}; Cambridge University Press, 2015.
+
+(17) Khalil, M.; Demirdöven, N.; Tokmakoff, A. Coherent 2D IR
+Spectroscopy: Molecular Structure and Dynamics in Solution. \emph{J.
+Phys. Chem. A} \textbf{2003}, \emph{107} (27), 5258--5279.
+
+(18) Levinson, N. M.; Bolte, E. E.; Miller, C. S.; Corcelli, S. A.;
+Boxer, S. G. Phosphate Vibrations Probe Local Electric Fields and
+Hydration in Biomolecules. \emph{J. Am. Chem. Soc.} \textbf{2011},
+\emph{133} (34), 13236--13239.
+
+(19) Choi, J. H.; Cho, M. Vibrational Solvatochromism and
+Electrochromism of Infrared Probe Molecules Containing C≡O, C≡N, C=O, or
+C-F Vibrational Chromophore. \emph{J. Chem. Phys.} \textbf{2011},
+\emph{134} (15), 154513.
+
+(20) Choi, J. H.; Oh, K. I.; Lee, H.; Lee, C.; Cho, M. Nitrile and
+Thiocyanate IR Probes: Quantum Chemistry Calculation Studies and
+Multivariate Least-Square Fitting Analysis. \emph{J. Chem. Phys.}
+\textbf{2008}, \emph{128} (13), 134506.
+
+(21) Lee, K. K.; Park, K. H.; Kwon, D.; Choi, J. H.; Son, H.; Park, S.;
+Cho, M. Ion-Pairing Dynamics of Li\textsuperscript{+} and
+SCN\textsuperscript{-} in Dimethylformamide Solution: Chemical Exchange
+Two-Dimensional Infrared Spectroscopy. \emph{J. Chem. Phys.}
+\textbf{2011}, \emph{134} (6), 64506.
+
+(22) Steinel, T.; Asbury, J. B.; Corcelli, S. A.; Lawrence, C. P.;
+Skinner, J. L.; Fayer, M. D. Water Dynamics: Dependence on Local
+Structure Probed with Vibrational Echo Correlation Spectroscopy.
+\emph{Chem. Phys. Lett.} \textbf{2004}, \emph{386} (4--6), 295--300.
+
+(23) Brinzer, T.; Berquist, E. J.; Ren, Z.; Dutta, S.; Johnson, C. A.;
+Krisher, C. S.; Lambrecht, D. S.; Garrett-Roe, S. Ultrafast Vibrational
+Spectroscopy (2D-IR) of CO\textsubscript{2} in Ionic Liquids: Carbon
+Capture from Carbon Dioxide's Point of View. \emph{J. Chem. Phys.}
+\textbf{2015}, \emph{142} (21), 212425.
+
+(24) Giammanco, C. H.; Kramer, P. L.; Yamada, S. A.; Nishida, J.;
+Tamimi, A.; Fayer, M. D. Carbon Dioxide in an Ionic Liquid: Structural
+and Rotational Dynamics. \emph{J. Chem. Phys.} \textbf{2016}, \emph{144}
+(10), 104506.
+
+(25) Giammanco, C. H.; Kramer, P. L.; Yamada, S. A.; Nishida, J.;
+Tamimi, A.; Fayer, M. D. Coupling of Carbon Dioxide Stretch and Bend
+Vibrations Reveals Thermal Population Dynamics in an Ionic Liquid.
+\emph{J. Phys. Chem. B} \textbf{2016}, \emph{120} (3), 549--556.
+
+(26) Asbury, J. B.; Steinel, T.; Kwak, K.; Corcelli, S. A.; Lawrence, C.
+P.; Skinner, J. L.; Fayer, M. D. Dynamics of Water Probed with
+Vibrational Echo Correlation Spectroscopy. \emph{J. Chem. Phys.}
+\textbf{2004}, \emph{121} (24), 12431--12446.
+
+(27) Asbury, J. B.; Steinel, T.; Stromberg, C.; Corcelli, S. A.;
+Lawrence, C. P.; Skinner, J. L.; Fayer, M. D. Water Dynamics:
+Vibrational Echo Correlation Spectroscopy and Comparison to Molecular
+Dynamics Simulations. \emph{J. Phys. Chem. A} \textbf{2004}, \emph{108}
+(7), 1107--1119.
+
+(28) Bakker, H. J.; Skinner, J. L. Vibrational Spectroscopy as a Probe
+of Structure and Dynamics in Liquid Water. \emph{Chem. Rev.}
+\textbf{2010}, \emph{110} (3), 1498--1517.
+
+(29) Fecko, C. J.; Eaves, J. D.; Loparo, J. J.; Tokmakoff, A.; Geissler,
+P. L. Ultrafast Hydrogen-Bond Dynamics in the Infrared Spectroscopy of
+Water. \emph{Science} \textbf{2003}, \emph{301} (5640), 1698--1702.
+
+(30) Eaves, J. D.; Loparo, J. J.; Fecko, C. J.; Roberts, S. T.;
+Tokmakoff, A.; Geissler, P. L. Hydrogen Bonds in Liquid Water Are Broken
+Only Fleetingly. \emph{Proc. Natl. Acad. Sci. U. S. A.} \textbf{2005},
+\emph{102} (37), 13019--13022.
+
+(31) Gruenbaum, S. M.; Tainter, C. J.; Shi, L.; Ni, Y.; Skinner, J. L.
+Robustness of Frequency, Transition Dipole, and Coupling Maps for Water
+Vibrational Spectroscopy. \emph{J. Chem. Theory Comput.} \textbf{2013},
+\emph{9} (7), 3109--3117.
+
+(32) Jansen, T. L. C.; Auer, B. M.; Yang, M.; Skinner, J. L.
+Two-Dimensional Infrared Spectroscopy and Ultrafast Anisotropy Decay of
+Water. \emph{J. Chem. Phys. J. Chem. Phys. J. Chem. Phys. J. Chem. Phys.
+J. Chem. Phys. J. Chem. Phys} \textbf{2010}, \emph{1321} (10),
+224503--164301.
+
+(33) Loparo, J. J.; Roberts, S. T.; Tokmakoff, A. Multidimensional
+Infrared Spectroscopy of Water. I. Vibrational Dynamics in
+Two-Dimensional IR Line Shapes. \emph{J. Chem. Phys.} \textbf{2006},
+\emph{125} (19), 194521.
+
+(34) Loparo, J. J.; Roberts, S. T.; Tokmakoff, A. Multidimensional
+Infrared Spectroscopy of Water. II. Hydrogen Bond Switching Dynamics.
+\emph{J. Chem. Phys.} \textbf{2006}, \emph{125} (19), 194522.
+
+(35) Nibbering, E. T. J.; Elsaesser, T. Ultrafast Vibrational Dynamics
+of Hydrogen Bonds in the Condensed Phase. \emph{Chem. Rev.}
+\textbf{2004}, \emph{104} (4), 1887--1914.
+
+(36) Nicodemus, R. A.; Corcelli, S. A.; Skinner, J. L.; Tokmakoff, A.
+Collective Hydrogen Bond Reorganization in Water Studied with
+Temperature-Dependent Ultrafast Infrared Spectroscopy. \emph{J. Phys.
+Chem. B} \textbf{2011}, \emph{115} (18), 5604--5616.
+
+(37) Nicodemus, R. A.; Ramasesha, K.; Roberts, S. T.; Tokmakoff, A.
+Hydrogen Bond Rearrangements in Water Probed with Temperature-Dependent
+2D IR. \emph{J. Phys. Chem. Lett.} \textbf{2010}, \emph{1} (7),
+1068--1072.
+
+(38) Ramasesha, K.; Roberts, S. T.; Nicodemus, R. A.; Mandal, A.;
+Tokmakoff, A. Ultrafast 2D IR Anisotropy of Water Reveals Reorientation
+during Hydrogen-Bond Switching. \emph{J. Chem. Phys.} \textbf{2011},
+\emph{135} (5), 12457--54509.
+
+(39) Roberts, S. T.; Ramasesha, K.; Tokmakoff, A. Structural
+Rearrangements in Water Viewed through Two-Dimensional Infrared
+Spectroscopy. \emph{Acc. Chem. Res.} \textbf{2009}, \emph{42} (9),
+1239--1249.
+
+(40) Auer, B.; Kumar, R.; Schmidt, J. R.; Skinner, J. L. Hydrogen
+Bonding and Raman, IR, and 2D-IR Spectroscopy of Dilute HOD in Liquid
+D\textsubscript{2}O. \emph{Proc. Natl. Acad. Sci. USA} \textbf{2007},
+\emph{104} (36), 14215--14220.
+
+(41) Auer, B. M.; Skinner, J. L. IR and Raman Spectra of Liquid Water:
+Theory and Interpretation. \emph{J. Chem. Phys.} \textbf{2008},
+\emph{128} (22), 224511.
+
+(42) Corcelli, S. A.; Lawrence, C. P.; Skinner, J. L. Combined
+Electronic Structure/molecular Dynamics Approach for Ultrafast Infrared
+Spectroscopy of Dilute HOD in Liquid H\textsubscript{2}O and
+D\textsubscript{2}O. \emph{J. Chem. Phys.} \textbf{2004}, \emph{120}
+(17), 8107--8117.
+
+(43) Hayashi, T.; la Cour Jansen, T.; Zhuang, W.; Mukamel, S. Collective
+Solvent Coordinates for the Infrared Spectrum of HOD in
+D\textsubscript{2}O Based on an \emph{Ab Initio} Electrostatic Map.
+\emph{J. Phys. Chem. A} \textbf{2005}, \emph{109} (1), 64--82.
+
+(44) Jansen, T. L. C.; Cringus, D.; Pshenichnikov, M. S. Dissimilar
+Dynamics of Coupled Water Vibrations. \emph{J. Phys. Chem. A}
+\textbf{2009}, \emph{113} (22), 6260--6265.
+
+(45) Li, F.; Skinner, J. L. Infrared and Raman Line Shapes for Ice
+I\textsubscript{h}. II. H\textsubscript{2}O and D\textsubscript{2}O.
+\emph{J. Chem. Phys.} \textbf{2010}, \emph{133} (24), 244504--244504.
+
+(46) Lin, Y. S.; Li, G. De; Mao, S. P.; Chai, J. Da. Long-Range
+Corrected Hybrid Density Functionals with Improved Dispersion
+Corrections. \emph{J. Chem. Theory Comput.} \textbf{2013}, \emph{9} (1),
+263--272.
+
+(47) Lin, Y. S.; Auer, B. M.; Skinner, J. L. Water Structure, Dynamics,
+and Vibrational Spectroscopy in Sodium Bromide Solutions. \emph{J. Chem.
+Phys.} \textbf{2009}, \emph{131} (14), 144511.
+
+(48) Paarmann, A.; Hayashi, T.; Mukamel, S.; Miller, R. J. D. Nonlinear
+Response of Vibrational Excitons: Simulating the Two-Dimensional
+Infrared Spectrum of Liquid Water. \emph{J. Chem. Phys.} \textbf{2009},
+\emph{130} (20), 204110.
+
+(49) Pieniazek, P. A.; Lin, Y.-S.; Chowdhary, J.; Ladanyi, B. M.;
+Skinner, J. L. Vibrational Spectroscopy and Dynamics of Water Confined
+inside Reverse Micelles. \emph{J. Phys. Chem. B} \textbf{2009},
+\emph{113} (45), 15017--15028.
+
+(50) Shi, L.; Gruenbaum, S. M.; Skinner, J. L. Interpretation of IR and
+Raman Line Shapes for H\textsubscript{2}O and D\textsubscript{2}O Ice
+I\textsubscript{h}. \emph{J. Phys. Chem. B} \textbf{2012}, \emph{116}
+(47), 13821--13830.
+
+(51) Skinner, J.; Auer, B.; Lin, Y. Vibrational Line Shapes, Spectral
+Diffusion, and Hydrogen Bonding in Liquid Water. \emph{Adv.}
+\emph{Chem.} \emph{Phys.} \textbf{2009}, \emph{142}, 59.
+
+(52) Tainter, C. J.; Skinner, J. L. The Water Hexamer: Three-Body
+Interactions, Structures, Energetics, and OH-Stretch Spectroscopy at
+Finite Temperature. \emph{J. Chem. Phys.} \textbf{2012}, \emph{137}
+(10), 2351--104304.
+
+(53) Yang, M.; Skinner, J. L. Time-Averaging Approximation in the
+Interaction Picture: Absorption Line Shapes for Coupled Chromophores
+with Application to Liquid Water. \emph{J. Chem. Phys.} \textbf{2011},
+\emph{135} (15), 154114.
+
+(54) Laage, D.; Hynes, J. T. Do More Strongly Hydrogen-Bonded Water
+Molecules Reorient More Slowly\,? \emph{Chem. Phys. Lett.}
+\textbf{2006}, \emph{433} (1--3), 80--85.
+
+(55) Laage, D. A Molecular Jump Mechanism of Water Reorientation.
+\emph{Science} \textbf{2006}, \emph{311} (5762), 832--835.
+
+(56) Laage, D.; Hynes, J. T. On the Molecular Mechanism of Water
+Reorientation. \emph{J. Phys. Chem. B} \textbf{2008}, \emph{112} (45),
+14230--14242.
+
+(57) Laage, D.; Stirnemann, G.; Hynes, J. T. Water Jump Reorientation
+and Ultrafast Vibrational Spectroscopy. \emph{J. Photochem. Photobiol. A
+Chem.} \textbf{2012}, \emph{234}, 75--82.
+
+(58) Laage, D.; Stirnemann, G.; Sterpone, F.; Hynes, J. T. Water Jump
+Reorientation: From Theoretical Prediction to Experimental Observation.
+\emph{Acc. Chem. Res.} \textbf{2012}, \emph{45} (1), 53--62.
+
+(59) Smith, J. D.; Cappa, C. D.; Wilson, K. R.; Cohen, R. C.; Geissler,
+P. L.; Saykally, R. J. Unified Description of Temperature-Dependent
+Hydrogen-Bond Rearrangements in Liquid Water. \emph{Proc. Natl. Acad.
+Sci.} \textbf{2005}, \emph{102} (40), 14171--14174.
+
+(60) Li, S.; Schmidt, J. R.; Corcelli, S. A.; Lawrence, C. P.; Skinner,
+J. L. Approaches for the Calculation of Vibrational Frequencies in
+Liquids: Comparison to Benchmarks for Azide/water Clusters. \emph{J.
+Chem. Phys.} \textbf{2006}, \emph{124} (20), 204110.
+
+(61) Terranova, Z. L.; Corcelli, S. A. Molecular Dynamics Investigation
+of the Vibrational Spectroscopy of Isolated Water in an Ionic Liquid.
+\emph{J. Phys. Chem. B} \textbf{2014}, \emph{118} (28), 8264--8272.
+
+(62) Oh, K. I.; Choi, J. H.; Lee, J. H.; Han, J. B.; Lee, H.; Cho, M.
+Nitrile and Thiocyanate IR Probes: Molecular Dynamics Simulation
+Studies. \emph{J. Chem. Phys.} \textbf{2008}, \emph{128} (15), 154504.
+
+(63) Corcelli, S. A.; Skinner, J. L. Infrared and Raman Line Shapes of
+Dilute HOD in Liquid H\textsubscript{2}O and D\textsubscript{2}O from 10
+to 90°C. \emph{J. Phys. Chem. A} \textbf{2005}, \emph{109} (28),
+6154--6165.
+
+(64) Schmidt, J. R.; Corcelli, S. A.; Skinner, J. L. Pronounced
+Non-Condon Effects in the Ultrafast Infrared Spectroscopy of Water.
+\emph{J. Chem. Phys.} \textbf{2005}, \emph{123} (4), 044513.
+
+(65) Błasiak, B.; Lee, H.; Cho, M. Vibrational Solvatochromism: Towards
+Systematic Approach to Modeling Solvation Phenomena. \emph{J. Chem.
+Phys.} \textbf{2013}, \emph{139} (4), 044111.
+
+(66) Błasiak, B.; Cho, M. Vibrational Solvatochromism. II. A
+First-Principle Theory of Solvation-Induced Vibrational Frequency Shift
+Based on Effective Fragment Potential Method. \emph{J. Chem. Phys.}
+\textbf{2014}, \emph{140} (16), 164107.
+
+(67) Berquist, E. J.; Daly, C. A. J.; Brinzer, T.; Bullard, K. K.;
+Campbell, Z. M.; Corcelli, S. A.; Garrett-Roe, S.; Lambrecht, D. S.
+Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids I.
+\emph{Ab Initio} Calculations. \emph{J.} \emph{Phys.} \emph{Chem.}
+(submitted)\emph{.}
+
+(68) Błasiak, B.; Cho, M. Vibrational Solvatochromism. III. Rigorous
+Treatment of the Dispersion Interaction Contribution. \emph{J. Chem.
+Phys.} \textbf{2015}, \emph{143} (16), 164111.
+
+(69) Jeziorski, B.; Moszynski, R.; Szalewicz, K. Perturbation Theory
+Approach to Intermolecular Potential Energy Surfaces of van Der Waals
+Complexes. \emph{Chem. Rev.} \textbf{1994}, \emph{94} (7), 1887--1930.
+
+(70) Hohenstein, E. G.; Sherrill, C. D. Density Fitting and Cholesky
+Decomposition Approximations in Symmetry-Adapted Perturbation Theory:
+Implementation and Application to Probe the Nature of\, π-π Interactions
+in Linear Systems. \emph{J. Chem. Phys.} \textbf{2010}, \emph{132} (18).
+
+(71) Hohenstein, E. G.; Parrish, R. M.; Sherrill, C. D.; Turney, J. M.;
+Schaefer, H. F. Large-Scale Symmetry-Adapted Perturbation Theory
+Computations via Density Fitting and Laplace Transformation Techniques:
+Investigating the Fundamental Forces of DNA-Intercalator Interactions.
+\emph{J. Chem. Phys.} \textbf{2011}, \emph{135} (17) 184111.
+
+(72) Plimpton, S. Fast Parallel Algorithms for Short-Range Molecular
+Dynamics. \emph{J. Comput. Phys.} \textbf{1995}, \emph{117} (1), 1--19.
+
+(73) Andreussi, O.; Marzari, N. Transport Properties of Room-Temperature
+Ionic Liquids from Classical Molecular Dynamics. \emph{J. Chem. Phys.}
+\textbf{2012}, \emph{137} (4), 44508.
+
+(74) Forester, T. R.; Smith, W. SHAKE, Rattle, and Roll: Efficient
+Constraint Algorithms for Linked Rigid Bodies. \emph{J. Comput. Chem.}
+\textbf{1998}, \emph{19} (1), 102--111.
+
+(75) Ryckaert, J. P.; Ciccotti, G.; Berendsen, H. J. C. Numerical
+Integration of the Cartesian Equations of Motion of a System with
+Constraints: Molecular Dynamics of N-Alkanes. \emph{J. Comput. Phys.}
+\textbf{1977}, \emph{23} (3), 327--341.
+
+(76) Sprenger, K. G.; Jaeger, V. W.; Pfaendtner, J. The General AMBER
+Force Field (GAFF) Can Accurately Predict Thermodynamic and Transport
+Properties of Many Ionic Liquids. \emph{J. Phys. Chem. B} \textbf{2015},
+\emph{119} (18), 5882--5895.
+
+(77) Wang, J.; Wolf, R. Development and Testing of a General Amber Force
+Field. \emph{J. Comput. Chem.} \textbf{2004}, \emph{25} (25),
+1157--1174.
+
+(78) Singh, U. C.; Kollman, P. A. A Combined \emph{Ab Initio} Quantum
+Mechanical and Molecular Mechanical Method for Carrying out Simulations
+on Complex Molecular Systems: Applications to the CH\textsubscript{3}Cl
++ Cl\textsuperscript{−} Exchange Reaction and Gas Phase Protonation of
+Polyethers. \emph{J. Comput. Chem.} \textbf{1986}, \emph{7} (6), 718.
+
+(79) Liu, Z.; Huang, S.; Wang, W. A Refined Force Field for Molecular
+Simulation of Imidazolium-Based Ionic Liquids. \emph{J. Phys. Chem. B}
+\textbf{2004}, \emph{108} (34), 12978--12989.
+
+(80) Chaban, V. V; Voroshylova, I. V; Kalugin, O. N. A New Force Field
+Model for the Simulation of Transport Properties of Imidazolium-Based
+Ionic Liquids. \emph{Phys. Chem. Chem. Phys.} \textbf{2011}, \emph{13}
+(17), 7910--7920.
+
+(81) Schröder, C. Comparing Reduced Partial Charge Models with
+Polarizable Simulations of Ionic Liquids. \emph{Phys. Chem. Chem. Phys.}
+\textbf{2012}, \emph{14} (9), 3089--3102.
+
+(82) Potoff, J. J.; Siepmann, J. I. Vapor--liquid Equilibria of Mixtures
+Containing Alkanes, Carbon Dioxide, and Nitrogen. \emph{AIChE J.}
+\textbf{2001}, \emph{47} (7), 1676--1682.
+
+(83) Perez-Blanco, M. E.; Maginn, E. J. Molecular Dynamics Simulations
+of CO\textsubscript{2} at an Ionic Liquid Interface: Adsorption,
+Ordering, and Interfacial Crossing. \emph{J. Phys. Chem. B}
+\textbf{2010}, \emph{114} (36), 11827--11837.
+
+(84) Darden, T.; York, D.; Pedersen, L. Particle Mesh Ewald: An N⋅log(N)
+Method for Ewald Sums in Large Systems. \emph{J. Chem. Phys.}
+\textbf{1993}, \emph{98} (12), 10089.
+
+(85) Małolepsza, E.; Straub, J. E. Empirical Maps for the Calculation of
+Amide I Vibrational Spectra of Proteins from Classical Molecular
+Dynamics Simulations. \emph{J. Phys. Chem. B} \textbf{2014}, \emph{118}
+(28), 7848--7855.
+
+(86) Fennell, C. J.; Gezelter, J. D. Is the Ewald Summation Still
+Necessary? Pairwise Alternatives to the Accepted Standard for Long-Range
+Electrostatics. \emph{J. Chem. Phys.} \textbf{2006}, \emph{124} (23),
+234104.
+
+(87) Loparo, J. J.; Roberts, S. T.; Nicodemus, R. A.; Tokmakoff, A.
+Variation of the Transition Dipole Moment across the OH Stretching Band
+of Water. \emph{Chem. Phys.} \textbf{2007}, \emph{341} (1--3), 218--229.
+
+(88) Miller, C. S.; Ploetz, E. A.; Cremeens, M. E.; Corcelli, S. A.
+Carbon-Deuterium Vibrational Probes of Peptide Conformation: Alanine
+Dipeptide and Glycine Dipeptide. \emph{J. Chem. Phys.} \textbf{2009},
+\emph{130} (12).
+
+(89) Aki, S. N. V. K.; Mellein, B. R.; Saurer, E. M.; Brennecke, J. F.
+High-Pressure Phase Behavior of Carbon Dioxide with Imidazolium-Based
+Ionic Liquids. \emph{J. Phys. Chem. B} \textbf{2004}, \emph{108},
+20355--20365.
+
+(90) Anthony, J. L.; Anderson, J. L.; Maginn, E. J.; Brennecke, J. F.
+Anion Effects on Gas Solubility in Ionic Liquids. \emph{J. Phys. Chem.
+B} \textbf{2005}, \emph{109}, 6366--6374.
+
+(91) Muldoon, M. J.; Aki, S. N. V. K.; Anderson, J. L.; Dixon, J. K.;
+Brennecke, J. F. Improving Carbon Dioxide Solubility in Ionic Liquids.
+\emph{J. Phys. Chem. B} \textbf{2007}, \emph{111} (30), 9001--9009.
+
+(92) Hou, Y.; Baltus, R. E. Experimental Measurement of the Solubility
+and Diffusivity of CO\textsubscript{2} in Room-Temperature Ionic Liquids
+Using a Transient Thin-Liquid-Film Method. \emph{Ind. Eng. Chem. Res.}
+\textbf{2007}, \emph{46} (24), 8166--8175.
+
+(93) Ramdin, M.; De Loos, T. W.; Vlugt, T. J. H. State-of-the-Art of
+CO\textsubscript{2} Capture with Ionic Liquids. \emph{Ind. Eng. Chem.
+Res.} \textbf{2012}, \emph{51} (24), 8149--8177.
+
+(94) Stenger, J.; Madsen, D.; Hamm, P.; Nibbering, E. T. J.; Elsaesser,
+T. Ultrafast Vibrational Dephasing of Liquid Water. \emph{Phys. Rev.
+Lett.} \textbf{2001}, \emph{87} (2), 27401.
+
+(95) Rosenthal, S. J.; Xie, X.; Du, M.; Fleming, G. R. Femtosecond
+Solvation Dynamics in Acetonitrile: Observation of the Inertial
+Contribution to the Solvent Response. \emph{J. Chem. Phys.}
+\textbf{1991}, \emph{95} (6), 4715.
+
+\textbf{\\
+}
+
+\textbf{Table 1.} Parameters of the spectroscopic map for the
+CO\textsubscript{2} asymmetric stretch frequency in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}.
+This map predicts the CO\textsubscript{2} with a regression coefficient
+\emph{R} = 0.94 and a root mean square error of 2.7
+cm\textsuperscript{-1}. The average shift,
+\(\left\langle \text{Δω} \right\rangle\), and standard deviation,
+\(\sigma(\Delta\omega)\), are reported for each term in the map.
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+& & \(\left\langle \text{Δω} \right\rangle\) (cm\textsuperscript{-1}) &
+\(\sigma(\Delta\omega)\) (cm\textsuperscript{-1})\tabularnewline
+\midrule
+\endhead
+\(\omega_{g}\) & 2349.1 cm\textsuperscript{-1} & 0.0 &
+0.0\tabularnewline
+\emph{a} & --1160.9 cm\textsuperscript{-1} & --6.6 & 7.0\tabularnewline
+\emph{b}\textsubscript{1} & 64.4 cm\textsuperscript{-1}
+au\textsuperscript{-1} & --0.1 & 0.4\tabularnewline
+\emph{b}\textsubscript{2} & 93.2 cm\textsuperscript{-1}
+au\textsuperscript{-1} & --1.8 & 0.7\tabularnewline
+\emph{c}\textsubscript{1} & 4.70 cm\textsuperscript{-1}
+kcal\textsuperscript{-1} mol & --9.5 & 2.0\tabularnewline
+\emph{c}\textsubscript{2} & --3.55 cm\textsuperscript{-1}
+kcal\textsuperscript{-1} mol & 7.3 & 2.1\tabularnewline
+\bottomrule
+\end{longtable}
+
+\textbf{\\
+}
+
+\textbf{Table 2.} Decomposition of the average LJ contribution to the
+spectroscopic map for the CO\textsubscript{2} asymmetric stretch
+frequency in
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+into attractive and repulsive components.
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+LJ Component & Site & \(\left\langle \text{Δω} \right\rangle\)
+(cm\textsuperscript{-1})\tabularnewline
+\midrule
+\endhead
+Attractive & O & --21.7\tabularnewline
+& C & 14.8\tabularnewline
+& Sum & --6.9\tabularnewline
+Repulsive & O & 12.3\tabularnewline
+& C & --7.4\tabularnewline
+& Sum & 4.9\tabularnewline
+Total & O & --9.4\tabularnewline
+& C & 7.3\tabularnewline
+& Sum & --2.1\tabularnewline
+\bottomrule
+\end{longtable}
+
+\emph{\\
+}
+
+% \includegraphics[width=6.43125in,height=5.7659in]{media/image1.emf}
+
+\textbf{Figure 1.} Relationship between the CO\textsubscript{2}
+asymmetric stretch vibrational frequency and the OCO angle,
+\(\theta_{\text{OCO}}\), for CO\textsubscript{2} in the gas-phase (green
+circles) and in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} IL
+(black circles). The gas-phase data are perfectly correlated with
+\(1 + cos(\theta_{\text{OCO}})\). The vibrational frequencies for
+CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+solvent also show this relationship, but additional solvation effects on
+the frequency are also present.
+
+% \includegraphics[width=6.22356in,height=6.29517in]{media/image2.emf}
+
+\textbf{Figure 2.} Relationship between CO\textsubscript{2} asymmetric
+stretch frequencies in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]} IL
+calculated using the DVR method and those calculated using the
+spectroscopic map for the 500 test set clusters (black circles). The red
+line represents a perfect correlation and the 95\% prediction interval
+is indicated with green lines. The spectroscopic map has a regression
+coefficient of R = 0.94 and a root means squared error of 2.7
+cm\textsuperscript{-1}.
+
+% \includegraphics[width=6.49062in,height=6.25278in]{media/image3.emf}
+
+\textbf{Figure 3.} Transition dipole moment integral, \(\mu_{01}\), of
+the asymmetric stretch of CO\textsubscript{2} in 1000
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters versus the asymmetric stretch vibrational frequency,
+\(\omega_{a}\), where \(\mu_{01}^{g}\) is the transition dipole moment
+integral of the asymmetric stretch of CO\textsubscript{2} in the
+gas-phase (blue circles). A linear fit of the data (black line) has a
+slope close to zero indicating that the Condon approximation is
+reasonable for the asymmetric stretch of CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+IL.
+
+% \includegraphics[width=6.45821in,height=4.31466in]{media/image4.png}
+
+\textbf{Figure 4.} Homogeneous instantaneous linewidth as a function of
+correlation time for fast motions, with \(T_{2}^{*} = 4\) ps, with upper
+and lower bounds estimated for \({\widetilde{\Delta}}_{H}\). The upper
+bound, based on an estimated fastest allowed inertial response
+timescale, and the lower bound, based on a threshold value of
+\(\Delta_{H}\tau_{H}\), are indicated by dashed horizontal lines. The
+resulting instantaneous frequency range for homogeneous motions is
+between 6 and 10 cm\textsuperscript{-1}.
+
+% \includegraphics[width=6.43125in,height=6.41597in]{media/image5.emf}
+
+\textbf{Figure 5.} Histograms of the CO\textsubscript{2} asymmetric
+stretch vibrational frequency, \(\omega_{a}\), for 1000
+CO\textsubscript{2}-{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+clusters. (a) Clusters extracted from an MD simulation of flexible
+CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+IL. (b) Clusters extracted from an MD simulation of flexible
+CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+IL, but where the CO\textsubscript{2} geometry is relaxed. (c) Clusters
+extracted from an MD simulation of rigid CO\textsubscript{2} in the
+{[}C\textsubscript{4}C\textsubscript{1}im{]}{[}PF\textsubscript{6}{]}
+IL.
+
+\end{document}
