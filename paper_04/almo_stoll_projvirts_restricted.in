@@ -1,0 +1,39 @@
+$rem
+  jobtype = polarizability
+  method = hf
+  basis = def2-svpd
+  scf_convergence = 11
+  thresh = 14
+  scf_max_cycles = 1000
+  symmetry = false
+  sym_ignore = true
+  cc_symmetry = false
+  scf_print_frgm = false
+  frgm_method = stoll
+  frgm_lpcorr = 0
+$end
+
+$response
+  solver = diis
+  maxiter = 1000
+  conv = 8
+  _almo_do_virt_relocalization = false
+  _almo_project_virts = true
+  _frgm_response_idx = 0
+  _mask_rhsvec_mo = true
+  _mask_rspvec_guess_mo = true
+  _mask_product_mo = true
+  _mask_ediff_mo = true
+  _mask_rspvec_mo = true
+  _mask_form_results_mo = true
+$end
+
+$molecule
+1 1
+-- 
+0 1
+Ar     0.000000000000000    0.000000000000000   -0.857713330500000
+-- 
+1 1
+Li     0.000000000000000    0.000000000000000    1.571999044800000
+$end

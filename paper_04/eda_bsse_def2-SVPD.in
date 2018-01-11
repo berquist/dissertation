@@ -1,0 +1,25 @@
+$rem
+  jobtype = eda
+  method = hf
+  basis = def2-svpd
+  scf_convergence = 11
+  thresh = 14
+  scf_max_cycles = 1000
+  symmetry = false
+  sym_ignore = true
+  cc_symmetry = false
+  scf_print_frgm = false
+  frgm_method = stoll
+  frgm_lpcorr = rs_exact_scf
+  eda_bsse = true
+$end
+
+$molecule
+1 1
+--
+0 1
+Ar     0.000000000000000    0.000000000000000   -0.857713330500000
+--
+1 1
+Li     0.000000000000000    0.000000000000000    1.571999044800000
+$end

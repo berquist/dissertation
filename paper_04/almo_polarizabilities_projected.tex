@@ -1,0 +1,53 @@
+\documentclass{article}%
+\usepackage[T1]{fontenc}%
+\usepackage[utf8]{inputenc}%
+\usepackage{lmodern}%
+\usepackage{textcomp}%
+\usepackage{lastpage}%
+\usepackage[a4paper,landscape,margin=0.5in]{geometry}%
+\usepackage{booktabs}%
+\usepackage[version=4]{mhchem}%
+%
+%
+%
+\begin{document}%
+\normalsize%
+\begin{tabular}{l|rrr|rrr}%
+\hline%
+\hline%
+\ce{Ar\bond{....}Li+}&\multicolumn{3}{c}{analytical}&\multicolumn{3}{c}{numerical}\\%
+\hline%
+def2-SVP&\(\alpha_{\perp}\)&\(\alpha_{\parallel}\)&\(\alpha_{\text{iso}}\)&\(\alpha_{\perp}\)&\(\alpha_{\parallel}\)&\(\alpha_{\text{iso}}\)\\%
+\hline%
+monomer A (\ce{Ar})&4.3702&4.3702&4.3702&4.3702&4.3702&4.3702\\%
+monomer B (\ce{Li+})&0.1593&0.1593&0.1593&0.1593&0.1593&0.1593\\%
+A + B&4.5295&4.5295&4.5295&4.5295&4.5295&4.5295\\%
+frz + pol&4.5042&4.5581&4.5222&4.5036&4.5696&4.5256\\%
+frz + pol + CT(A \(\rightarrow\) all)&4.7040&5.5191&4.9757&{-}{-}&{-}{-}&{-}{-}\\%
+frz + pol + CT(B \(\rightarrow\) all)&0.1594&0.1586&0.1591&{-}{-}&{-}{-}&{-}{-}\\%
+frz + pol + CT(all \(\rightarrow\) all) [blocked]&4.8409&5.7540&5.1452&{-}{-}&{-}{-}&{-}{-}\\%
+frz + pol + CT(all \(\rightarrow\) all) [super]&5.2142&7.8649&6.0978&5.2142&7.8649&6.0978\\%
+\hline%
+\hline%
+\end{tabular}%
+\\%
+\begin{tabular}{l|rrr|rrr}%
+\hline%
+\hline%
+\ce{Ar\bond{....}Li+}&\multicolumn{3}{c}{analytical}&\multicolumn{3}{c}{numerical}\\%
+\hline%
+def2-SVPD&\(\alpha_{\perp}\)&\(\alpha_{\parallel}\)&\(\alpha_{\text{iso}}\)&\(\alpha_{\perp}\)&\(\alpha_{\parallel}\)&\(\alpha_{\text{iso}}\)\\%
+\hline%
+monomer A (\ce{Ar})&10.3735&10.3735&10.3735&10.3735&10.3735&10.3735\\%
+monomer B (\ce{Li+})&0.1603&0.1603&0.1603&0.1603&0.1603&0.1603\\%
+A + B&10.5338&10.5338&10.5338&10.5338&10.5338&10.5338\\%
+frz + pol&10.0787&10.6399&10.2658&10.0875&10.6599&10.2783\\%
+frz + pol + CT(A \(\rightarrow\) all)&10.0157&10.4900&10.1738&{-}{-}&{-}{-}&{-}{-}\\%
+frz + pol + CT(B \(\rightarrow\) all)&0.1606&0.1614&0.1609&{-}{-}&{-}{-}&{-}{-}\\%
+frz + pol + CT(all \(\rightarrow\) all) [blocked]&10.1395&10.8004&10.3598&{-}{-}&{-}{-}&{-}{-}\\%
+frz + pol + CT(all \(\rightarrow\) all) [super]&10.0724&11.0645&10.4031&10.0724&11.0645&10.4031\\%
+\hline%
+\hline%
+\end{tabular}%
+\\%
+\end{document}
