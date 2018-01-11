@@ -5,6 +5,8 @@
 %
 \usepackage{graphicx}
 \usepackage{braket}
+% \usepackage{breqn}
+\usepackage{longtable,booktabs}
 \usepackage[version=4]{mhchem}
 %
 \usepackage[%
@@ -12,7 +14,9 @@
     multi-part-units = single,%
 ]{siunitx}
 \DeclareSIUnit\Molar{M}
+\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
 \DeclareSIUnit\electron{e^{-}}
+\DeclareSIUnit\kcal{\kilo\cal}
 \DeclareSIUnit\micron{\micro\metre}
 \DeclareSIUnit\torr{Torr}
 \DeclareSIUnit\wavenumber{\per\centi\metre}
@@ -37,5 +41,6 @@
 \input{./preludes/preface}
 %
 \input{./paper_01/anions}
+\input{./paper_02/AbInitio_revised}
 %
 \end{document}
