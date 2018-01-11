@@ -1,14 +1,18 @@
 \let\oldyear\year
-\documentclass{pittetd}
+\documentclass[final,pdftex]{pittetd}
 \let\setyear\year
 \let\year\oldyear
 %
 \usepackage{graphicx}
+\usepackage{braket}
 \usepackage[version=4]{mhchem}
-\usepackage{fixme}
 %
-\usepackage{siunitx}
+\usepackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+]{siunitx}
 \DeclareSIUnit\Molar{M}
+\DeclareSIUnit\electron{e^{-}}
 \DeclareSIUnit\micron{\micro\metre}
 \DeclareSIUnit\torr{Torr}
 \DeclareSIUnit\wavenumber{\per\centi\metre}
@@ -29,7 +33,6 @@
 \tableofcontents
 \listoftables
 \listoffigures
-\listoffixmes
 %
 \input{./preludes/preface}
 %
