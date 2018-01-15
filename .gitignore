@@ -7,6 +7,8 @@ eric_john_berquist_etd.pdf
 ## LaTeX
 
 *.aux
+*.bbl
+*.blg
 *.fdb_latexmk
 *.fls
 *.lof
