@@ -3,6 +3,7 @@
 \let\setyear\year
 \let\year\oldyear
 %
+\usepackage[sort&compress,numbers,super]{natbib}
 \usepackage{graphicx}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
@@ -58,5 +59,8 @@
 \input{./paper_03/SpectroscopicMap}
 \input{./paper_04/ALMO_LR}
 \input{./paper_05/psi4numpy}
+%
+\bibliographystyle{achemso}
+\safebibliography{paper_04/paper,paper_05/psi4numpy}
 %
 \end{document}
