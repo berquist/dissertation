@@ -102,7 +102,7 @@ class helper_CPHF(object):
         dvir = np.diag(np.ones(self.nvir))
         eps_diag = self.epsilon[self.nocc:].reshape(-1, 1) - self.epsilon[:self.nocc]
 
-        # Form oNNN MO tensor, oN^4 cost
+        # Form $[o,N,N,N]$ MO tensor, $oN^4$ cost
         MO = np.asarray(self.mints.mo_eri(self.Co, self.C, self.C, self.C))
 
         H = np.einsum('ai,ij,ab->iajb', eps_diag, docc, dvir)
@@ -114,7 +114,7 @@ class helper_CPHF(object):
 
         print('...formed Hessian in %.3f seconds.' % (time.time() - t))
 
-        # Invert Hessian (o^3 v^3)
+        # Invert Hessian ($o^3 v^3$)
         print('\nInverting Hessian...')
         t = time.time()
         Hinv = np.linalg.inv(H.reshape(self.nocc * self.nvir, -1)).reshape(self.nocc, self.nvir, self.nocc, self.nvir)

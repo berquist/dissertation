@@ -20,9 +20,13 @@ eric_john_berquist_etd.pdf
 # *.pdf
 # *.tex
 *.toc
+*.xdv
 
 # pittetd
 *.etd
+
+# minted
+_minted*
 
 ## Emacs
 *~
