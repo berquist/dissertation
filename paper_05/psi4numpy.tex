@@ -7,9 +7,9 @@
 
 The text in this chapter has been adapted from
 
-\section{Chapter Summary}
+\section{\caps{Summary}}
 
-\section{Introduction}
+\section{\caps{Introduction}}
 
 Whereas in the past a new quantum chemical (QC) method was commonly presented solely through its equations, perhaps along with a few token values, the more recent expectation is that equations will be accompanied by results from an effective computer program clearly demonstrating the utility of the method.  This expectation becomes increasingly burdensome as new computer architectures emerge, since some theories will be naturally more computationally efficient or more difficult to implement than others.  The computation expense of most quantum chemical methods creates substantial pressure for methods to be implemented with highly optimized algorithms.
 
@@ -30,7 +30,7 @@ Several of the reference implementations have been augmented by tutorial-style i
 
 Shortly before submission, the authors chanced upon the Quantum Chemistry Program Exchange (QCPE)\cite{QCPE, Boyd:2013:221}, whose goals of software (particularly self-contained software) accessibility, algorithm explication, and free software ``publishing'' \pfn shares. The general tools embraced by \pfn (GitHub for communication, \numpy for linear algebra, Python for interfacing, and Jupyter for illumination) further allow rapid prototyping and educational objectives. In this manner \pfn can be thought as a modern successor to QCPE built to serve the flexible needs of the community.
 
-\section{Basic Tools}
+\section{\caps{Basic Tools}}
 
 The basic premise of \pfn is to leverage \pfour to generate quantum chemistry-specific quantities and the \numpy library\cite{Varoquaux:1521-9615} for all other tensor manipulations.  The latest version of \pfour has added the capability to import \pfour as a Python module as well as continuing to be called in an executable fashion. In this way, both the \pfour and \numpy libraries can be loaded into a single Python script and used in cooperation.
 
@@ -200,7 +200,7 @@ In this fashion, virtually any SCF-level theory can be formulated at the \pfn la
 
 To illustrate this point, the \pfour SCF program is compared against a \pfn implementation on an Intel i7-5930K processor with the adenine$\cdot$thymine complex in the aug-cc-pVTZ basis (1127 basis functions) using a density-fitted JK build on six cores. The \pfour SCF program took 250 seconds while the \pfn implementation took 245 seconds. This should not be surprising as each spent 94\% total wall time computing the J and K quantities (both implementations used 18 SCF iterations) and all other operations of nonnegligible cost use the same BLAS implementations.
 
-\section{Rapid Development}
+\section{\caps{Rapid Development}}
 
 A key component of the \pfn framework is to provide an easy-to-use development environment for rapid prototyping. Vital to this is \numpy's \texttt{einsum} function that performs arbitrary tensor contractions using Einstein summation syntax.  For example, the atomic orbital to molecular orbital 4-index transformation of Eq.~(\ref{eq:aomo}) and code snippet (\ref{snip:eri_trans}) could be accomplished by:
 
@@ -237,14 +237,14 @@ Here, {\tt MO} holds the 4-index antisymmetrized integrals, {\tt T1} and {\tt T2
 
 To our knowledge, the first implementations of Symmetry-Adapted Perturbation Theory with Complete Active Space SCF references [SAPT(CASSCF)], fourth-order Electron Propagator Theory, and transcorrelated theories have all been achieved using these rapid prototyping techniques.
 
-\section{Access and Contributions}
+\section{\caps{Access and Contributions}}
 
 To ensure ease of community access to the \pfn project, all software dependencies are made available as binary Conda packages\cite{ContinuumIO} either by us (e.g., \pfour), or by ContinuumIO or Intel (e.g., \numpy, Matplotlib, Jupyter). Through this route, binary distributions are installable in a single line to all common computing platforms, so users are not required to compile, link against the correct libraries, or debug runtime issues. We hope that the ready accessibility of these tools facilitates their use in methods development and in the creation of additional publicly available reference implementations.
 
 To lower the barrier to contribution, guidance is included in the repository regarding attribution, citations, and testing. Though the authors adhere to Python software developement best practices in their other projects, they resist advanced Python syntax, organization, file linking, or other jargon-ized code in \pfn in favor of straightforward scripts and Jupyter notebooks for ease of community involvement.  Educators are encouraged to base lessons and labs off this work and are also referred to the \textsc{Psi4Education} project\cite{psi4edu}.
 
 
-\section{Reference Implementations}
+\section{\caps{Reference Implementations}}
 
 To illustrate the \pfn tools, and to provide a resource to the quantum chemistry methods development community, we have created a number of reference implementations and made them publicly available on GitHub at \url{https://github.com/psi4/psi4numpy}.  We intend to add to this collection over time.  Given the wide spectrum of quantum chemical methods, we also encourage submissions from other developers.
 
@@ -337,7 +337,7 @@ Molecular-dynamics tutorials include
 \item Periodic Ewald Electostatic summation
 \end{enumerate}
 
-\section{Conclusions}
+\section{\caps{Conclusions}}
 
 We believe that the benefits of the \pfn framework to the computational chemistry community are threefold.  Beginning researchers can use the \pfn reference implementations for \emph{education}. Reference implementations convey not just the underlying mathematical formulas of a given theory, but how to implement these formulas in a manner that avoids common pitfalls such as ill-conditioned numerical equations. \pfn is likely the most interactive educational resource available in this field: thanks to the Jupyter Notebook format, the learners can explore the implementation step by step and easily try out various modifications and additional approximations.
 
@@ -345,7 +345,7 @@ More advanced researchers who need to reimplement and/or modify a given computat
 
 Finally, for researchers who want to develop new functionality, \pfn is a highly valuable platform for \emph{initial implementation} that is efficient enough for meaningful testing, quick to generate, easy to debug, and has few opportunities for programming errors. All underlying quantum-chemistry building blocks such as integrals, orbitals, density matrices, and CI vectors are efficiently computed by \pfour and readily imported in the \numpy format. In particular, a \pfn implementation of any one-electron theory such as HF or DFT is already close to optimal as the most expensive operations are all written in terms of generalized Coulomb and exchange matrices which are supplied by \pfour.  Some of us, together with their collaborators, have already taken advantage of the \pfn capabilities to rapidly generate pilot implementations of brand new electronic-structure approaches.
 
-\section{Associated Content}
+\section{\caps{Associated Content}}
 Documents reproducing all currently available reference implementations and interactive tutorials are available free of charge via the Internet at \url{https://zenodo.org/record/1134320}. For all future materials, please see \url{https://github.com/psi4/psi4numpy}.
 
 \section{Acknowledgements}

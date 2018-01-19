@@ -11,6 +11,7 @@
 % \usepackage{breqn}
 \usepackage{longtable,booktabs}
 \usepackage{xspace}
+\usepackage{microtype}
 \usepackage[version=4]{mhchem}
 %
 \usepackage[%
@@ -47,6 +48,9 @@
 }
 %
 \newcommand{\latin}[1]{\textit{#1}}
+% optionally don't use uppercase
+\newcommand{\caps}[1]{\uppercase{#1}}
+% \newcommand{\caps}[1]{{#1}}
 %
 %
 \input{./preamble}

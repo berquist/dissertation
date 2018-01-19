@@ -5,11 +5,12 @@ Eric J. Berquist,\textsuperscript{1,2} Clyde A. Daly Jr.,\textsuperscript{3} Tho
 
 \textsuperscript{1}Department of Chemistry, University of Pittsburgh, 219 Parkman Ave, Pittsburgh, Pennsylvania. \textsuperscript{2} Pittsburgh Quantum Institute. \textsuperscript{3}Department of Chemistry and Biochemistry, University of Notre Dame, Notre Dame, Indiana.
 
-\section{Background}
+\section{\caps{Summary}}
+\label{paper_02:sec:summary}
 
 This work elucidates the molecular binding mechanism of \ce{CO2} in \ce{[C4C1im][PF6]} ionic liquid (IL) and its interplay with the \ce{CO2} asymmetric stretch frequency \(\nu_{3}\), and establishes computational protocols for the reliable construction of spectroscopic maps for simulating ultrafast 2D-IR data of \ce{CO2} solvated in ILs. While charge transfer drives the static frequency shift between \emph{different} ionic liquids {[}\emph{J. Chem. Phys.}  \textbf{142}, 212425 (2015){]}, we find here that electrostatic and Pauli repulsion effects dominate the dynamical frequency shift between different geometries sampled from the finite-temperature dynamics within a single ionic liquid. This finding is also surprising because dispersion interactions dominate the \ce{CO2}\textendash{}IL interaction energies, but are comparably constant across different geometries. An important practical consequence of this finding is that density functional theory is expected to be sufficiently accurate for constructing potential energy surfaces for \ce{CO2} in \ce{[C4C1im][PF6]}, as needed for accurate anharmonic calculations to construct a reliable spectroscopic map. Similarly, we established appropriate computational and chemical models for treating the extended solvent environment. We found that a QM/MM treatment including at least \num{2} cation-ion pairs at the QM level and at least \num{32} pairs at the MM level is necessary to converge vibrational frequencies to within \SI{1}{\wavenumber}. Using these insights, this work identifies a computational protocol as well as a chemical model necessary to construct accurate spectroscopic maps from first principles.
 
-\section{Introduction}
+\section{\caps{Introduction}}
 \label{paper_02:sec:I}
 
 Capturing anthropogenic \ce{CO2} before its release into the atmosphere is a pressing need, and most methods will require the development of novel materials, such as metal-organic frameworks, polymers, or ionic liquids (ILs).\cite{sumidaCR-12,Du2011,Dawson2011,baraACR-10,seoJPCB-14,DAlessandro2010} Understanding how to control the interactions between \ce{CO2} and its condensed-phase environment is a key to achieving efficient carbon capture and sequestration\cite{Corvo2015,Hayes2015,seoJPCB-14,gurkanJPCL-10} and to developing routes toward potentially transforming \ce{CO2} into value-added chemicals including fuels.\cite{Grice2015,Rosen2011,Kumar2012} To rationally develop such technologies, a molecular level understanding of the \ce{CO2}-sorbent interactions, structures and dynamics is necessary.
@@ -32,7 +33,7 @@ The energy decomposition approaches we use add new and valuable physical insight
 
 The paper is organized as follows. In section~\ref{paper_02:sec:II}, we give a detailed account of the computational approaches used, including DFT calculations and DVR vibrational frequency calculations. In section~\ref{paper_02:sec:III}, we analyze the dependence of the calculated \ce{CO2} vibrational frequencies on the computational approach and the chemical model. For the computational approach, we quantify both the impacts of the electronic structure method (density functional and basis set) as well as the inclusion of anharmonic effects via the DVR approach. We analyze the dependence on the chemical model by comparing our previous gas-phase cluster calculations with results obtained for extended solvent boxes both at the classical point charge and the hybrid quantum mechanics/molecular mechanics (QM/MM) level, where structures are sampled from extensive molecular dynamics (MD) simulations (details of the MD simulations will be discussed in a follow-up paper\cite{Daly2016}). This way, we aim to include the most important effects of solvent electrostatics, exchange-repulsion, and solvent disorder. In section~\ref{paper_02:sec:IV} we present concluding remarks and an outlook for future research.
 
-\section{Computational Methods}
+\section{\caps{Computational Methods}}
 \label{paper_02:sec:II}
 
 \subsection{Methods and Basis Sets}
@@ -82,7 +83,7 @@ The DVR calculation also returns vibrational wave functions calculated on the sa
 
 where \(r_{1}^{ij}\) or \(r_{2}^{ij}\) is the bond length at grid point \((i,j)\), \(N = 12\) is the number of grid points along each coordinate, and \(\psi_{ij}\) is the value of the ground-state wave function at grid point \((i,j)\). Due to the anharmonicity of the potential energy surface, the expectation value of the bond lengths is longer than the bond length obtained from geometry optimizations. For instance, the optimized gas-phase bond length is \SI{1.1608}{\angstrom}, and the gas-phase DVR expectation value is \SI{1.1647}{\angstrom}. In the IL environment the vibrationally averaged \ce{CO2} bond lengths vary from snapshot to snapshot. On average, the vibrationally averaged \ce{CO2} bond length is \SI{1.1648}{\angstrom} in the IL. The average bond length from the classical MD simulation snapshots is \SI{1.1610}{\angstrom}, which is almost identical to the harmonic equilibrium bond length in the force field (\SI{1.1600}{\angstrom}).
 
-\section{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}
+\section{\caps{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}
 \label{paper_02:sec:III}
 
 In a previous publication\cite{Brinzer2015} we identified the predominant role of CT for the asymmetric stretch frequency of \ce{CO2} in different ionic liquids. Here we aim to analyze whether our previous findings also hold when more sophisticated computational and chemical models are used. To this end, we investigate the impact of method, basis set, anharmonicity, electrostatics of the surrounding condensed phase, and solvent disorder on absolute and relative trends in the \ce{CO2} asymmetric stretch frequency.
@@ -111,7 +112,7 @@ The relative magnitudes of the ``geometry'' versus ``curvature'' mechanism resul
 \subsection{Anharmonicity}
 \label{paper_02:ssec:IIIB}
 
-We employed a grid-based anharmonic (DVR) method to assess the effects of anharmonicity on the \ce{CO2} \(\nu_{3}\) frequency. That is, we numerically solved for the vibrational wave function on the discretized potential energy surface spanned by two degrees of freedom for the \ce{CO2} molecule (along the \ce{OCO} axis), constraining the degrees of freedom involved in \ce{CO2} bending modes, as discussed earlier. Solving for the fully anharmonic vibrational wave function is important for connecting to experiment for the following reasons. First, an accurate comparison to experiment is only possible via anharmonic calculations because experiment probes vibrational transitions that take place on the full (anharmonic) potential energy surface. Second, harmonic frequencies change their physical interpretation as vibrational energy levels when calculated away from the minimum where they pick up contributions from non-zero forces and from higher-order derivatives. For these reasons, DVR calculations are essential for being able to calculate vibrational frequencies for different geometries (MD snapshots) that are consistent with experimental conditions sampling dynamical structures away from the equilibrium geometries. Consequently, the DVR approach is instrumental for the construction of a spectroscopic map as presented in Ref. 56, as it requires sampling various (non-equilibrium) geometries from MD simulations. In this section, we investigate the impact of anharmonicity on the frequency and geometry (i.e., position expectation values) of gas-phase \ce{CO2}.
+We employed a grid-based anharmonic (DVR) method to assess the effects of anharmonicity on the \ce{CO2} \(\nu_{3}\) frequency. That is, we numerically solved for the vibrational wave function on the discretized potential energy surface spanned by two degrees of freedom for the \ce{CO2} molecule (along the \ce{OCO} axis), constraining the degrees of freedom involved in \ce{CO2} bending modes, as discussed earlier. Solving for the fully anharmonic vibrational wave function is important for connecting to experiment for the following reasons. First, an accurate comparison to experiment is only possible via anharmonic calculations because experiment probes vibrational transitions that take place on the full (anharmonic) potential energy surface. Second, harmonic frequencies change their physical interpretation as vibrational energy levels when calculated away from the minimum where they pick up contributions from non-zero forces and from higher-order derivatives. For these reasons, DVR calculations are essential for being able to calculate vibrational frequencies for different geometries (MD snapshots) that are consistent with experimental conditions sampling dynamical structures away from the equilibrium geometries. Consequently, the DVR approach is instrumental for the construction of a spectroscopic map as presented in Ref. \cite{Daly2016}, as it requires sampling various (non-equilibrium) geometries from MD simulations. In this section, we investigate the impact of anharmonicity on the frequency and geometry (i.e., position expectation values) of gas-phase \ce{CO2}.
 
 Our goal is to separate the impact of anharmonicity from the numerical errors arising from using a discretized and reduced-dimensional (2D) potential energy surface. To this end, we performed standard harmonic calculations (using analytical derivatives on the fully-dimensional surface), harmonic calculations on the discretized reduced-dimensional grid, and DVR calculations on the same grid (Tab.~\ref{paper_02:tab:4}). All potential energy surfaces were calculated at the B3LYP/LP level. The standard (analytical) harmonic calculation yielded a vibrational frequency of \SI{2420}{\wavenumber} and an equilibrium bond length of \SI{1.161}{\angstrom}.
 
@@ -191,7 +192,7 @@ We determine the converged frequency to be \(c = 2388.8 \pm \SI{1.5}{\wavenumber
 
 A central objective of this publication is to establish a computational approach that will allow us to develop a reliable spectroscopic map for the prediction and interpretation of 2D-IR spectroscopic signatures for \ce{CO2} solvated in ionic liquids. While the spectroscopic map and its validation are the subject of the second publication in this series, we can use the predicted solvation shift (i.e., the frequency shift between gas-phase \ce{CO2} and dissolved in \ce{[C4C1im][PF6]}) as a first indicator for the quality of the computational and chemical model. We note that absolute frequencies are very hard to reproduce with all but the most sophisticated quantum chemical approaches, which are prohibitively expensive for the present application. We therefore scale the calculated frequencies by a factor of \num{0.9855} so the DVR/B3LYP/LP gas-phase result of \SI{2384}{\wavenumber} (Tab.~\ref{paper_02:tab:4}) agrees with the experiment (\SI{2349}{\wavenumber}). At the proposed DVR/B3LYP/LP level (within a QM/MM approach with \(n = 2\) ion pairs in the QM region and sampling from \num{85} MD snapshots for the solvated \ce{CO2}), the scaled frequency of the solvated \ce{CO2} is \SI{2339}{\wavenumber} (Tab.~\ref{paper_02:tab:5}). The predicted solvation frequency shift is then \SI{-10}{\wavenumber}, which is in good agreement with the experimental solvation shift of \SI{-6.8}{\wavenumber}. We note that these results were calculated from only \num{85} MD snapshots and are therefore probably not statistically converged. We will present an in-depth validation of convergence with respect to number of MD steps in the subsequent paper. The already rather nice agreement makes us optimistic that an accurate spectroscopic map can be developed using the computational approach proposed here.
 
-\section{Conclusions}
+\section{\caps{Conclusions}}
 \label{paper_02:sec:IV}
 
 This work provides fundamental insights into the molecular origins of the vibrational frequency shifts of \ce{CO2} in ionic liquids. First, we validated the computational methodology used for predicting vibrational frequencies \textemdash{} as defined by basis set, wave function or density functional method, size of the QM region, and the role of anharmonicity. Second, we analyzed the physical origins of \ce{CO2}\textendash{}IL binding and its interplay with the vibrational frequency shifts using ALMO and SAPT energy decomposition schemes. Our calculations provide insights that are perhaps quite surprising, but definitely nuanced. In a previous publication we concluded that, unlike for other vibrational chromophores, electrostatics alone poorly predict the vibrational frequency shifts for \ce{CO2} in different ILs. From ALMO-EDA we concluded that this frequency shift between different ionic liquids is actually not driven by the electrostatics, but by charge transfer from the anion. This work confirms that our previous results are qualitatively independent from the choices of basis set, ab initio method, and treatment of anharmonicity, confirming the validity of our previous results within the ALMO framework. For different points on the potential energy surface of a \emph{single} ionic liquid (here: \ce{[C4C1im][PF6]}), however, the energetics are dominated by electrostatics plus Pauli repulsion. This frequency shift mechanism is surprising, firstly because it is fundamentally different from the mechanism that drives the \ce{CO2} frequency shift between different ILs, and secondly because electrostatics plus Pauli repulsion is a relatively small energetic contribution compared to, e.g., dispersion interactions, which one would therefore expect to dominate the frequency shifts. An important practical consequence of this finding is that density functional theory is expected to be sufficiently accurate for constructing potential energy surfaces for \ce{CO2} in \ce{[C4C1im][PF6]}, as needed for the DVR calculations to construct a reliable spectroscopic map.
@@ -496,7 +497,7 @@ EJB thanks Dr. Mary Sherman for performing initial SAPT calculations and cclib\c
 
 \includegraphics[width=\textwidth]{paper_02/TOC.pdf}
 
-\section{Statistical Distribution of Harmonic Frequencies for MD snapshots}
+\section{\caps{Statistical Distribution of Harmonic Frequencies for MD snapshots}}
 \label{paper_02:sec:SI}
 
 \begin{table}[h]
@@ -524,7 +525,7 @@ EJB thanks Dr. Mary Sherman for performing initial SAPT calculations and cclib\c
   \end{longtable}
 \end{table}
 
-\section{Histogram and Weights of Frequency Distributions from MD Snapshots}
+\section{\caps{Histogram and Weights of Frequency Distributions from MD Snapshots}}
 \label{paper_02:sec:SII}
 
 \begin{table}[h]
@@ -564,7 +565,7 @@ EJB thanks Dr. Mary Sherman for performing initial SAPT calculations and cclib\c
   \end{longtable}
 \end{table}
 
-\section{Method and Basis Set Dependence of Harmonic Frequencies}
+\section{\caps{Method and Basis Set Dependence of Harmonic Frequencies}}
 \label{paper_02:sec:SIII}
 
 It is imperative to investigate how sensitive the prediction of relative trends is with respect to the computational approach. To this end, we consider snapshots from MD simulations (see Ref. {[}paper II{]} for details), which allow us to test how well different computational approaches can predict \emph{trends} in dependence of the local coordination environment around the \ce{CO2} and the bulk solvent structure. Fig.~\ref{paper_02:fig:S3} shows the \ce{CO2} \(\nu_{3}\) harmonic frequencies calculated for \num{1000} statistically uncorrelated MD snapshots (0 QM/256 MM) using various SCF-type approaches, as compared to Møller-Plesset perturbation theory to second order (MP2) as the least expensive wave function-based method that incorporates dispersion effects.\cite{WCMS:WCMS58} The predicted harmonic frequencies in Fig.~\ref{paper_02:fig:S3} are parallel to each other for most of the frequency range, independent of method and basis set choice. In fact, there is almost complete overlap between the B3LYP/SP and \(\omega\)B97X-D/SP distributions, and to a lesser degree for B3LYP/VTZ and \(\omega\)B97X-D/VTZ. There is minor crossing of curves in two instances, 1. TPSS/VTZ with \(\omega\)B97X-D/SP, and 2. HF/SP with both B3LYP/VTZ and \(\omega\)B97X-D/VTZ, but nevertheless the conservation of qualitative trends seems excellent. The ordering of calculated frequencies is, from smallest to largest, HF, B3LYP, \(\omega\)B97X-D, BLYP, TPSS, and MP2, using the SP basis set. Within the VTZ basis, the ordering of MP2 and TPSS is interchanged. As expected, the MP2 results are most sensitive to the basis set size, as wave-function based correlation methods require larger basis sets for convergence compared to self-consistent field approaches (HF and DFT). The VTZ basis set predicts frequency distributions that are red-shifted compared to the SP basis set, in agreement with the trends observed from Table~\ref{paper_02:tab:2}.
@@ -612,7 +613,7 @@ To confirm that the good agreement in relative trends is not an artifact of the 
   \end{longtable}
 \end{table}
 
-\section{Solvatochromic Shift Dependence on Counterpoise Corrections}
+\section{\caps{Solvatochromic Shift Dependence on Counterpoise Corrections}}
 \label{paper_02:sec:SIV}
 
 \begin{table}
@@ -637,7 +638,7 @@ To confirm that the good agreement in relative trends is not an artifact of the 
   \end{longtable}
 \end{table}
 
-\section{Potential Energy Surface Fitting}
+\section{\caps{Potential Energy Surface Fitting}}
 \label{paper_02:sec:SV}
 
 We fitted the discrete variable representation (DVR) of the Born-Oppenheimer potential energy surface of gas phase \ce{CO2} to a vibrational potential expanded in the local modes basis using a nonlinear least squares method. The potential energy expansion was truncated at fourth order, and off-diagonal fourth order terms (e.g.  \(c_{3}[(x - x_{0})^{2}(y - y_{0})^{2}]\)) were omitted, using the following form:
@@ -674,7 +675,7 @@ The force constants and internal coordinates were calculated (the F matrix) and 
   \end{longtable}
 \end{table}
 
-\section{\(\nu_{3}\) Frequency Convergence with Increasing QM Size}
+\section{\caps{\(\nu_{3}\) Frequency Convergence with Increasing QM Size}}
 \label{paper_02:sec:SVI}
 
 To test the qualitative accuracy of the calculations using smaller QM regions, we examined the correlation between frequencies calculated with \(n = 0-5\) QM pairs and \num{6} QM pairs for each snapshot. The data were fitted using a linear regression analysis.
