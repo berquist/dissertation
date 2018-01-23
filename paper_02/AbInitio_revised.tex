@@ -78,7 +78,7 @@ where \(r_{1}^{ij}\) or \(r_{2}^{ij}\) is the bond length at grid point \((i,j)\
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1]{paper_02/Fig1.pdf}
+  \includegraphics[scale=0.75]{paper_02/Fig1.pdf}
   \caption[DVR contour plot]{Contour plot of a discrete variable representation (DVR) of the Born\textendash{}Oppenheimer potential energy surface of gas phase \ce{CO2}. Density functional theory single point energy calculations with the B3LYP functional and the 6-311++G(d,p) basis set were performed on carbon dioxide, incrementing each CO bond's length in steps of \SI{0.045}{\angstrom}, from \SIrange{0.955}{1.45}{\angstrom}. Below a relative energy of \SI{2500}{\wavenumber}, contour lines are spaced by \SI{100}{\wavenumber}, above they are spaced by \SI{2500}{\wavenumber}. Mesh intersections indicate individual single point energy calculations. In order to calculate vibrational frequencies, this potential energy surface is incorporated into a discretized version of the Hamiltonian for the stretching modes of \ce{CO2} (Eq.~\ref{paper_02:eq:1}), which is then numerically diagonalized. The asymmetric stretch frequency is obtained from the differences between the energy levels (Eq.~\ref{paper_02:eq:2}).}
   \label{paper_02:fig:1}
 \end{figure}
@@ -345,7 +345,7 @@ Our previous publication\cite{Brinzer2015} used a rather crude gas-phase cluster
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_02/figure4.png} % TODO find PDF?
+  \includegraphics[width=\textwidth]{paper_02/frequency_same_set_2QM_convergence.pdf}
   \caption[Effect of MM region size on \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} QM/MM frequencies]{Dependence of harmonic \(\nu_3\) frequencies (unscaled) on the solvent box size (B3LYP/SP potential energy surface).}
   \label{paper_02:fig:4}
 \end{figure}
@@ -457,7 +457,7 @@ These results for relative trends in vibrational frequencies are highly encourag
 
 \begin{figure}
   \centering
-  % TODO
+  \includegraphics[width=\textwidth]{./paper_02/snapshots_ordered_0QM_256MM.pdf}
   \caption{Harmonic \(\nu_{3}\) frequencies (unscaled) for different methods and basis sets, ordered from lowest to highest frequency according to MP2/VTZ (0 QM/256 MM). The TPSS meta-GGA\cite{Tao2003} and the \(\omega\)B97X-D\cite{Chai2008} hybrid GGA density functionals are included as representatives of more recent functionals. \(\omega\)B97X-D is both a range-separated functional, with a minimum 22\% HF exchange at \(r_{e} = 0\), increasing smoothly to 100\% as \(r_{e} \rightarrow \infty\), and it includes an empirical dispersion correction. To aid in recognizing trends, we have ordered the structures by increasing MP2/VTZ frequency. MP2 calculations use the resolution of the identity (RI) approximation\cite{Feyereisen1993,Weigend1997,Distasio2007} and the cc-pVQZ-RI fitting basis set\cite{Weigend2002}.}
   \label{paper_02:fig:S3}
 \end{figure}
@@ -466,7 +466,7 @@ To confirm that the good agreement in relative trends is not an artifact of the 
 
 \begin{figure}
   \centering
-  % TODO
+  \includegraphics[width=\textwidth]{./paper_02/trajectory_frequencies_cc-pvtz.pdf}
   \caption{Harmonic \(\nu_{3}\) frequencies (unscaled) for the first \num{50} (out of \num{1000}) snapshots calculated with different methods and the cc-pVTZ basis set (0 QM/256 MM).}
   \label{paper_02:fig:S4}
 \end{figure}
@@ -644,7 +644,9 @@ To test the qualitative accuracy of the calculations using smaller QM regions, w
 
 \begin{figure}
   \centering
-  % TODO
+  \includegraphics[scale=0.85]{./paper_02/figureS5.png}
   \caption{Correlation plots for QM/MM harmonic frequencies of \num{10} MD snapshots, with increasing numbers of anion-cation pairs treated quantum mechanically.}
   \label{paper_02:fig:S5}
 \end{figure}
+
+% TODO contents of Excel spreadsheet
