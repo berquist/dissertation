@@ -1,0 +1,34 @@
+\documentclass{article}
+% \usepackage[utf8]{inputenc}
+% \usepackage[T1]{fontenc}
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+% \usepackage[
+%     backend    = biber,
+%     style      = chem-acs,
+%     autocite   = plain,
+%     minnames   = 1,
+%     maxnames   = 1,
+%     doi        = true,
+%     hyperref   = true,
+% ]{biblatex}
+\let\cite\autocite
+\let\citep\parencite
+\addbibresource{./library.bib}
+\addbibresource{./paper_04/paper.bib}
+\addbibresource{./paper_05/psi4numpy.bib}
+
+\usepackage[colorlinks]{hyperref}    % better urls in bibliography
+
+\begin{document}
+Test the complete \texttt{.bib} file: \nocite{*}.
+
+\printbibliography
+\end{document}

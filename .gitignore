@@ -3,13 +3,15 @@
 *.html
 
 eric_john_berquist_etd.pdf
+test_bibliography.pdf
 
 ## LaTeX
 
 *.aux
+*.bbl
+*.bcf
 *.bib.bak
 *.bib.sav
-*.bbl
 *.blg
 *.fdb_latexmk
 *.fls
@@ -19,6 +21,7 @@ eric_john_berquist_etd.pdf
 *.out
 # *.pdf
 # *.tex
+*.run.xml
 *.toc
 *.xdv
 
