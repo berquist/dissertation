@@ -3,7 +3,7 @@
 % \usepackage[T1]{fontenc}
 \usepackage[%
     backend    = biber,%
-    style      = chem-acs,%
+    style      = chem-biochem,%
     autocite   = superscript,%
     biblabel   = brackets,%
     doi        = true,%
@@ -25,10 +25,13 @@
 \addbibresource{./paper_04/paper.bib}
 \addbibresource{./paper_05/psi4numpy.bib}
 
-\usepackage[colorlinks]{hyperref}    % better urls in bibliography
+% better urls in bibliography
+\usepackage[colorlinks]{hyperref}
 
 \begin{document}
-Test the complete \texttt{.bib} file: \nocite{*}.
+Test the complete \texttt{.bib} file.
+
+\nocite{*}
 
 \printbibliography
 \end{document}
