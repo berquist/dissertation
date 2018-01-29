@@ -36,7 +36,11 @@ E_{abc}^{(3)} &\rightarrow -\beta_{abc},\textrm{the first hyperpolarizability}
 \end{align}
 The first hyperpolarizability is the leading-order term that describes the \emph{nonlinear} response of a system to an external electric field.  Each term in the series expansion increases the rank of the coefficient by one: the ground-state energy is a scalar, the dipole is a length 3 vector, the polarizability is a 3-by-3 matrix, and the first hyperpolarizability is a 3-by-3-by-3 tensor.
 
-Translated into the language of analytic derivative theory, is it represented as \(\beta_{abc} = \left.\frac{\partial^{3} E}{\partial E_a \partial E_b \partial E_c}\right|_{\mathbf{E}=\mathbf{0}}\), though it is not yet clear how to take derivatives of the energy beyond what is presented in tutorial 6a. Additionally, nothing has been stated about time dependence; everything to this point has been the static case, where the strength of fields do not vary with time. We will first incorporate time dependence, and equations for derivative theory will result.
+Translated into the language of analytic derivative theory, is it represented as
+\begin{equation}
+  \beta_{abc} = \left.\frac{\partial^{3} E}{\partial E_a \partial E_b \partial E_c}\right|_{\mathbf{E}=\mathbf{0}},
+\end{equation}
+though it is not yet clear how to take derivatives of the energy beyond what is presented in tutorial 6a. Additionally, nothing has been stated about time dependence; everything to this point has been the static case, where the strength of fields do not vary with time. We will first incorporate time dependence, and equations for derivative theory will result.
 
 \hypertarget{notation}{%
   \subsubsection{Notation}\label{notation}}
@@ -76,9 +80,16 @@ In general, the MO coeffients are perturbation- and time-dependent, but the basi
 where \(a,b,c,...\in\{x,y,z\}\), and
 \begin{align}
   \epsilon^{a} &= e^{\pm i \omega t} \epsilon^{a}(\pm\omega) + \epsilon^{a}(0), \\
-  \epsilon^{ab} &= e^{\pm 2 i \omega t} \epsilon^{ab}(\pm\omega,\pm\omega) + e^{\pm i \omega t} \{ \epsilon^{ab}(0,\pm\omega) + \epsilon^{ab}(\pm\omega,0)\} + \epsilon^{ab}(\pm\omega,\mp\omega) + \epsilon^{ab}(0,0), \\
-  \epsilon^{abc} &= e^{\pm 3 i \omega t} \epsilon^{abc}(\pm\omega,\pm\omega,\pm\omega) + e^{\pm 2 i \omega t} \{\epsilon^{abc}(0,\pm\omega,\pm\omega) + \epsilon^{abc}(\pm\omega,0,\pm\omega) + \epsilon^{abc}(\pm\omega,\pm\omega,0)\} + e^{\pm i \omega t} \{\epsilon^{abc}(\pm\omega,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,\pm\omega) + \epsilon^{abc}(\mp\omega,\pm\omega,\pm\omega)\} + e^{\pm i \omega t} \{\epsilon^{abc}(0,0,\pm\omega) + \epsilon^{abc}(0,\pm\omega,0) + \epsilon^{abc}(\pm\omega,0,0)\} + \{\epsilon^{abc}(0,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,0,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,0)\} + \epsilon^{abc}(0,0,0),
+  \epsilon^{ab} &= e^{\pm 2 i \omega t} \epsilon^{ab}(\pm\omega,\pm\omega) + e^{\pm i \omega t} \{ \epsilon^{ab}(0,\pm\omega) + \epsilon^{ab}(\pm\omega,0)\} + \epsilon^{ab}(\pm\omega,\mp\omega) + \epsilon^{ab}(0,0),
 \end{align}
+\begin{equation}
+  \begin{split}
+    \epsilon^{abc} &= e^{\pm 3 i \omega t} \epsilon^{abc}(\pm\omega,\pm\omega,\pm\omega) + e^{\pm 2 i \omega t} \{\epsilon^{abc}(0,\pm\omega,\pm\omega) + \epsilon^{abc}(\pm\omega,0,\pm\omega) + \epsilon^{abc}(\pm\omega,\pm\omega,0)\} \\
+    &+ e^{\pm i \omega t} \{\epsilon^{abc}(\pm\omega,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,\pm\omega) + \epsilon^{abc}(\mp\omega,\pm\omega,\pm\omega)\} \\
+    &+ e^{\pm i \omega t} \{\epsilon^{abc}(0,0,\pm\omega) + \epsilon^{abc}(0,\pm\omega,0) + \epsilon^{abc}(\pm\omega,0,0)\} \\
+    &+ \{\epsilon^{abc}(0,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,0,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,0)\} + \epsilon^{abc}(0,0,0),
+  \end{split}
+\end{equation}
 showing that each order of the expansion consists of all possible phase combinations. For the first hyperpolarizability, only quantities with at most two field indices are required. Each permutationally unique subterm of the expansion corresponds to a different physical observable:
 \begin{itemize}
 \item \((0) \rightarrow\) static polarizability \(\rightarrow \alpha(0;0) = -Tr[H^{a} D^{b}(0)]\)
@@ -136,9 +147,14 @@ and the \(U\) matrices are the MO-basis perturbation parameters
   C^{ab\dots} = C^{0} U^{ab\dots},
 \]
 which will be discussed in the implementation. The final expression for the static hyperpolarizability is (Karna eq. VII-4)
-\[
-  \beta_{abc}(0; 0, 0) = Tr[n \{ U^{a}(0) G^{b}(0) U^{c}(0) + U^{c}(0) G^{b}(0) U^{a}(0) + U^{b}(0) G^{c}(0) U^{a}(0) + U^{a}(0) G^{c}(0) U^{b}(0) + U^{c}(0) G^{a}(0) U^{b}(0) + U^{b}(0) G^{a}(0) U^{c}(0)\} ] - Tr[n \{ U^{a}(0) U^{c}(0) \epsilon^{b}(0) + U^{c}(0) U^{a}(0) \epsilon^{b}(0) + U^{b}(0) U^{a}(0) \epsilon^{c}(0) + U^{a}(0) U^{b}(0) \epsilon^{c}(0) + U^{c}(0) U^{b}(0) \epsilon^{a}(0) + U^{b}(0) U^{c}(0) \epsilon^{a}(0) \} ].
-\]
+\begin{equation}
+  \begin{split}
+    \beta_{abc}(0; 0, 0) &= Tr[n \{U^{a}(0) G^{b}(0) U^{c}(0) + U^{c}(0) G^{b}(0) U^{a}(0) + U^{b}(0) G^{c}(0) U^{a}(0) \\
+    &+ U^{a}(0) G^{c}(0) U^{b}(0) + U^{c}(0) G^{a}(0) U^{b}(0) + U^{b}(0) G^{a}(0) U^{c}(0)\} ] \\
+    &- Tr[n \{ U^{a}(0) U^{c}(0) \epsilon^{b}(0) + U^{c}(0) U^{a}(0) \epsilon^{b}(0) + U^{b}(0) U^{a}(0) \epsilon^{c}(0) \\
+    &+ U^{a}(0) U^{b}(0) \epsilon^{c}(0) + U^{c}(0) U^{b}(0) \epsilon^{a}(0) + U^{b}(0) U^{c}(0) \epsilon^{a}(0) \} ].
+  \end{split}
+\end{equation}
 By noticing that each term corresponds to a unique permutation of the field indices, it can be rewritten as
 \[
   \beta_{abc} = Tr\left[ n \sum \mathcal{P}(d,e,f) U^{d} G^{e} U^{f} \right] - Tr\left[ n \sum \mathcal{P}(d,e,f) U^{d} U^{e} \epsilon^{f} \right],
