@@ -35,19 +35,17 @@
   doi          = {10.1126/science.aad3000},
   eprint       = {http://science.sciencemag.org/content/351/6280/aad3000.full.pdf},
   url          = {http://science.sciencemag.org/content/351/6280/aad3000},
-  abstract     = {Density functional theory (DFT) is now routinely used for simulating material properties. Many software packages are available, which makes it challenging to know which are the best to use for a specific calculation. Lejaeghere et al. compared the calculated values for the equation of states for 71 elemental crystals from 15 different widely used DFT codes employing 40 different potentials (see the Perspective by Skylaris). Although there were variations in the calculated values, most recent codes and methods converged toward a single value, with errors comparable to those of experiment.Science, this issue p. 10.1126/science.aad3000; see also p. 1394INTRODUCTIONThe reproducibility of results is one of the underlying principles of science. An observation can only be accepted by the scientific community when it can be confirmed by independent studies. However, reproducibility does not come easily. Recent works have painfully exposed cases where previous conclusions were not upheld. The scrutiny of the scientific community has also turned to research involving computer programs, finding that reproducibility depends more strongly on implementation than commonly thought. These problems are especially relevant for property predictions of crystals and molecules, which hinge on precise computer implementations of the governing equation of quantum physics.RATIONALEThis work focuses on density functional theory (DFT), a particularly popular quantum method for both academic and industrial applications. More than 15,000 DFT papers are published each year, and DFT is now increasingly used in an automated fashion to build large databases or apply multiscale techniques with limited human supervision. Therefore, the reproducibility of DFT results underlies the scientific credibility of a substantial fraction of current work in the natural and engineering sciences. A plethora of DFT computer codes are available, many of them differing considerably in their details of implementation, and each yielding a certain {\textquotedblleft}precision{\textquotedblright} relative to other codes. How is one to decide for more than a few simple cases which code predicts the correct result, and which does not? We devised a procedure to assess the precision of DFT methods and used this to demonstrate reproducibility among many of the most widely used DFT codes. The essential part of this assessment is a pairwise comparison of a wide range of methods with respect to their predictions of the equations of state of the elemental crystals. This effort required the combined expertise of a large group of code developers and expert users.RESULTSWe calculated equation-of-state data for four classes of DFT implementations, totaling 40 methods. Most codes agree very well, with pairwise differences that are comparable to those between different high-precision experiments. Even in the case of pseudization approaches, which largely depend on the atomic potentials used, a similar precision can be obtained as when using the full potential. The remaining deviations are due to subtle effects, such as specific numerical implementations or the treatment of relativistic terms.CONCLUSIONOur work demonstrates that the precision of DFT implementations can be determined, even in the absence of one absolute reference code. Although this was not the case 5 to 10 years ago, most of the commonly used codes and methods are now found to predict essentially identical results. The established precision of DFT codes not only ensures the reproducibility of DFT predictions but also puts several past and future developments on a firmer footing. Any newly developed methodology can now be tested against the benchmark to verify whether it reaches the same level of precision. New DFT applications can be shown to have used a sufficiently precise method. Moreover, high-precision DFT calculations are essential for developing improvements to DFT methodology, such as new density functionals, which may further increase the predictive power of the simulations.Recent DFT methods yield reproducible results.Whereas older DFT implementations predict different values (red darts), codes have now evolved to mutual agreement (green darts). The scoreboard illustrates the good pairwise agreement of four classes of DFT implementations (horizontal direction) with all-electron results (vertical direction). Each number reflects the average difference between the equations of state for a given pair of methods, with the green-to-red color scheme showing the range from the best to the poorest agreement.The widespread popularity of density functional theory has given rise to an extensive range of dedicated codes for predicting molecular and crystalline properties. However, each code implements the formalism in a different way, raising questions about the reproducibility of such predictions. We report the results of a community-wide effort that compared 15 solid-state codes, using 40 different potentials or basis set types, to assess the quality of the Perdew-Burke-Ernzerhof equations of state for 71 elemental crystals. We conclude that predictions from recent codes and pseudopotentials agree very well, with pairwise differences that are comparable to those between different high-precision experiments. Older methods, however, have less precise agreement. Our benchmark provides a framework for users and developers to document the precision of new applications and methodological improvements.},
   publisher    = {American Association for the Advancement of Science},
 }
 
 @Article{Psi41.1,
-  author       = {Parrish, Robert M. and Burns, Lori A. and Smith, Daniel G. A. and Simmonett, Andrew C. and DePrince, A. Eugene and Hohenstein, Edward G. and Bozkaya, Uğur and Sokolov, Alexander Yu. and Di Remigio, Roberto and Richard, Ryan M. and Gonthier, Jérôme F. and James, Andrew M. and McAlexander, Harley R. and Kumar, Ashutosh and Saitow, Masaaki and Wang, Xiao and Pritchard, Benjamin P. and Verma, Prakash and Schaefer, Henry F. and Patkowski, Konrad and King, Rollin A. and Valeev, Edward F. and Evangelista, Francesco A. and Turney, Justin M. and Crawford, T. Daniel and Sherrill, C. David},
+  author       = {Parrish, Robert M. and Burns, Lori A. and Smith, Daniel G. A. and Simmonett, Andrew C. and DePrince, A. Eugene and Hohenstein, Edward G. and Bozkaya, U{\u{g}}ur and Sokolov, Alexander Yu. and Di Remigio, Roberto and Richard, Ryan M. and Gonthier, J{\'{e}}r{\^{o}}me F. and James, Andrew M. and McAlexander, Harley R. and Kumar, Ashutosh and Saitow, Masaaki and Wang, Xiao and Pritchard, Benjamin P. and Verma, Prakash and Schaefer, Henry F. and Patkowski, Konrad and King, Rollin A. and Valeev, Edward F. and Evangelista, Francesco A. and Turney, Justin M. and Crawford, T. Daniel and Sherrill, C. David},
   title        = {Psi4 1.1: An Open-Source Electronic Structure Program Emphasizing Automation, Advanced Libraries, and Interoperability},
   journaltitle = {Journal of Chemical Theory and Computation},
   date         = {2017},
   volume       = {13},
   number       = {7},
   pages        = {3185-3197},
-  note         = {PMID: 28489372},
   doi          = {10.1021/acs.jctc.7b00174},
   eprint       = {http://dx.doi.org/10.1021/acs.jctc.7b00174},
 }
@@ -81,7 +79,6 @@
   location     = {New York, NY, USA},
   numpages     = {17},
   publisher    = {ACM},
-  sortkey      = {{$\!\!$}},
 }
 
 @Article{Bartlett:1981:359,
@@ -172,7 +169,7 @@
 }
 
 @Article{Bartlett1991:4334,
-  author       = {John F. Stanton and Jürgen Gauss and John D. Watts and Rodney J. Bartlett},
+  author       = {John F. Stanton and J{\"{u}}rgen Gauss and John D. Watts and Rodney J. Bartlett},
   title        = {A direct product decomposition approach for symmetry exploitation in many-body methods. I. Energy calculations},
   journaltitle = {The Journal of Chemical Physics},
   date         = {1991},
@@ -184,7 +181,7 @@
 }
 
 @Article{25,
-  author       = {Péter Pulay},
+  author       = {P{\'{e}}ter Pulay},
   title        = {Convergence acceleration of iterative sequences. the case of scf iteration},
   journaltitle = {Chemical Physics Letters},
   date         = {1980},
@@ -241,7 +238,7 @@
   author    = {C. David Sherrill and Henry F. Schaefer},
   title     = {Advances in Quantum Chemistry},
   date      = {1999},
-  editor    = {Per-Olov L\"owdin},
+  editor    = {Per-Olov L{\"{o}}wdin},
   volume    = {34},
   publisher = {Academic Press},
   location  = {New York},
@@ -261,7 +258,7 @@
 }
 
 @Misc{danielsmith2016:160842,
-  author = {Smith, D. G. A. and St{\o}ter, F.-R. and McGibbon, R. T. and Werner, N.},
+  author = {Smith, D. G. A. and St{\o{}}ter, F.-R. and McGibbon, R. T. and Werner, N.},
   title  = {Optimized Einsum: v1.0},
   date   = {2016},
   doi    = {10.5281/zenodo.160842},
