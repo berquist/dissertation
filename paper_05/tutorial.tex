@@ -1,0 +1,714 @@
+\documentclass[11pt]{article}
+
+% Basic figure setup, for now with no caption control since it's done
+% automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+\usepackage{graphicx}
+% We will generate all images so they have a width \maxwidth. This means
+% that they will get their normal width if they fit onto the page, but
+% are scaled down if they would overflow the margins.
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+  \else\Gin@nat@width\fi}
+\makeatother
+\let\Oldincludegraphics\includegraphics
+% Set max figure width to be 80% of text width, for now hardcoded.
+\renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+% Ensure that by default, figures have no caption (until we provide a
+% proper Figure object with a Caption API and a way to capture that
+% in the conversion process - todo).
+\usepackage{caption}
+\DeclareCaptionLabelFormat{nolabel}{}
+\captionsetup{labelformat=nolabel}
+
+\usepackage{adjustbox} % Used to constrain images to a maximum size
+\usepackage{xcolor} % Allow colors to be defined
+\usepackage{enumerate} % Needed for markdown enumerations to work
+\usepackage{geometry} % Used to adjust the document margins
+\usepackage{amsmath} % Equations
+\usepackage{amssymb} % Equations
+\usepackage{textcomp} % defines textquotesingle
+% Hack from http://tex.stackexchange.com/a/47451/13684:
+\AtBeginDocument{%
+  \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+}
+\usepackage{upquote} % Upright quotes for verbatim code
+\usepackage{eurosym} % defines \euro
+\usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+\usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+\usepackage{fancyvrb} % verbatim replacement that allows latex
+\usepackage{grffile} % extends the file name processing of package graphics
+% to support a larger range
+% The hyperref package gives us a pdf with properly built
+% internal navigation ('pdf bookmarks' for the table of contents,
+% internal cross-reference links, web links for URLs, etc.)
+\usepackage{hyperref}
+\usepackage{longtable} % longtable support required by pandoc >1.10
+\usepackage{booktabs}  % table support for pandoc > 1.12.2
+\usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+\usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                            % normalem makes italics be italics, not underlines
+
+                            % Colors for the hyperref package
+\definecolor{urlcolor}{rgb}{0,.145,.698}
+\definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+\definecolor{citecolor}{rgb}{.12,.54,.11}
+
+% ANSI colors
+\definecolor{ansi-black}{HTML}{3E424D}
+\definecolor{ansi-black-intense}{HTML}{282C36}
+\definecolor{ansi-red}{HTML}{E75C58}
+\definecolor{ansi-red-intense}{HTML}{B22B31}
+\definecolor{ansi-green}{HTML}{00A250}
+\definecolor{ansi-green-intense}{HTML}{007427}
+\definecolor{ansi-yellow}{HTML}{DDB62B}
+\definecolor{ansi-yellow-intense}{HTML}{B27D12}
+\definecolor{ansi-blue}{HTML}{208FFB}
+\definecolor{ansi-blue-intense}{HTML}{0065CA}
+\definecolor{ansi-magenta}{HTML}{D160C4}
+\definecolor{ansi-magenta-intense}{HTML}{A03196}
+\definecolor{ansi-cyan}{HTML}{60C6C8}
+\definecolor{ansi-cyan-intense}{HTML}{258F8F}
+\definecolor{ansi-white}{HTML}{C5C1B4}
+\definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+% commands and environments needed by pandoc snippets
+% extracted from the output of `pandoc -s`
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+\newcommand{\RegionMarkerTok}[1]{{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+\newcommand{\NormalTok}[1]{{#1}}
+
+% Additional commands for more recent versions of Pandoc
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+\newcommand{\ImportTok}[1]{{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+\newcommand{\BuiltInTok}[1]{{#1}}
+\newcommand{\ExtensionTok}[1]{{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+% Define a nice break command that doesn't care if a line doesn't already
+% exist.
+\def\br{\hspace*{\fill} \\* }
+% Math Jax compatability definitions
+\def\gt{>}
+\def\lt{<}
+% Document parameters
+\title{6b\_first\_hyperpolarizability}
+
+% Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+% Exact colors from NB
+\definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+\definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+% Prevent overflowing lines due to hard-to-break entities
+\sloppy
+% Setup hyperref package
+\hypersetup{
+  breaklinks=true,  % so long urls are correctly broken across lines
+  colorlinks=true,
+  urlcolor=urlcolor,
+  linkcolor=linkcolor,
+  citecolor=citecolor,
+}
+% Slightly bigger margins than the latex defaults
+
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\begin{document}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Tutorial: SCF first hyperpolarizability\PYZdq{}\PYZdq{}\PYZdq{}}
+
+        \PY{n}{\PYZus{}\PYZus{}author\PYZus{}\PYZus{}}    \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Eric J. Berquist}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{\PYZus{}\PYZus{}credit\PYZus{}\PYZus{}}    \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Eric J. Berquist}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+
+        \PY{n}{\PYZus{}\PYZus{}copyright\PYZus{}\PYZus{}} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(c) 2014\PYZhy{}2017, The Psi4NumPy Developers}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{\PYZus{}\PYZus{}license\PYZus{}\PYZus{}}   \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BSD\PYZhy{}3\PYZhy{}Clause}\PY{l+s+s2}{\PYZdq{}}
+        \PY{n}{\PYZus{}\PYZus{}date\PYZus{}\PYZus{}}      \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2017\PYZhy{}12\PYZhy{}19}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+\hypertarget{scf-first-hyperpolarizability}{%
+  \section{SCF First Hyperpolarizability}\label{scf-first-hyperpolarizability}}
+
+\hypertarget{introduction}{%
+\subsection{Introduction}\label{introduction}}
+
+In Tutorial 6a, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed Hartree-Fock (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
+
+\[
+  E(\mathbf{E}) = \sum_{n=0}^{\infty} \frac{1}{n!}E^{(n)}(\mathbf{a})\cdot(\mathbf{E}-\mathbf{a})^{n},
+\]
+where the electric field is \(\mathbf{E} = \vec{E} = (E_x,E_y,E_z)\) and \(\mathbf{a}\) is the expansion point. In practice, we always expand around \(\mathbf{a} = \mathbf{0}\), so it is a Maclaurin series:
+\[
+  E(\mathbf{E}) = \sum_{n=0}^{\infty} \frac{1}{n!}\mathbf{E}^{(n)}(\mathbf{0})\cdot\mathbf{E}^{n}.
+\]
+Expanding the above to the first 4 explicit terms gives
+\[
+  E(\mathbf{E}) \approx E^{(0)}(\mathbf{0}) + \mathbf{E}^{(1)}(\mathbf{0})\cdot\mathbf{E} + \frac{1}{2}\mathbf{E}^{(2)}(\mathbf{0})\cdot\mathbf{E}^{2} + \frac{1}{6}\mathbf{E}^{(3)}(\mathbf{0})\cdot\mathbf{E}^{3},
+\]
+where we identify
+\begin{align}
+  E^{(0)} &\rightarrow \textrm{the unperturbed ground-state energy} \\
+  E_{a}^{(1)} &\rightarrow -\mu_{a},\textrm{the dipole moment} \\
+  E_{ab}^{(2)} &\rightarrow -\alpha_{ab},\textrm{the polarizability} \\
+  E_{abc}^{(3)} &\rightarrow -\beta_{abc},\textrm{the first hyperpolarizability}
+\end{align}
+The first hyperpolarizability is the leading-order term that describes the \emph{nonlinear} response of a system to an external electric field.  Each term in the series expansion increases the rank of the coefficient by one: the ground-state energy is a scalar, the dipole is a length 3 vector, the polarizability is a 3-by-3 matrix, and the first hyperpolarizability is a 3-by-3-by-3 tensor.
+
+Translated into the language of analytic derivative theory, is it represented as \(\beta_{abc} = \left.\frac{\partial^{3} E}{\partial E_a \partial E_b \partial E_c}\right|_{\mathbf{E}=\mathbf{0}}\), though it is not yet clear how to take derivatives of the energy beyond what is presented in tutorial 6a. Additionally, nothing has been stated about time dependence; everything to this point has been the static case, where the strength of fields do not vary with time. We will first incorporate time dependence, and equations for derivative theory will result.
+
+\hypertarget{notation}{%
+  \subsubsection{Notation}\label{notation}}
+
+Before going further, some notational conventions should be mentioned.  When used as field indices, \(a,b,c,\dots \in \{x,y,z\}\), the three Cartesian directions.
+
+For matrix indices, \(\mu,\nu,\lambda,\sigma,\dots\) label atomic orbitals (AOs)/basis functions, \(i,j,k,l,\dots\) label occupied molecular orbitals (MOs), \(a,b,c,d,\dots\) label unoccupied/virtual MOs, and \(p,q,r,s,\dots\) label all MOs. Einstein summation is used, so repeated indices are contracted over.
+
+\hypertarget{derivation}{%
+\subsection{Derivation}\label{derivation}}
+
+Again, write the total Hamiltonian as the sum of unperturbed and perturbed components
+
+\begin{align}
+  \hat{H}(\mathbf{E},t) &= \hat{H}^{(0)} + \hat{V}(\mathbf{E},t) \\
+  \hat{V}(\mathbf{E},t) &= -\mathbf{\mu} \cdot \mathbf{E}(e^{\pm i \omega t} + 1)
+\end{align}
+
+where part of the external field now oscillates with some characteristic frequency \(\omega\). This can be incorporated into the time-dependent Schrodinger equation, which for a stationary state obeys
+\begin{align}
+  \left[ \hat{H}^{(0)} + \hat{V}(\mathbf{E},t) - i\frac{\partial}{\partial t} \right] \psi(t) &= 0, \\
+  FC - i \frac{\partial}{\partial t} SC &= SC\epsilon, \\
+  \frac{\partial}{\partial t} C^{\dagger} S C &= 0,
+\end{align}
+where the full definition of the Fock matrix is
+\[
+  F_{\mu\nu} = h_{\mu\nu} + D_{\lambda\sigma}[2J_{\mu\nu\lambda\sigma} - K_{\mu\nu\lambda\sigma}]
+\]
+and the density matrix is defined as
+\[
+  D_{\mu\nu} = C_{\mu p}n_{pq}C_{\nu q}^{\dagger},
+\]
+
+where the diagonal occupation number matrix \(n_{ii} = 2\) and \(n_{aa} = 0\) for RHF.
+
+In general, the MO coeffients are perturbation- and time-dependent, but the basis functions themselves are not. This means that when the series expansion for the perturbation above is performed on other quantities, only \(F\), \(C\), \(\epsilon\), and \(D\) are affected. For example, the Lagrangian multiplier matrix \(\epsilon\) can be expanded as
+\[
+  \epsilon(\mathbf{E}) = \epsilon^0 + E_a\epsilon^a + \frac{1}{2!}E_aE_b\epsilon^{ab} + \frac{1}{3!}E_aE_bE_c\epsilon^{abc} + \cdots
+\]
+where \(a,b,c,...\in\{x,y,z\}\), and
+\begin{align}
+  \epsilon^{a} &= e^{\pm i \omega t} \epsilon^{a}(\pm\omega) + \epsilon^{a}(0), \\
+  \epsilon^{ab} &= e^{\pm 2 i \omega t} \epsilon^{ab}(\pm\omega,\pm\omega) + e^{\pm i \omega t} \{ \epsilon^{ab}(0,\pm\omega) + \epsilon^{ab}(\pm\omega,0)\} + \epsilon^{ab}(\pm\omega,\mp\omega) + \epsilon^{ab}(0,0), \\
+  \epsilon^{abc} &= e^{\pm 3 i \omega t} \epsilon^{abc}(\pm\omega,\pm\omega,\pm\omega) + e^{\pm 2 i \omega t} \{\epsilon^{abc}(0,\pm\omega,\pm\omega) + \epsilon^{abc}(\pm\omega,0,\pm\omega) + \epsilon^{abc}(\pm\omega,\pm\omega,0)\} + e^{\pm i \omega t} \{\epsilon^{abc}(\pm\omega,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,\pm\omega) + \epsilon^{abc}(\mp\omega,\pm\omega,\pm\omega)\} + e^{\pm i \omega t} \{\epsilon^{abc}(0,0,\pm\omega) + \epsilon^{abc}(0,\pm\omega,0) + \epsilon^{abc}(\pm\omega,0,0)\} + \{\epsilon^{abc}(0,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,0,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,0)\} + \epsilon^{abc}(0,0,0),
+\end{align}
+
+showing that each order of the expansion consists of all possible phase combinations. For the first hyperpolarizability, only quantities with at most two field indices are required. Each permutationally unique subterm of the expansion corresponds to a different physical observable:
+
+\begin{itemize}
+\item \((0) \rightarrow\) static polarizability \(\rightarrow \alpha(0;0) = -Tr[H^{a} D^{b}(0)]\)
+\item \((\pm\omega) \rightarrow\) dynamic polarizability \(\rightarrow \alpha(\mp\omega;\pm\omega) = -Tr[H^{a} D^{b}(\pm\omega)]\)
+\item \((0,0) \rightarrow\) static (first) hyperpolarizability \(\rightarrow \beta(0;0,0) = -Tr[H^{a} D^{bc}(0,0)]\)
+\item \((0,\pm\omega) \rightarrow\) electrooptic Pockels effect (EOPE) \(\rightarrow \beta(\mp \omega;0,\pm\omega) = -Tr[H^{a} D^{bc}(0,\pm\omega)]\)
+\item \((\pm\omega,\pm\omega) \rightarrow\) second harmonic generation (SHG) \(\rightarrow \beta(\mp 2\omega;\pm\omega,\pm\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\pm\omega)]\)
+\item \((\pm\omega,\mp\omega) \rightarrow\) optical rectification \(\rightarrow \beta(0;\pm\omega,\mp\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\mp\omega)]\)
+\end{itemize}
+
+where each property is calculated as the trace over the AO-basis dipole matrices \(H^{a}\) with the appropriate perturbed density. The task now comes down to calculating the necessary perturbed density for the phenomenon of interest. The second-order densities required for the four different first hyperpolarizabilities are (Karna eqs. III-2a to III-2d)
+
+\begin{align}
+  D^{ab}(\pm\omega,\pm\omega) &= C^{ab}(\pm\omega,\pm\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\mp\omega) + C^{b}(\pm\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\mp\omega), \\
+  D^{ab}(0,\pm\omega) &= C^{ab}(0,\pm\omega) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(\mp\omega) + C^{b}(\pm\omega) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,\mp\omega), \\
+  D^{ab}(\pm\omega,\mp\omega) &= C^{ab}(\pm\omega,\mp\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\pm\omega) + C^{b}(\mp\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\pm\omega), \\
+  D^{ab}(0,0) &= C^{ab}(0,0) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(0) + C^{b}(0) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,0).
+\end{align}
+
+Already a few important insights about the equations are revealed: Each perturbation index always carries its respective frequency, and the positive and negative frequencies are related by the Hermitian adjoint (except for \(C(-\omega) = -C^{0} U^{\dagger}(+\omega)\), Karna eq. 40).  We also see the appearance of terms like \(C^{ab}\), which will require \(U^{ab}\) originating from the second-order CPHF. Computationally, this is undesirable due to the increased number of iterative calculations that must be performed, so we borrow a trick that most prominently appears in perturbation theory.
+
+\hypertarget{wigners-2n-1-rule}{%
+  \subsubsection{\texorpdfstring{Wigner's \(2n + 1\) rule}{Wigner's 2n + 1 rule}}\label{wigners-2n-1-rule}}
+
+From Schaefer, page 25:
+
+\begin{quote}
+  When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem {[}29-31{]}.
+\end{quote}
+
+\[
+  \begin{array}{cccc}
+    \hline
+    & \text{CI: MO/CI space} & \text{MCSCF: MO/CI space} & \text{RHF: MO space} \\
+    \hline
+    \text{Energy}, E & C_{\mu}^{i} , C_{I} & C_{\mu}^{i}, C_{I} & C_{\mu}^{i} \\
+    \text{First Derivative}, \frac{\partial E}{\partial a} & U^{a} , C_{I} & C_{\mu}^{i}, C_{I} & C_{\mu}^{i}\\
+    \text{Second Derivative}, \frac{\partial^{2} E}{\partial a \partial b} & U^{ab} , \frac{\partial C_{I}}{\partial a} & U^{a}, \frac{\partial C_{I}}{\partial a} & U^{a} \\
+    \text{Third Derivative}, \frac{\partial^{3} E}{\partial a \partial b \partial c} & U^{abc} , \frac{\partial C_{I}}{\partial a} & U^{a}, \frac{\partial C_{I}}{\partial a} & U^{a} \\
+    \text{Fourth Derivative}, \frac{\partial^{4} E}{\partial a \partial b \partial c \partial d} & U^{abcd} , \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab}, \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab} \\
+    \text{Fifth Derivative}, \frac{\partial^{5} E}{\partial a \partial b \partial c \partial d \partial e} & U^{abcde} , \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab}, \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab} \\
+    \hline
+  \end{array}
+\]
+
+Since the first hyperpolarizability is calculated as a third derivative of the energy, perturbed coefficients with only one field index should be required. From the above table, we can also see why SCF gradients (\(\frac{\partial E}{\partial R_A}\), where \(R_A\) is the \(A\)-th Cartesian component of nucleus \(R\)) avoid the need to solve for \(U\) matrices.
+
+\hypertarget{final-expressions}{%
+  \subsection{Final expressions}\label{final-expressions}}
+
+To this point, most work has been in the AO basis, but it is conceptually easier to work in the MO basis, in particular due to the use of the \(\epsilon\) equations (Karna eq. 34)
+
+\[
+  \epsilon^{a}(\pm\omega) = G^{a}(\pm\omega) + \epsilon^{0} U^{a}(\pm\omega) - U^{a}(\pm\omega) \epsilon^{0} \pm \omega U^{a}(\pm\omega),
+\]
+
+where the \(G\) matrices are the MO-basis Fock matrices
+
+\[
+  G^{ab\dots} = C^{0\dagger} F^{ab\dots} C^{0},
+\]
+
+and the \(U\) matrices are the MO-basis perturbation parameters
+
+\[
+  C^{ab\dots} = C^{0} U^{ab\dots},
+\]
+
+which will be discussed in the implementation. The final expression for the static hyperpolarizability is (Karna eq. VII-4)
+
+\[
+  \beta_{abc}(0; 0, 0) = Tr[n \{ U^{a}(0) G^{b}(0) U^{c}(0) + U^{c}(0) G^{b}(0) U^{a}(0) + U^{b}(0) G^{c}(0) U^{a}(0) + U^{a}(0) G^{c}(0) U^{b}(0) + U^{c}(0) G^{a}(0) U^{b}(0) + U^{b}(0) G^{a}(0) U^{c}(0)\} ] - Tr[n \{ U^{a}(0) U^{c}(0) \epsilon^{b}(0) + U^{c}(0) U^{a}(0) \epsilon^{b}(0) + U^{b}(0) U^{a}(0) \epsilon^{c}(0) + U^{a}(0) U^{b}(0) \epsilon^{c}(0) + U^{c}(0) U^{b}(0) \epsilon^{a}(0) + U^{b}(0) U^{c}(0) \epsilon^{a}(0) \} ].
+\]
+
+By noticing that each term corresponds to a unique permutation of the field indices, it can be rewritten as
+
+\[
+  \beta_{abc} = Tr\left[ n \sum \mathcal{P}(d,e,f) U^{d} G^{e} U^{f} \right] - Tr\left[ n \sum \mathcal{P}(d,e,f) U^{d} U^{e} \epsilon^{f} \right],
+\]
+
+where the permutation indices are initially assigned as \(d = a, e = b, f = c\). The frequency notation has also been dropped, since each \(abc\) (and therefore each \(def\)) will always carry the appropriate field index, making this the most general form of the first hyperpolarizability. If the indices \(abc\) are also permuted, then all 27 components of the first hyperpolarizability tensor will be computed.
+
+\hypertarget{computational-procedure}{%
+  \subsection{Computational Procedure}\label{computational-procedure}}
+
+The basic quantities we need are the matrices \(C, \mu, F, \epsilon\), and \(U\). The MO coefficients \(C\) are already obtained from the ground-state calculation, along with \(\epsilon^{0}\) (the MO energies) and \(F^{0}\) (the AO-basis Fock matrix). The dipole matrices \(\mu\) are needed for the linear response (polarizability) calculation, which results in response vectors that compose the off-diagonal blocks of the \(U^{a}\) matrix. \(G^{a}\) is obtained from \(F^{a}\), which comes from performing a single Fock build with the perturbed density \(D^{a}\).  Finally, \(\epsilon^{a}\) can be constructed.
+
+Although the expressions so far are general for any frequency and first-order non-linear optical response, the tutorial implementation will cover the static case. For second-harmonic generation, see the reference implementation.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{n}{np}\PY{o}{.}\PY{n}{set\PYZus{}printoptions}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{suppress}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}    \PY{c+c1}{\PYZsh{} when we inspect the vectors/matrices,}
+                                                                \PY{c+c1}{\PYZsh{} use a prettier format for printing}
+        \PY{k+kn}{import} \PY{n+nn}{psi4}
+\end{Verbatim}
+
+The energy and density convergence criteria are tightened from defaults, as response properties are sensitive to the quality of the ground-state wavefunction.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{mol} \PY{o}{=} \PY{n}{psi4}\PY{o}{.}\PY{n}{geometry}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+s1}{    O}
+        \PY{l+s+s1}{    H  1  0.9435}
+        \PY{l+s+s1}{    H  1  0.9435  2  105.9443}
+        \PY{l+s+s1}{    symmetry c1}
+        \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{p}{)}
+        \PY{n}{psi4}\PY{o}{.}\PY{n}{set\PYZus{}options}\PY{p}{(}\PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{basis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{aug\PYZhy{}cc\PYZhy{}pVDZ}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{scf\PYZus{}type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{direct}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df\PYZus{}scf\PYZus{}guess}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{k+kc}{False}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{e\PYZus{}convergence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}9}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d\PYZus{}convergence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}9}\PY{p}{,}
+        \PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} This is to enable testing outside of the notebook environment.}
+        \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{k}{try}\PY{p}{:}
+            \PY{n}{get\PYZus{}ipython}\PY{p}{(}\PY{p}{)}
+            \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../../Response\PYZhy{}Theory/Self\PYZhy{}Consistent\PYZhy{}Field}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{k}{except} \PY{n+ne}{NameError}\PY{p}{:}
+            \PY{k+kn}{import} \PY{n+nn}{os}\PY{n+nn}{.}\PY{n+nn}{path}
+            \PY{n}{dirname} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{dirname}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{abspath}\PY{p}{(}\PY{n+nv+vm}{\PYZus{}\PYZus{}file\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{)}
+            \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{dirname}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../../Response\PYZhy{}Theory/Self\PYZhy{}Consistent\PYZhy{}Field}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+
+        \PY{k+kn}{from} \PY{n+nn}{helper\PYZus{}CPHF} \PY{k}{import} \PY{n}{helper\PYZus{}CPHF}
+\end{Verbatim}
+
+The helper encapsulates the solution of the ground-state wavefunction followed by the frequency-(in)dependent linear response equations,
+
+\[
+  \left[
+    \begin{pmatrix}
+      \mathbf{A} & \mathbf{B} \\
+      \mathbf{B}^{*} & \mathbf{A}^{*}
+    \end{pmatrix}
+    - \omega_{f}
+    \begin{pmatrix}
+      \mathbf{\Sigma} & \mathbf{\Delta} \\
+      -\mathbf{\Delta}^{*} & -\mathbf{\Sigma}^{*}
+    \end{pmatrix}
+  \right]
+  \begin{pmatrix}
+    \mathbf{X} \\
+    \mathbf{Y}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \mathbf{V} \\
+    -\mathbf{V}^{*}
+  \end{pmatrix}
+  ,
+\]
+
+either directly (via matrix inversion in the MO basis) or iteratively (via repeated matrix-vector products using Fock builds). For a HF/DFT reference with canonical orbitals, the above equations reduce to
+
+\[
+  \left[
+    \begin{pmatrix}
+      \mathbf{A} & \mathbf{B} \\
+      \mathbf{B} & \mathbf{A}
+    \end{pmatrix}
+    - \omega_{f}
+    \begin{pmatrix}
+      \mathbf{1} & \mathbf{0} \\
+      \mathbf{0} & -\mathbf{1}
+    \end{pmatrix}
+  \right]
+  \begin{pmatrix}
+    \mathbf{X} \\
+    \mathbf{Y}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \mathbf{V} \\
+    -\mathbf{V}
+  \end{pmatrix}
+  .
+\]
+
+In the static limit \((\omega_f = 0)\), the whole superoverlap matrix vanishes, and the CPHF equations can be reduced to those used in tutorial 6a.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{solver} \PY{o}{=} \PY{n}{helper\PYZus{}CPHF}\PY{p}{(}\PY{n}{mol}\PY{p}{)}
+        \PY{n}{solver}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+
+Number of occupied orbitals: 5
+Number of basis functions: 41
+
+Tensor sizes:
+ERI tensor           0.02 GB.
+oNNN MO tensor       0.00 GB.
+ovov Hessian tensor  0.00 GB.
+
+Forming Hessian{\ldots}
+{\ldots}formed Hessian in 0.473 seconds.
+
+Inverting Hessian{\ldots}
+{\ldots}inverted Hessian in 0.007 seconds.
+
+\end{Verbatim}
+
+Because the calculation of \(\beta\) requires \(U^{a}\), we also obtain linear response properties from a quadratic response calculation. This holds for any order of response, where lower-order response functions are automatically obtained from higher-order response calculations.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{around}\PY{p}{(}\PY{n}{solver}\PY{o}{.}\PY{n}{polar}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+[[ 7.2587 -0.      0.    ]
+ [-0.      8.7969  0.    ]
+ [ 0.      0.      7.854 ]]
+
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} epsilon\PYZca{}\PYZob{}0\PYZcb{}}
+        \PY{n}{moenergies} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{epsilon}
+        \PY{n}{C} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{solver}\PY{o}{.}\PY{n}{C}\PY{p}{)}
+        \PY{n}{Co} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Co}
+        \PY{n}{Cv} \PY{o}{=} \PY{n}{solver}\PY{o}{.}\PY{n}{Cv}
+        \PY{n}{nbf}\PY{p}{,} \PY{n}{norb} \PY{o}{=} \PY{n}{C}\PY{o}{.}\PY{n}{shape}
+        \PY{n}{nocc} \PY{o}{=} \PY{n}{Co}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+        \PY{n}{nvir} \PY{o}{=} \PY{n}{norb} \PY{o}{\PYZhy{}} \PY{n}{nocc}
+        \PY{n}{nov} \PY{o}{=} \PY{n}{nocc} \PY{o}{*} \PY{n}{nvir}
+        \PY{c+c1}{\PYZsh{} the response vectors X\PYZus{}x, X\PYZus{}y, X\PYZus{}z; Y\PYZus{}x, Y\PYZus{}y, Y\PYZus{}z not needed separately for static response}
+        \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{solver}\PY{o}{.}\PY{n}{x}\PY{p}{)}
+        \PY{n}{ncomp} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        \PY{c+c1}{\PYZsh{} reuse the AO\PYZhy{}basis dipole integrals}
+        \PY{n}{integrals\PYZus{}ao} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{dipole\PYZus{}ao\PYZus{}component}\PY{p}{)}
+                                   \PY{k}{for} \PY{n}{dipole\PYZus{}ao\PYZus{}component} \PY{o+ow}{in} \PY{n}{solver}\PY{o}{.}\PY{n}{tmp\PYZus{}dipoles}\PY{p}{]}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{dimension of response vectors from linear response: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{} for dynamic response, this will be (2 * nov)}
+        \PY{k}{assert} \PY{n}{x}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{n}{nov}
+\end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+dimension of response vectors from linear response: (3, 180)
+
+\end{Verbatim}
+
+The foundation of the CPHF equations is that the right-hand side \(\mathbf{V}\) is a perturbation on the wavefunction causing single excitations from the occupied orbitals to virtual orbitals, the coefficents of which are in the response vectors \(\mathbf{X}\); the vectors \(\mathbf{Y}\) describe single deexcitations. Because the full (square) \(\mathbf{U}\) matrices are required, all MO-based quantities must be of shape \([N_{orb}, N_{orb}]\) rather than \([N_{occ}, N_{vir}]\).
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} form full MO\PYZhy{}basis dipole integrals}
+        \PY{n}{integrals\PYZus{}mo} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{ncomp}\PY{p}{,} \PY{n}{norb}\PY{p}{,} \PY{n}{norb}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ncomp}\PY{p}{)}\PY{p}{:}
+            \PY{n}{integrals\PYZus{}mo}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{C}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{integrals\PYZus{}ao}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+\end{Verbatim}
+
+Similarly, \(\mathbf{X}\) and \(\mathbf{Y}\) form the off-diagonal blocks of the \(\mathbf{U}\) matrices. They are usually stored as in DALTON, where each vector is of length \(2N_{ov}\), with \(\mathbf{X}\) on top of \(\mathbf{Y}\).
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} repack response vectors to [norb, norb]; 1/2 is due to X + Y}
+        \PY{n}{U} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros\PYZus{}like}\PY{p}{(}\PY{n}{integrals\PYZus{}mo}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ncomp}\PY{p}{)}\PY{p}{:}
+            \PY{n}{U}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{n}{nocc}\PY{p}{:}\PY{p}{]} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{nocc}\PY{p}{,} \PY{n}{nvir}\PY{p}{)}
+            \PY{n}{U}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{nocc}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{nocc}\PY{p}{,} \PY{n}{nvir}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+A minor implementation detail: because this was not a frequency-dependent calculation, only \(\mathbf{X}+\mathbf{Y}\) needs to be calculated; as they are identical, this leads to the prefactor of 1/2.
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} form G matrices from perturbation and generalized Fock matrices; do}
+         \PY{c+c1}{\PYZsh{} one more Fock build for each response vector}
+         \PY{n}{jk} \PY{o}{=} \PY{n}{psi4}\PY{o}{.}\PY{n}{core}\PY{o}{.}\PY{n}{JK}\PY{o}{.}\PY{n}{build}\PY{p}{(}\PY{n}{solver}\PY{o}{.}\PY{n}{scf\PYZus{}wfn}\PY{o}{.}\PY{n}{basisset}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n}{jk}\PY{o}{.}\PY{n}{initialize}\PY{p}{(}\PY{p}{)}
+         \PY{n}{G} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{empty\PYZus{}like}\PY{p}{(}\PY{n}{U}\PY{p}{)}
+         \PY{n}{R} \PY{o}{=} \PY{n}{psi4}\PY{o}{.}\PY{n}{core}\PY{o}{.}\PY{n}{Matrix}\PY{p}{(}\PY{n}{nbf}\PY{p}{,} \PY{n}{nocc}\PY{p}{)}
+         \PY{n}{npR} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{R}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ncomp}\PY{p}{)}\PY{p}{:}
+             \PY{n}{V} \PY{o}{=} \PY{n}{integrals\PYZus{}mo}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
+
+             \PY{c+c1}{\PYZsh{} eqn. (III\PYZhy{}1b)}
+             \PY{c+c1}{\PYZsh{} Note: this simplified handling of the response vector}
+             \PY{c+c1}{\PYZsh{} transformation for the Fock build is insufficient for}
+             \PY{c+c1}{\PYZsh{} frequency\PYZhy{}dependent response. 1/2 is due to X + Y}
+             \PY{n}{jk}\PY{o}{.}\PY{n}{C\PYZus{}clear}\PY{p}{(}\PY{p}{)}
+             \PY{n}{L} \PY{o}{=} \PY{n}{Co}
+             \PY{n}{npR}\PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{=} \PY{n}{x}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{nocc}\PY{p}{,} \PY{n}{nvir}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{Cv}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+             \PY{n}{jk}\PY{o}{.}\PY{n}{C\PYZus{}left\PYZus{}add}\PY{p}{(}\PY{n}{L}\PY{p}{)}
+             \PY{n}{jk}\PY{o}{.}\PY{n}{C\PYZus{}right\PYZus{}add}\PY{p}{(}\PY{n}{R}\PY{p}{)}
+             \PY{n}{jk}\PY{o}{.}\PY{n}{compute}\PY{p}{(}\PY{p}{)}
+             \PY{n}{J} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{jk}\PY{o}{.}\PY{n}{J}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{K} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{jk}\PY{o}{.}\PY{n}{K}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+
+             \PY{c+c1}{\PYZsh{} eqn. (21b)}
+             \PY{n}{F} \PY{o}{=} \PY{p}{(}\PY{n}{C}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{l+m+mi}{4} \PY{o}{*} \PY{n}{J} \PY{o}{\PYZhy{}} \PY{n}{K}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{K}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{C}\PY{p}{)}
+             \PY{n}{G}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{=} \PY{n}{V} \PY{o}{+} \PY{n}{F}
+
+         \PY{c+c1}{\PYZsh{} form epsilon matrices, eqn. (34)}
+         \PY{n}{E} \PY{o}{=} \PY{n}{G}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{omega} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ncomp}\PY{p}{)}\PY{p}{:}
+             \PY{n}{eoU} \PY{o}{=} \PY{p}{(}\PY{n}{moenergies}\PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]} \PY{o}{+} \PY{n}{omega}\PY{p}{)} \PY{o}{*} \PY{n}{U}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
+             \PY{n}{Ue} \PY{o}{=} \PY{n}{U}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{*} \PY{n}{moenergies}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
+             \PY{n}{E}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{eoU} \PY{o}{\PYZhy{}} \PY{n}{Ue}\PY{p}{)}
+
+         \PY{c+c1}{\PYZsh{} Assume some symmetry and calculate only part of the tensor.}
+         \PY{c+c1}{\PYZsh{} eqn. (VII\PYZhy{}4)}
+         \PY{n}{hyperpolarizability} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+         \PY{n}{off1} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{off2} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{]}
+         \PY{k}{for} \PY{n}{r} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}
+             \PY{n}{b} \PY{o}{=} \PY{n}{off1}\PY{p}{[}\PY{n}{r}\PY{p}{]}
+             \PY{n}{c} \PY{o}{=} \PY{n}{off2}\PY{p}{[}\PY{n}{r}\PY{p}{]}
+             \PY{k}{for} \PY{n}{a} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{tl1} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{G}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tl2} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{G}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tl3} \PY{o}{=} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{G}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tr1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tr2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tr3} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tr4} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tr5} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tr6} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{trace}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{a}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{U}\PY{p}{[}\PY{n}{b}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{E}\PY{p}{[}\PY{n}{c}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{n}{nocc}\PY{p}{,} \PY{p}{:}\PY{n}{nocc}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{tl} \PY{o}{=} \PY{n}{tl1} \PY{o}{+} \PY{n}{tl2} \PY{o}{+} \PY{n}{tl3}
+                 \PY{n}{tr} \PY{o}{=} \PY{n}{tr1} \PY{o}{+} \PY{n}{tr2} \PY{o}{+} \PY{n}{tr3} \PY{o}{+} \PY{n}{tr4} \PY{o}{+} \PY{n}{tr5} \PY{o}{+} \PY{n}{tr6}
+                 \PY{n}{hyperpolarizability}\PY{p}{[}\PY{n}{r}\PY{p}{,} \PY{n}{a}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{tl} \PY{o}{\PYZhy{}} \PY{n}{tr}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{ref\PYZus{}static} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}
+             \PY{p}{[} \PY{l+m+mf}{0.00000001}\PY{p}{,}   \PY{l+m+mf}{0.00000000}\PY{p}{,}  \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.10826460}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[} \PY{l+m+mf}{0.00000000}\PY{p}{,}   \PY{l+m+mf}{0.00000000}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{11.22412215}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[} \PY{l+m+mf}{0.00000000}\PY{p}{,}   \PY{l+m+mf}{0.00000000}\PY{p}{,}  \PY{o}{\PYZhy{}}\PY{l+m+mf}{4.36450397}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[} \PY{l+m+mf}{0.00000000}\PY{p}{,}   \PY{l+m+mf}{0.00000000}\PY{p}{,}  \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.00000001}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.10826460}\PY{p}{,}  \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.00000001}\PY{p}{,}   \PY{l+m+mf}{0.00000000}\PY{p}{]}\PY{p}{,}
+             \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.00000001}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{11.22412215}\PY{p}{,}   \PY{l+m+mf}{0.00000000}\PY{p}{]}
+         \PY{p}{]}\PY{p}{)}
+         \PY{k}{assert} \PY{n}{np}\PY{o}{.}\PY{n}{allclose}\PY{p}{(}\PY{n}{ref\PYZus{}static}\PY{p}{,} \PY{n}{hyperpolarizability}\PY{p}{,} \PY{n}{rtol}\PY{o}{=}\PY{l+m+mf}{0.0}\PY{p}{,} \PY{n}{atol}\PY{o}{=}\PY{l+m+mf}{1.0e\PYZhy{}3}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{First dipole hyperpolarizability (static):}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{hyperpolarizability}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+
+First dipole hyperpolarizability (static):
+[[ -0.       -0.       -0.10826]
+ [ -0.       -0.      -11.22412]
+ [ -0.       -0.       -4.3645 ]
+ [ -0.       -0.        0.     ]
+ [ -0.10826   0.       -0.     ]
+ [  0.      -11.22412  -0.     ]]
+
+\end{Verbatim}
+
+\hypertarget{references}{%
+  \subsection{References}\label{references}}
+
+\hypertarget{primary-equations-and-implementation}{%
+  \subsubsection{Primary equations and implementation}\label{primary-equations-and-implementation}}
+
+\begin{itemize}
+\tightlist
+\item \href{https://dx.doi.org/10.1002/jcc.540120409}{Karna:1991:487}: Karna, Shashi P.; Dupuis, Michel. Frequency dependent nonlinear optical properties of molecules: Formulation and implementation in the HONDO program \emph{J. Comput. Chem.} \textbf{12} 487-504 (1991)
+\end{itemize}
+
+\hypertarget{n-1-rule}{%
+  \subsubsection{\texorpdfstring{\(2n + 1\) rule}{2n + 1 rule}}\label{n-1-rule}}
+
+\begin{itemize}
+\tightlist
+\item \href{https://isbnsearch.org/isbn/9780195070286}{Yamaguchi, Yukio; Goddard, John D.; Osamura, Yoshihiro; Schaefer III, Henry F. \emph{A New Dimension to Quantum Chemistry: Analytic Derivative Methods in Ab Initio Molecular Electronic Structure Theory (International Series of Monographs on Chemistry);} Oxford University Press: 1994.}
+\item \href{https://dx.doi.org/10.1063/1.1668053}{Epstein, Saul T. General Remainder Theorem \emph{J. Chem. Phys.} \textbf{48} 4725 (1968)}
+\item \href{https://dx.doi.org/10.1016/0009-2614(80)85340-1}{Epstein, Saul T. Constraints and the \(V^{2n+1}\) theorem \emph{Chem. Phys. Lett.}  \textbf{70} 311 (1980)}
+\end{itemize}
+
+\hypertarget{additional-reading}{%
+  \subsubsection{Additional reading}\label{additional-reading}}
+
+\begin{itemize}
+\tightlist
+\item \href{https://dx.doi.org/10.1016/j.ccr.2008.05.014}{Neese, Frank.  Prediction of molecular properties and molecular spectroscopy with density functional theory: From fundamental theory to exchange-coupling \emph{Coord. Chem. Rev.} \textbf{253} 526-563 (2009)}
+\end{itemize}
+\end{document}

@@ -1,0 +1,29 @@
+\documentclass{article}
+
+\usepackage[margin=1in]{geometry}
+
+% \usepackage{listings}
+% \lstset{%
+%   basicstyle=\ttfamily\footnotesize,%
+%   breakatwhitespace=true,%
+%   breaklines=false,%
+%   frame=single,%
+% }
+
+\usepackage{minted}
+\setminted{%
+  breaklines=true,%
+  fontsize=\footnotesize,%
+  frame=lines,%
+  linenos=true,%
+  mathescape=true,%
+  python3=true,%
+  texcomments=false,%
+}
+
+\begin{document}
+% \lstinputlisting{helper_CPHF.py}
+% \lstinputlisting{beta.py}
+\inputminted{python}{helper_CPHF.py}
+\inputminted{python}{beta.py}
+\end{document}
