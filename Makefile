@@ -4,7 +4,7 @@ all:
 	latexmk -pdf -shell-escape eric_john_berquist_etd.tex
 
 library: library.bib
-	latexmk -pdf test_bibliography.tex
+	latexmk -pdf -xelatex test_bibliography.tex
 
 clean:
 	latexmk -c
