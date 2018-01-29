@@ -7,7 +7,7 @@
 
 The text in this chapter has been adapted from
 
-\section{\caps{Summary}}
+\section{\texorpdfstring{\caps{Summary}}{Summary}}
 
 \pfn demonstrates the use of efficient computational kernels from the open-source \pfour program through the popular \numpy library for linear algebra in Python to facilitate the rapid development of clear, understandable Python computer code for new quantum chemical methods, while maintaining a relatively low execution time.  Using these tools, reference implementations have been created for a number of methods, including self-consistent field (SCF), SCF response, many-body perturbation theory, coupled-cluster theory, configuration interaction, and symmetry-adapted perturbation theory.  Further, several reference codes have been integrated into Jupyter notebooks, allowing background and explanatory information to be associated with the implementation.  \pfn tools and associated reference implementations can lower the barrier for future development of quantum chemistry methods.  These implementations also demonstrate the power of the hybrid C++/Python programming approach employed by the \pfour program.
 
@@ -25,7 +25,8 @@ Here we present \pfn, a framework for the creation of clear, readable reference 
 
 Several of the reference implementations have been augmented by tutorial-style introductions to the relevant theory.  The \pfn tutorial collection includes self-consistent field (SCF), DFT,\cite{Parr:1989} many-body perturbation theory (MBPT),\cite{Bartlett:1981:359} symmetry-adapted perturbation theory (SAPT)\cite{Jeziorski:1994:1887, Szalewicz:2012:254}, coupled-cluster (CC)\cite{Purvis:1982}, and configuration interaction (CI)\cite{Shavitt:1977,Sherrill:1999:CI} theories, with additional sections detailing the theory and implementation of linear response, geometry optimizations, and Verlet integrators.  It is our hope that \pfn and the accompanying reference code will lower the barrier to implementing quantum chemical methods.
 
-\begin{figure}
+\begin{figure}[H]
+  \centering
   \includegraphics[width=\textwidth]{paper_05/fig1.png}
   \caption{\pfn draws linear algebra tools from \numpy and fundamental quantum chemistry structures from \pfour to bring together a practical and convenient environment for code development, verification, and exploration. The most important data structures and functions are shown for \numpy and \pfour as well as representative tutorial and reference implementations presently in \pfn.}
   \label{fig:ovalorg}
@@ -33,7 +34,7 @@ Several of the reference implementations have been augmented by tutorial-style i
 
 Shortly before submission, the authors chanced upon the Quantum Chemistry Program Exchange (QCPE)\cite{QCPE, Boyd:2013:221}, whose goals of software (particularly self-contained software) accessibility, algorithm explication, and free software ``publishing'' \pfn shares. The general tools embraced by \pfn (GitHub for communication, \numpy for linear algebra, Python for interfacing, and Jupyter for illumination) further allow rapid prototyping and educational objectives. In this manner \pfn can be thought as a modern successor to QCPE built to serve the flexible needs of the community.
 
-\section{\caps{Basic Tools}}
+\section{\texorpdfstring{\caps{Basic Tools}}{Basic Tools}}
 
 The basic premise of \pfn is to leverage \pfour to generate quantum chemistry-specific quantities and the \numpy library\cite{Varoquaux:1521-9615} for all other tensor manipulations.  The latest version of \pfour has added the capability to import \pfour as a Python module as well as continuing to be called in an executable fashion. In this way, both the \pfour and \numpy libraries can be loaded into a single Python script and used in cooperation.
 
@@ -203,7 +204,7 @@ In this fashion, virtually any SCF-level theory can be formulated at the \pfn la
 
 To illustrate this point, the \pfour SCF program is compared against a \pfn implementation on an Intel i7-5930K processor with the adenine$\cdot$thymine complex in the aug-cc-pVTZ basis (1127 basis functions) using a density-fitted JK build on six cores. The \pfour SCF program took 250 seconds while the \pfn implementation took 245 seconds. This should not be surprising as each spent 94\% total wall time computing the J and K quantities (both implementations used 18 SCF iterations) and all other operations of nonnegligible cost use the same BLAS implementations.
 
-\section{\caps{Rapid Development}}
+\section{\texorpdfstring{\caps{Rapid Development}}{Rapid Development}}
 
 A key component of the \pfn framework is to provide an easy-to-use development environment for rapid prototyping. Vital to this is \numpy's \texttt{einsum} function that performs arbitrary tensor contractions using Einstein summation syntax.  For example, the atomic orbital to molecular orbital 4-index transformation of Eq.~(\ref{eq:aomo}) and code snippet (\ref{snip:eri_trans}) could be accomplished by:
 
@@ -240,14 +241,13 @@ Here, {\tt MO} holds the 4-index antisymmetrized integrals, {\tt T1} and {\tt T2
 
 To our knowledge, the first implementations of Symmetry-Adapted Perturbation Theory with Complete Active Space SCF references [SAPT(CASSCF)], fourth-order Electron Propagator Theory, and transcorrelated theories have all been achieved using these rapid prototyping techniques.
 
-\section{\caps{Access and Contributions}}
+\section{\texorpdfstring{\caps{Access and Contributions}}{Access and Contributions}}
 
 To ensure ease of community access to the \pfn project, all software dependencies are made available as binary Conda packages\cite{ContinuumIO} either by us (e.g., \pfour), or by ContinuumIO or Intel (e.g., \numpy, Matplotlib, Jupyter). Through this route, binary distributions are installable in a single line to all common computing platforms, so users are not required to compile, link against the correct libraries, or debug runtime issues. We hope that the ready accessibility of these tools facilitates their use in methods development and in the creation of additional publicly available reference implementations.
 
 To lower the barrier to contribution, guidance is included in the repository regarding attribution, citations, and testing. Though the authors adhere to Python software developement best practices in their other projects, they resist advanced Python syntax, organization, file linking, or other jargon-ized code in \pfn in favor of straightforward scripts and Jupyter notebooks for ease of community involvement.  Educators are encouraged to base lessons and labs off this work and are also referred to the \textsc{Psi4Education} project\cite{psi4edu}.
 
-
-\section{\caps{Reference Implementations}}
+\section{\texorpdfstring{\caps{Reference Implementations}}{Reference Implementations}}
 
 To illustrate the \pfn tools, and to provide a resource to the quantum chemistry methods development community, we have created a number of reference implementations and made them publicly available on GitHub at \url{https://github.com/psi4/psi4numpy}.  We intend to add to this collection over time.  Given the wide spectrum of quantum chemical methods, we also encourage submissions from other developers.
 
@@ -300,26 +300,20 @@ Current reference implementations include
     \item Spin-orbital EP3
     \end{enumerate}
 
-%\item MD-Verlet-Integrator
-
 \end{enumerate}
-
 
 \subsection{Jupyter Notebook integration}
 
 As a service to the community, some of the reference implementations have been augmented by additional, tutorial-style background information on various subfields of quantum chemistry.  We found it convenient to add this additional information using the Jupyter notebook web application,\cite{Granger:1521-9615} a popular Integrated Development Environment (IDE) for interactive computing in several programming languages that is starting to be adopted by chemists \cite{charles:2017:592}.  An example for restricted Hartree--Fock can be found in Fig.~\ref{fig:ipython}.
 
 \begin{figure}[H]
+  \centering
   \includegraphics[scale=0.25]{paper_05/fig2.png}
   \caption{Extract from a Jupyter notebook demonstrating the construction of a SCF Fock matrix where {\tt I} is the 4-index electron repulsion integral array and {\tt Cocc} is the occupied orbital matrix.}
   \label{fig:ipython}
 \end{figure}
 
 These documents may be unique within quantum chemistry in that they focus not only on theoretical considerations but also on the details of a method's implementation, such as \emph{why} certain programming choices were made. For example, the comparison between a general matrix inversion and solving a set of linear equations demonstrates instability issues that often plague the former technique. Such illustrations should make the Jupyter implementations useful both to new users in quantum chemistry and to experienced users interested in exploring new subfields.
-
-% Whether a theorist wanting to learn or brush up on new quantum chemical methods or an instructor assembling a QC methods workshop, \pfn is a valuable resource. In particular, a learner is advised to read the introductory tutorial, \pfn Basics, then go directly to the implementation scripts, referring back to the later tutorials for enrichment, if needed.  An instructor will want to focus on the tutorials, perhaps devising exercises at the end of each for students to develop their syntax and method skills.
-
-% Whether a student or enthusiast wanting to learn or brush up on quantum chemical methods, a prospective developer seeking good practices for manipulating \pfour's powerful C++ backend, an instructor assembling a QC methods or \pfour users workshop, or a researcher in need of a reference implementation validation, \pfn is a valuable resource. In particular, a learner is advised to read the introductory tutorial, \pfn Basics, then go directly to the implementation scripts, referring back to the later tutorials for enrichment, if needed. A developer should start with a familiar method, then examine all the variations and implementations to see how it's expressed for \pfour. An instructor (unless for an advanced workshop) will want to focus on the tutorials, perhaps devising exercises at the end of each for students to develop their syntax and method skills. A researcher whose target method is lodged with \pfn will naturally focus on adding variations to that script, validating his own code against them, and hopefully contributing his improvements back to \pfn.
 
 Current tutorial-style Jupyter reference implementations include
 
@@ -340,7 +334,7 @@ Molecular-dynamics tutorials include
 \item Periodic Ewald Electostatic summation
 \end{enumerate}
 
-\section{\caps{Conclusions}}
+\section{\texorpdfstring{\caps{Conclusions}}{Conclusions}}
 
 We believe that the benefits of the \pfn framework to the computational chemistry community are threefold.  Beginning researchers can use the \pfn reference implementations for \emph{education}. Reference implementations convey not just the underlying mathematical formulas of a given theory, but how to implement these formulas in a manner that avoids common pitfalls such as ill-conditioned numerical equations. \pfn is likely the most interactive educational resource available in this field: thanks to the Jupyter Notebook format, the learners can explore the implementation step by step and easily try out various modifications and additional approximations.
 
@@ -348,8 +342,23 @@ More advanced researchers who need to reimplement and/or modify a given computat
 
 Finally, for researchers who want to develop new functionality, \pfn is a highly valuable platform for \emph{initial implementation} that is efficient enough for meaningful testing, quick to generate, easy to debug, and has few opportunities for programming errors. All underlying quantum-chemistry building blocks such as integrals, orbitals, density matrices, and CI vectors are efficiently computed by \pfour and readily imported in the \numpy format. In particular, a \pfn implementation of any one-electron theory such as HF or DFT is already close to optimal as the most expensive operations are all written in terms of generalized Coulomb and exchange matrices which are supplied by \pfour.  Some of us, together with their collaborators, have already taken advantage of the \pfn capabilities to rapidly generate pilot implementations of brand new electronic-structure approaches.
 
-\section{\caps{Associated Content}}
-Documents reproducing all currently available reference implementations and interactive tutorials are available free of charge via the Internet at \url{https://zenodo.org/record/1134320}. For all future materials, please see \url{https://github.com/psi4/psi4numpy}.
+\section{\texorpdfstring{\caps{Acknowledgements}}{Acknowledgements}}
 
-\section{Acknowledgements}
-This work was supported in part by the U.S.~National Science Foundation through grants ACI-1449723 and CHE-1566192 for D.G.A.S, L.A.B., D.A.S, and C.D.S; CHE-1661604 for B.Z., A.S.A, J.M.T., and H.F.S; CHE-1554354 for D.R.N and A.E.D. B. Z. contributions to this work were also supported by a Software Fellowship from the Molecular Sciences Software Institute, which is funded by the U.S. National Science Foundation (ACI-1547580).  M.H.L. acknowledges financial support by the Studienstiftung des Deutschen Volkes. K.P.  is supported by the U.S. National Science Foundation CAREER award CHE-1351978.
+This work was supported in part by the U.S.~National Science Foundation through grants ACI-1449723 and CHE-1566192 for D.G.A.S, L.A.B., D.A.S, and C.D.S; CHE-1661604 for B.Z., A.S.A, J.M.T., and H.F.S; CHE-1554354 for D.R.N and A.E.D. B. Z. contributions to this work were also supported by a Software Fellowship from the Molecular Sciences Software Institute, which is funded by the U.S. National Science Foundation (ACI-1547580). M.H.L. acknowledges financial support by the Studienstiftung des Deutschen Volkes. K.P. is supported by the U.S. National Science Foundation CAREER award CHE-1351978.
+
+\section{\texorpdfstring{\caps{Supporting Information}}{Supporting Information}}
+
+Documents reproducing all currently available reference implementations and interactive tutorials are available free of charge via the Internet at \url{https://zenodo.org/record/1134320}. For all future materials, please see \url{https://github.com/psi4/psi4numpy}. The code found in sections~\ref{paper_05:ssec:hyperpolarizability_reference_implementation}~and~\ref{paper_05:ssec:hyperpolarizability_tutorial} was merged in commit hash \href{https://github.com/psi4/psi4numpy/tree/066f378f26240a4802371ef32849230853581329}{066f378}.
+
+\subsection{Hyperpolarizability Reference Implementation}
+\label{paper_05:ssec:hyperpolarizability_reference_implementation}
+
+\inputminted{python}{paper_05/helper_CPHF.py}
+\inputminted{python}{paper_05/beta.py}
+
+\subsection{Hyperpolarizability Tutorial}
+\label{paper_05:ssec:hyperpolarizability_tutorial}
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\input{paper_05/tutorial_redone}
