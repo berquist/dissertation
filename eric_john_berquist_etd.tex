@@ -3,7 +3,21 @@
 \let\setyear\year
 \let\year\oldyear
 %
-\usepackage[sort&compress,numbers,super]{natbib}
+% \usepackage[sort&compress,numbers,super]{natbib}
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+\let\cite\autocite
+\let\citep\parencite
+\addbibresource{./library.bib}
+\addbibresource{./paper_04/paper.bib}
+\addbibresource{./paper_05/psi4numpy.bib}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{booktabs}
@@ -80,7 +94,8 @@
 %
 \input{./other_contributions}
 %
-\bibliographystyle{achemso}
-\safebibliography{library,paper_04/paper,paper_05/psi4numpy}
+% \bibliographystyle{achemso}
+% \safebibliography{library,paper_04/paper,paper_05/psi4numpy}
+\printbibliography
 %
 \end{document}
