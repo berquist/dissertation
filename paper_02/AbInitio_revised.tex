@@ -346,7 +346,7 @@ Our previous publication\cite{Brinzer2015} used a rather crude gas-phase cluster
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{paper_02/frequency_same_set_2QM_convergence.pdf}
-  \caption[Effect of MM region size on \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} QM/MM frequencies]{Dependence of harmonic \(\nu_3\) frequencies (unscaled) on the solvent box size (B3LYP/SP potential energy surface).}
+  \caption[Effect of QM and MM region size on \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} QM/MM frequencies]{Dependence of harmonic \(\nu_3\) frequencies (unscaled) on the solvent box size (B3LYP/SP potential energy surface).}
   \label{paper_02:fig:4}
 \end{figure}
 
@@ -458,7 +458,7 @@ These results for relative trends in vibrational frequencies are highly encourag
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{./paper_02/snapshots_ordered_0QM_256MM.pdf}
-  \caption{Harmonic \(\nu_{3}\) frequencies (unscaled) for different methods and basis sets, ordered from lowest to highest frequency according to MP2/VTZ (0 QM/256 MM). The TPSS meta-GGA\cite{Tao2003} and the \(\omega\)B97X-D\cite{Chai2008} hybrid GGA density functionals are included as representatives of more recent functionals. \(\omega\)B97X-D is both a range-separated functional, with a minimum 22\% HF exchange at \(r_{e} = 0\), increasing smoothly to 100\% as \(r_{e} \rightarrow \infty\), and it includes an empirical dispersion correction. To aid in recognizing trends, we have ordered the structures by increasing MP2/VTZ frequency. MP2 calculations use the resolution of the identity (RI) approximation\cite{Feyereisen1993,Weigend1997,Distasio2007} and the cc-pVQZ-RI fitting basis set\cite{Weigend2002}.}
+  \caption[Spread of method and basis set dependence of MD snapshots]{Harmonic \(\nu_{3}\) frequencies (unscaled) for different methods and basis sets, ordered from lowest to highest frequency according to MP2/VTZ (0 QM/256 MM). The TPSS meta-GGA\cite{Tao2003} and the \(\omega\)B97X-D\cite{Chai2008} hybrid GGA density functionals are included as representatives of more recent functionals. \(\omega\)B97X-D is both a range-separated functional, with a minimum 22\% HF exchange at \(r_{e} = 0\), increasing smoothly to 100\% as \(r_{e} \rightarrow \infty\), and it includes an empirical dispersion correction. To aid in recognizing trends, we have ordered the structures by increasing MP2/VTZ frequency. MP2 calculations use the resolution of the identity (RI) approximation\cite{Feyereisen1993,Weigend1997,Distasio2007} and the cc-pVQZ-RI fitting basis set\cite{Weigend2002}.}
   \label{paper_02:fig:S3}
 \end{figure}
 
@@ -467,7 +467,7 @@ To confirm that the good agreement in relative trends is not an artifact of the 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{./paper_02/trajectory_frequencies_cc-pvtz.pdf}
-  \caption{Harmonic \(\nu_{3}\) frequencies (unscaled) for the first \num{50} (out of \num{1000}) snapshots calculated with different methods and the cc-pVTZ basis set (0 QM/256 MM).}
+  \caption[Instantaneous method and basis set dependence of MD snapshots]{Harmonic \(\nu_{3}\) frequencies (unscaled) for the first \num{50} (out of \num{1000}) snapshots calculated with different methods and the cc-pVTZ basis set (0 QM/256 MM).}
   \label{paper_02:fig:S4}
 \end{figure}
 
@@ -495,12 +495,9 @@ To confirm that the good agreement in relative trends is not an artifact of the 
   \end{tabular}
 \end{table}
 
-\subsection{Solvatochromic Shift Dependence on Counterpoise Corrections}
-\label{paper_02:ssec:SI4}
-
 \begin{table}
   \centering
-  \caption[Effect of counterpoise correction on \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} frequency]{Effect of counterpoise correction on \ce{CO2} \(\nu_3\) harmonic frequency when applied during geometry optimization and/or the harmonic frequency calculation. Clusters are with 1 \ce{CO2}, 1 MMIM cation, and 1 anion. All frequencies are in \si{\wavenumber} and unscaled. The first column is from our previous paper. CP-corrected calculations were performed using Cuby as a driver for Turbomole 6.6 at the B3LYP/SP level with numerical integration grid 7.}
+  \caption[Solvatochromic shift dependence on counterpoise corrections]{Effect of counterpoise correction on \ce{CO2} \(\nu_3\) harmonic frequency when applied during geometry optimization and/or the harmonic frequency calculation. Clusters are with 1 \ce{CO2}, 1 MMIM cation, and 1 anion. All frequencies are in \si{\wavenumber} and unscaled. The first column is from our previous paper. CP-corrected calculations were performed using Cuby as a driver for Turbomole 6.6 at the B3LYP/SP level with numerical integration grid 7.}
   \label{paper_02:tab:S4}
   CP-correction for geometry? / CP-correction for frequencies?
   \begin{tabular}{lcccc}
@@ -644,8 +641,8 @@ To test the qualitative accuracy of the calculations using smaller QM regions, w
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.85]{./paper_02/figureS5.png}
-  \caption{Correlation plots for QM/MM harmonic frequencies of \num{10} MD snapshots, with increasing numbers of anion-cation pairs treated quantum mechanically.}
+  \includegraphics[scale=0.85]{./paper_02/figureS5.png}% TODO the png looks terribad
+  \caption[Self-correlation of QM/MM frequencies with increasing QM region size]{Correlation plots for QM/MM harmonic frequencies of \num{10} MD snapshots, with increasing numbers of anion-cation pairs treated quantum mechanically.}
   \label{paper_02:fig:S5}
 \end{figure}
 

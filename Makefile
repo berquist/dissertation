@@ -10,4 +10,5 @@ clean:
 	latexmk -c
 	rm -f *.bbl
 	rm -f *.etd
+	rm -f *.run.xml
 	rm -f *.xdv
