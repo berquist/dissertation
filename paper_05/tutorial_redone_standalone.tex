@@ -1,5 +1,6 @@
 \documentclass{article}
 
+\usepackage[margin=1.25in]{geometry}
 \usepackage{hyperref}
 \usepackage{amsmath}
 
@@ -19,6 +20,21 @@
 
 \usepackage{microtype}
 
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+\let\cite\autocite
+\let\citep\parencite
+\addbibresource{../paper_04/paper.bib}
+\addbibresource{./tutorial.bib}
+
 \begin{document}
 \include{tutorial_redone}
+% \printbibliography
 \end{document}
