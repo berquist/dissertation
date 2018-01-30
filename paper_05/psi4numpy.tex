@@ -1,11 +1,13 @@
 \newcommand{\numpy}{\textsc{NumPy}\xspace}
 \newcommand{\pfour}{\textsc{Psi4}\xspace}
 \newcommand{\pfn}{\textsc{Psi4NumPy}\xspace}
+\newcommand{\arrayint}{\texttt{array\_interface}\xspace}
+\newcommand{\einsum}{\texttt{einsum}\xspace}
 
 \chapter[\pfn]{\pfn: An Interactive Quantum Chemistry Programming Environment for Reference Implementations and Rapid Development}
 \label{ch:paper_05}
 
-The text in this chapter has been adapted from \fullcite{Smith2018}.
+The text in this chapter has been adapted from \fullcite{Smith2018}. The author's contributions to this work were the reference implementation and Jupyter Notebook tutorial for the SCF first hyperpolarizability, presented in sections~\ref{paper_05:ssec:hyperpolarizability_reference_implementation}~and~\ref{paper_05:ssec:hyperpolarizability_tutorial}.
 
 \section{\texorpdfstring{\caps{Summary}}{Summary}}
 
@@ -25,10 +27,10 @@ Here we present \pfn, a framework for the creation of clear, readable reference 
 
 Several of the reference implementations have been augmented by tutorial-style introductions to the relevant theory.  The \pfn tutorial collection includes self-consistent field (SCF), DFT,\cite{Parr:1989} many-body perturbation theory (MBPT),\cite{Bartlett:1981:359} symmetry-adapted perturbation theory (SAPT)\cite{Jeziorski:1994:1887, Szalewicz:2012:254}, coupled-cluster (CC)\cite{Purvis:1982}, and configuration interaction (CI)\cite{Shavitt:1977,Sherrill:1999:CI} theories, with additional sections detailing the theory and implementation of linear response, geometry optimizations, and Verlet integrators.  It is our hope that \pfn and the accompanying reference code will lower the barrier to implementing quantum chemical methods.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
   \includegraphics[width=\textwidth]{paper_05/fig1.png}
-  \caption{\pfn draws linear algebra tools from \numpy and fundamental quantum chemistry structures from \pfour to bring together a practical and convenient environment for code development, verification, and exploration. The most important data structures and functions are shown for \numpy and \pfour as well as representative tutorial and reference implementations presently in \pfn.}
+  \caption[Location of \pfn within the scientific computing ecosystem]{\pfn draws linear algebra tools from \numpy and fundamental quantum chemistry structures from \pfour to bring together a practical and convenient environment for code development, verification, and exploration. The most important data structures and functions are shown for \numpy and \pfour as well as representative tutorial and reference implementations presently in \pfn.}
   \label{fig:ovalorg}
 \end{figure}
 
@@ -49,13 +51,13 @@ A key capacity in this enterprise is seamless translation between \numpy and \pf
   \label{snip:np2p42np}
 \end{eqnarray}
 %Refer as Eq.~\ref{snip:np2p42np}.
-At the core of this procedure is \textsc{NumPy}'s {\tt array\_interface}\cite{array_interface} protocol, a basic specification for dense matrices consisting of
+At the core of this procedure is \textsc{NumPy}'s \arrayint \cite{array_interface} protocol, a basic specification for dense matrices consisting of
 \begin{enumerate}
 \item (a) the starting memory location for an in-memory array
 \item (b) the overall ``shape'' of the array [$(n,)$ for a vector, $(n,m)$ for a matrix, etc.]
 \item (c) the type of data involved (\texttt{double64}, \texttt{int32}, etc.)
 \end{enumerate}
-This specification is compact and widely used amongst the scientific Python community in a variety of scenarios. Using the {\tt array\_interface}, it becomes straightforward to allow \numpy access to a \pfour data class, allowing both \pfour and \numpy to access and manipulate the same data. For example, the below will overwrite the \pfour Matrix class in place with a random \numpy array:
+This specification is compact and widely used amongst the scientific Python community in a variety of scenarios. Using the \arrayint, it becomes straightforward to allow \numpy access to a \pfour data class, allowing both \pfour and \numpy to access and manipulate the same data. For example, the below will overwrite the \pfour Matrix class in place with a random \numpy array:
 \begin{eqnarray}
   \begin{aligned}
     &\verb!psi4_matrix.np[:] = numpy.random.rand(5, 5)! \\
@@ -64,7 +66,7 @@ This specification is compact and widely used amongst the scientific Python comm
 \end{eqnarray}
 In this way the typical separation between general tensor frameworks and custom quantum chemistry data structures is removed.
 
-A description of the full set of capabilities of the {\tt array\_interface} is available in the \pfour documentation: \url{http://psicode.org/psi4manual/master/numpy.html}.
+A description of the full set of capabilities of the \arrayint is available in the \pfour documentation: \url{http://psicode.org/psi4manual/master/numpy.html}.
 
 \subsection{Wavefunction Objects}
 
@@ -206,7 +208,7 @@ To illustrate this point, the \pfour SCF program is compared against a \pfn impl
 
 \section{\texorpdfstring{\caps{Rapid Development}}{Rapid Development}}
 
-A key component of the \pfn framework is to provide an easy-to-use development environment for rapid prototyping. Vital to this is \numpy's \texttt{einsum} function that performs arbitrary tensor contractions using Einstein summation syntax.  For example, the atomic orbital to molecular orbital 4-index transformation of Eq.~(\ref{eq:aomo}) and code snippet (\ref{snip:eri_trans}) could be accomplished by:
+A key component of the \pfn framework is to provide an easy-to-use development environment for rapid prototyping. Vital to this is \numpy's \einsum function that performs arbitrary tensor contractions using Einstein summation syntax.  For example, the atomic orbital to molecular orbital 4-index transformation of Eq.~(\ref{eq:aomo}) and code snippet (\ref{snip:eri_trans}) could be accomplished by:
 
 \begin{eqnarray}
   \begin{aligned}
@@ -216,14 +218,13 @@ A key component of the \pfn framework is to provide an easy-to-use development e
   \end{aligned}
       \label{snip:aomo}
 \end{eqnarray}
-Recently, one of us (D.G.A.S.) modified \numpy's \texttt{einsum} function so that it will automatically factorize the incoming tensor expression to reduce the cost of the operation from naive $N^8$ to the conventional $N^5$ version. This feature is available in \numpy 1.12 and onwards, with additional optimizations and BLAS usage occurring in \numpy 1.14. In addition, a drop-in replacement for the \texttt{einsum} function, which makes optimal use of vendor BLAS, can be found through the Optimized Einsum project.\cite{danielsmith2016:160842}
+Recently, one of us (D.G.A.S.) modified \numpy's \einsum function so that it will automatically factorize the incoming tensor expression to reduce the cost of the operation from naive $N^8$ to the conventional $N^5$ version. This feature is available in \numpy 1.12 and onwards, with additional optimizations and BLAS usage occurring in \numpy 1.14. In addition, a drop-in replacement for the \einsum function, which makes optimal use of vendor BLAS, can be found through the Optimized Einsum project.\cite{danielsmith2016:160842}
 
-Using the \texttt{einsum} function, it is straightforward to transcribe existing equations directly into working code without a compilation stage.  While the resulting program is not as efficient for post-SCF level theories as a full implementation in a low-level language, the code is easy to read and modify without the need for compilation, allowing considerable flexibility when prototyping. In addition, the resulting program will provide correct answers for the given expressions, sparing the developer any worry whether low-level code is correct.
+Using the \einsum function, it is straightforward to transcribe existing equations directly into working code without a compilation stage.  While the resulting program is not as efficient for post-SCF level theories as a full implementation in a low-level language, the code is easy to read and modify without the need for compilation, allowing considerable flexibility when prototyping. In addition, the resulting program will provide correct answers for the given expressions, sparing the developer any worry whether low-level code is correct.
 
 As an example of rapid prototyping, we use a temporary CCSD quantity in the Direct Product Decomposition formalism\cite{Bartlett1991:4334}. For virtual indices $a, b, c, d$ and occupied indices $i,j,k$, Equation 8 of Ref.~\citenum{Bartlett1991:4334} is written as:
 
-$W_{jaci} = \langle ja || ci \rangle + t^d_i \langle ja || cd \rangle - t^a_k \langle jk || ci \rangle - (\frac{1}{2}t^{da}_{ik} + t^d_it^a_k) \langle jk || cd \rangle$,
-
+\(W_{jaci} = \langle ja || ci \rangle + t^d_i \langle ja || cd \rangle - t^a_k \langle jk || ci \rangle - (\frac{1}{2}t^{da}_{ik} + t^d_it^a_k) \langle jk || cd \rangle\),
 which can be directly translated into a function:
 \begin{eqnarray}
   \begin{aligned}
@@ -237,7 +238,7 @@ which can be directly translated into a function:
   \end{aligned}
       \label{snip:cc_example}
 \end{eqnarray}
-Here, {\tt MO} holds the 4-index antisymmetrized integrals, {\tt T1} and {\tt T2} the current amplitudes, and the {\tt o, v} quantities are Python-based slices so that {\tt MO[o, v, v, v]} returns the occupied-virtual-virtual-virtual blocks of the antisymmetrized integrals.
+Here, \texttt{MO} holds the 4-index antisymmetrized integrals, \texttt{T1} and \texttt{T2} the current amplitudes, and the \texttt{o, v} quantities are Python-based slices so that \texttt{MO[o, v, v, v]} returns the occupied-virtual-virtual-virtual blocks of the antisymmetrized integrals.
 
 To our knowledge, the first implementations of Symmetry-Adapted Perturbation Theory with Complete Active Space SCF references [SAPT(CASSCF)], fourth-order Electron Propagator Theory, and transcorrelated theories have all been achieved using these rapid prototyping techniques.
 
@@ -306,10 +307,10 @@ Current reference implementations include
 
 As a service to the community, some of the reference implementations have been augmented by additional, tutorial-style background information on various subfields of quantum chemistry.  We found it convenient to add this additional information using the Jupyter notebook web application,\cite{Granger:1521-9615} a popular Integrated Development Environment (IDE) for interactive computing in several programming languages that is starting to be adopted by chemists \cite{charles:2017:592}.  An example for restricted Hartree--Fock can be found in Fig.~\ref{fig:ipython}.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[scale=0.25]{paper_05/fig2.png}
-  \caption{Extract from a Jupyter notebook demonstrating the construction of a SCF Fock matrix where {\tt I} is the 4-index electron repulsion integral array and {\tt Cocc} is the occupied orbital matrix.}
+  \caption[Extract from a \pfn tutorial notebook]{Extract from a Jupyter notebook demonstrating the construction of a SCF Fock matrix where \texttt{I} is the 4-index electron repulsion integral array and \texttt{Cocc} is the occupied orbital matrix.}
   \label{fig:ipython}
 \end{figure}
 
@@ -338,7 +339,7 @@ Molecular-dynamics tutorials include
 
 We believe that the benefits of the \pfn framework to the computational chemistry community are threefold.  Beginning researchers can use the \pfn reference implementations for \emph{education}. Reference implementations convey not just the underlying mathematical formulas of a given theory, but how to implement these formulas in a manner that avoids common pitfalls such as ill-conditioned numerical equations. \pfn is likely the most interactive educational resource available in this field: thanks to the Jupyter Notebook format, the learners can explore the implementation step by step and easily try out various modifications and additional approximations.
 
-More advanced researchers who need to reimplement and/or modify a given computational chemistry approach can use the \pfn reference implementations for \emph{validation}, taking advantage of the code that, thanks to the extensive use of the \numpy \texttt{einsum} functionality, provides a nearly one-to-one correspondence between the terms in a formula and the lines of Python code. As a result, it is trivial to switch off, for debugging purposes, any subset of terms as well as generate an arbitrary intermediate without even recompiling any code.  This feature should be contrasted with the situation when one tries to validate their code against a C++/Fortran implementation from an established electronic-structure package. Once the relevant fragment of code that does the actual computation is found (which is not always trivial), various terms are typically combined in nontrivial ways to improve computational performance. As a result, getting out a specific intermediate for checking the implementation in progress often requires substantive changes to the reference code, not to mention its recompilation.  In addition, we include the programmed formulas together with their implementation in the Jupyter Notebook to alleviate difficulties associated with incompatible notation or even errors in the originally published expressions.
+More advanced researchers who need to reimplement and/or modify a given computational chemistry approach can use the \pfn reference implementations for \emph{validation}, taking advantage of the code that, thanks to the extensive use of the \numpy \einsum functionality, provides a nearly one-to-one correspondence between the terms in a formula and the lines of Python code. As a result, it is trivial to switch off, for debugging purposes, any subset of terms as well as generate an arbitrary intermediate without even recompiling any code.  This feature should be contrasted with the situation when one tries to validate their code against a C++/Fortran implementation from an established electronic-structure package. Once the relevant fragment of code that does the actual computation is found (which is not always trivial), various terms are typically combined in nontrivial ways to improve computational performance. As a result, getting out a specific intermediate for checking the implementation in progress often requires substantive changes to the reference code, not to mention its recompilation.  In addition, we include the programmed formulas together with their implementation in the Jupyter Notebook to alleviate difficulties associated with incompatible notation or even errors in the originally published expressions.
 
 Finally, for researchers who want to develop new functionality, \pfn is a highly valuable platform for \emph{initial implementation} that is efficient enough for meaningful testing, quick to generate, easy to debug, and has few opportunities for programming errors. All underlying quantum-chemistry building blocks such as integrals, orbitals, density matrices, and CI vectors are efficiently computed by \pfour and readily imported in the \numpy format. In particular, a \pfn implementation of any one-electron theory such as HF or DFT is already close to optimal as the most expensive operations are all written in terms of generalized Coulomb and exchange matrices which are supplied by \pfour.  Some of us, together with their collaborators, have already taken advantage of the \pfn capabilities to rapidly generate pilot implementations of brand new electronic-structure approaches.
 
