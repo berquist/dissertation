@@ -3,7 +3,6 @@
 \let\setyear\year
 \let\year\oldyear
 %
-% \usepackage[sort&compress,numbers,super]{natbib}
 \usepackage[%
     backend    = biber,%
     style      = chem-acs,%
@@ -15,15 +14,18 @@
 ]{biblatex}
 \let\cite\autocite
 \let\citep\parencite
+%
 \addbibresource{./library.bib}
 \addbibresource{./paper_04/paper.bib}
 \addbibresource{./paper_05/psi4numpy.bib}
 \addbibresource{./paper_05/tutorial.bib}
+\addbibresource{./5746059.bib}
+\addbibresource{./5773968.bib}
+\addbibresource{./in_preparation.bib}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{braket}
-% \usepackage{breqn}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage[version=4]{mhchem}
@@ -66,7 +68,8 @@
 %
 \newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
 \newcommand{\latin}[1]{\textit{#1}}
-% optionally don't use uppercase
+% optionally don't use uppercase for document classes that aren't
+% garbage
 \newcommand{\caps}[1]{\uppercase{#1}}
 % \newcommand{\caps}[1]{{#1}}
 %
@@ -95,8 +98,6 @@
 %
 \input{./other_contributions}
 %
-% \bibliographystyle{achemso}
-% \safebibliography{library,paper_04/paper,paper_05/psi4numpy}
 \printbibliography
 %
 \end{document}
