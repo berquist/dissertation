@@ -1,4 +1,4 @@
-\chapter[Linear Response with Absolutely Localized Molecular Orbitals]{A First Principles Approach for Partitioning Linear Response Properties into Additive and Cooperative Contributions}
+\chapter[ALMO Linear Response]{A First Principles Approach for Partitioning Linear Response Properties into Additive and Cooperative Contributions}
 \label{ch:paper_04}
 
 The text in this chapter has been adapted from \fullcite{Berquist2018}.
@@ -120,7 +120,6 @@ where \((\mat{P})_{ia} = \braket{i|\op{P}|a}\) and \((\mat{Q})_{ia} = \braket{i|
     ^{II}\mat{G}^{\sigma} &= \mat{A}^{\sigma} - \mat{B}^{\sigma}
   \end{aligned}
 \end{equation}
-
 for real (\(R\)) and imaginary (\(I\)) perturbations, respectively\cite{doi:10.1080/00268976.2015.1024182}. The spin case \(\sigma\) can either be singlet (\(\sigma = s\)) or triplet (\(\sigma = t\)) depending on whether the perturbation operator conserves or flips spin, respectively:
 
 \begin{equation}
@@ -231,18 +230,18 @@ All calculations were performed using a development version of \qchem{}\cite{Sha
 \subsection{Equilibrium distance}
 \label{ssec:results-equilibrium-distance}
 
-\begin{table}[H]
+\begin{table}
   \centering
-  \input{paper_04/almo_polarizabilities_projected_def2-SVP}
   \caption[Argon\textemdash{}lithium cation dimer polarizabilities using HF/def2-SVP]{Polarizability results for the argon\textemdash{}lithium cation dimer at the HF/def2-SVP level. The geometry is optimized at the same level. All values have units of \aud{}.}
   \label{table:polarizability-results-def2-svp}
+  \input{paper_04/almo_polarizabilities_projected_def2-SVP}
 \end{table}
 
-\begin{table}[H]
+\begin{table}
   \centering
-  \input{paper_04/almo_polarizabilities_projected_def2-SVPD}
   \caption[Argon\textemdash{}lithium cation dimer polarizabilities using HF/def2-SVPD]{Polarizability results for the argon\textemdash{}lithium cation dimer at the HF/def2-SVPD level. The geometry is optimized at the same level. All values have units of \aud{}.}
   \label{table:polarizability-results-def2-svpd}
+  \input{paper_04/almo_polarizabilities_projected_def2-SVPD}
 \end{table}
 
 Tables~\ref{table:polarizability-results-def2-svp}~and~\ref{table:polarizability-results-def2-svpd} show equilibrium distance results for the argon\textemdash{}lithium cation dimer at the HF/def2-SVP and HF/def2-SVPD levels, respectively. Due to molecular symmetry, two of the three polarizability tensor principal components are identical; these correspond to the perpendicular polarizability \(\alpha_{\perp}\), or how easy it is to shift the electron density perpendicular to the interatomic axis. The parallel polarizability \(\alpha_{\parallel}\) corresponds to the principal component that lies along the axis of interaction between the two atoms and corresponds to the bond polarizability. Monomer A and B refer to the isolated atoms; parallel and perpendicular axes have no meaning here due to their spherical symmetry, as all principal components are identical. An approximation to the frozen density interaction in response is the sum of the response of the isolated fragments (atoms), shown as ``A + B''. Note that this is not the true frozen monomer response\cite{Mao_2017_5944}. ``frz + pol'' is where CT is disallowed between fragments using the algorithm described above, consistent with the original SCF(MI) and conceptually analogous to TDDFT(MI). The remaining entries are those described in section~\ref{ssec:decomp-line-resp}.
@@ -257,8 +256,10 @@ As a correctness check, our analytic formulation is validated against finite-fie
 
 From tables~\ref{table:polarizability-results-def2-svp}~and~\ref{table:polarizability-results-def2-svpd}, the importance of charge transfer via both the wavefunction and response mechanisms can be calculated as the difference between ``frz + pol'', ``CT(all \(\rightarrow\) all) [blocked]'', and ``CT(all \(\rightarrow\) all) [super]''; these are ``off/off'', ``off/on'', and ``on/on'', respectively. The effect of each mechanism is shown in table~\ref{tab:mechanism-percentage-changes}.
 
-\begin{table}[H]
+\begin{table}
   \centering
+  \caption[Percentage changes in argon\textemdash{}lithium cation dimer \(\alpha_{\parallel}\) due to the two CT mechanisms]{Percentage changes in \(\alpha_{\parallel}\) due to the two CT mechanisms. The reference (denominator) polarizability used is shown in \textit{italics}. All calculations used a bond length of \geomdeftsvpd{}.}
+  \label{tab:mechanism-percentage-changes}
   \begin{tabular}{ccc}
     \toprule
                                            & \multicolumn{2}{c}{basis set} \\
@@ -268,8 +269,6 @@ From tables~\ref{table:polarizability-results-def2-svp}~and~\ref{table:polarizab
     wavefunction (\textit{on/on} - off/on) & 26.8        & 2.4             \\
     \bottomrule
   \end{tabular}
-  \caption[Percentage changes in argon\textemdash{}lithium cation dimer \(\alpha_{\parallel}\) due to the two CT mechanisms]{Percentage changes in \(\alpha_{\parallel}\) due to the two CT mechanisms. The reference (denominator) polarizability used is shown in \textit{italics}. All calculations used a bond length of \geomdeftsvpd{}.}
-  \label{tab:mechanism-percentage-changes}
 \end{table}
 
 For def2-SVP, it is clear that each successive relaxation of CT restrictions has a non-negligible effect on the final property, where \(\alpha_{\parallel}^{\text{frz + pol}}\) is 58.0\% and 96.2\% of the supermolecular value for the two basis sets. This representation makes it clear that in addition to larger polarizabilities (\(\sim 2 \times\)), there are other fundamental differences caused by the use of diffuse functions in def2-SVPD.
@@ -293,8 +292,10 @@ For def2-SVP, it is clear that each successive relaxation of CT restrictions has
 
 Calculated this way, the wavefunction mechanism may include some higher-order effects, as the pure wavefunction mechanism, calculated as ``on/off'' - ``off/off'',  cannot be isolated due to the ``on/off'' term (see section~\ref{ssec:decomp-line-resp}). The size of these higher-order effects in the wavefunction can be estimated by the percent contribution of higher-order effects in ALMO-EDA charge transfer, shown in table~\ref{tab:almo-eda-higher-order-pct-of-ct}.
 
-\begin{table}[H]
+\begin{table}
   \centering
+  \caption[Percentage of ALMO-EDA charge transfer in argon\textemdash{}lithium cation dimer due to higher-order effects]{Percentage of ALMO-EDA charge transfer due to higher-order effects, calculated as \(100 * \frac{\Delta E_{\text{CT}}^{\text{HO}}}{\Delta E_{\text{CT}}^{\text{RS}} + \Delta E_{\text{CT}}^{\text{HO}}}\). All calculations used a bond length of \geomdeftsvpd{}.}
+  \label{tab:almo-eda-higher-order-pct-of-ct}
   \begin{tabular}{ccc}
     \toprule
                     & \multicolumn{2}{c}{basis set} \\
@@ -304,8 +305,6 @@ Calculated this way, the wavefunction mechanism may include some higher-order ef
     yes             & 25.0        & 19.4        \\
     \bottomrule
   \end{tabular}
-  \caption[Percentage of ALMO-EDA charge transfer in argon\textemdash{}lithium cation dimer due to higher-order effects]{Percentage of ALMO-EDA charge transfer due to higher-order effects, calculated as \(100 * \frac{\Delta E_{\text{CT}}^{\text{HO}}}{\Delta E_{\text{CT}}^{\text{RS}} + \Delta E_{\text{CT}}^{\text{HO}}}\). All calculations used a bond length of \geomdeftsvpd{}.}
-  \label{tab:almo-eda-higher-order-pct-of-ct}
 \end{table}
 
 Using the uncorrected results for consistency, the new estimates of percentage changes due to the wavefunction mechanism become 20.3\% and 2.0\%, showing the presence of CT in the underlying wavefunction and in the response calculation are equally important in predicting molecular properties.
@@ -319,11 +318,11 @@ To investigate these effects directly on the polarizability, rather than through
 
 In order to test the importance of nuclear charge without the influence of basis functions, the ``PC(+)'' and ``PC(-)'' entries represent replacing the lithium atom with positive and negative point charges of unit magnitude, respectively. To test the importance of the basis set without the influence of a nuclear charge, ``Gh(Li)'' represents replacing the full lithium atom with only its basis functions, leaving a ``ghost atom'' with no (effective) nuclear charge. This should separate the \arlidimer{} interaction into a purely electrostatic effect from the nucleus, a delocalization-like effect due to increased spatial flexibility for motion of electrons during SCF and response iterations, and some non-additive effects.
 
-\begin{table}[H]
+\begin{table}
   \centering
-  \input{paper_04/point_charge_polarizabilities_table}
   \caption[Point charge and basis function contributions to argon\textemdash{}lithium cation dimer polarizabilities]{Decomposition of polarizabilities into point charge and basis function contributions. All calculations used canonical MOs and a distance of \geomdeftsvpd{} from argon to the other center(s).}
   \label{tab:basis-set-dependence}
+  \input{paper_04/point_charge_polarizabilities_table}
 \end{table}
 
 As expected, compared to a bare argon atom, the presence of a ghost function both increases the polarizability and decreases the first excitation energy. Intuitively, there are now additional molecular orbitals within reasonable spatial distance that electron density can spread on to as part of the ground-state calculation and can be excited to as part of the excited-state calculation. The difference is much less pronounced for the diffuse basis, where it is the presence of point charges that has the larger effect. This indicates that there is overlap with the tails of only the additional diffuse basis functions at the distance of the lithium center, and is caused by basis set incompleteness present even at the canonical SCF level. The point charges are in comparatively empty space in the non-diffuse basis, and the ghost function is unimportant for the diffuse basis. There, \(\alpha_{\parallel}^{\text{PC(+)}} \gg \alpha_{\parallel}^{\arlidimer{}}\) due to electron screening on the lithium atom, which leads to a reduced effective nuclear charge that is less capable of polarizing the argon atom.
@@ -335,29 +334,27 @@ As further confirmation that any basis set effects are not due to a breakdown in
 
 An extension of the validation in section~\ref{sssec:results-validation} is to compare our analytic implementation of ``ALMO frz + pol'' with finite field calculations using both energies and dipole moments as a function of interatomic distance. Short-range results for both basis sets are presented in figure~\ref{fig:distance-dependence-validation}. Only at shorter than equilibrium distances is there visible deviation between the analytic and numerical ``ALMO frz + pol'' results, most likely due to the virtual space delocalization. However, this is near the region where the electron clouds of the two atoms penetrate each other, and \(\Delta E_{\text{frz}}\) is an order of magnitude larger than either \(\Delta E_{\text{pol}}\) or \(\Delta E_{\text{CT}}\) due to Pauli repulsion, so this difference does not detract from the accuracy of the analytic implementation.
 
-\begin{figure}[H]
+\begin{figure}
   \centering
-  \includegraphics[scale=1.00]{paper_04/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVP.pdf}
-  \includegraphics[scale=1.00]{paper_04/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVPD.pdf}
-  \caption{Distance dependence of analytic and numerical ALMO polarizabilities for both basis sets.}
+  \includegraphics[scale=0.90]{paper_04/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVP.pdf}
+  \includegraphics[scale=0.90]{paper_04/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVPD.pdf}
+  \caption[Distance dependence of analytic and numerical ALMO polarizabilities]{Distance dependence of analytic and numerical ALMO polarizabilities for both basis sets.}
   \label{fig:distance-dependence-validation}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
-  \includegraphics[scale=1.00]{paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVP.pdf}
-  \includegraphics[scale=1.00]{paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVPD.pdf}
-  \caption{Distance dependence of CT restrictions on polarizabilities for both basis sets.}
+  \includegraphics[scale=0.90]{paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVP.pdf}
+  \includegraphics[scale=0.90]{paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVPD.pdf}
+  \caption[Distance dependence of CT restrictions on polarizabilities]{Distance dependence of CT restrictions on polarizabilities for both basis sets.}
   \label{fig:distance-dependence-ct-levels}
 \end{figure}
 
 Figure~\ref{fig:distance-dependence-ct-levels} shows how the different forms of CT restriction vary as a function of interatomic distance. Similar to the counterpoise (CP) correction for interaction energies, the ``BSSE-corrected canonical'' polarizability for two monomers A and B is defined as
-
 \begin{equation}
   \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right],
   \label{eq:bsse-corrected-polarizability}
 \end{equation}
-
 where, for example, \(\alpha^{A}(AB)\) is the polarizability of monomer A in the combined (supermolecular) basis of both monomers.
 
 The difference from the BSSE correction is large in def2-SVP but negligible in def2-SVPD, confirming our results from section~\ref{sssec:basis-set-dependence}. For both basis sets, the argon polarizability is the major contributor, provided that the entire dimer basis virtual space is available. The difference between the argon and blocked ALMO curves is due to the small but non-zero polarizability of the lithium cation, plus a mutual or higher-order polarization effect that appears at shorter than equilibrium distances for def2-SVP. Most notably, there is a quantitative difference between the blocked ALMO and canonical results even with def2-SVPD, showing that the wavefunction mechanism is large, and only allowing CT during the response calculation cannot recover these effects.
@@ -379,62 +376,56 @@ E.J.B. thanks \qchem{} for a summer internship opportunity, Evgeny Epifanovsky f
 
 ALMO-EDA results and analysis, additional ghost basis and point charge analysis, additional distance dependence results, sample input files, pseudocode for algorithm.
 
-\subsection{Energy analysis}
-
-\begin{table}[H]
+\begin{table}
   \centering
-  \input{paper_04/eda_analysis_table}
   \caption[ALMO-EDA results for argon\textemdash{}lithium cation dimer]{ALMO-EDA results. Energy units are \si{\kcal\per\mol}. All calculations used Hartree-Fock with a bond length of \SI{2.4297}{\angstrom}.}
   \label{tab:almo-eda-results}
+  \input{paper_04/eda_analysis_table}
 \end{table}
 
-\begin{table}[H]
+\begin{table}
   \centering
-  \input{paper_04/eda_analysis_percentages_table}
   \caption{Analysis of ALMO-EDA terms from table~\ref{tab:almo-eda-results}.}.
   \label{tab:almo-eda-results-percentages}
+  \input{paper_04/eda_analysis_percentages_table}
 \end{table}
 
-\subsection{Basis set dependence}
-
-\begin{table}[H]
+\begin{table}
   \centering
-  \input{paper_04/point_charge_polarizabilities_percentages_table}
   \caption[Point charge and ghost function polarizability analysis]{Percentage of supermolecular result for point charge and ghost function polarizabilities. All calculations used Hartree-Fock with canonical MOs and a distance of \SI{2.4297}{\angstrom} from argon to the other center(s).}
   \label{tab:basis-set-dependence-percentages}
+  \input{paper_04/point_charge_polarizabilities_percentages_table}
 \end{table}
 
-\subsection{Distance dependence}
-
-\begin{figure}[H]
+\begin{figure}
   \centering
-  \includegraphics[scale=1.00]{paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
-  \includegraphics[scale=1.00]{paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
-  \caption{Short- and long-range interatomic separation dependence of the static polarizability parallel to the coordination axis. All calculations are at the HF/def2-SVP level.}
+  \includegraphics[scale=0.90]{paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
+  \includegraphics[scale=0.90]{paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
+  \caption[Distance dependence of \(\alpha_{\parallel}\) for def2-SVP]{Short- and long-range interatomic separation dependence of the static polarizability parallel to the coordination axis. All calculations are at the HF/def2-SVP level.}
   \label{fig:distance-dependence-parallel-def2-svp}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
-  \includegraphics[scale=1.00]{paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
-  \includegraphics[scale=1.00]{paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
-  \caption{Short- and long-range interatomic separation dependence of the static polarizability parallel to the coordination axis. All calculations are at the HF/def2-SVPD level.}
+  \includegraphics[scale=0.90]{paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
+  \includegraphics[scale=0.90]{paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
+  \caption[Distance dependence of \(\alpha_{\parallel}\) for def2-SVPD]{Short- and long-range interatomic separation dependence of the static polarizability parallel to the coordination axis. All calculations are at the HF/def2-SVPD level.}
   \label{fig:distance-dependence-parallel-def2-svpd}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
-  \includegraphics[scale=1.00]{paper_04/polar_offaxis_projected_short_def2-SVP.pdf}
-  \includegraphics[scale=1.00]{paper_04/polar_offaxis_projected_long_def2-SVP.pdf}
-  \caption{Short- and long-range interatomic separation dependence of the static polarizability perpendicular to the coordination axis. All calculations are at the HF/def2-SVP level.}
+  \includegraphics[scale=0.90]{paper_04/polar_offaxis_projected_short_def2-SVP.pdf}
+  \includegraphics[scale=0.90]{paper_04/polar_offaxis_projected_long_def2-SVP.pdf}
+  \caption[Distance dependence of \(\alpha_{\perp}\) for def2-SVP]{Short- and long-range interatomic separation dependence of the static polarizability perpendicular to the coordination axis. All calculations are at the HF/def2-SVP level.}
   \label{fig:distance-dependence-perp-def2-svp}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}
   \centering
-  \includegraphics[scale=1.00]{paper_04/polar_offaxis_projected_short_def2-SVPD.pdf}
-  \includegraphics[scale=1.00]{paper_04/polar_offaxis_projected_long_def2-SVPD.pdf}
-  \caption{Short- and long-range interatomic separation dependence of the static polarizability perpendicular to the coordination axis. All calculations are at the HF/def2-SVPD level.}
+  \includegraphics[scale=0.90]{paper_04/polar_offaxis_projected_short_def2-SVPD.pdf}
+  \includegraphics[scale=0.90]{paper_04/polar_offaxis_projected_long_def2-SVPD.pdf}
+  \caption[Distance dependence of \(\alpha_{\perp}\) for def2-SVPD]{Short- and long-range interatomic separation dependence of the static polarizability perpendicular to the coordination axis. All calculations are at the HF/def2-SVPD level.}
   \label{fig:distance-dependence-perp-def2-svpd}
 \end{figure}
 
