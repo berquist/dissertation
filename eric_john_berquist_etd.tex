@@ -34,6 +34,10 @@
 \usepackage{pdflscape}
 \usepackage{xspace}
 %
+\usepackage[usenames,dvipsnames,svgnames,hyperref,table]{xcolor}
+\definecolor{caliblue}{HTML}{015482}
+\definecolor{carmine}{HTML}{960018}
+%
 \usepackage[%
     separate-uncertainty = true,%
     multi-part-units = single,%
@@ -80,10 +84,20 @@
 \newcommand{\caps}[1]{\uppercase{#1}}
 % \newcommand{\caps}[1]{{#1}}
 %
-%
 \input{./preamble}
 %
 \begin{document}
+\hypersetup{%
+  backref,%
+  bookmarks,%
+  bookmarksnumbered,%
+  bookmarksopen,%
+  colorlinks,%
+  letterpaper,%
+  citecolor=black,%
+  linkcolor=black,%
+  urlcolor=black,%
+}
 %
 \maketitle
 \makecommittee
