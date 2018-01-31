@@ -7,6 +7,7 @@
     backend    = biber,%
     style      = chem-acs,%
     autocite   = superscript,%
+    backref    = true,%
     biblabel   = brackets,%
     doi        = true,%
     minnames   = 1,%
@@ -14,7 +15,11 @@
 ]{biblatex}
 \let\cite\autocite
 \let\citep\parencite
-%
+\DefineBibliographyStrings{english}{%
+  backrefpage = {page},% originally "cit. on p."
+  backrefpages = {pages},
+}
+% 
 \addbibresource{./library.bib}
 \addbibresource{./paper_04/paper.bib}
 \addbibresource{./paper_05/psi4numpy.bib}
@@ -85,18 +90,17 @@
 % \newcommand{\caps}[1]{{#1}}
 %
 \input{./preamble}
-%
 \begin{document}
+%
 \hypersetup{%
   backref,%
   bookmarks,%
   bookmarksnumbered,%
   bookmarksopen,%
   colorlinks,%
-  letterpaper,%
   citecolor=black,%
   linkcolor=black,%
-  urlcolor=black,%
+  urlcolor=carmine,%
 }
 %
 \maketitle
