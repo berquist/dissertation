@@ -307,7 +307,7 @@ Current reference implementations include
 
 As a service to the community, some of the reference implementations have been augmented by additional, tutorial-style background information on various subfields of quantum chemistry.  We found it convenient to add this additional information using the Jupyter notebook web application,\cite{Granger:1521-9615} a popular Integrated Development Environment (IDE) for interactive computing in several programming languages that is starting to be adopted by chemists \cite{charles:2017:592}.  An example for restricted Hartree--Fock can be found in Fig.~\ref{fig:ipython}.
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \includegraphics[scale=0.25]{paper_05/fig2.png}
   \caption[Extract from a \pfn tutorial notebook]{Extract from a Jupyter notebook demonstrating the construction of a SCF Fock matrix where \texttt{I} is the 4-index electron repulsion integral array and \texttt{Cocc} is the occupied orbital matrix.}
@@ -354,8 +354,10 @@ Documents reproducing all currently available reference implementations and inte
 \subsection{Hyperpolarizability Reference Implementation}
 \label{paper_05:ssec:hyperpolarizability_reference_implementation}
 
+\begin{singlespace}
 \inputminted{python}{paper_05/helper_CPHF.py}
 \inputminted{python}{paper_05/beta.py}
+\end{singlespace}
 
 \subsection{Hyperpolarizability Tutorial}
 \label{paper_05:ssec:hyperpolarizability_tutorial}

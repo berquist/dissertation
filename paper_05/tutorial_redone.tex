@@ -167,6 +167,7 @@ where the permutation indices are initially assigned as \(d = a, e = b, f = c\).
 The basic quantities we need are the matrices \(C, \mu, F, \epsilon\), and \(U\). The MO coefficients \(C\) are already obtained from the ground-state calculation, along with \(\epsilon^{0}\) (the MO energies) and \(F^{0}\) (the AO-basis Fock matrix). The dipole matrices \(\mu\) are needed for the linear response (polarizability) calculation, which results in response vectors that compose the off-diagonal blocks of the \(U^{a}\) matrix. \(G^{a}\) is obtained from \(F^{a}\), which comes from performing a single Fock build with the perturbed density \(D^{a}\).  Finally, \(\epsilon^{a}\) can be constructed.
 
 Although the expressions so far are general for any frequency and first-order non-linear optical response, the tutorial implementation will cover the static case. For second-harmonic generation, see the reference implementation.
+
 \begin{minted}[]{python}
 import numpy as np
 np.set_printoptions(3, linewidth=100, suppress=True)    # when we inspect the vectors/matrices,
@@ -174,6 +175,7 @@ np.set_printoptions(3, linewidth=100, suppress=True)    # when we inspect the ve
 import psi4
 \end{minted}
 The energy and density convergence criteria are tightened from defaults, as response properties are sensitive to the quality of the ground-state wavefunction.
+
 \begin{minted}[]{python}
 mol = psi4.geometry('''
     O
@@ -251,6 +253,7 @@ either directly (via matrix inversion in the MO basis) or iteratively (via repea
   .
 \]
 In the static limit \((\omega_f = 0)\), the whole superoverlap matrix vanishes, and the CPHF equations can be reduced to those used in tutorial 6a.
+
 \begin{minted}[]{python}
 solver = helper_CPHF(mol)
 solver.run()
@@ -271,6 +274,7 @@ Inverting Hessian...
 ...inverted Hessian in 0.007 seconds.
 \end{minted}
 Because the calculation of \(\beta\) requires \(U^{a}\), we also obtain linear response properties from a quadratic response calculation. This holds for any order of response, where lower-order response functions are automatically obtained from higher-order response calculations.
+
 \begin{minted}[]{python}
 print(np.around(solver.polar, 4))
 \end{minted}
@@ -303,6 +307,7 @@ assert x.shape[1] == nov
 dimension of response vectors from linear response: (3, 180)
 \end{minted}
 The foundation of the CPHF equations is that the right-hand side \(\mathbf{V}\) is a perturbation on the wavefunction causing single excitations from the occupied orbitals to virtual orbitals, the coefficents of which are in the response vectors \(\mathbf{X}\); the vectors \(\mathbf{Y}\) describe single deexcitations. Because the full (square) \(\mathbf{U}\) matrices are required, all MO-based quantities must be of shape \([N_{orb}, N_{orb}]\) rather than \([N_{occ}, N_{vir}]\).
+
 \begin{minted}[]{python}
 # form full MO-basis dipole integrals
 integrals_mo = np.empty(shape=(ncomp, norb, norb))
@@ -310,6 +315,7 @@ for i in range(ncomp):
     integrals_mo[i, ...] = (C.T).dot(integrals_ao[i, ...]).dot(C)
 \end{minted}
 Similarly, \(\mathbf{X}\) and \(\mathbf{Y}\) form the off-diagonal blocks of the \(\mathbf{U}\) matrices. They are usually stored as in DALTON, where each vector is of length \(2N_{ov}\), with \(\mathbf{X}\) on top of \(\mathbf{Y}\).
+
 \begin{minted}[]{python}
 # repack response vectors to [norb, norb]; 1/2 is due to X + Y
 U = np.zeros_like(integrals_mo)
@@ -318,6 +324,7 @@ for i in range(ncomp):
     U[i, nocc:, :nocc] = -0.5 * x[i, ...].reshape(nocc, nvir).T
 \end{minted}
 A minor implementation detail: because this was not a frequency-dependent calculation, only \(\mathbf{X}+\mathbf{Y}\) needs to be calculated; as they are identical, this leads to the prefactor of 1/2.
+
 \begin{minted}[]{python}
 # form G matrices from perturbation and generalized Fock matrices; do
 # one more Fock build for each response vector
@@ -427,4 +434,3 @@ First dipole hyperpolarizability (static):
   \tightlist
   \item \fullcite{NEESE2009526}
 \end{itemize}
-

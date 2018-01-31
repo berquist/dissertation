@@ -243,7 +243,7 @@ where the \(\psi_{jl}^{n}\) are the vibrational wavefunctions for state \(n\) on
 
 Next, we evaluated the accuracy of this method for \ce{CO2} in solution. A previously used method for evaluating the Condon approximation for vibrational reporters in solution is to (1) optimize the vibrational subsystem of interest with DFT while freezing all other degrees of freedom, (2) calculate the harmonic vibrational frequency and intensity for the vibrational subsystem using the same DFT method, then (3) repeat this for many statistically independent snapshots of the reporter in solution.\cite{schmidt_pronounced_2005-1} This process was completed for \num{25} snapshots of \ce{CO2} in IL solution for the asymmetric stretch. DVR asymmetric stretch frequencies and TDMs were also calculated for the \num{25} optimized (post step 1) snapshots. In order to facilitate comparison, the square roots of the intensities were taken. The resulting values and the TDMs were divided by their respective gas phase values. These values are plotted against each other in figure~\ref{paper_03:fig:S1}. The agreement between the two methods is excellent (\(R = 0.994\)). This new method has the advantage of being essentially computationally free to perform anytime a DVR calculation has already been done. Due to the possibility of parallelization, DVR calculations can be much more computationally inexpensive than regular vibrational frequency calculations.
 
-\begin{table}[h]
+\begin{table}[b]
   \centering
   \caption{Transition dipole moments for gas phase stretching modes of \ce{CO2}.}
   \label{paper_03:tab:S1}
@@ -257,7 +257,7 @@ Next, we evaluated the accuracy of this method for \ce{CO2} in solution. A previ
   \end{tabular}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}
   \centering
   \includegraphics[width=\textwidth]{paper_03/figureS1.pdf}
   \caption{Normalized transition dipole moment for the asymmetric stretch of \ce{CO2} as calculated by a quantum chemistry program and as calculated by the DVR method (blue dots). The black line is the best fit line, \(y = 0.97x + 0.07\). The correlation coefficient is 0.994.}

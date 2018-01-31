@@ -26,6 +26,7 @@
 \usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{braket}
+\usepackage{etoolbox}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage[version=4]{mhchem}
@@ -65,6 +66,12 @@
   python3=true,%
   texcomments=false,%
 }
+%
+% stop it, pittetd
+\BeforeBeginEnvironment{algorithmic}{\begin{singlespace}}
+\AfterEndEnvironment{algorithmic}{\end{singlespace}}
+\BeforeBeginEnvironment{minted}{\begin{singlespace}}
+\AfterEndEnvironment{minted}{\end{singlespace}}
 %
 \newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
 \newcommand{\latin}[1]{\textit{#1}}
