@@ -16,17 +16,17 @@ __date__      = "2017-12-19"
   \subsection{Introduction}\label{introduction}}
 
 In Tutorial 6a, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed Hartree-Fock (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
-\[
+\begin{equation}
   E(\mathbf{E}) = \sum_{n=0}^{\infty} \frac{1}{n!}E^{(n)}(\mathbf{a})\cdot(\mathbf{E}-\mathbf{a})^{n},
-\]
+\end{equation}
 where the electric field is \(\mathbf{E} = \vec{E} = (E_x,E_y,E_z)\) and \(\mathbf{a}\) is the expansion point. In practice, we always expand around \(\mathbf{a} = \mathbf{0}\), so it is a Maclaurin series:
-\[
+\begin{equation}
   E(\mathbf{E}) = \sum_{n=0}^{\infty} \frac{1}{n!}\mathbf{E}^{(n)}(\mathbf{0})\cdot\mathbf{E}^{n}.
-\]
+\end{equation}
 Expanding the above to the first 4 explicit terms gives
-\[
+\begin{equation}
   E(\mathbf{E}) \approx E^{(0)}(\mathbf{0}) + \mathbf{E}^{(1)}(\mathbf{0})\cdot\mathbf{E} + \frac{1}{2}\mathbf{E}^{(2)}(\mathbf{0})\cdot\mathbf{E}^{2} + \frac{1}{6}\mathbf{E}^{(3)}(\mathbf{0})\cdot\mathbf{E}^{3},
-\]
+\end{equation}
 where we identify
 \begin{align}
 E^{(0)} &\rightarrow \textrm{the unperturbed ground-state energy} \\
@@ -64,19 +64,19 @@ where part of the external field now oscillates with some characteristic frequen
   \frac{\partial}{\partial t} C^{\dagger} S C &= 0,
 \end{align}
 where the full definition of the Fock matrix is
-\[
+\begin{equation}
   F_{\mu\nu} = h_{\mu\nu} + D_{\lambda\sigma}[2J_{\mu\nu\lambda\sigma} - K_{\mu\nu\lambda\sigma}]
-\]
+\end{equation}
 and the density matrix is defined as
-\[
+\begin{equation}
   D_{\mu\nu} = C_{\mu p}n_{pq}C_{\nu q}^{\dagger},
-\]
+\end{equation}
 where the diagonal occupation number matrix \(n_{ii} = 2\) and \(n_{aa} = 0\) for RHF.
 
 In general, the MO coeffients are perturbation- and time-dependent, but the basis functions themselves are not. This means that when the series expansion for the perturbation above is performed on other quantities, only \(F\), \(C\), \(\epsilon\), and \(D\) are affected. For example, the Lagrangian multiplier matrix \(\epsilon\) can be expanded as
-\[
+\begin{equation}
   \epsilon(\mathbf{E}) = \epsilon^0 + E_a\epsilon^a + \frac{1}{2!}E_aE_b\epsilon^{ab} + \frac{1}{3!}E_aE_bE_c\epsilon^{abc} + \cdots
-\]
+\end{equation}
 where \(a,b,c,...\in\{x,y,z\}\), and
 \begin{align}
   \epsilon^{a} &= e^{\pm i \omega t} \epsilon^{a}(\pm\omega) + \epsilon^{a}(0), \\
@@ -96,15 +96,28 @@ showing that each order of the expansion consists of all possible phase combinat
 \item \((\pm\omega) \rightarrow\) dynamic polarizability \(\rightarrow \alpha(\mp\omega;\pm\omega) = -Tr[H^{a} D^{b}(\pm\omega)]\)
 \item \((0,0) \rightarrow\) static (first) hyperpolarizability \(\rightarrow \beta(0;0,0) = -Tr[H^{a} D^{bc}(0,0)]\)
 \item \((0,\pm\omega) \rightarrow\) electrooptic Pockels effect (EOPE) \(\rightarrow \beta(\mp \omega;0,\pm\omega) = -Tr[H^{a} D^{bc}(0,\pm\omega)]\)
-\item \((\pm\omega,\pm\omega) \rightarrow\) second harmonic generation (SHG) \(\rightarrow \beta(\mp 2\omega;\pm\omega,\pm\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\pm\omega)]\)
+\item \((\pm\omega,\pm\omega) \rightarrow\) second harmonic generation (SHG) \\
+  \(\rightarrow \beta(\mp 2\omega;\pm\omega,\pm\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\pm\omega)]\)
 \item \((\pm\omega,\mp\omega) \rightarrow\) optical rectification \(\rightarrow \beta(0;\pm\omega,\mp\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\mp\omega)]\)
 \end{itemize}
 where each property is calculated as the trace over the AO-basis dipole matrices \(H^{a}\) with the appropriate perturbed density. The task now comes down to calculating the necessary perturbed density for the phenomenon of interest. The second-order densities required for the four different first hyperpolarizabilities are (Karna eqs. III-2a to III-2d)
 \begin{align}
-D^{ab}(\pm\omega,\pm\omega) &= C^{ab}(\pm\omega,\pm\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\mp\omega) + C^{b}(\pm\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\mp\omega), \\
-D^{ab}(0,\pm\omega) &= C^{ab}(0,\pm\omega) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(\mp\omega) + C^{b}(\pm\omega) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,\mp\omega), \\
-D^{ab}(\pm\omega,\mp\omega) &= C^{ab}(\pm\omega,\mp\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\pm\omega) + C^{b}(\mp\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\pm\omega), \\
-D^{ab}(0,0) &= C^{ab}(0,0) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(0) + C^{b}(0) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,0).
+  \begin{split}
+    D^{ab}(\pm\omega,\pm\omega) &= C^{ab}(\pm\omega,\pm\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\mp\omega) \\
+    &+ C^{b}(\pm\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\mp\omega),
+  \end{split} \\
+  \begin{split}
+    D^{ab}(0,\pm\omega) &= C^{ab}(0,\pm\omega) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(\mp\omega) \\
+    &+ C^{b}(\pm\omega) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,\mp\omega),
+  \end{split} \\
+  \begin{split}
+    D^{ab}(\pm\omega,\mp\omega) &= C^{ab}(\pm\omega,\mp\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\pm\omega) \\
+    &+ C^{b}(\mp\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\pm\omega),
+  \end{split} \\
+  \begin{split}
+    D^{ab}(0,0) &= C^{ab}(0,0) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(0) \\
+    &+ C^{b}(0) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,0).
+  \end{split}
 \end{align}
 Already a few important insights about the equations are revealed: Each perturbation index always carries its respective frequency, and the positive and negative frequencies are related by the Hermitian adjoint (except for \(C(-\omega) = -C^{0} U^{\dagger}(+\omega)\), Karna eq. 40).  We also see the appearance of terms like \(C^{ab}\), which will require \(U^{ab}\) originating from the second-order CPHF. Computationally, this is undesirable due to the increased number of iterative calculations that must be performed, so we borrow a trick that most prominently appears in perturbation theory.
 
@@ -115,37 +128,39 @@ From Schaefer, page 25:
 \begin{quote}
   When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem {[}29-31{]}.
 \end{quote}
-\[
-  \begin{array}{cccc}
-    \hline
-    & \text{CI: MO/CI space} & \text{MCSCF: MO/CI space} & \text{RHF: MO space} \\
-    \hline
-    \text{Energy}, E & C_{\mu}^{i} , C_{I} & C_{\mu}^{i}, C_{I} & C_{\mu}^{i} \\
-    \text{First Derivative}, \frac{\partial E}{\partial a} & U^{a} , C_{I} & C_{\mu}^{i}, C_{I} & C_{\mu}^{i}\\
-    \text{Second Derivative}, \frac{\partial^{2} E}{\partial a \partial b} & U^{ab} , \frac{\partial C_{I}}{\partial a} & U^{a}, \frac{\partial C_{I}}{\partial a} & U^{a} \\
-    \text{Third Derivative}, \frac{\partial^{3} E}{\partial a \partial b \partial c} & U^{abc} , \frac{\partial C_{I}}{\partial a} & U^{a}, \frac{\partial C_{I}}{\partial a} & U^{a} \\
-    \text{Fourth Derivative}, \frac{\partial^{4} E}{\partial a \partial b \partial c \partial d} & U^{abcd} , \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab}, \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab} \\
-    \text{Fifth Derivative}, \frac{\partial^{5} E}{\partial a \partial b \partial c \partial d \partial e} & U^{abcde} , \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab}, \frac{\partial^{2} C_{I}}{\partial a \partial b} & U^{ab} \\
-    \hline
-  \end{array}
-\]
-Since the first hyperpolarizability is calculated as a third derivative of the energy, perturbed coefficients with only one field index should be required. From the above table, we can also see why SCF gradients (\(\frac{\partial E}{\partial R_A}\), where \(R_A\) is the \(A\)-th Cartesian component of nucleus \(R\)) avoid the need to solve for \(U\) matrices.
+\begin{table}
+  \caption[MO coefficient derivatives and rotation matrices needed for energy derivatives.]{Orders of MO coefficient derivatives and rotation matrices needed for energy derivatives.}
+  \label{tutorial:tab:wigner}
+  \begin{tabular}{cccc}
+    \toprule
+    & CI: MO/CI space & MCSCF: MO/CI space & RHF: MO space \\
+    \midrule
+    Energy, \(E\) & \(C_{\mu}^{i}\), \(C_{I}\) & \(C_{\mu}^{i}\), \(C_{I}\) & \(C_{\mu}^{i}\) \\
+    First Derivative, \(\frac{\partial E}{\partial a}\) & \(U^{a}\), \(C_{I}\) & \(C_{\mu}^{i}\), \(C_{I}\) & \(C_{\mu}^{i}\) \\
+    Second Derivative, \(\frac{\partial^{2} E}{\partial a \partial b}\) & \(U^{ab}\), \(\frac{\partial C_{I}}{\partial a}\) & \(U^{a}\), \(\frac{\partial C_{I}}{\partial a}\) & \(U^{a}\) \\
+    Third Derivative, \(\frac{\partial^{3} E}{\partial a \partial b \partial c}\) & \(U^{abc}\), \(\frac{\partial C_{I}}{\partial a}\) & \(U^{a}\), \(\frac{\partial C_{I}}{\partial a}\) & \(U^{a}\) \\
+    Fourth Derivative, \(\frac{\partial^{4} E}{\partial a \partial b \partial c \partial d}\) & \(U^{abcd}\), \(\frac{\partial^{2} C_{I}}{\partial a \partial b}\) & \(U^{ab}\), \(\frac{\partial^{2} C_{I}}{\partial a \partial b}\) & \(U^{ab}\) \\
+    Fifth Derivative, \(\frac{\partial^{5} E}{\partial a \partial b \partial c \partial d \partial e}\) & \(U^{abcde}\), \(\frac{\partial^{2} C_{I}}{\partial a \partial b}\) & \(U^{ab}\), \(\frac{\partial^{2} C_{I}}{\partial a \partial b}\) & \(U^{ab}\) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+Since the first hyperpolarizability is calculated as a third derivative of the energy, perturbed coefficients with only one field index should be required. From table~\ref{tutorial:tab:wigner}, we can also see why SCF gradients (\(\frac{\partial E}{\partial R_A}\), where \(R_A\) is the \(A\)-th Cartesian component of nucleus \(R\)) avoid the need to solve for \(U\) matrices.
 
 \hypertarget{final-expressions}{%
   \subsection{Final expressions}\label{final-expressions}}
 
 To this point, most work has been in the AO basis, but it is conceptually easier to work in the MO basis, in particular due to the use of the \(\epsilon\) equations (Karna eq. 34)
-\[
+\begin{equation}
   \epsilon^{a}(\pm\omega) = G^{a}(\pm\omega) + \epsilon^{0} U^{a}(\pm\omega) - U^{a}(\pm\omega) \epsilon^{0} \pm \omega U^{a}(\pm\omega),
-\]
+\end{equation}
 where the \(G\) matrices are the MO-basis Fock matrices
-\[
+\begin{equation}
   G^{ab\dots} = C^{0\dagger} F^{ab\dots} C^{0},
-\]
+\end{equation}
 and the \(U\) matrices are the MO-basis perturbation parameters
-\[
+\begin{equation}
   C^{ab\dots} = C^{0} U^{ab\dots},
-\]
+\end{equation}
 which will be discussed in the implementation. The final expression for the static hyperpolarizability is (Karna eq. VII-4)
 \begin{equation}
   \begin{split}
@@ -156,9 +171,9 @@ which will be discussed in the implementation. The final expression for the stat
   \end{split}
 \end{equation}
 By noticing that each term corresponds to a unique permutation of the field indices, it can be rewritten as
-\[
+\begin{equation}
   \beta_{abc} = Tr\left[ n \sum \mathcal{P}(d,e,f) U^{d} G^{e} U^{f} \right] - Tr\left[ n \sum \mathcal{P}(d,e,f) U^{d} U^{e} \epsilon^{f} \right],
-\]
+\end{equation}
 where the permutation indices are initially assigned as \(d = a, e = b, f = c\). The frequency notation has also been dropped, since each \(abc\) (and therefore each \(def\)) will always carry the appropriate field index, making this the most general form of the first hyperpolarizability. If the indices \(abc\) are also permuted, then all 27 components of the first hyperpolarizability tensor will be computed.
 
 \hypertarget{computational-procedure}{%
@@ -205,7 +220,7 @@ except NameError:
 from helper_CPHF import helper_CPHF
 \end{minted}
 The helper encapsulates the solution of the ground-state wavefunction followed by the frequency-(in)dependent linear response equations,
-\[
+\begin{equation}
   \left[
     \begin{pmatrix}
       \mathbf{A} & \mathbf{B} \\
@@ -227,9 +242,9 @@ The helper encapsulates the solution of the ground-state wavefunction followed b
     -\mathbf{V}^{*}
   \end{pmatrix}
   ,
-\]
+\end{equation}
 either directly (via matrix inversion in the MO basis) or iteratively (via repeated matrix-vector products using Fock builds). For a HF/DFT reference with canonical orbitals, the above equations reduce to
-\[
+\begin{equation}
   \left[
     \begin{pmatrix}
       \mathbf{A} & \mathbf{B} \\
@@ -251,7 +266,7 @@ either directly (via matrix inversion in the MO basis) or iteratively (via repea
     -\mathbf{V}
   \end{pmatrix}
   .
-\]
+\end{equation}
 In the static limit \((\omega_f = 0)\), the whole superoverlap matrix vanishes, and the CPHF equations can be reduced to those used in tutorial 6a.
 
 \begin{minted}[]{python}
