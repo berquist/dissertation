@@ -44,7 +44,7 @@
 \newcommand{\latin}[1]{\textit{#1}}
 \newcommand{\caps}[1]{\uppercase{#1}}
 \begin{document}
-\chapter[\ce{CO2}-IL Cluster Model Validation]{Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: I. \textit{Ab Initio} Calculations}
+\chapter[\texorpdfstring{\ce{CO2}}{CO2}-IL Cluster Model Validation]{Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: I. \textit{Ab Initio} Calculations}
 \label{ch:paper_02}
 
 The text in this chapter has been adapted from \fullcite{Berquist2017}. The author's contribution to the work included performing all quantum chemical calculations and analyses (excepting those for DVR), designing the charge transfer mechanism and counterpoise correction analyses, writing those respective parts of the manuscript, and editing/revising the remainder.
@@ -129,7 +129,9 @@ where \(r_{1}^{ij}\) or \(r_{2}^{ij}\) is the bond length at grid point \((i,j)\
   \label{paper_02:fig:1}
 \end{figure}
 
-\section{\texorpdfstring{\caps{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}
+% \section{\texorpdfstring{\caps{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}
+% Vibrational Frequency Dependence on Model Approximations
+\section{\texorpdfstring{\caps{Vibrational Frequency Dependence on Model Approximations}}{Vibrational Frequency Dependence on Model Approximations}}
 \label{paper_02:sec:III}
 
 In a previous publication\cite{Brinzer2015} we identified the predominant role of CT for the asymmetric stretch frequency of \ce{CO2} in different ionic liquids. Here we aim to analyze whether our previous findings also hold when more sophisticated computational and chemical models are used. To this end, we investigate the impact of method, basis set, anharmonicity, electrostatics of the surrounding condensed phase, and solvent disorder on absolute and relative trends in the \ce{CO2} asymmetric stretch frequency.
@@ -231,7 +233,7 @@ The relative magnitudes of the ``geometry'' versus ``curvature'' mechanism resul
 \subsection{Anharmonicity}
 \label{paper_02:ssec:IIIB}
 
-We employed a grid-based anharmonic (DVR) method to assess the effects of anharmonicity on the \ce{CO2} \(\nu_{3}\) frequency. That is, we numerically solved for the vibrational wave function on the discretized potential energy surface spanned by two degrees of freedom for the \ce{CO2} molecule (along the \ce{OCO} axis), constraining the degrees of freedom involved in \ce{CO2} bending modes, as discussed earlier. Solving for the fully anharmonic vibrational wave function is important for connecting to experiment for the following reasons. First, an accurate comparison to experiment is only possible via anharmonic calculations because experiment probes vibrational transitions that take place on the full (anharmonic) potential energy surface. Second, harmonic frequencies change their physical interpretation as vibrational energy levels when calculated away from the minimum where they pick up contributions from non-zero forces and from higher-order derivatives. For these reasons, DVR calculations are essential for being able to calculate vibrational frequencies for different geometries (MD snapshots) that are consistent with experimental conditions sampling dynamical structures away from the equilibrium geometries. Consequently, the DVR approach is instrumental for the construction of a spectroscopic map as presented in Ref. \cite{Daly2016}, as it requires sampling various (non-equilibrium) geometries from MD simulations. In this section, we investigate the impact of anharmonicity on the frequency and geometry (i.e., position expectation values) of gas-phase \ce{CO2}.
+We employed a grid-based anharmonic (DVR) method to assess the effects of anharmonicity on the \ce{CO2} \(\nu_{3}\) frequency. That is, we numerically solved for the vibrational wave function on the discretized potential energy surface spanned by two degrees of freedom for the \ce{CO2} molecule (along the \ce{OCO} axis), constraining the degrees of freedom involved in \ce{CO2} bending modes, as discussed earlier. Solving for the fully anharmonic vibrational wave function is important for connecting to experiment for the following reasons. First, an accurate comparison to experiment is only possible via anharmonic calculations because experiment probes vibrational transitions that take place on the full (anharmonic) potential energy surface. Second, harmonic frequencies change their physical interpretation as vibrational energy levels when calculated away from the minimum where they pick up contributions from non-zero forces and from higher-order derivatives. For these reasons, DVR calculations are essential for being able to calculate vibrational frequencies for different geometries (MD snapshots) that are consistent with experimental conditions sampling dynamical structures away from the equilibrium geometries. Consequently, the DVR approach is instrumental for the construction of a spectroscopic map as presented in Ref.~\parencite{Daly2016}, as it requires sampling various (non-equilibrium) geometries from MD simulations. In this section, we investigate the impact of anharmonicity on the frequency and geometry (i.e., position expectation values) of gas-phase \ce{CO2}.
 
 Our goal is to separate the impact of anharmonicity from the numerical errors arising from using a discretized and reduced-dimensional (2D) potential energy surface. To this end, we performed standard harmonic calculations (using analytical derivatives on the fully-dimensional surface), harmonic calculations on the discretized reduced-dimensional grid, and DVR calculations on the same grid (Tab.~\ref{paper_02:tab:4}). All potential energy surfaces were calculated at the B3LYP/LP level. The standard (analytical) harmonic calculation yielded a vibrational frequency of \SI{2420}{\wavenumber} and an equilibrium bond length of \SI{1.161}{\angstrom}.
 
@@ -312,7 +314,7 @@ To understand how the choice of decomposition method affects the predicted solut
 
 \begin{table}
   \centering
-  \caption[Comparison of ALMO and SAPT interaction energies for MD clusters]{Comparison of ALMO- versus SAPT0-decomposed interaction energies averaged over \num{15} representative molecular dynamics snapshots. ALMO calculations were performed within the SP basis to allow comparison to results from Ref. 14. For SAPT0, we report both monomer-centered basis set (MCBS) and dimer-centered basis set (DCBS) results. Energies are reported in \si{\kcal\per\mole}.}
+  \caption[Comparison of ALMO and SAPT interaction energies for MD clusters]{Comparison of ALMO- versus SAPT0-decomposed interaction energies averaged over \num{15} representative molecular dynamics snapshots. ALMO calculations were performed within the SP basis to allow comparison to results from Ref.~\parencite{14}. For SAPT0, we report both monomer-centered basis set (MCBS) and dimer-centered basis set (DCBS) results. Energies are reported in \si{\kcal\per\mole}.}
   \label{paper_02:tab:6}
   \begin{tabular}{lcccccc}
     & & & \multicolumn{2}{c}{SAPT0 SP} & \multicolumn{2}{c}{SAPT0 jun-cc-pVTZ} \\
