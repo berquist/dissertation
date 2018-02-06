@@ -5,28 +5,15 @@
   multi = true,%
   preview = false,%
 ]{standalone}
-\usepackage[%
-    backend    = biber,%
-    style      = chem-acs,%
-    autocite   = superscript,%
-    backref    = true,%
-    biblabel   = brackets,%
-    doi        = true,%
-    minnames   = 1,%
-    maxnames   = 999,%
-]{biblatex}
 \usepackage[version=4]{mhchem}
+\newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
 % no more than 350 words, use C-c C-w c in the abstract region
 \begin{document}
-Spectroscopy, the molecular response to electromagnetic radiation of different wavelengths, is one of the most powerful experimental tools for interrogating a molecule's interactions with its environment. However, both the time-averaged and time-resolved pictures are not enough to obtain exact structural information, requiring the construction of molecular models for correlating geometries with spectroscopic response. The use of computation brings a wealth of methods for quantifying intermolecular interactions that, when combined with molecular models, correlate intuitive physical pictures with spectroscopic response.
+Two-dimensional infrared (2D-IR) spectroscopy was used to study the dynamics of \ce{CO2} in physisorbing ionic liquids (ILs). To build a molecular picture, quantum chemical calculations on small clusters qualitatively reproduced the experimental ordering for \ce{CO2}'s \(\nu_3\) peak position when dissolved in a series of ILs when varying the anion. To uncover the physical origin of the \(\nu_3\) shift, the language of decomposition analysis, specifically based on absolutely localized molecular orbitals (ALMO-EDA), was translated from energies to vibrational frequencies. Geometric distortion of the \ce{CO2} in the IL environment, as a result of charge transfer (CT) from the anion into the \ce{CO2}, is the driving force for differentiating the \ce{CO2} \(\nu_3\) shift in different IL anions.
 
-Two-dimensional infrared (2D-IR) spectroscopy was used to study the dynamics of \ce{CO2} in physisorbing ionic liquids (ILs). To build a molecular picture, quantum chemical calculations on small clusters qualitatively reproduced the experimental ordering for \ce{CO2}'s \(\nu_3\) peak position when dissolved in a series of ionic liquids when varying the anion. To uncover the physical origin of the \(\nu_3\) shift, the language of decomposition analysis, specifically based on absolutely localized molecular orbitals (ALMO-EDA), was translated from energies to vibrational frequencies. We found that geometric distortion of the \ce{CO2} in the ionic liquid environment, as a result of charge transfer (CT) from the anion into the \ce{CO2}, is the driving force for differentiating the \ce{CO2} \(\nu_3\) shift in different ionic liquid anions.
+After validating these simple models, we further decomposed the CT contribution into geometry and curvature mechanisms, finding that CT is a significant contributor in both the geometry optimization and frequency calculation steps. A comparison between ALMO-EDA and symmetry-adapted perturbation theory (SAPT) showed that while dispersion accounts for the majority of binding energy, excellent correlation between both total interaction energies and individual components for ALMO-EDA and SAPT validates the use of DFT, enabling the construction of a semiempirical spectroscopic map.
 
-Encouraged by the ability to construct simple models, we further decomposed the CT contribution into geometry and curvature mechanisms, finding that [...] A comparison between ALMO-EDA and symmetry adapted perturbation theory (SAPT) showed that while dispersion accounts for the majority of binding energy, correlation between both total interaction energies and individual components for ALMO-EDA and SAPT is excellent.
-
-The decomposition developed in Ref.~\parencite{Brinzer2015} and further applied in Ref.~\parencite{Berquist2017} presented the first application of an EDA outside the energy realm into molecular properties. However, the method used for calculating the CT contribution to the curvature mechanism is not generally applicable to arbitrary response properties. A reformulation of the linear response equations into
-
-The fully-analytic decomposition presented in Ref.~\parencite{Berquist2018}
+This decomposition presented the first application of an EDA outside the energy realm into molecular properties. However, the method used for calculating the CT contribution to the curvature mechanism is not generally applicable to arbitrary response properties. A reformulation of the canonical linear response equations for use with ALMOs provides a direct connection between EDA terms and their corresponding contribution to spectra. Results for \arlidimer{} polarizabilities show that allowing CT is equally important in both the underlying ground-state wavefunction and the response calculation, and should not be confused with basis set superposition error.
 \end{document}
 
 % Local variables:
