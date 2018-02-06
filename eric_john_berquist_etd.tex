@@ -49,6 +49,7 @@
 \usepackage{makecell}
 \renewcommand{\cellalign}{cl}
 \usepackage[version=4]{mhchem}
+\newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
 % \usepackage[final]{microtype}
 \usepackage{pdflscape}
 \usepackage[flushleft]{threeparttable}
@@ -57,6 +58,9 @@
 \usepackage[usenames,dvipsnames,svgnames,hyperref,table]{xcolor}
 \definecolor{caliblue}{HTML}{015482}
 \definecolor{carmine}{HTML}{960018}
+%
+\usepackage{cancel}
+\newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
 %
 \usepackage[%
     separate-uncertainty = true,%
