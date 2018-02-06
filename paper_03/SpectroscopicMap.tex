@@ -1,3 +1,39 @@
+\documentclass[%
+  class = book,%
+  crop = false,%
+  float = true,%
+  multi = true,%
+  preview = false,%
+]{standalone}
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    backref    = true,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+\addbibresource{../library.bib}
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage{graphicx}
+\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
+\usepackage[version=4]{mhchem}
+\usepackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
+\DeclareSIUnit\au{au}
+\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
+\DeclareSIUnit\debye{D}
+\DeclareSIUnit\kcal{\kilo\cal}
+\DeclareSIUnit\wavenumber{\per\centi\metre}
+\newcommand{\caps}[1]{\uppercase{#1}}
+\begin{document}
 \chapter[\ce{CO2}-IL Spectroscopic Map Development]{Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: II. Spectroscopic Map}
 \label{ch:paper_03}
 
@@ -54,7 +90,7 @@ Figure~\ref{paper_03:fig3} also shows the vibrational frequency of \num{500} sta
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_03/figure3.png}
+  \includegraphics[width=\textwidth]{figure3.png}
   \caption[Correlation between \(\mu_{01}\) and \(\tilde{\nu}_{3}\)]{Transition dipole moment integral, \(\mu_{01}\), of the asymmetric stretch of \ce{CO2} in 1000 \ce{CO2}-\ce{[C4C1im][PF6]} clusters versus the asymmetric stretch vibrational frequency, \(\omega_{a}\), where \(\mu_{01}^{g}\) is the transition dipole moment integral of the asymmetric stretch of \ce{CO2} in the gas-phase (blue circles). A linear fit of the data (black line) has a slope close to zero indicating that the Condon approximation is reasonable for the asymmetric stretch of \ce{CO2} in the \ce{[C4C1im][PF6]} IL.}
   \label{paper_03:fig3}
 \end{figure}
@@ -98,7 +134,7 @@ The four parameters, \(b_{1}\), \(b_{2}\), \(c_{1}\), and \(c_{2}\), in Eq.~(\re
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_03/figure2.png}
+  \includegraphics[width=\textwidth]{figure2.png}
   \caption[Spectroscopic map comparison with DVR]{Relationship between \ce{CO2} asymmetric stretch frequencies in the \ce{[C4C1im][PF6]} IL calculated using the DVR method and those calculated using the spectroscopic map for the 500 test set clusters (black circles). The red line represents a perfect correlation and the 95\% prediction interval is indicated with green lines. The spectroscopic map has a regression coefficient of \(R = 0.94\) and a root means squared error of \SI{2.7}{\wavenumber}.}
   \label{paper_03:fig2}
 \end{figure}
@@ -171,7 +207,7 @@ Finally, the variance of the frequency fluctuations, \(\Delta_{H}^{2}\), can be 
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_03/figure4.png}
+  \includegraphics[width=\textwidth]{figure4.png}
   \caption[Linewidth dependence on correlation time for fast motions]{Homogeneous instantaneous linewidth as a function of correlation time for fast motions, with \(T_{2}^{*} = \SI{4}{\pico\second}\), with upper and lower bounds estimated for \({\widetilde{\Delta}}_{H}\). The upper bound, based on an estimated fastest allowed inertial response timescale, and the lower bound, based on a threshold value of \(\Delta_{H}\tau_{H}\), are indicated by dashed horizontal lines. The resulting instantaneous frequency range for homogeneous motions is between \SIrange{6}{10}{\wavenumber}.}
   \label{paper_03:fig4}
 \end{figure}
@@ -181,7 +217,7 @@ Finally, the variance of the frequency fluctuations, \(\Delta_{H}^{2}\), can be 
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_03/figure5.png}
+  \includegraphics[width=\textwidth]{figure5.png}
   \caption[Histograms of \ce{CO2} \(\tilde{\nu}_{3}\) from MD simulations]{Histograms of the \ce{CO2} asymmetric stretch vibrational frequency, \(\omega_{a}\), for \num{1000} \ce{CO2}-\ce{[C4C1im][PF6]} clusters. (a) Clusters extracted from an MD simulation of flexible \ce{CO2} in the \ce{[C4C1im][PF6]} IL. (b) Clusters extracted from an MD simulation of flexible \ce{CO2} in the \ce{[C4C1im][PF6]} IL, but where the \ce{CO2} geometry is relaxed. (c) Clusters extracted from an MD simulation of rigid \ce{CO2} in the \ce{[C4C1im][PF6]} IL.}
   \label{paper_03:fig5}
 \end{figure}
@@ -194,7 +230,7 @@ The results in Figure~\ref{paper_03:fig5}a~and~\ref{paper_03:fig5}c represent tw
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_03/figure1.png}
+  \includegraphics[width=\textwidth]{figure1.png}
   \caption[Relationship between \ce{CO2} \(\tilde{\nu}_{3}\) and \(1 + \cos{\theta_{\ce{OCO}}}\)]{Relationship between the \ce{CO2} asymmetric stretch vibrational frequency and the \ce{OCO} angle, \(\theta_{\ce{OCO}}\), for \ce{CO2} in the gas-phase (green circles) and in the \ce{[C4C1im][PF6]} IL (black circles). The gas-phase data are perfectly correlated with \(1 + \cos{\theta_{\ce{OCO}}})\). The vibrational frequencies for \ce{CO2} in the \ce{[C4C1im][PF6]} solvent also show this relationship, but additional solvation effects on the frequency are also present.}
   \label{paper_03:fig1}
 \end{figure}
@@ -259,7 +295,8 @@ Next, we evaluated the accuracy of this method for \ce{CO2} in solution. A previ
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_03/figureS1.pdf}
+  \includegraphics[width=\textwidth]{figureS1.pdf}
   \caption[Correlation between DVR and \textit{ab intio} transition dipole moments]{Normalized transition dipole moment for the asymmetric stretch of \ce{CO2} as calculated by a quantum chemistry program and as calculated by the DVR method (blue dots). The black line is the best fit line, \(y = 0.97x + 0.07\). The correlation coefficient is 0.994.}
   \label{paper_03:fig:S1}
 \end{figure}
+\end{document}

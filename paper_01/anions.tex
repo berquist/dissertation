@@ -1,3 +1,45 @@
+\documentclass[%
+  class = book,%
+  crop = false,%
+  float = true,%
+  multi = true,%
+  preview = false,%
+]{standalone}
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    backref    = true,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+\addbibresource{../library.bib}
+\addbibresource{../paper_04/paper.bib}
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage{graphicx}
+\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
+\usepackage[version=4]{mhchem}
+\usepackage{pdflscape}
+\usepackage[flushleft]{threeparttable}
+\usepackage{xspace}
+\usepackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
+\DeclareSIUnit\Molar{M}
+\DeclareSIUnit\electron{e^{-}}
+\DeclareSIUnit\micron{\micro\metre}
+\DeclareSIUnit\torr{Torr}
+\DeclareSIUnit\wavenumber{\per\centi\metre}
+\newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
+\newcommand{\latin}[1]{\textit{#1}}
+\newcommand{\caps}[1]{\uppercase{#1}}
+\begin{document}
 \chapter[\ce{CO2}-IL Cluster Model Development]{Carbon Capture from Carbon Dioxide's Point-of-View}
 \label{ch:anions}
 
@@ -6,7 +48,7 @@ The text in this chapter has been adapted from \fullcite{Brinzer2015}, and its e
 \section{\texorpdfstring{\caps{Summary}}{Summary}}
 \label{sec:anions_summary}
 
-The \ce{CO2} \(\nu_3\) asymmetric stretching mode is established as a vibrational chromophore for ultrafast two-dimensional infrared (2D-IR) spectroscopic studies of local structure and dynamics in ionic liquids, which are of interest for carbon capture applications. \ce{CO2} is dissolved in a series of 1-butyl-3-methylimidazolium-based ionic liquids (\ce{[Im_{4,1}}][X]), where \ce{[X]-} is the anion from the series hexafluorophosphate (\ce{PF6-}), tetrafluoroborate (\ce{BF4-}), bis-(trifluoromethyl\-sulfonyl)imide (\ce{Tf2N-}), triflate (\ce{TfO-}), trifluoroacetate (\ce{TFA-}), dicyanamide (\ce{DCA-}), and thiocyanate (\ce{SCN-}). In the ionic liquids studied, the \(\nu_3\) center frequency is sensitive to the local solvation environment and reports on the timescales for local structural relaxation. Density functional theory calculations predict charge transfer from the anion to the \ce{CO2} and from \ce{CO2} to the cation. The charge transfer drives geometrical distortion of \ce{CO2}, which in turn changes the \(\nu_3\) frequency. The observed structural relaxation timescales vary by up to an order of magnitude between ionic liquids. Shoulders in the 2D-IR spectra arise from anharmonic coupling of the \(\nu_2\) and \(\nu_3\) normal modes of \ce{CO2}. Thermal fluctuations in the \(\nu_2\) population stochastically modulate the \(\nu_3\) frequency and generate dynamic cross-peaks. These timescales are attributed to the breakup of ion cages that create a well-defined local environment for \ce{CO2}. The results suggest that the picosecond dynamics of \ce{CO2} are gated by local diffusion of anions and cations.
+The \ce{CO2} \(\nu_3\) asymmetric stretching mode is established as a vibrational chromophore for ultrafast two-dimensional infrared (2D-IR) spectroscopic studies of local structure and dynamics in ionic liquids, which are of interest for carbon capture applications. \ce{CO2} is dissolved in a series of 1-butyl-3-methylimidazolium-based ionic liquids (\ce{[Im_{4,1}}][X]), where \ce{[X]-} is the anion from the series hexafluorophosphate (\ce{PF6-}), tetrafluoroborate (\ce{BF4-}), bis-(tri\-fluoro\-methyl\-sulfonyl)imide (\ce{Tf2N-}), triflate (\ce{TfO-}), trifluoroacetate (\ce{TFA-}), dicyanamide (\ce{DCA-}), and thiocyanate (\ce{SCN-}). In the ionic liquids studied, the \(\nu_3\) center frequency is sensitive to the local solvation environment and reports on the timescales for local structural relaxation. Density functional theory calculations predict charge transfer from the anion to the \ce{CO2} and from \ce{CO2} to the cation. The charge transfer drives geometrical distortion of \ce{CO2}, which in turn changes the \(\nu_3\) frequency. The observed structural relaxation timescales vary by up to an order of magnitude between ionic liquids. Shoulders in the 2D-IR spectra arise from anharmonic coupling of the \(\nu_2\) and \(\nu_3\) normal modes of \ce{CO2}. Thermal fluctuations in the \(\nu_2\) population stochastically modulate the \(\nu_3\) frequency and generate dynamic cross-peaks. These timescales are attributed to the breakup of ion cages that create a well-defined local environment for \ce{CO2}. The results suggest that the picosecond dynamics of \ce{CO2} are gated by local diffusion of anions and cations.
 
 \section{\texorpdfstring{\caps{Introduction}}{Introduction}}
 \label{sec:anions_intro}
@@ -52,7 +94,7 @@ The remaining question is how sensitively \ce{CO2} reports on structural relaxat
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.25]{./paper_01/fig1.eps}
+  \includegraphics[scale=1.25]{fig1.eps}
   \caption[Linear and 2D-IR of \texorpdfstring{\ce{CO2} in \ce{H2O}}{carbon dioxide in water}]{\label{fig:CO2 in water}(A) FTIR spectrum of \ce{H2O} with (blue line) and without (black line) \ce{CO2} dissolved in it. \ce{CO2} \(\nu_3\) lies in the overtones and combinations bands from \ce{H2O} librational modes. (B) Inset of \(\nu_3\) with water background subtracted shows the Lorentzian character of the peak. (C) Purely absorptive 2D-IR spectrum of \(\nu_3\) in \ce{H2O} with \(t_2 = \SI{0.2}{\ps}\) shows that, in water, the line is nearly completely in the limit of homogeneous dynamics.}
 \end{figure}
 
@@ -118,13 +160,13 @@ The linear spectra of \ce{CO2} establish that the \(\nu_3\) mode is sensitive to
 The \(\nu_3\) vibration absorbs strongly around \SI{2340}{\wavenumber} in a spectral region with no strong solvent absorbances (Figure~\ref{fig:FTIR}A). The lineshape of the \(\nu_3\) band (Figure~\ref{fig:FTIR}B) appears mostly Lorentzian, with a low frequency shoulder.
 \begin{figure}
   \centering
-  \includegraphics[scale=1.40]{./paper_01/fig2.eps}
+  \includegraphics[scale=1.40]{fig2.eps}
   \caption[FTIR of \texorpdfstring{\ce{CO2}}{carbon dioxide} in ionic liquids]{\label{fig:FTIR} a) Absorption spectrum of \ce{CO2} in \ce{[Im_{4,1}]}[TFA] shows the intense antisymmetric stretch absorption at \SI{2340}{\wavenumber}; b) the background subtracted spectrum is Lorentzian with a shoulder at \SI{2328}{\wavenumber}, the \(\nu_3\) band of the \ce{^{13}C} isotopomer is located at \SI{2280}{\wavenumber}; c) The average vibrational frequency of the \(\nu_3\) absorption of \ce{CO2} shifts for different anions and the same \ce{[Im_{4,1}^+]} cation (background subtracted).}
 \end{figure}
 
 Changing the anion causes both the full-width at half-maximum (FWHM) and center frequency of \(\nu_3\) to change (Figure~\ref{fig:FTIR}C). We varied the anion, rather than the cation, because the anion dominates \ce{CO2} solubility in ionic liquids.\cite{anthonyJPCB-05,Cadena2004,Bhargava2007} Anions studied were hexafluorophosphate (\ce{PF6-}), tetrafluoroborate (\ce{BF4-}), bis-(trifluoromethyl\-sulfonyl)imide (\ce{Tf2N-}), triflate (\ce{TfO-}), trifluoroacetate (\ce{TFA-}), dicyanamide (\ce{DCA-}), and thiocyanate (\ce{SCN-}). The cation in all experiments was 1-butyl-3-methylimidazolium (\ce{[Im_{4,1}]}).
 
-The \(\nu_3\) center frequency progressively redshifts from a maximum of \SI{2342.5}{\wavenumber} (\ce{[PF6-]}) to a minimum of \SI{2336}{\wavenumber} (\ce{[SCN]-}). The shoulder moves with the main absorption band and stays \(\sim\SI{12}{\wavenumber}\) lower in frequency.  Qualitatively, smaller, harder anions like \ce{[SCN]-} and \ce{[DCA]-} create a larger redshift than bulkier, softer anions like \ce{[Tf2N]-} and \ce{[TfO]-}, which is most likely a function of increased anionic charge density. The increased charge density could red-shift the \ce{CO2} center frequency though an increased local electric field (Stark effect), through charge transfer, or through inductive effects. Quantum chemistry calculations (Section~\ref{sec:vib_calcs}) help to disentangle the driving forces behind this qualitative trend.
+The \(\nu_3\) center frequency progressively red\-shifts from a max\-i\-mum of \SI{2342.5}{\wavenumber} (\ce{[PF6-]}) to a minimum of \SI{2336}{\wavenumber} (\ce{[SCN]-}). The shoulder moves with the main absorption band and stays \(\sim\SI{12}{\wavenumber}\) lower in frequency.  Qualitatively, smaller, harder anions like \ce{[SCN]-} and \ce{[DCA]-} create a larger redshift than bulkier, softer anions like \ce{[Tf2N]-} and \ce{[TfO]-}, which is most likely a function of increased anionic charge density. The increased charge density could red-shift the \ce{CO2} center frequency though an increased local electric field (Stark effect), through charge transfer, or through inductive effects. Quantum chemistry calculations (Section~\ref{sec:vib_calcs}) help to disentangle the driving forces behind this qualitative trend.
 
 The shoulder on the low frequency side of the main \(\nu_3\) transition could arise from several possible mechanisms, a ``hot-band'', a multiple-quantum transition, or different chemical environments. The temperature dependence of this feature is important in discriminating among these possibilities.
 
@@ -132,7 +174,7 @@ Temperature-dependent FTIR demonstrates that the shoulder on the low frequency s
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.40]{./paper_01/fig3.eps}
+  \includegraphics[scale=1.40]{fig3.eps}
   \caption[T-dependent FTIR of \texorpdfstring{\ce{CO2}}{carbon dioxide} in 1-butyl-3-methylimidazolium triflate]{\label{fig:hot band}(A) Temperature dependence of the \(\nu_3\) spectrum in \ce{[Im_{4,1}]}[TfO] shows transition of intensity from the main peak to the shoulder with increasing temperature, indicating a temperature-dependent two-state transition. (B) Relative intensity of shoulder to the main band (based on fitting to Voigt profiles) follows a van't Hoff temperature dependence, indicating an energy barrier of around \SI{800}{\wavenumber}, which closely follows the prediction from the temperature dependence of bending mode population.}
 \end{figure}
 
@@ -199,7 +241,7 @@ These calculations demonstrate that the \(\nu_3\) frequency shift reflects a com
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.50]{./paper_01/fig4.eps}
+  \includegraphics[scale=1.50]{fig4.eps}
   \caption[ALMO decomposition of \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} frequency]{\label{fig:decomposition}Decomposition of the geometric, electrostatic, and charge transfer contributions to \ce{CO2} \(\nu_3\) vibrational frequency shifts. (A) The cluster geometry (including \ce{CO2}) was optimized while allowing charge transfer. (B) The cluster geometry was optimized using ALMOs to forbid charge transfer between fragments. The final frequency (\(\omega_\mathrm{tot} = \omega_\mathrm{free} + \Delta \omega_\mathrm{GEOM} + \Delta \omega_\mathrm{FRZ} + \Delta \omega_\mathrm{POL} + \Delta \omega_\mathrm{CT}\)) correlates most strongly with the change in frequency from geometric distortion (\(\Delta \omega_\mathrm{GEOM}\)).}
 \end{figure}
 
@@ -281,7 +323,7 @@ The combination of \ce{CO2}'s high molar absorptivity (\(\sim \SI{1000}{\per\Mol
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1]{./paper_01/fig5_update4.eps}
+  \includegraphics[scale=1]{fig5_update4.eps}
   \caption[2D-IR spectra of \texorpdfstring{\ce{CO2}}{carbon dioxide} in ionic liquids]{\label{fig:example 2D}\textbf{(A)} 2D-IR spectrum of \ce{CO2} in \ce{[Im_{4,1}][TFA]} at \(t_2\) = \SIlist[list-units = single]{0.2;50}{\ps}. The peak labels correspond to transitions in (C) and (D). \textbf{(B)} The same spectrum as (A) with contours limited to 10\% of the maximum in the $z$-direction. Structure of the diagonal shoulders and cross-peaks can be seen much more readily. \textbf{(C) and (D)} Vibrational energy level diagrams for observed third-order (C) and fifth-order (D) bands of \ce{CO2} in \ce{[Im_{4,1}][TFA]}. Quantum numbers correspond to $|\nu_1 \nu_2^l \nu_3\rangle$. Transition frequencies are labeled in wavenumbers (\si{\wavenumber}), and a label corresponding to the peaks in A and B. The color of the label indicates whether the expected peak is negative (blue) or positive (red).}
 \end{figure}
 
@@ -294,7 +336,7 @@ The observations of a complex pattern of peaks and of spectral diffusion on a te
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1]{./paper_01/fig6.eps}
+  \includegraphics[scale=1]{fig6.eps}
   \caption[\texorpdfstring{\ce{CO2}}{Carbon dioxide} in IL bending mode kinetics]{\label{fig:shoulder kinetics}Kinetic analysis of \ce{[Im_{4,1}]}[TFA]. (A) Absolute intensity of the main peak (1b) with increasing \(t_2\). Decreased intensity results from both orientational and population relaxation. (B)-(E) show intensities relative to A. Discrete data points represent experimental data, while lines show data from stochastic simulations (Section~\ref{sec:shoulders_modeling}). (B) and (C), which result from the first diagonal shoulder (2b) and its cross-peaks with the main band (1-2b / 2-1b) show good agreement between experimental and simulated kinetics. (D) and (E), which result from the second diagonal shoulder (3b) and the apparent cross-peak (1c) show distinct kinetics, which cannot result from the same stochastic bending mode fluctuations, and point to a direct transition.}
 \end{figure}
 
@@ -343,7 +385,7 @@ The magnitude of third-order signal is linear in pump light intensity, since the
 % TODO this bit here must come from the comment/erratum?
 \begin{figure}
   \centering
-  \includegraphics[scale=0.85]{./paper_01/sgr_pathways_02.eps}
+  \includegraphics[scale=0.85]{sgr_pathways_02.eps}
   \caption[Double-sided Feynman diagrams for 3rd and 5th order signals]{\label{fig:Feynman}Double-sided Feynman diagrams, pathway labels, and peaks for third- and fifth-order peaks in the \ce{CO2} 2D-IR spectrum (non-rephasing pathways shown). Labels for pathways correspond to those used by Garrett-Roe and Hamm in their description of purely absorptive 3D-IR spectra.\cite{Garrett-Roe2009b} In a three optical pulse experiment (like 2D-IR), only two of the three coherences of a fifth-order signal can be resolved. Thus, depending on whether up-pumping occurs during the first or second pump pulse, either \(t_1\) or \(t_3\) will be unresolved in the fifth-order pathways. This effect can lead to multiple peaks on the 2D-IR spectrum from a single fifth-order pathway.}
 \end{figure}
 
@@ -390,7 +432,7 @@ The intense \(\nu_3\) peak clearly exhibits spectral diffusion in each ionic liq
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.40]{./paper_01/fig7.eps}
+  \includegraphics[scale=1.40]{fig7.eps}
   \caption[Experimental 2D-IR spectra of \texorpdfstring{\ce{CO2}}{carbon dioxide} in \ce{[Im_{4,1}][X]}]{Experimental 2D-IR spectra of \ce{CO2} in \ce{[Im_{4,1}]} (A) \ce{[PF6]}, (B) \ce{[Tf2N]}, and (C) [DCA] show the range of timescales for spectral diffusion in \(\nu_3\). Spectral diffusion results from local structural relaxation around \ce{CO2}. Spectral modelling quantifies the timescale of this structural relaxation, and indicates that the timescale varies by up to an order of magnitude between ionic liquid solvents, and that \ce{CO2} dynamics are likely gated by anion dynamics in these ionic liquids. Spectra for \ce{CO2} in other ionic liquids tested can be found in figure~\ref{paper_01:fig:SI_all_2D}.}
   \label{fig:all 2D}
 \end{figure}
@@ -416,7 +458,7 @@ Experimental and optimized calculated spectra agree in terms of overall lineshap
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.25]{./paper_01/fig8.eps}
+  \includegraphics[scale=1.25]{fig8.eps}
   \caption[Example of global fitting of 2D-IR spectra]{\label{fig:TFA 2D fit}Example of global fitting of spectra. (A) Experimental 2D-IR spectra of \ce{CO2} in \ce{[Im_{4,1}]}[TFA]. (B) Calculated 2D-IR for \(\nu_3\) based on a third-order response function, which is fitted to A by optimizing the correlation time \(\tau_c\), frequency range \(\Delta\), and dephasing time \(T_2\), in addition to several other parameters (see text). (C) Residual between the experimental and calculated spectra.}
 \end{figure}
 
@@ -481,7 +523,7 @@ The simulated lineshape is sensitive to the rate of thermal fluctuations in \(\n
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.10]{./paper_01/fig9.eps}
+  \includegraphics[scale=1.10]{fig9.eps}
   \caption[Stochastic simulation spectrum]{\label{fig:sim spect}Calculated spectrum of \ce{CO2} in \ce{[Im_{4,1}]}[TFA] at $t_2 =$ \SIlist[list-units = single]{0.2;50}{\ps}. Spectra are based on a stochastic simulation that allows the bending mode of a particular oscillator to fluctuate over the course of the experiment (while preserving a Boltzmann distribution). The lineshape as a function of \(t_2\) closely approximates the lineshape of the main peak (1a and 2a), first diagonal shoulder (1b and 2b), and cross-peaks (1b,a; 2a,b and 2b,a) in the experimental spectra (Figure~{\ref{fig:example 2D}}).}
 \end{figure}
 
@@ -503,7 +545,7 @@ The bulk viscosity, \(\eta\), serves as a proxy for this rate of diffusion which
 
 \begin{figure}
   \centering
-  \includegraphics[scale=1.25]{./paper_01/fig10.eps}
+  \includegraphics[scale=1.25]{fig10.eps}
   \caption[\texorpdfstring{\(\tau_c\)}{tau(c)}-viscosity correlation with differing ionic liquid anion]{\label{fig:visc correlation}Correlation time, \(\tau_c\), compared with viscosity for the 1-butyl-3-methylimidazolium ionic liquid solvent. Data points marked with an `O' are from \ce{CO2} in this work, while those marked `X' are correlation times from other works (a) \ce{SCN-} in \ce{[Im_{4,1}][Tf2N]},\cite{Ren2014} (b) HOD in \ce{[Im_{4,1}][PF6]},\cite{wongJPCB-13} with ionic liquid viscosity scaled to account for water content.\cite{Li2007}  Literature values for viscosity were used for all ionic liquids.\cite{Tokuda2006a,Domanska2012,Sanchez2009}}
 \end{figure}
 
@@ -550,13 +592,13 @@ with the resulting parameters for \ce{CO2} \(\nu_3\) in \ce{[Im_{4,1}][TFA]}: \(
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=0.8]{./paper_01/CLS_BMIMTFA.pdf}
+  \includegraphics[scale=0.8]{CLS_BMIMTFA.pdf}
   \caption[CLS overlaid on 2D-IR spectrum]{CLS overlaid on the 2D spectrum of \ce{CO2} in \ce{[Im_{4,1}][TFA]}}
 \end{figure}
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1]{./paper_01/CLS_fit_BMIMTFA.pdf}
+  \includegraphics[scale=1]{CLS_fit_BMIMTFA.pdf}
   \caption[CLS fitting of 2D-IR spectrum]{CLS fitting of \ce{CO2} \(\nu_3\) 2D spectrum from \ce{[Im_{4,1}][TFA]}}
 \end{figure}
 
@@ -565,7 +607,7 @@ with the resulting parameters for \ce{CO2} \(\nu_3\) in \ce{[Im_{4,1}][TFA]}: \(
 
 \begin{figure}[h]
   \centering
-  \includegraphics[scale=1.0]{./paper_01/all_2d.eps}
+  \includegraphics[scale=1.0]{all_2d.eps}
   \caption[Experimental 2D-IR spectra of \texorpdfstring{\ce{CO2}}{carbon dioxide} in all \ce{[Im_{4,1}][X]}]{2D-IR spectra of \ce{CO2} \(\nu_3\) in \ce{[Im_{4,1}+]} (A) \ce{[PF6]-}, (B) \ce{[TFA]-}, (C) \ce{[TfO]-}, (D) \ce{[Tf2N]-}, (E) \ce{[SCN]-}, and (F) \ce{[DCA]-}, showing the range of timescales for spectral diffusion in \(\nu_3\).}
   \label{paper_01:fig:SI_all_2D}
 \end{figure}
@@ -644,3 +686,4 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
     \normalsize
   \end{table}
 \end{landscape}
+\end{document}

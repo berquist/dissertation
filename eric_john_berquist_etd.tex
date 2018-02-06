@@ -3,6 +3,18 @@
 \let\setyear\year
 \let\year\oldyear
 %
+% This is first because otherwise references won't get added properly
+% to the main document.
+\usepackage{etoolbox}
+\usepackage[%
+  subpreambles = false,%
+  sort = false,%
+  print = false,%
+  group = false,%
+  mode = tex,%
+  obeyclassoptions = false,%
+]{standalone}
+%
 % \usepackage{fontspec}
 % \setmonofont[Scale=0.75]{Panic Sans}
 %
@@ -17,7 +29,6 @@
     maxnames   = 999,%
 ]{biblatex}
 \let\cite\autocite
-\let\citep\parencite
 \DefineBibliographyStrings{english}{%
   backrefpage = {page},% originally "cit. on p."
   backrefpages = {pages},
@@ -34,9 +45,7 @@
 \usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{braket}
-\usepackage{etoolbox}
 \usepackage{graphicx}
-\usepackage{longtable}
 \usepackage{makecell}
 \renewcommand{\cellalign}{cl}
 \usepackage[version=4]{mhchem}
@@ -56,8 +65,8 @@
     retain-explicit-plus = true,%
 ]{siunitx}
 \DeclareSIUnit\Molar{M}
-\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
 \DeclareSIUnit\au{au}
+\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
 \DeclareSIUnit\debye{D}
 \DeclareSIUnit\electron{e^{-}}
 \DeclareSIUnit\kcal{\kilo\cal}
@@ -122,6 +131,8 @@
 \listoffigures
 %
 \input{./preface}
+%
+\graphicspath{{introduction/}{paper_01/}{paper_02/}{paper_03/}{paper_04/}{paper_05/}}
 \input{./introduction}
 \input{./paper_01/anions}
 \input{./paper_02/AbInitio_revised}

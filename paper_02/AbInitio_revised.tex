@@ -1,3 +1,44 @@
+\documentclass[%
+  class = book,%
+  crop = false,%
+  float = true,%
+  multi = true,%
+  preview = false,%
+]{standalone}
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    backref    = true,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+\addbibresource{../library.bib}
+\addbibresource{../paper_04/paper.bib}
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage{graphicx}
+\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
+\usepackage{makecell}
+\renewcommand{\cellalign}{cl}
+\usepackage[version=4]{mhchem}
+\usepackage{pdflscape}
+\usepackage{xspace}
+\usepackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
+\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
+\DeclareSIUnit\kcal{\kilo\cal}
+\DeclareSIUnit\wavenumber{\per\centi\metre}
+\newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
+\newcommand{\latin}[1]{\textit{#1}}
+\newcommand{\caps}[1]{\uppercase{#1}}
+\begin{document}
 \chapter[\ce{CO2}-IL Cluster Model Validation]{Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: I. \textit{Ab Initio} Calculations}
 \label{ch:paper_02}
 
@@ -78,7 +119,7 @@ where \(r_{1}^{ij}\) or \(r_{2}^{ij}\) is the bond length at grid point \((i,j)\
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.75]{paper_02/Fig1.pdf}
+  \includegraphics[scale=0.75]{Fig1.pdf}
   \caption[DVR contour plot]{Contour plot of a discrete variable representation (DVR) of the Born\textendash{}Oppenheimer potential energy surface of gas phase \ce{CO2}. Density functional theory single point energy calculations with the B3LYP functional and the 6-311++G(d,p) basis set were performed on carbon dioxide, incrementing each CO bond's length in steps of \SI{0.045}{\angstrom}, from \SIrange{0.955}{1.45}{\angstrom}. Below a relative energy of \SI{2500}{\wavenumber}, contour lines are spaced by \SI{100}{\wavenumber}, above they are spaced by \SI{2500}{\wavenumber}. Mesh intersections indicate individual single point energy calculations. In order to calculate vibrational frequencies, this potential energy surface is incorporated into a discretized version of the Hamiltonian for the stretching modes of \ce{CO2} (Eq.~\ref{paper_02:eq:1}), which is then numerically diagonalized. The asymmetric stretch frequency is obtained from the differences between the energy levels (Eq.~\ref{paper_02:eq:2}).}
   \label{paper_02:fig:1}
 \end{figure}
@@ -142,7 +183,7 @@ Bond lengths for \ce{CO2} combined with a single ion pair are shown in the lower
 
 Next we investigate the impact of method and basis set on the harmonic vibrational frequencies for the \(\nu_{3}\) mode in a \cotil complex (Tab.~\ref{paper_02:tab:2}). As expected, the absolute values of harmonic frequencies depend significantly on the method, overall the frequency can vary by more than \SI{200}{\wavenumber} depending on the choice of HF exchange percentage. We find a linear and positive correlation (\(R^{2} = 0.96\)) with the fraction of HF exchange present in the method for all basis sets (\hyperref[paper_02:sec:SI]{SI}). This correlation is consistent with the tendency of HF theory to overbind. Increasing the basis set size, on the other hand, results in decreasing the harmonic \ce{CO2} \(\nu_{3}\) frequency. The convergence of frequencies with basis size is rather slow, and even from VTZ to VQZ we still observe a change by \num{8}-\SI{9}{\wavenumber}. Overall, the sensitivity of the absolute vibrational frequencies to the method and basis set choice is large compared to the accuracy required to quantitatively describe the frequency shifts for \ce{CO2} solvated in different ionic liquids, which is on the order of \SI{10}{\wavenumber}.
 
-It is therefore imperative to investigate how sensitive the prediction of relative trends is with respect to the computational approach. To this end, we consider snapshots from MD simulations (see Ref. \citep{Daly2016} for details), which allows us to test how well different computational approaches can predict \emph{trends} in dependence of the local coordination environment around the \ce{CO2} and the bulk solvent structure. Fig.~\ref{paper_02:fig:S3} shows the \ce{CO2} \(\nu_{3}\) harmonic frequencies calculated for \num{1000} statistically uncorrelated MD snapshots (0 QM/256 MM) using various SCF-type approaches, as compared to M\o{}ller\textendash{}Plesset perturbation theory to second order (MP2) as the least expensive wave function-based method that incorporates dispersion effects.\cite{WCMS:WCMS58} The predicted harmonic frequencies in Fig.~\ref{paper_02:fig:S3} are parallel to each other for most of the frequency range, independent of method and basis set choice. These results for relative trends in vibrational frequencies are highly encouraging. Aside from a multiplicative scaling factor, any of the common quantum chemical methods investigated here can qualitatively reproduce the distribution of harmonic frequencies.
+It is therefore imperative to investigate how sensitive the prediction of relative trends is with respect to the computational approach. To this end, we consider snapshots from MD simulations (see Ref.~\parencite{Daly2016} for details), which allows us to test how well different computational approaches can predict \emph{trends} in dependence of the local coordination environment around the \ce{CO2} and the bulk solvent structure. Fig.~\ref{paper_02:fig:S3} shows the \ce{CO2} \(\nu_{3}\) harmonic frequencies calculated for \num{1000} statistically uncorrelated MD snapshots (0 QM/256 MM) using various SCF-type approaches, as compared to M\o{}ller\textendash{}Plesset perturbation theory to second order (MP2) as the least expensive wave function-based method that incorporates dispersion effects.\cite{WCMS:WCMS58} The predicted harmonic frequencies in Fig.~\ref{paper_02:fig:S3} are parallel to each other for most of the frequency range, independent of method and basis set choice. These results for relative trends in vibrational frequencies are highly encouraging. Aside from a multiplicative scaling factor, any of the common quantum chemical methods investigated here can qualitatively reproduce the distribution of harmonic frequencies.
 
 Identifying the role of different intermolecular interactions in determining the vibrational signature of solvated \ce{CO2} is an important aspect of our previous and ongoing work.\cite{Brinzer2015,Ramos-Cordoba2011,Lambrecht2011c} In our previous publication,\cite{Brinzer2015} we found that the CT contribution is decisive for discriminating between the vibrational signatures of \ce{CO2} solvated in different ionic liquids. We therefore end this section by investigating the method and basis set dependence of the CT contributions to relative shifts in the \ce{CO2} asymmetric stretch frequency due to solvation. As discussed in our previous publication,\cite{Brinzer2015} CT can enter the frequency shift at two stages: (i) during the geometry optimization (i.e., influencing the geometries sampled by the solvated \ce{CO2}), and (ii) during the frequency calculation (i.e., by modifying the curvature of the potential energy surface at the point where the frequency is calculated).
 
@@ -178,7 +219,7 @@ To quantify the sensitivity of both mechanisms to the computational approach, we
 
 Our results show that the frequency shift varies by up to \SI{0.9}{\wavenumber} depending on the method and by up to \SI{1.53}{\wavenumber} depending on the basis set (Tab.~\ref{paper_02:tab:3}, top). For the ``curvature mechanism'' (ii), we calculated the shift between standard ``CT on'' and ``CT off'' frequency calculations at the same, conventionally (``CT on'') optimized geometries (Tab.~\ref{paper_02:tab:3}, bottom). Here we find variations with the method of up to \SI{0.49}{\wavenumber} and up to \SI{1.86}{\wavenumber} with the basis set. Compared to the magnitude of the total CT frequency shifts, the basis set dependence is not negligible.
 
-This finding is not surprising, because the definition of CT used within the ALMO approach is intimately linked to the locality of the basis set. However, we note that \emph{all} methods and basis sets tested here provide qualitatively similar predictions, namely a negative frequency shift between \num{-1.19} and \SI{-3.50}{\wavenumber} for the ``geometry mechanism'' and between \num{-0.94} and \SI{-2.97}{\wavenumber} for the ``curvature mechanism''. For future work, it will be useful to consider alternative definitions of CT that are less dependent on basis set locality (see e.g. Ref.~\citep{Lao2016a}).
+This finding is not surprising, because the definition of CT used within the ALMO approach is intimately linked to the locality of the basis set. However, we note that \emph{all} methods and basis sets tested here provide qualitatively similar predictions, namely a negative frequency shift between \num{-1.19} and \SI{-3.50}{\wavenumber} for the ``geometry mechanism'' and between \num{-0.94} and \SI{-2.97}{\wavenumber} for the ``curvature mechanism''. For future work, it will be useful to consider alternative definitions of CT that are less dependent on basis set locality (see e.g. Ref.~\parencite{Lao2016a}).
 
 The relative magnitudes of the ``geometry'' versus ``curvature'' mechanism results warrant some discussion, given that we found previously that the geometry contribution dominates the differentiation between different ionic liquids. According to the present results, the impact of CT via the geometry is typically bigger than the curvature effect by \SIrange{\sim 15}{35}{\percent} (with exception of the LP results, where the geometry effect is smaller than the curvature effect), but on the other hand this means the curvature effect still makes up a signification portion of the CT frequency shift. This finding may be surprising at first, but it is important to note that our previous discussion was not about the absolute magnitude of the shifts, but about the differentiation between different ionic liquids. In fact, the current results of \num{-3.50} and \SI{-2.86}{\wavenumber} are in good agreement with those from our previous publication, \SI{-3.29}{\wavenumber} and \SI{-2.29}{\wavenumber}, respectively. While the absolute values of the CT shifts are largely caused by the impact of CT on the force constants during the frequency calculation, the modification of the geometry determines the \emph{differentiation} between different ILs.
 
@@ -208,7 +249,7 @@ For the harmonic grid-based calculations, we fit an accurate analytical potentia
 
 As another point supporting the necessity for DVR calculations, we observe that the standard deviation of the calculated harmonic vibrational frequency distribution of \SI{\sim 100}{\wavenumber} (Tab.~\ref{paper_02:tab:S1}) is about an order of magnitude larger than the experimental distribution of \SIrange{\sim 6}{10}{\wavenumber}. This large error arises from the fact that harmonic calculations pick up contaminations in the frequency that grow with the displacement from the minima. As we will show in the follow-up paper,\cite{Daly2016} the anharmonic DVR calculations result in frequency distributions that are consistent with experiment. In summary, we conclude that the inclusion of anharmonic effects is imperative for constructing a spectroscopic map that allows meaningful comparison to experiment.
 
-Since our previous results emphasized that CT is a decisive factor for the \ce{CO2} solvation shift between different ionic liquids, it is important to investigate the significance of CT in the context of anharmonic calculations. The fact that DVR calculations are agnostic toward the level of theory used to generate the discretized potential energy surface allows us to perform DVR calculations on standard (``CT on'') and ALMO/SCF-MI (``CT off'') surfaces (Tab.~\ref{paper_02:tab:5}). Excluding CT, we obtain a frequency of \SI{2399.4}{\wavenumber} and bond lengths of \SI{1.172}{\angstrom} and \SI{1.173}{\angstrom}, respectively. The slight bond length asymmetry arises from the fact that we averaged over \num{85} snapshots taken from classical MD simulations, resulting in slightly non-symmetric solvation environments (see Ref.~\citep{Daly2016} for details). Upon turning CT on, the vibrational frequency decreases to \SI{2389.5}{\wavenumber}, whereas bond lengths remain almost unchanged at \num{1.173} and \SI{1.173}{\angstrom}, respectively. This \SI{9.9}{\wavenumber} red-shift is comparable in size to experimentally observed solvation shifts for \ce{CO2} in ionic liquids,\cite{Brinzer2015,choi_vibrational_2011} which means that the anharmonic results are consistent with our earlier conclusion that CT is important to understand the vibrational signature of solvated \ce{CO2}. We plan to quantify the \emph{relative} effects of CT when studying ILs other than \ce{[C4C1im][PF6]} in future work.
+Since our previous results emphasized that CT is a decisive factor for the \ce{CO2} solvation shift between different ionic liquids, it is important to investigate the significance of CT in the context of anharmonic calculations. The fact that DVR calculations are agnostic toward the level of theory used to generate the discretized potential energy surface allows us to perform DVR calculations on standard (``CT on'') and ALMO/SCF-MI (``CT off'') surfaces (Tab.~\ref{paper_02:tab:5}). Excluding CT, we obtain a frequency of \SI{2399.4}{\wavenumber} and bond lengths of \SI{1.172}{\angstrom} and \SI{1.173}{\angstrom}, respectively. The slight bond length asymmetry arises from the fact that we averaged over \num{85} snapshots taken from classical MD simulations, resulting in slightly non-symmetric solvation environments (see Ref.~\parencite{Daly2016} for details). Upon turning CT on, the vibrational frequency decreases to \SI{2389.5}{\wavenumber}, whereas bond lengths remain almost unchanged at \num{1.173} and \SI{1.173}{\angstrom}, respectively. This \SI{9.9}{\wavenumber} red-shift is comparable in size to experimentally observed solvation shifts for \ce{CO2} in ionic liquids,\cite{Brinzer2015,choi_vibrational_2011} which means that the anharmonic results are consistent with our earlier conclusion that CT is important to understand the vibrational signature of solvated \ce{CO2}. We plan to quantify the \emph{relative} effects of CT when studying ILs other than \ce{[C4C1im][PF6]} in future work.
 
 \begin{table}
   \centering
@@ -237,8 +278,8 @@ We previously concluded\cite{Brinzer2015} that the CT term, as defined in the AL
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.91]{paper_02/Fig2a.pdf}
-  \includegraphics[scale=0.91]{paper_02/Fig2b.pdf}
+  \includegraphics[scale=0.91]{Fig2a.pdf}
+  \includegraphics[scale=0.91]{Fig2b.pdf}
   \caption[Correlation of \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} frequencies with CT mechanisms]{Comparison of B3LYP/SP frequencies calculated (a, top) within the ALMO (CT off) approach versus standard SCF (CT on) at the standard SCF-optimized geometry and (b, bottom) at the ALMO-optimized geometry versus standard SCF-optimized geometry with Hessian within the ALMO approach (red squares) versus Hessian using standard DFT (blue triangles). The frequencies are unscaled.}
   \label{paper_02:fig:2}
 \end{figure}
@@ -249,8 +290,8 @@ However, ALMO simultaneously corrects for CT as well as the basis set superposit
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.91]{paper_02/Fig3a.pdf}
-  \includegraphics[scale=0.91]{paper_02/Fig3b.pdf}
+  \includegraphics[scale=0.91]{Fig3a.pdf}
+  \includegraphics[scale=0.91]{Fig3b.pdf}
   \caption[Correlation of \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} frequencies with CP corrections]{Comparison of B3LYP/SP frequencies (a, top) calculated at counterpoise (CP) corrected geometries versus uncorrected geometries and (b, bottom) calculated using CP-corrected Hessians at CP-corrected geometries versus uncorrected Hessians at uncorrected geometries. The frequencies are unscaled.}
   \label{paper_02:fig:3}
 \end{figure}
@@ -345,7 +386,7 @@ Our previous publication\cite{Brinzer2015} used a rather crude gas-phase cluster
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{paper_02/frequency_same_set_2QM_convergence.pdf}
+  \includegraphics[width=\textwidth]{frequency_same_set_2QM_convergence.pdf}
   \caption[Effect of QM and MM region size on \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} QM/MM frequencies]{Dependence of harmonic \(\nu_3\) frequencies (unscaled) on the solvent box size (B3LYP/SP potential energy surface).}
   \label{paper_02:fig:4}
 \end{figure}
@@ -365,7 +406,7 @@ where \(n\) is the size of the QM region (measured in number of ion pairs) and \
 
 \begin{figure}
   \centering
-  \includegraphics{paper_02/Fig5.pdf}
+  \includegraphics{Fig5.pdf}
   \caption[DVR convergence with respect to number of QM ion pairs]{Dependence of DVR \(\nu_{3}\) mean frequency (\(\overline{\nu}\)) on the number of solvent ion pairs treated quantum mechanically (\(n_{QM}\)). Mean frequencies were calculated from \(N = 10\) representative MD snapshots using a B3LYP/SP potential energy surface. Error bars represent the standard deviation of the mean (\(SD_{\overline{x}} = \sigma_{x}/\sqrt{N}\)). The data were fitted to an exponential decay (\({\overline{\nu}}_{QM} = A\exp\left( - kn_{QM} \right) + {\overline{\nu}}_{converged}\)), with weights of \(1/SD_{\overline{x}}^{2}\) (\(R^2 = 0.99\)). The resulting estimate for the fully converged frequency at this level of theory is \(2388.8 \pm \SI{1.5}{\wavenumber}\).}
   \label{paper_02:fig:5}
 \end{figure}
@@ -451,13 +492,13 @@ Statistics on calculated harmonic frequencies across different MD snapshots, bin
 \subsection{Method and Basis Set Dependence of Harmonic Frequencies}
 \label{paper_02:ssec:SI3}
 
-It is imperative to investigate how sensitive the prediction of relative trends is with respect to the computational approach. To this end, we consider snapshots from MD simulations (see Ref. \citep{Daly2016} for details), which allow us to test how well different computational approaches can predict \emph{trends} in dependence of the local coordination environment around the \ce{CO2} and the bulk solvent structure. Fig.~\ref{paper_02:fig:S3} shows the \ce{CO2} \(\nu_{3}\) harmonic frequencies calculated for \num{1000} statistically uncorrelated MD snapshots (0 QM/256 MM) using various SCF-type approaches, as compared to Møller-Plesset perturbation theory to second order (MP2) as the least expensive wave function-based method that incorporates dispersion effects.\cite{WCMS:WCMS58} The predicted harmonic frequencies in Fig.~\ref{paper_02:fig:S3} are parallel to each other for most of the frequency range, independent of method and basis set choice. In fact, there is almost complete overlap between the B3LYP/SP and \(\omega\)B97X-D/SP distributions, and to a lesser degree for B3LYP/VTZ and \(\omega\)B97X-D/VTZ. There is minor crossing of curves in two instances, 1. TPSS/VTZ with \(\omega\)B97X-D/SP, and 2. HF/SP with both B3LYP/VTZ and \(\omega\)B97X-D/VTZ, but nevertheless the conservation of qualitative trends seems excellent. The ordering of calculated frequencies is, from smallest to largest, HF, B3LYP, \(\omega\)B97X-D, BLYP, TPSS, and MP2, using the SP basis set. Within the VTZ basis, the ordering of MP2 and TPSS is interchanged. As expected, the MP2 results are most sensitive to the basis set size, as wave-function based correlation methods require larger basis sets for convergence compared to self-consistent field approaches (HF and DFT). The VTZ basis set predicts frequency distributions that are red-shifted compared to the SP basis set, in agreement with the trends observed from Table~\ref{paper_02:tab:2}.
+It is imperative to investigate how sensitive the prediction of relative trends is with respect to the computational approach. To this end, we consider snapshots from MD simulations (see Ref.~\parencite{Daly2016} for details), which allow us to test how well different computational approaches can predict \emph{trends} in dependence of the local coordination environment around the \ce{CO2} and the bulk solvent structure. Fig.~\ref{paper_02:fig:S3} shows the \ce{CO2} \(\nu_{3}\) harmonic frequencies calculated for \num{1000} statistically uncorrelated MD snapshots (0 QM/256 MM) using various SCF-type approaches, as compared to Møller-Plesset perturbation theory to second order (MP2) as the least expensive wave function-based method that incorporates dispersion effects.\cite{WCMS:WCMS58} The predicted harmonic frequencies in Fig.~\ref{paper_02:fig:S3} are parallel to each other for most of the frequency range, independent of method and basis set choice. In fact, there is almost complete overlap between the B3LYP/SP and \(\omega\)B97X-D/SP distributions, and to a lesser degree for B3LYP/VTZ and \(\omega\)B97X-D/VTZ. There is minor crossing of curves in two instances, 1. TPSS/VTZ with \(\omega\)B97X-D/SP, and 2. HF/SP with both B3LYP/VTZ and \(\omega\)B97X-D/VTZ, but nevertheless the conservation of qualitative trends seems excellent. The ordering of calculated frequencies is, from smallest to largest, HF, B3LYP, \(\omega\)B97X-D, BLYP, TPSS, and MP2, using the SP basis set. Within the VTZ basis, the ordering of MP2 and TPSS is interchanged. As expected, the MP2 results are most sensitive to the basis set size, as wave-function based correlation methods require larger basis sets for convergence compared to self-consistent field approaches (HF and DFT). The VTZ basis set predicts frequency distributions that are red-shifted compared to the SP basis set, in agreement with the trends observed from Table~\ref{paper_02:tab:2}.
 
 These results for relative trends in vibrational frequencies are highly encouraging. Aside from a multiplicative scaling factor, any of the common quantum chemical methods investigated here can qualitatively reproduce the distribution of harmonic frequencies. The similarity in performance between B3LYP and \(\omega\)B97X-D is somewhat surprising, as the former is a global hybrid with a fixed fraction of HF exchange over all interelectronic distances, and \(\omega\)B97X-D is a range-separated functional with a variable fraction of HF exchange. An explanation of this observation will be provided together with the SAPT results.
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{./paper_02/snapshots_ordered_0QM_256MM.pdf}
+  \includegraphics[width=\textwidth]{snapshots_ordered_0QM_256MM.pdf}
   \caption[Spread of method and basis set dependence of MD snapshots]{Harmonic \(\nu_{3}\) frequencies (unscaled) for different methods and basis sets, ordered from lowest to highest frequency according to MP2/VTZ (0 QM/256 MM). The TPSS meta-GGA\cite{Tao2003} and the \(\omega\)B97X-D\cite{Chai2008} hybrid GGA density functionals are included as representatives of more recent functionals. \(\omega\)B97X-D is both a range-separated functional, with a minimum 22\% HF exchange at \(r_{e} = 0\), increasing smoothly to 100\% as \(r_{e} \rightarrow \infty\), and it includes an empirical dispersion correction. To aid in recognizing trends, we have ordered the structures by increasing MP2/VTZ frequency. MP2 calculations use the resolution of the identity (RI) approximation\cite{Feyereisen1993,Weigend1997,Distasio2007} and the cc-pVQZ-RI fitting basis set\cite{Weigend2002}.}
   \label{paper_02:fig:S3}
 \end{figure}
@@ -466,7 +507,7 @@ To confirm that the good agreement in relative trends is not an artifact of the 
 
 \begin{figure}
   \centering
-  \includegraphics[width=\textwidth]{./paper_02/trajectory_frequencies_cc-pvtz.pdf}
+  \includegraphics[width=\textwidth]{trajectory_frequencies_cc-pvtz.pdf}
   \caption[Instantaneous method and basis set dependence of MD snapshots]{Harmonic \(\nu_{3}\) frequencies (unscaled) for the first \num{50} (out of \num{1000}) snapshots calculated with different methods and the cc-pVTZ basis set (0 QM/256 MM).}
   \label{paper_02:fig:S4}
 \end{figure}
@@ -641,9 +682,10 @@ To test the qualitative accuracy of the calculations using smaller QM regions, w
 
 \begin{figure}
   \centering
-  \includegraphics[scale=0.85]{./paper_02/figureS5.png}% TODO the png looks terribad
+  \includegraphics[scale=0.85]{figureS5.png}% TODO the png looks terribad
   \caption[Self-correlation of QM/MM frequencies with increasing QM region size]{Correlation plots for QM/MM harmonic frequencies of \num{10} MD snapshots, with increasing numbers of anion-cation pairs treated quantum mechanically.}
   \label{paper_02:fig:S5}
 \end{figure}
 
 % TODO contents of Excel spreadsheet
+\end{document}
