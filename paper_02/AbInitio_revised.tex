@@ -15,6 +15,11 @@
     minnames   = 1,%
     maxnames   = 999,%
 ]{biblatex}
+\let\cite\autocite
+\DefineBibliographyStrings{english}{%
+  backrefpage = {page},% originally "cit. on p."
+  backrefpages = {pages},
+}
 \addbibresource{../library.bib}
 \addbibresource{../paper_04/paper.bib}
 \usepackage{booktabs}

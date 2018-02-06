@@ -5,9 +5,9 @@ float = true,%
 multi = true,%
 preview = false,%
 ]{standalone}
-\usepackage{amsmath}
+\onlyifstandalone{\usepackage{amsmath}}
+\onlyifstandalone{\usepackage{xcolor}}
 \usepackage{cancel}
-\usepackage{xcolor}
 % https://tex.stackexchange.com/q/105902/94717
 % \newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 \newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
