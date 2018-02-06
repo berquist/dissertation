@@ -299,10 +299,11 @@
     \newcommand\acro[1]{\textSMC{#1}\@}}{}
 \if@hyper@ref
     \AtEndOfClass{%
-        \usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
+        \usepackage[bookmarks,colorlinks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
         \def\@pdfcreator{LaTeX, pittetd class, hyperref package}}
     \AtBeginDocument{%
-        \hypersetup{%
+        \hypersetup{%,
+            bookmarksnumbered,bookmarksopen,%
             pdftitle=\@pdftitle,pdfauthor=\@author,%
             pdfkeywords=\@keywords,%
             pdfsubject=\the\subject}}
