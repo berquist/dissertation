@@ -9,7 +9,7 @@ preview = false,%
 \usepackage{cancel}
 \usepackage{xcolor}
 % https://tex.stackexchange.com/q/105902/94717
-\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+% \newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 \newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
 \begin{document}
 \chapter{Introduction}
@@ -58,6 +58,7 @@ For a one-dimensional spring connecting a ball to a fixed object, Hooke's law
 
 \begin{equation}
   F = -k x
+  \label{eq:hooke_1d}
 \end{equation}
 
 Generalization to 3D space
@@ -127,6 +128,43 @@ Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem
 \end{equation}
 
 Comment on which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots)
+
+A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(E\) that produces this dipole moment. Although the electric field is usually written as \(E\) or \(F\), here \(\epsilon\) is used to disambiguate it from the geometric force in \eqref{eq:hooke_1d}. Both \(\mu\) and \(\epsilon\) are 3D vector quantities
+
+\begin{equation}
+  \mu = \alpha \epsilon
+\end{equation}
+
+\begin{equation}
+  \begin{bmatrix}
+    \mu_{1} \\ \mu_{2} \\ \mu_{3}
+  \end{bmatrix}
+  = -
+  \begin{bmatrix}
+    \alpha_{11} & \alpha_{12} & \alpha_{13} \\
+    \alpha_{21} & \alpha_{22} & \alpha_{23} \\
+    \alpha_{31} & \alpha_{32} & \alpha_{33}
+  \end{bmatrix}
+  \begin{bmatrix}
+    \epsilon_{1} \\ \epsilon_{2} \\ \epsilon_{3}
+  \end{bmatrix}
+\end{equation}
+
+Another definition of the molecular dipole moment induced by an external (applied) electric field is
+
+\begin{equation}
+  \mu_{i} = \frac{\partial E}{\partial \epsilon_{i}}
+\end{equation}
+
+\begin{equation}
+  \alpha_{ij} \epsilon_{j} = \frac{\partial E}{\partial \epsilon_{i}}
+\end{equation}
+
+\begin{align}
+  \left( \frac{\partial}{\partial \epsilon_{j}} \right) \left( -\alpha_{ij} \epsilon_{j} \right) &= \left( \frac{\partial}{\partial \epsilon_{j}} \right) \left( \frac{\partial E}{\partial \epsilon_{i}} \right) \\
+  -\Ccancelto[red]{0}{\left( \frac{\partial \alpha_{ij}}{\partial \epsilon_{j}} \right)} \epsilon_{j} - \alpha_{ij} \Ccancelto[green]{1}{\left( \frac{\partial \epsilon_{j}}{\partial \epsilon_{j}} \right)} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}} \\
+  -\alpha_{ij} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}}
+\end{align}
 
 \section{Frequency-dependent response}
 
