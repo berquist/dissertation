@@ -5,7 +5,138 @@ float = true,%
 multi = true,%
 preview = false,%
 ]{standalone}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage{xcolor}
+% https://tex.stackexchange.com/q/105902/94717
+\newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
+\newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
 \begin{document}
 \chapter{Introduction}
 \label{ch:introduction}
+
+\section{Introduction to the thesis}
+What is the unifying theme?
+
+The unifying theme is the contribution of specific intermolecular interactions to spectroscopic response.
+
+The contributions of specific intermolecular interactions are in the language of energy decomposition analysis using absolutely localized molecular orbitals, abbreviated as ALMO-EDA.
+
+Intro/background to ALMO-EDA is given in sec 4.2
+
+In chapters blah, blah, blah, we present applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies and dipole polarizabilities.
+
+The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables.
+
+\section{Connection between macroscopic and microscopic}
+
+maybe subsection of ADT
+
+\section{Analytic derivative theory}
+
+\begin{itemize}
+\item start from MacLaurin series expansion of the perturbation
+\item identify each derivative as corresponding to a molecular property
+\item example tables of molecular properties (not until after frequency-dependent perturbations)
+\item however examples for Hessian, polarizability (static) are ok
+\item some explanation of why this is insufficient for frequency-dependent perturbations
+\item finite difference?
+\end{itemize}
+
+Sources: Toulouse; Handy has expressions for derivatives leading to integrals
+
+Two possible ways to perform the derivation:
+
+\begin{enumerate}
+\item from series expansion of the energy with respect to one or more perturbations
+\item from a phenomenological Hamiltonian (sort of like quantizing a classical expression)
+\end{enumerate}
+
+\subsection{Phenomenological approach}
+
+For a one-dimensional spring connecting a ball to a fixed object, Hooke's law
+
+\begin{equation}
+  F = -k x
+\end{equation}
+
+Generalization to 3D space
+
+\begin{equation}
+  \begin{bmatrix}
+    F_{1} \\ F_{2} \\ F_{3}
+  \end{bmatrix}
+  = -
+  \begin{bmatrix}
+    k_{11} & k_{12} & k_{13} \\
+    k_{21} & k_{22} & k_{23} \\
+    k_{31} & k_{32} & k_{33}
+  \end{bmatrix}
+  \begin{bmatrix}
+    x_{1} \\ x_{2} \\ x_{3}
+  \end{bmatrix}
+\end{equation}
+
+Can also be made 3N-dimensional, describes the forces on atoms given their relative positions \(\mathbf{x}\) and the ``stiffness'' of their connectivity \(\mathbf{k}\)
+
+\begin{equation}
+  F_{i} = - \sum_{j} k_{ij} x_{j}
+\end{equation}
+
+Rewrite in Einstein summation notation
+
+\begin{equation}
+  F_{i} = -k_{ij} x_{j}
+  \label{eq:force_hooke_einstein}
+\end{equation}
+
+We also know that the force is related to the energy. In one dimension
+
+\begin{align}
+  F &= - \nabla U \\
+  &= \frac{\partial E}{\partial x}
+\end{align}
+
+In arbitrary dimensions
+
+\begin{equation}
+  F_{i} = \frac{\partial E}{\partial x_{i}}
+  \label{eq:force_partial_derivative}
+\end{equation}
+
+Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_partial_derivative} gives
+
+\begin{equation}
+  -k_{ij} x_{j} = \frac{\partial E}{\partial x_{i}}
+\end{equation}
+
+To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side
+
+\begin{align}
+  \left( \frac{\partial}{\partial x_{j}} \right) \left( -k_{ij} x_{j} \right) &= \left( \frac{\partial}{\partial x_{j}} \right) \left( \frac{\partial E}{\partial x_{i}} \right) \\
+  \Ccancelto[red]{0}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) \left( -k_{ij} \right) \right]} x_{j} - k_{ij} \Ccancelto[green]{1}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) x_{j} \right]} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} \\
+  -k_{ij} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}}
+\end{align}
+
+This tells that the internal stiffness is related to the second derivative of the energy with respect to nuclear coordinate displacements. The internal stiffness is actually the molecular Hessian.
+
+Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem
+
+\begin{equation}
+  \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} = \frac{\partial^{2} E}{\partial x_{i} \partial x_{j}}
+\end{equation}
+
+Comment on which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots)
+
+\section{Frequency-dependent response}
+
+\begin{itemize}
+\item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
+\item Two approaches: quasi-energy derivatives and polarization propagator
+\item In the static limit (\(\omega \rightarrow 0, t \rightarrow \infty\) (?)), equivalent to ADT, this is a more general derivation
+\item This is a one-particle approximation, that is, assume a perturbation can be described as a linear combination of single-particle excitations and deexcitations
+\item Two-particle approximation is SOPPA
+\end{itemize}
+
+Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
 \end{document}
