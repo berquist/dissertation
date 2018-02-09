@@ -25,11 +25,15 @@
 \usepackage{booktabs}
 \usepackage{braket}
 \usepackage{graphicx}
+\onlyifstandalone{\usepackage[margin=1in]{geometry}}
+\onlyifstandalone{\raggedbottom}
 \usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
 \usepackage{makecell}
 \renewcommand{\cellalign}{cl}
 \usepackage[version=4]{mhchem}
+\usepackage{multirow}
 \usepackage{pdflscape}
+\usepackage[flushleft]{threeparttable}
 \usepackage{xspace}
 \usepackage[%
     separate-uncertainty = true,%
@@ -43,6 +47,7 @@
 \newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
 \newcommand{\latin}[1]{\textit{#1}}
 \newcommand{\caps}[1]{\uppercase{#1}}
+\hyphenation{solvato-chromic}
 \begin{document}
 \chapter[\texorpdfstring{\ce{CO2}}{CO2}-IL Cluster Model Validation]{Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: I. \textit{Ab Initio} Calculations}
 \label{ch:paper_02}
@@ -146,8 +151,9 @@ In a previous publication\cite{Brinzer2015} we identified the predominant role o
   \begin{tabular}{ccccccc}
     \toprule
     & \multicolumn{3}{c}{\(r_{\ce{O}1}\)} & \multicolumn{3}{c}{\(r_{\ce{O}1} + r_{\ce{O}2}\)} \\
-    \midrule
+    \cmidrule{2-7}
     \ce{CO2} (free) & BLYP & B3LYP & HF & BLYP & B3LYP & HF \\
+    \midrule
     SP & 1.1828 & 1.1692 & 1.1433 & 2.3656 & 2.3383 & 2.2865 \\
     LP & 1.1744 & 1.1608 & 1.1357 & 2.3487 & 2.3216 & 2.2715 \\
     VDZ & 1.1815 & 1.1674 & 1.1406 & 2.3630 & 2.3348 & 2.2811 \\
@@ -155,8 +161,9 @@ In a previous publication\cite{Brinzer2015} we identified the predominant role o
     VQZ & 1.1720 & 1.1588 & 1.1345 & 2.3441 & 2.3176 & 2.2690 \\
     \midrule
     & \multicolumn{3}{c}{\(r_{\ce{O}1}\)} & \multicolumn{3}{c}{\(r_{\ce{O}1} + r_{\ce{O}2}\)} \\
-    \midrule
+    \cmidrule{2-7}
     \ce{CO2}/\ce{[BMIM][PF6]} & BLYP & B3LYP & HF & BLYP & B3LYP & HF \\
+    \midrule
     SP & 1.1854 & 1.1723 & 1.1473 & 2.3649 & 2.3380 & 2.2871 \\
     LP & 1.1775 & 1.1646 & 1.1402 & 2.3485 & 2.3217 & 2.2725 \\
     VDZ & 1.1845 & 1.1710 & 1.1450 & 2.3622 & 2.3345 & 2.2819 \\
@@ -177,6 +184,7 @@ Bond lengths for \ce{CO2} combined with a single ion pair are shown in the lower
   \begin{tabular}{cccc}
     \toprule
     & \multicolumn{3}{c}{Method} \\
+    \cmidrule{2-4}
     Basis & BLYP & B3LYP & HF \\
     \midrule
     SP & 2348.88 & 2437.23 & 2582.87 \\
@@ -200,27 +208,45 @@ To quantify the sensitivity of both mechanisms to the computational approach, we
   \centering
   \caption[Charge transfer dependence of \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} frequencies]{Dependence of CT contributions to the \(\nu_3\) frequency based on functional (BLYP, B3LYP, and HF) and basis set (SP, LP, VDZ, VTZ, and VQZ). Calculations are on an optimized gas-phase cluster of \ce{CO2} with a single cation/anion pair. All frequencies reported in \si{\wavenumber}. We distinguish two mechanisms by which CT can enter the frequency: (i) a ``geometry mechanism'' where CT determines the optimized geometry of the cluster, calculated as the difference between standard harmonic frequency results at the optimized standard (``CT on'') and ALMO (``CT off'') geometries. (ii) a ``curvature mechanism'' where CT enters by modifying the force constant at the optimized geometry, calculated as the difference between the ``CT on'' and ``CT off'' frequencies at the optimized standard (``CT on'') geometry.}
   \label{paper_02:tab:3}
-  \begin{tabular}{cccc}
-    (i) ``Geometry Mechanism'' & \multicolumn{3}{c}{Method} \\
-    \hline
-    Basis & BLYP & B3LYP & HF \\
-    \hline
-    SP & -3.16 & -3.50 & -3.33 \\
-    LP & -2.80 & -3.38 & -3.72 \\
-    VDZ & -2.46 & -3.11 & -2.93 \\
-    VTZ & -1.90 & -2.35 & -1.19 \\
-    VQZ & -2.44 & N/A & N/A
-  \end{tabular}
-  \begin{tabular}{cccc}
-    (ii) ``Curvature Mechanism'' & \multicolumn{3}{c}{Method} \\
-    \hline
-    Basis & BLYP & B3LYP & HF \\
-    \hline
-    SP & -2.72 & -2.86 & -2.80 \\
-    LP & -1.31 & -1.25 & -1.55 \\
-    VDZ & -2.92 & -2.97 & -2.53 \\
-    VTZ & -1.43 & -1.33 & -0.94 \\
-    VQZ & -1.18 & N/A & N/A
+  % \begin{tabular}{cccc}
+  %   \toprule
+  %   (i) ``Geometry Mechanism'' & \multicolumn{3}{c}{Method} \\
+  %   \cmidrule{2-4}
+  %   Basis & BLYP & B3LYP & HF \\
+  %   \midrule
+  %   SP & -3.16 & -3.50 & -3.33 \\
+  %   LP & -2.80 & -3.38 & -3.72 \\
+  %   VDZ & -2.46 & -3.11 & -2.93 \\
+  %   VTZ & -1.90 & -2.35 & -1.19 \\
+  %   VQZ & -2.44 & N/A & N/A \\
+  %   \bottomrule
+  % \end{tabular}
+  % \begin{tabular}{cccc}
+  %   \toprule
+  %   (ii) ``Curvature Mechanism'' & \multicolumn{3}{c}{Method} \\
+  %   \cmidrule{2-4}
+  %   Basis & BLYP & B3LYP & HF \\
+  %   \midrule
+  %   SP & -2.72 & -2.86 & -2.80 \\
+  %   LP & -1.31 & -1.25 & -1.55 \\
+  %   VDZ & -2.92 & -2.97 & -2.53 \\
+  %   VTZ & -1.43 & -1.33 & -0.94 \\
+  %   VQZ & -1.18 & N/A & N/A \\
+  %   \bottomrule
+  % \end{tabular}
+  \begin{tabular}{ccccccc}
+    \toprule
+    & \multicolumn{3}{c}{(i) ``Geometry Mechanism''} & \multicolumn{3}{c}{(ii) ``Curvature Mechanism''} \\
+    & \multicolumn{3}{c}{method} & \multicolumn{3}{c}{method} \\
+    \cmidrule{2-4}\cmidrule{5-7}
+    Basis & BLYP & B3LYP & HF & BLYP & B3LYP & HF \\
+    \midrule
+    SP  & -3.16 & -3.50 & -3.33 & -2.72 & -2.86 & -2.80 \\
+    LP  & -2.80 & -3.38 & -3.72 & -1.31 & -1.25 & -1.55 \\
+    VDZ & -2.46 & -3.11 & -2.93 & -2.92 & -2.97 & -2.53 \\
+    VTZ & -1.90 & -2.35 & -1.19 & -1.43 & -1.33 & -0.94 \\
+    VQZ & -2.44 & N/A   & N/A   & -1.18 & N/A   & N/A \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -239,7 +265,7 @@ Our goal is to separate the impact of anharmonicity from the numerical errors ar
 
 \begin{table}
   \centering
-  \caption[PES error in \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch}]{Comparison of analytical harmonic (AH), grid-based harmonic (GH), and grid-based anharmonic (DVR) absolute \(\nu_3\) frequencies for \ce{CO2} in the gas phase (B3LYP/6-311++G(d,p) potential energy surface). Reported frequencies are unscaled.}
+  \caption[PES error in \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch}]{Comparison of analytical harmonic (AH), grid-based harmonic (GH), and grid-based anharmonic (DVR) absolute \(\nu_3\) frequencies for \ce{CO2} in the gas phase (B3LYP/LP potential energy surface). Reported frequencies are unscaled.}
   \label{paper_02:tab:4}
   \begin{tabular}{lcc}
     \toprule
@@ -305,7 +331,7 @@ However, ALMO simultaneously corrects for CT as well as the basis set superposit
 
 The CP-corrected frequency calculations show a somewhat smaller correlation with the CP-uncorrected frequencies (\(R^2 = 0.629\), Fig.~\ref{paper_02:fig:3}b). We believe that, for the given combination of systems and computational methodologies, the CP-\emph{un}corrected frequencies are actually more accurate than the CP-corrected frequencies for a number of reasons: (1) The trends in CP-corrected frequencies contradict our ALMO-frequency results, where ALMO predicts a \emph{negligible} impact of CT+BSSE in the frequency calculation step, whereas the CP-corrected frequency calculations suggest a significant impact of BSSE on the relative frequencies. DFT integration grid superposition errors can be excluded here because we did not find significant dependence on the grid size. (2) We suspect that the CP-correction overestimates the impact of BSSE for the given systems and computational approaches, because a detailed analysis of intermolecular interaction energies shows that, with the CP correction applied, one obtains unphysical, repulsive CT energies (see the \hyperref[SI]{SI}): ALMO-CT should always be non-repulsive, because a system would not undergo CT if it were energetically unfavorable. However, after applying a CP correction to the ALMO delocalization energy, one obtains repulsive CT energies for several MD snapshots. We conclude that the CP correction overestimates the amount of BSSE for the given system. Similar conclusions have been drawn before, for example arguing\cite{Collins1986} that the CP overcorrects for BSSE, or that BSSE is actually beneficial because it reduces basis set incompleteness.\cite{Mentel2014}
 
-These fundamental problems in the CP-corrected frequencies manifest themselves in two findings (Tab.~\ref{paper_02:tab:S4}): (1) overestimation of the solvatochromic shifts for \(\nu_{3}\) in different ILs, and (2) incorrect ordering of the CP-corrected frequencies compared with experiment. The CP-corrected frequencies overestimate the range of solvatochromic shifts for \(\nu_{3}\) by a factor of \(5.9 \times\) when compared with experiment (\SI{38.1}{\wavenumber} versus \SI{6.5}{\wavenumber}), whereas the CP-uncorrected shifts give agree much more closely (\SI{8.4}{\wavenumber}). Furthermore, the ordering of the CP-corrected frequencies is incorrect. For example, the lowest experimental \(\nu_{3}\) frequency is found in \ce{[C4C1im][SCN]} (\SI{2336}{\wavenumber}), while the CP-corrected frequencies predict the lowest result in \ce{[C4C1im][DCA]}. The CP-uncorrected frequencies correctly predict \ce{[SCN]-} as causing the largest shift. Furthermore, anions that cause identical experimental frequencies (\ce{[Tf2N]-} and \ce{[BF4]-}: \SI{2341.7}{\wavenumber}) differ by \SI{9.6}{\wavenumber} in the CP-corrected prediction (and only by \SI{1.1}{\wavenumber} in the uncorrected calculation).
+These fundamental problems in the CP-corrected frequencies manifest themselves in two findings (Table~\ref{paper_02:tab:S4}): (1) overestimation of the solvatochromic shifts for \(\nu_{3}\) in different ILs, and (2) incorrect ordering of the CP-corrected frequencies compared with experiment. The CP-corrected frequencies overestimate the range of solvatochromic shifts for \(\nu_{3}\) by a factor of \(5.9 \times\) when compared with experiment (\SI{38.1}{\wavenumber} versus \SI{6.5}{\wavenumber}), whereas the CP-uncorrected shifts give agree much more closely (\SI{8.4}{\wavenumber}). Furthermore, the ordering of the CP-corrected frequencies is incorrect. For example, the lowest experimental \(\nu_{3}\) frequency is found in \ce{[C4C1im][SCN]} (\SI{2336}{\wavenumber}), while the CP-corrected frequencies predict the lowest result in \ce{[C4C1im][DCA]}. The CP-uncorrected frequencies correctly predict \ce{[SCN]-} as causing the largest shift. Furthermore, anions that cause identical experimental frequencies (\ce{[Tf2N]-} and \ce{[BF4]-}: \SI{2341.7}{\wavenumber}) differ by \SI{9.6}{\wavenumber} in the CP-corrected prediction (and only by \SI{1.1}{\wavenumber} in the uncorrected calculation).
 
 \subsection{\texorpdfstring{Energetics of \cotil Interactions and Dependence on Decomposition Approach}{Energetics of CO2-IL Interactions and Dependence on Decomposition Approach}}
 \label{paper_02:sssec:IIIC2}
@@ -314,11 +340,14 @@ To understand how the choice of decomposition method affects the predicted solut
 
 \begin{table}
   \centering
-  \caption[Comparison of ALMO and SAPT interaction energies for MD clusters]{Comparison of ALMO- versus SAPT0-decomposed interaction energies averaged over \num{15} representative molecular dynamics snapshots. ALMO calculations were performed within the SP basis to allow comparison to results from Ref.~\parencite{14}. For SAPT0, we report both monomer-centered basis set (MCBS) and dimer-centered basis set (DCBS) results. Energies are reported in \si{\kcal\per\mole}.}
+  \caption[Comparison of ALMO and SAPT interaction energies for MD clusters]{Comparison of ALMO- versus SAPT0-decomposed interaction energies averaged over \num{15} representative molecular dynamics snapshots. ALMO calculations were performed within the SP basis to allow comparison to results from Ref.~\parencite{Brinzer2015}. For SAPT0, we report both monomer-centered basis set (MCBS) and dimer-centered basis set (DCBS) results. Energies are reported in \si{\kcal\per\mole}.}
   \label{paper_02:tab:6}
   \begin{tabular}{lcccccc}
-    & & & \multicolumn{2}{c}{SAPT0 SP} & \multicolumn{2}{c}{SAPT0 jun-cc-pVTZ} \\
-    component & ALMO-DFT SP & ALMO-HF SP & MCBS & DCBS & MCBS & DCBS \\
+    \toprule
+    & & & \multicolumn{2}{c}{SAPT0/SP} & \multicolumn{2}{c}{SAPT0/jun-cc-pVTZ} \\
+    \cmidrule{4-5} \cmidrule{6-7}
+    component & ALMO-DFT/SP & ALMO-HF/SP & MCBS & DCBS & MCBS & DCBS \\
+    \midrule
     \(E_{\text{el}}^{(10)}\) & \textemdash{} & \textemdash{} & -5.295 & -7.018 & -6.097 & -6.154 \\
     \(E_{\text{exch}}^{(10)}\) & \textemdash{} & \textemdash{} & 2.845 & 7.611 & 7.106 & 7.622 \\
     \(\mathbf{E_{\textbf{frz}}}\) & \textbf{0.500} & \textbf{0.082} & \textbf{-2.450} & \textbf{0.593} & \textbf{1.009} & \textbf{1.468} \\
@@ -330,7 +359,8 @@ To understand how the choice of decomposition method affects the predicted solut
     \(E_{\text{disp}}^{(20)}\) & \textemdash{} & \textemdash{} & -4.193 & -5.197 & -7.323 & -8.084 \\
     \(E_{\text{disp-exch}}^{(20)}\) & \textemdash{} & \textemdash{} & 0.058 & 0.483 & 0.393 & 0.671 \\
     \(\mathbf{E_{\textbf{disp}}}\) & \textbf{\textemdash{}} & \textbf{\textemdash{}} & \textbf{-4.135} & \textbf{-4.714} & \textbf{-6.930} & \textbf{-7.413} \\
-    \(\mathbf{E_{\textbf{int}}}\) & \textbf{-1.918} & \textbf{-1.323} & \textbf{-8.634} & \textbf{-6.031} & \textbf{-8.394} & \textbf{-8.326}
+    \(\mathbf{E_{\textbf{int}}}\) & \textbf{-1.918} & \textbf{-1.323} & \textbf{-8.634} & \textbf{-6.031} & \textbf{-8.394} & \textbf{-8.326} \\
+    \bottomrule
   \end{tabular}
 \end{table}
 
@@ -347,28 +377,27 @@ The three approaches used here disagree on the dominating mechanism of binding: 
 The conclusion changes when comparing \emph{relative trends} in binding energies between different MD snapshots. Comparing the correlation coefficients for linear regression analysis between individual energy components and the total energies (Tab.~\ref{paper_02:tab:7}a), \emph{all} of the methods predict that the frozen monomer electrostatics plus Pauli repulsion component (\(E_{\text{frz}}\)) is the single most important contribution to trends in the total energy (\(R^2 = \numrange[range-phrase = --]{0.870}{0.944}\)). This finding implies that, although ALMO and SAPT0 disagree on the identity of the largest absolute energy component, they agree that the \(E_{\text{frz}}\) is most important to capture differential effects between different MD snapshots. This finding is somewhat surprising, given that \(E_{\text{frz}}\) is a rather small energy contribution on an absolute scale, whereas dispersion makes up the largest contribution to the total binding energy. However, this trend shows that dispersion varies less than the frozen-fragment interaction across different points on the potential energy surface.
 
 \begin{table}
-  \centering
+  \centering% TODO
   \caption[Correlation between ALMO and SAPT terms]{Correlation coefficients (\(R^2\)) between different solute-solvent interaction energy components as calculated at the ALMO-DFT (B3LYP), ALMO-HF, and SAPT0 level within the SP basis. (a) Comparison between individual components and the total interaction energy (\(E_{\text{tot}}\)) calculated for each methodology. (b) Correlation coefficients between contributions to the \cotil interaction energy calculated via ALMO as compared to the corresponding SAPT0 energy terms. Reported SAPT0 results are within the dimer-centered basis set (DCBS), except for the charge transfer component, which is calculated as the difference between monomer- and dimer-centered basis set results for the induction energy.}
   \label{paper_02:tab:7}
-
-  (a)
-
-  \begin{tabular}{lccc}
-    \toprule
-    Component & ALMO-DFT & ALMO-HF & SAPT0 \\
-    \midrule
-    \(E_{\text{frz}}\) & 0.887 & 0.944 & \makecell{0.870 \\ (\(E_{\text{el}}\): 0.602, \(E_{\text{exch}}\): 0.073)} \\
-    \(E_{\text{pol}}\) & 0.170 & 0.087 & 0.073 \\
-    \(E_{\text{CT}}\) & 0.225 & 0.270 & 0.093 \\
-    \(E_{\text{disp}}\) & \textemdash{} & \textemdash{} & 0.150 \\
-    \bottomrule
-  \end{tabular}
-
-  (b)
-
+  \begin{threeparttable}
+    \begin{tabular}{lccc}
+      \toprule
+      (a) Component & ALMO-DFT & ALMO-HF & SAPT0 \\
+      \midrule
+      \(E_{\text{frz}}\) & 0.887 & 0.944 & 0.870\tnote{1} \\
+      \(E_{\text{pol}}\) & 0.170 & 0.087 & 0.073 \\
+      \(E_{\text{CT}}\) & 0.225 & 0.270 & 0.093 \\
+      \(E_{\text{disp}}\) & \textemdash{} & \textemdash{} & 0.150 \\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+    \item[1] \(E_{\text{el}}\): 0.602, \(E_{\text{exch}}\): 0.073
+    \end{tablenotes}
+  \end{threeparttable}
   \begin{tabular}{lcc}
     \toprule
-    Component (ALMO \textemdash{} SAPT0) & ALMO-DFT & ALMO-HF \\
+    (b) Component (ALMO \textemdash{} SAPT0) & ALMO-DFT & ALMO-HF \\
     \midrule
     \(E_{\text{frz}}\) \textemdash{} \(E_{\text{el}} + E_{\text{exch}}\) & 0.989 & 0.993 \\
     \(E_{\text{pol}}\) \textemdash{} \(E_{\text{ind}} + E_{\text{ind-exch}} + \delta_{\text{HF}}\) & 0.887 & 0.927 \\
@@ -535,9 +564,9 @@ To confirm that the good agreement in relative trends is not an artifact of the 
     \(\omega\)B97X-D/cc-pVTZ & -3.114 & -1.617 & -1.209 & \textemdash{} & -5.941 \\
     \(\omega\)B97M-V/6-31G(d,p) & -5.494 & -1.256 & -0.523 & \textemdash{} & -7.274 \\
     \(\omega\)B97M-V/cc-pVTZ & -5.149 & -1.649 & -0.889 & \textemdash{} & -7.687 \\
-    SAPT0/6-31G(d,p)/MCBS & -2.450 & -2.049 & -0.280 & -4.135 & -8.634 \\
-    SAPT0/6-31G(d,p)/DCBS & 0.593 & -1.910 & & -4.714 & -6.031 \\
-    SAPT0/jun-cc-pVTZ/MCBS & 1.009 & -2.473 & -0.203 & -6.930 & -8.394 \\
+    SAPT0/6-31G(d,p)/MCBS & -2.450 & -2.049 & \multirow{2}{*}{-0.280} & -4.135 & -8.634 \\
+    SAPT0/6-31G(d,p)/DCBS & 0.593 & -1.910 &  & -4.714 & -6.031 \\
+    SAPT0/jun-cc-pVTZ/MCBS & 1.009 & -2.473 & \multirow{2}{*}{-0.203} & -6.930 & -8.394 \\
     SAPT0/jun-cc-pVTZ/DCBS & 1.469 & -2.382 & & -7.413 & -8.326 \\
     \bottomrule
   \end{tabular}
