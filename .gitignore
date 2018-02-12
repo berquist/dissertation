@@ -36,12 +36,17 @@ test_bibliography.pdf
 *.toc
 *.xdv
 
-# pittetd
-*.etd
+# glossaries/acronyms
+*.acn
+*.glsdefs
+*.ist
 
 # minted
 _minted*
 *.pyg
+
+# pittetd
+*.etd
 
 ## Emacs
 *~
