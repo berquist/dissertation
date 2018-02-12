@@ -5,12 +5,33 @@ float = true,%
 multi = true,%
 preview = false,%
 ]{standalone}
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    backref    = true,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 999,%
+]{biblatex}
+\let\cite\autocite
+\DefineBibliographyStrings{english}{%
+  backrefpage = {page},% originally "cit. on p."
+  backrefpages = {pages},
+}
+\addbibresource{./paper_05/tutorial.bib}
+\addbibresource{./library2.bib}
 \onlyifstandalone{\usepackage{amsmath}}
 \onlyifstandalone{\usepackage{xcolor}}
+\usepackage{braket}
 \usepackage{cancel}
 % https://tex.stackexchange.com/q/105902/94717
 % \newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 \newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+\onlyifstandalone{\usepackage{hyperref}}
+\usepackage{xspace}
+\newcommand\hf{Hartree\textendash{}Fock\xspace}%
 \begin{document}
 \chapter{Introduction}
 \label{ch:introduction}
@@ -131,6 +152,14 @@ Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem
 
 Comment on which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots)
 
+For example, given the \hf energy expression,
+
+the first derivative with respect to a nuclear displacement \(X_{A}\) is
+
+and differentiating that expression with respect to another nuclear displacement \(Y_{B}\) is
+
+In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
+
 A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(E\) that produces this dipole moment. Although the electric field is usually written as \(E\) or \(F\), here \(\epsilon\) is used to disambiguate it from the geometric force in \eqref{eq:hooke_1d}. Both \(\mu\) and \(\epsilon\) are 3D vector quantities
 
 \begin{equation}
@@ -179,4 +208,208 @@ Another definition of the molecular dipole moment induced by an external (applie
 \end{itemize}
 
 Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
+
+Poles and residues
+
+residues lead to transition moments
+
+A residue analysis provides a mean to obtain \textit{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
+\begin{equation*}
+  \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
+\end{equation*}
+Spin-orbit coupling constants between singlet/triplet states correspond to the residue of the triplet linear response function:
+\begin{equation*}
+  \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
+\end{equation*}
+
+\section{Barron}
+% page 85
+\subsection{A molecule in static fields}
+The electric and magnetic multipole moments appearing in the expressions for the interaction energy of a system of charges and currents with external electric and magnetic fields can be permanent attributes of the system or can be induced by the fields themselves. If the interaction is weak, the situation can be analyzed by expanding the energy \(W\) of the system in a Taylor series about the energy in the absence of the field.
+
+Thus for an electrically neutral molecule in a static uniform electric field,
+\begin{equation}
+  \label{eq:2.6.1}
+  W[(\mathbf{E})_{0}] = 
+\end{equation}
+The field itself, \((\mathbf{E})_{0}\), is taken at the molecular origin
+
+Time-independent perturbation theory is now introduced to give the static molecular property tensors a quantum mechanical form. We require approximate solutions of the time-independent Schr{\"{o}}dinger equation
+\begin{equation}
+  \label{eq:2.6.12}
+  H' \psi ' = (H + V) \psi ' = W' \psi ',
+\end{equation}
+where \(H\) is the unperturbed molecular Hamiltonian \eqref{eq:2.5.21}, \(V\) is the operator equivalent of a static interaction Hamiltonian such as \eqref{eq:2.5.8} or \eqref{eq:2.5.11} whose effect is small compared with that of \(H\), and \(\psi '\) and \(W'\) are the perturbed molecular wavefunction and energy. Perturbation theory provides approximate expressions for the eigenfunctions \(\psi_{j}'\) and eigenvalues \(W_{j}'\) of the perturbed operator \(H'\) in terms of the unperturbed operator \(H\). We refer to standard works such as Davydov (1976) for the development of these approximate expressions.
+
+The perturbed energy eigenvalue corresponding to the nondegenerate eigenfunction \(\psi_{n}\) is, to second order in the perturbation,
+\begin{equation}
+  \label{eq:2.6.13}
+  W_{n}' = W_{n} + \braket{n|V|n} + \sum_{j \neq n} \frac{\braket{n|V|j}\braket{j|V|n}}{W_{n} - W_{j}},
+\end{equation}
+where the sum extends over the complete set of eigenfunctions with the exception of the initial state \(\psi_{n}\). Since the energy of a system correct to the (\(2n + 1\))th order in the perturbation is given by wave functions correct to the \(n\)th order (see section~\ref{TODO}), we need only take the corresponding perturbed eigenfunction to first order in the perturbation:
+\begin{equation}
+  \label{eq:2.6.14}
+  \psi_{n}' = \psi_{n} + \sum_{j \neq n} \frac{\braket{j|V|n}}{W_{n} - W_{j}} \psi_{j}.
+\end{equation}
+
+If the perturbation is due to a static uniform electric field, \(V = -\mu_{\alpha}(E_{\alpha})_{0}\). Applying \eqref{eq:2.6.3} to \eqref{eq:2.6.13} and comparing the result with \eqref{eq:2.6.4}, we find the following expressions for the permanent electric dipole moment and the polarizability of a molecule in the state \(\psi_{n}\):
+\begin{align}
+  \mu_{0_{\alpha}} &= \braket{n|\mu_{\alpha}|n}, \\
+  \alpha_{\alpha\beta} &= -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} = \alpha_{\beta\alpha}.
+\end{align}
+These results can also be obtained by taking the expectation value of the electric dipole moment operator with the perturbed eigenfunction \eqref{eq:2.6.14}, and comparing the result with \eqref{eq:2.6.4}:
+\begin{align}
+  \mu_{\alpha} &= \braket{n'|\mu_{\alpha}|n'} \\
+               &= \braket{n|\mu_{\alpha}|n} -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} (E_{\beta})_{0}.
+\end{align}
+
+Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
+
+\section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
+
+The analytical gradient of the Hartree-Fock energy is given by (Szabo \& Ostlund eq. C.16):
+\begin{equation}
+  \frac{\partial E}{\partial X_{A}} = \sum_{ij}{P_{ji} \frac{\partial H_{ij}}{\partial X_{A}}} + \frac{1}{2} \sum_{ijkl}{P_{ji}P_{kl} \frac{\partial (ij|kl)}{\partial X_{A}}} - \sum_{ij}{Q_{ji} \frac{\partial S_{ij}}{\partial X_{A}}} + \frac{\partial V_{NN}}{\partial X_{A}}
+\end{equation}
+Of course, the Born-Oppenheimer approximation means that the nuclear repulsion term is easy to handle, and the derivative is given as:
+\begin{equation}
+  \frac{\partial V_{NN}}{\partial X_{A}} = Z_{A} \sum_{B} \frac{Z_{B} (X_{B} - X_{A})}{R_{AB}^{3}}
+\end{equation}
+The remaining terms require computing the derivatives of the Gaussian functions (depending upon the molecular integral evaluation scheme used). However, in Szabo \& Ostlund the nuclear-electronic attraction term is provided as:
+\begin{equation}
+  \frac{\partial V_{Ne}}{\partial X_{A}} = -Z_{A} \sum_{i} \frac{X_{i} - X_{A}}{r_{iA}^{3}}
+\end{equation}
+In the Hartree-Fock equations, the molecular Hamiltonian is formed as \(H = T + V_{Ne}\). Presuming that the gradient of the molecular Hamiltonian is formed the same way, how can I treat this formulation of the analytical gradient with only a scalar value for the nuclear attraction term, when I must take into account the density matrix? Is this solution to the nuclear attraction gradient of no use in calculating the gradient of the energy?
+
+\begin{quote}
+{[}1{]} A. Szabo and N. S. Ostlund, \emph{Modern Quantum Chemistry: Introduction to Advanced Electronic Structure Theory}, Dover Publications Inc., New York, pp.~441-442.
+\end{quote}
+
+\subsection{Answer}
+
+There are a few points to discuss:
+
+\begin{itemize}
+\item Since there are \(3N\) possible \(\{X_{A}\}\), each term where an \(X_{A}\) appears will result in \(3N\) matrix elements. In your first equation, that will be \(S\), \(T\), \(V\), and the 2-electron contribution, which should really be rewritten into a Fock matrix term \(F\) where the ket is precontracted with the density.
+\item There is nothing wrong with this solution, though it is a little strange because it's in the MO basis, and we normally prefer to work in the AO basis to avoid any unnecessary transformations. I'm going to drop the \(Ne\) from here on out since \(V\) is understood in this context to only be the one-electron nuclear attraction term.
+\item I think you're asking what happens to the density matrix. The derivative of \(V\) expands into multiple parts, as we will see below. I will reference a bunch of equations that use \(h\), where \(\left( h = H = H^{\text{core}} \right) \equiv T_{e} + V_{Ne}\), and differentiating into a sum should hopefully be clear. What follows should work for any real-valued one-electron operator. I will use the book by Yamaguchi with liberties taken. In many places I use \(p,q\) rather than \(i,j\), as these indices run over all MOs, not just occupied ones.
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Expanding \(\frac{\partial V_{ij}}{\partial X_{A}}\) using the product rule gives
+\begin{align*}
+  \frac{\partial V_{ij}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \left( \sum_{\mu\nu}^{\text{AO}} C_{\mu i} C_{\nu j} V_{\mu\nu} \right) \tag{Yamaguchi eq. 3.80} \\
+                                         &= \sum_{\mu\nu}^{\text{AO}} \left( \frac{\partial C_{\mu i}}{\partial X_{A}} C_{\nu j} V_{\mu\nu} + C_{\mu i} \frac{\partial C_{\nu j}}{\partial X_{A}} V_{\mu\nu} + C_{\mu i} C_{\nu j} \frac{\partial V_{\mu\nu}}{\partial X_{A}} \right), \label{3.81}\tag{Yamaguchi eq. 3.81}
+\end{align*}
+where the third/last term is the true AO integral derivative, and the first two terms, the MO coefficient derivatives, come from differentiating the density matrix.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+The simplest term to write out, but the most difficult to implement, is the AO integral derivative. I will use \(\mu,\nu\) rather than \(\chi_{\mu},\chi_{\nu}\), so they refer to both AO basis functions \emph{and} their matrix indices.
+
+\begin{align*}
+  \frac{\partial V_{\mu\nu}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \left< \mu | \hat{V} | \nu \right> \tag{Yamaguchi eq. 3.24} \\
+                                             &= \left< \frac{\partial \mu}{\partial X_{A}} | \hat{V} | \nu \right> + \left< \mu | \frac{\partial \hat{V}}{\partial X_{A}} | \nu \right> + \left< \mu | \hat{V} | \frac{\partial \nu}{\partial X_{A}} \right> \label{3.25}\tag{Yamaguchi eq. 3.25}
+\end{align*}
+
+What you have presented, %TODO nuke numbering?
+\begin{equation}
+  \frac{\partial \hat{V}}{\partial X_{A}} = -Z_{A} \sum_{i} \frac{X_{i} - X_{A}}{r_{iA}^{3}},
+\end{equation}
+is only the derivative of the operator. The basis function derivatives are also required, as the AOs in this case depend on the nuclear positions. Contrast this with an electric field perturbation, where only the derivative of the operator is required, or magnetic field derivatives, where basis functions \emph{may} be perturbation-dependent if gauge-including atomic orbitals (GIAOs) are used. Also important is that the index \(i\) here refers to an electron, \emph{not} an occupied MO. This is an electric field integral.
+
+\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+Now for the derivative of the MO coefficients/density matrix. Clearly they don't appear in the final HF gradient expression. They disappear through the magic of Wigner's \(2n + 1\) rule. From page 25:
+\begin{quote}
+When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem {[}29-31{]}.
+\end{quote}
+More explicitly, we have the zeroth-order wavefunction, so we must be able to calculate the first-order correction to the energy. Worded differently, any first derivative of the energy must be easily calculated without differentiating MO coefficients, which is only required for second derivatives, such as the molecular Hessian or the dipole polarizability.
+
+First, rewrite the MO coefficient derivatives
+\begin{equation}
+  \frac{\partial C_{\mu i}}{\partial X_{A}} = \sum_{m}^{\text{MO}} U_{mi}^{X_{A}} C_{\mu m}, \tag{Yamaguchi eq. 3.7}
+\end{equation}
+where the index \(m\) runs over all occupied and unoccupied/virtual MOs. The same goes for \(p,q\). I've replaced \(a\) from the text with \(X_{A}\), but this holds for any general perturbation (such as \(\lambda\), pick your favorite unused index). The key insight is that we can write the effect of a perturbation on the MO coefficients as the contraction of the unmodified MO coeffcients with a unitary matrix describing single-particle excitations from occupied to virtual MOs, as well as deexcitations from virtual to occupied MOs. In matrix form, this is
+\begin{equation}
+  \mathbf{C}^{(X_{A})} = \mathbf{C}^{(0)} \left( \mathbf{U}^{(X_{A})} \right)^{T},
+\end{equation}
+where it is usually easiest to have the dimension of \(\mathbf{U}\) be \([N_{\text{orb}}, N_{\text{orb}}]\), with only the occ-virt and virt-occ blocks being non-zero. The problem now becomes solving for \(\mathbf{U}\) and eliminating it from the final gradient expression. I will walk through parts of section 4.3 to show how this is done.
+
+Given the energy expression for an RHF wavefunction,
+\begin{equation}
+  E = 2 \sum_{i}^{\text{d.o.}} h_{ii} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj) - (ij|ij) \right], \tag{Yamaguchi eq. 4.1}
+\end{equation}
+the first derivative with respect to \(X_{A}\) is
+\begin{equation}
+  \frac{\partial E_{\text{elec}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{m}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{mi}^{X_{A}} F_{im}, \label{4.16}\tag{Yamaguchi eq. 4.16}
+\end{equation}
+where the Fock matrix is defined as
+\begin{align*}
+  F_{pq} &= h_{pq} + \sum_{k}^{\text{d.o.}} \left[ 2(pq|kk) - (pk|qk) \right] \tag{Yamaguchi eq. 4.6} \\
+         &= h_{pq} + 2J_{pq} - K_{pq},
+\end{align*}
+and I've introduced the Coulomb and exchange matrices \(\mathbf{J}\) and \(\mathbf{K}\) as well. I skipped all the steps in expanding the first derivative, and \(\eqref{4.16}\) is what results upon collecting terms with \(\mathbf{U}\).
+
+Using the RHF variational conditions, the Fock matrix from a converged calculation is diagonal in the MO basis, corresponding to the MO energies
+\begin{equation}
+  F_{pq} = \delta_{pq} \epsilon_{pq}, \tag{Yamaguchi eq. 4.7}
+\end{equation}
+so \(\eqref{4.16}\) simplifies to
+\begin{equation}
+  \frac{\partial E_{\text{elec}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{m}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{mi}^{X_{A}} \epsilon_{im}, \tag{Yamaguchi eq. 4.17 modified}
+\end{equation}
+which can be further simplified as
+\begin{equation}
+  \frac{\partial E_{\text{elec}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{i}^{\text{d.o.}} U_{ii}^{X_{A}} \epsilon_{ii}. \tag{Yamaguchi eq. 4.17}
+\end{equation}
+
+Now we use one of the most important tricks in quantum chemistry. Given the orthonormality of the MOs,
+\begin{equation}
+S_{pq} = \delta_{pq}, \tag{Yamaguchi eq. 3.44}
+\end{equation}
+we must have
+\begin{equation}
+  \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0. \tag{Yamaguchi eq. 3.45}
+\end{equation}
+
+This is where not using general notation in the above is a bit confusing because it seems to conflict with your original expression, but remember that similar to \(\eqref{3.81}/\eqref{3.25}\), this is in fact multiple terms: two for the basis functions, and two for the MO coefficients, giving
+\begin{align*}
+\frac{\partial S_{pq}}{\partial X_{A}} &= \sum_{\mu\nu}^{\text{AO}} C_{\mu p} C_{\mu q} \frac{\partial S_{\mu\nu}}{\partial X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right) \tag{Yamaguchi eqs. 3.40 + 3.43} \\
+                                       &= S_{pq}^{X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right). \tag{Yamaguchi eq. 3.43}
+\end{align*}
+
+The sum over all MOs can be eliminated by reusing the orthonormality condition, so in the first term \(m \overset{!}{=} q\) and for the second term \(m \overset{!}{=} p\), and the overlap matrix in the MO basis is unity for those terms, giving
+\begin{equation}
+  \frac{\partial S_{pq}}{\partial X_{A}} = S_{pq}^{X_{A}} + U_{qp}^{X_{A}} + U_{pq}^{X_{A}} \overset{!}{=} 0. \tag{Yamaguchi eq. 3.46}
+\end{equation}
+
+Recognizing that we only need diagonal terms, this can be rewritten as
+\begin{equation}
+  U_{pp}^{X_{A}} = -\frac{1}{2} S_{pp}^{X_{A}}, \tag{Yamaguchi eq. 4.20}
+\end{equation}
+which is then plugged back into the first derivative expression to give
+\begin{align*}
+  \frac{\partial E_{\text{elec}}}{\partial X_{A}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{i}^{\text{d.o.}} \left( -\frac{1}{2} S_{ii}^{X_{A}} \right) \epsilon_{ii} \\
+                                                  &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{ii}. \tag{Yamaguchi eq. 4.21}
+\end{align*}
+
+Rewrite the last term
+\begin{align*}
+  \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{ii} &= \sum_{i}^{\text{d.o.}} \sum_{\mu\nu}^{\text{AO}} C_{\mu i} C_{\mu i} \frac{\partial S_{\mu\nu}}{\partial X_{A}} \epsilon_{ii} \\
+                                                      &= \sum_{i}^{\text{d.o.}} \sum_{\mu\nu}^{\text{AO}} C_{\mu i} C_{\mu i} \epsilon_{ii} \frac{\partial S_{\mu\nu}}{\partial X_{A}} \\
+                                                      &= \sum_{\mu\nu}^{\text{AO}} W_{\mu\nu} \frac{\partial S_{\mu\nu}}{\partial X_{A}} \tag{Yamaguchi eq. 4.24}
+\end{align*}
+to use the energy-weighted density matrix \(\mathbf{W}\), which in your expression is called \(\mathbf{Q}\).
+
+Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why you do not see any density or MO coefficient derivatives in the gradient expression.
+
+\begin{itemize}
+\item \fullcite{Yamaguchi1994}
+\item \fullcite{Pople1979}
+\item \fullcite{doi:10.1063/1.1668053}
+\item \fullcite{EPSTEIN1980311}
+\end{itemize}
+
 \end{document}
