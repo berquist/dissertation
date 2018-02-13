@@ -66,8 +66,6 @@ maybe subsection of ADT
 
 Sources: response book draft, Barron book
 
-
-
 \section{Analytic derivative theory}
 
 \begin{itemize}
@@ -84,11 +82,104 @@ Sources: Toulouse; Handy has expressions for derivatives leading to integrals
 Two possible ways to perform the derivation:
 
 \begin{enumerate}
-\item from series expansion of the energy with respect to one or more perturbations
-\item from a phenomenological Hamiltonian (sort of like quantizing a classical expression)
+\item from series expansion of the energy with respect to one or more perturbations (section~\ref{ssec:series-expansion})
+\item from a phenomenological Hamiltonian (sort of like quantizing a classical expression) (section~\ref{ssec:phenomenological-approach})
 \end{enumerate}
 
+TODO where does the perturbation theory style derivation go?
+
+\subsection{Perturbation theory}
+\label{ssec:perturbation-theory}
+
+In Rayleigh\textendash{}Schr{\"{o}}dinger perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322.}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
+\begin{equation}
+  \label{eq:perturbed-hamiltonian}
+  \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
+\end{equation}
+where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\psi}\) and its energy \(E\), where increasing orders account for better approximations to the exact (perturbed) energy:
+\begin{align}
+  \label{eq:expansion-wavefunction}
+  \ket{\psi} &= \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \\
+  \label{eq:expansion-energy}
+  E &= E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} + \dots
+\end{align}
+
+Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the Schr{\"{o}}dinger equation, \(\hat{H}\ket{\psi} = E\ket{\psi}\), gives
+\begin{equation}
+  \label{eq:expansion-schrodinger}
+  \begin{aligned}
+    \left( \hat{H}^{(0)} + \lambda\hat{V} \right) &\left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right] \\
+    &= \left[ E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} \right] \left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right],
+  \end{aligned}
+\end{equation}
+where the \(\{\lambda\}\) are now also useful for collecting terms of like orders. The zeroth-order terms give the Schr{\"{o}}dinger equation for the unperturbed energy,
+\begin{equation}
+  \label{eq:unperturbed-energy}
+  \hat{H}^{(0)} \ket{\psi}^{(0)} = E^{(0)} \ket{\psi}^{(0)},
+\end{equation}
+but equating all terms that are first order in \(\lambda\) on both sides gives
+\begin{equation}
+  \label{eq:first-order-terms}
+  \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} = E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}},
+\end{equation}
+where \(\lambda\) has been dropped for readability since it is present in front of each term. \eqref{eq:first-order-terms} can be simplified through integration using the bra \(\bra{\psi^{(0)}}\), which does not change the order from \(\lambda^{1}\):
+\begin{equation}
+  \label{eq:first-order-terms-bra}
+  \begin{aligned}
+    \bra{\psi^{(0)}} \left( \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} \right) &= \bra{\psi^{(0)}} \left( E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}} \right) \\
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= \braket{\psi^{(0)} | E^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | E^{(1)} | \psi^{(0)}} \\
+    &= E^{(0)} \braket{\psi^{(0)} | \psi^{(1)}} + E^{(1)} \braket{\psi^{(0)} | \psi^{(0)}}.
+  \end{aligned}
+\end{equation}
+
+It is now important to know what orthonormality conditions exist between the set of all intermediate states \(\{\ket{\psi^{(n)}}\}\). For the unperturbed state, which is usually the \hf ground state,
+\begin{equation}
+  \label{eq:hf-normalization}
+  \braket{\psi^{(0)}|\psi^{(0)}} = 1,
+\end{equation}
+and the choice of \emph{intermediate normalization} is made,
+\begin{equation}
+  \label{eq:intermediate-normalization}
+  \braket{\psi^{(0)}|\psi} \overset{!}{=} 1,
+\end{equation}
+which upon expanding the ket using \eqref{eq:expansion-wavefunction} leads to
+\begin{equation}
+  \label{eq:intermediate-normalization-single}
+  \braket{\psi^{(0)}|\psi^{(n)}} = 0
+\end{equation}
+for any intermediate state where \(n > 0\). Returning to \eqref{eq:first-order-terms-bra}, this first allows for simplification of the right-hand side,
+\begin{equation}
+  \label{eq:first-order-terms-first-simplification}
+  \begin{aligned}
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= E^{(0)} \Ccancelto[red]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} + E^{(1)} \Ccancelto[green]{1}{\braket{\psi^{(0)} | \psi^{(0)}}} \\
+    &= E^{(1)},
+  \end{aligned}
+\end{equation}
+and the first term on the left-hand side can be simplified using the hermiticity of the Hamiltonian followed by \eqref{eq:intermediate-normalization-single},
+\begin{equation}
+  \label{eq:hermiticity}
+  \begin{aligned}
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} &= \braket{\psi^{(1)} | \hat{H}^{(0)} | \psi^{(0)}}^{*} \\
+    &= \braket{\psi^{(1)} | E^{(0)} | \psi^{(0)}}^{*} \\
+    &= E^{(0)} \braket{\psi^{(1)} | \psi^{(0)}}^{*} \\
+    &= E^{(0)} \Ccancelto[red]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} \\
+    &= 0.
+  \end{aligned}
+\end{equation}
+
+The final form of \eqref{eq:first-order-terms-bra} is now
+\begin{equation}
+  \label{eq:first-order-terms-final}
+  \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} = E^{(1)},
+\end{equation}
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO
+\subsection{Series expansion}
+\label{ssec:series-expansion}
+
+TODO
+
 \subsection{Phenomenological approach}
+\label{ssec:phenomenological-approach}
 
 For a one-dimensional spring connecting a ball to a fixed object, Hooke's law is
 \begin{equation}
@@ -142,43 +233,30 @@ The force is also related to the energy. In one dimension,
   F &= \nabla E \\
   &= \frac{\partial E}{\partial x},
 \end{align}
-where \(\nabla \equiv \partial/\partial x\). For convenience, the negative sign will be dropped from the remainder of the derivation. In \(N\) dimensions, like \eqref{eq:force_hooke_einstein}, \eqref{eq:energy_derivative_1d} is
+where \(\nabla \equiv \partial/\partial x\). For convenience, the negative sign will be dropped from the remainder of the derivation. In \(N\) dimensions, like \eqref{eq:force_hooke_einstein}, \eqref{eq:energy_derivative_1d} is (using vector calculus)
 \begin{equation}
   \label{eq:force_partial_derivative}
-  F_{i} = \frac{\partial E}{\partial x_{i}}
+  F_{i} = \frac{\partial E}{\partial x_{i}}.
 \end{equation}
 
 Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_partial_derivative} gives
-
 \begin{equation}
-  -k_{ij} x_{j} = \frac{\partial E}{\partial x_{i}}
+  k_{ij} x_{j} = \frac{\partial E}{\partial x_{i}}.
 \end{equation}
 
-To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side
-
+To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side:
 \begin{align}
-  \left( \frac{\partial}{\partial x_{j}} \right) \left( -k_{ij} x_{j} \right) &= \left( \frac{\partial}{\partial x_{j}} \right) \left( \frac{\partial E}{\partial x_{i}} \right) \\
-  \Ccancelto[red]{0}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) \left( -k_{ij} \right) \right]} x_{j} - k_{ij} \Ccancelto[green]{1}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) x_{j} \right]} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} \\
-  -k_{ij} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}}
+  \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} x_{j} \right) &= \left( \frac{\partial}{\partial x_{j}} \right) \left( \frac{\partial E}{\partial x_{i}} \right) \\
+  \Ccancelto[red]{0}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} \right) \right]} x_{j} + k_{ij} \Ccancelto[green]{1}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) x_{j} \right]} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} \\
+  k_{ij} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}}.
 \end{align}
 
-This tells that the internal stiffness is related to the second derivative of the energy with respect to nuclear coordinate displacements. The internal stiffness is actually the molecular Hessian.
+This tells that the internal stiffness is related to the second derivative of the energy with respect to nuclear coordinate displacements. The internal stiffness matrix is the molecular Hessian, where each ``spring constant'' is called a force constant, which describes how a change or perturbation to one atomic coordinate affects a change in another atomic coordinate.
 
-Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem
-
+Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem, TODO this may only be for real perturbations.
 \begin{equation}
   \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} = \frac{\partial^{2} E}{\partial x_{i} \partial x_{j}}
 \end{equation}
-
-Comment on which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots)
-
-For example, given the \hf energy expression,
-
-the first derivative with respect to a nuclear displacement \(X_{A}\) is
-
-and differentiating that expression with respect to another nuclear displacement \(Y_{B}\) is
-
-In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
 
 A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(E\) that produces this dipole moment. Although the electric field is usually written as \(E\) or \(F\), here \(\epsilon\) is used to disambiguate it from the geometric force in \eqref{eq:hooke_1d}. Both \(\mu\) and \(\epsilon\) are 3D vector quantities
 
@@ -217,6 +295,16 @@ Another definition of the molecular dipole moment induced by an external (applie
   -\alpha_{ij} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}}
 \end{align}
 
+Comment on which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots)
+
+For example, given the \hf energy expression,
+
+the first derivative with respect to a nuclear displacement \(X_{A}\) is
+
+and differentiating that expression with respect to another nuclear displacement \(Y_{B}\) is
+
+In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
+
 \begin{table}
   \centering
   \caption{Adapted from Ref.~\parencite{gauss2000}.}
@@ -226,7 +314,7 @@ Another definition of the molecular dipole moment induced by an external (applie
     \midrule
     \frac{dE}{d\varepsilon_{i}} & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
     \frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability \\
-    \frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}} & (first) hyperpolarizbility \\
+    \frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}} & (first) hyperpolarizability \\
     \frac{dE}{dx_{i}} & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
     \frac{d^{2}E}{dx_{i}dx_{j}} & harmonic force constants; harmonic vibrational frequencies \\
     \frac{d^{3}E}{dx_{i}dx_{j}dx_{k}} & cubic force constants; vibrational corrections to distances and rotational constants \\
