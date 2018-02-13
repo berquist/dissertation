@@ -24,7 +24,8 @@ preview = false,%
 \addbibresource{./paper_05/tutorial.bib}
 \addbibresource{./library2.bib}
 \onlyifstandalone{\usepackage{amsmath}}
-\onlyifstandalone{\usepackage{xcolor}}
+\onlyifstandalone{\usepackage[usenames,dvipsnames,svgnames,hyperref,table]{xcolor}}
+\onlyifstandalone{\definecolor{carmine}{HTML}{960018}}
 \usepackage{booktabs}
 \usepackage{braket}
 \usepackage{cancel}
@@ -151,7 +152,7 @@ for any intermediate state where \(n > 0\). Returning to \eqref{eq:first-order-t
 \begin{equation}
   \label{eq:first-order-terms-first-simplification}
   \begin{aligned}
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= E^{(0)} \Ccancelto[red]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} + E^{(1)} \Ccancelto[green]{1}{\braket{\psi^{(0)} | \psi^{(0)}}} \\
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} + E^{(1)} \Ccancelto[Green]{1}{\braket{\psi^{(0)} | \psi^{(0)}}} \\
     &= E^{(1)},
   \end{aligned}
 \end{equation}
@@ -162,7 +163,7 @@ and the first term on the left-hand side can be simplified using the hermiticity
     \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} &= \braket{\psi^{(1)} | \hat{H}^{(0)} | \psi^{(0)}}^{*} \\
     &= \braket{\psi^{(1)} | E^{(0)} | \psi^{(0)}}^{*} \\
     &= E^{(0)} \braket{\psi^{(1)} | \psi^{(0)}}^{*} \\
-    &= E^{(0)} \Ccancelto[red]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} \\
+    &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} \\
     &= 0.
   \end{aligned}
 \end{equation}
@@ -172,7 +173,14 @@ The final form of \eqref{eq:first-order-terms-bra} is now
   \label{eq:first-order-terms-final}
   \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} = E^{(1)},
 \end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
+
+The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
+\begin{equation}
+  \label{eq:general-energy-correction}
+  E^{(n)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(n-1)}},
+\end{equation}
+so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}).
 \subsection{Series expansion}
 \label{ssec:series-expansion}
 
@@ -247,7 +255,7 @@ Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_pa
 To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side:
 \begin{align}
   \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} x_{j} \right) &= \left( \frac{\partial}{\partial x_{j}} \right) \left( \frac{\partial E}{\partial x_{i}} \right) \\
-  \Ccancelto[red]{0}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} \right) \right]} x_{j} + k_{ij} \Ccancelto[green]{1}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) x_{j} \right]} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} \\
+  \Ccancelto[carmine]{0}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} \right) \right]} x_{j} + k_{ij} \Ccancelto[Green]{1}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) x_{j} \right]} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} \\
   k_{ij} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}}.
 \end{align}
 
@@ -291,7 +299,7 @@ Another definition of the molecular dipole moment induced by an external (applie
 
 \begin{align}
   \left( \frac{\partial}{\partial \epsilon_{j}} \right) \left( -\alpha_{ij} \epsilon_{j} \right) &= \left( \frac{\partial}{\partial \epsilon_{j}} \right) \left( \frac{\partial E}{\partial \epsilon_{i}} \right) \\
-  -\Ccancelto[red]{0}{\left( \frac{\partial \alpha_{ij}}{\partial \epsilon_{j}} \right)} \epsilon_{j} - \alpha_{ij} \Ccancelto[green]{1}{\left( \frac{\partial \epsilon_{j}}{\partial \epsilon_{j}} \right)} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}} \\
+  -\Ccancelto[carmine]{0}{\left( \frac{\partial \alpha_{ij}}{\partial \epsilon_{j}} \right)} \epsilon_{j} - \alpha_{ij} \Ccancelto[Green]{1}{\left( \frac{\partial \epsilon_{j}}{\partial \epsilon_{j}} \right)} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}} \\
   -\alpha_{ij} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}}
 \end{align}
 
