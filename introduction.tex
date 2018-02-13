@@ -222,15 +222,14 @@ or in Einstein summation notation where repeated indices are implicitly summed (
   \label{eq:force_hooke_einstein}
   F_{i} = -k_{ij} x_{j},
 \end{equation}
-where both \(i,j\) range from 1 to \(N\), leading to vectors \(\mathbf{F}\) and \(\mathbf{x}\) of shape \([N]\) and a matrix \(\mathbf{k}\) of shape \([N,N]\).
-From \eqref{eq:force_hooke_matrix}, \eqref{eq:force_hooke_sum}, and \eqref{eq:force_hooke_einstein}, if off-diagonal elements in \(k\) are allowed to be nonzero, there can be coupling between springs. For example, if \(i \leftarrow 1\), in the case of coupling,
+where both \(i,j\) range from 1 to \(N\), leading to vectors \(\mathbf{F}\) and \(\mathbf{x}\) of shape \([N]\) and a matrix \(\mathbf{k}\) of shape \([N,N]\). From \eqref{eq:force_hooke_matrix}, \eqref{eq:force_hooke_sum}, and \eqref{eq:force_hooke_einstein}, if off-diagonal elements of \(k\) are allowed to be nonzero, there can be coupling between springs. For example, if \(i \leftarrow 1\), in the case of coupling,
 \begin{equation}
   \label{eq:force_hooke_example}
   F_{1} = -(k_{11}x_{1} + k_{12}x_{2} + k_{13}x_{3}),
 \end{equation}
 which reduces to
 \begin{equation}
-  \label{eq:force_hooke_example}
+  \label{eq:force_hooke_example_nocoupling}
   F_{1} = -k_{11}x_{1}
 \end{equation}
 in the absence of coupling, or the same result obtained in \eqref{eq:hooke_1d}.
@@ -397,7 +396,7 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
   \end{tabular}
 \end{table}
 
-\section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
+% \section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
 
 The analytical gradient of the Hartree-Fock energy is given by (Szabo \& Ostlund eq. C.16):
 \begin{equation}

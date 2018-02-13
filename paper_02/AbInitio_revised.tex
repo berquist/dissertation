@@ -24,9 +24,9 @@
 \addbibresource{../paper_04/paper.bib}
 \usepackage{booktabs}
 \usepackage{braket}
-\usepackage{graphicx}
 \onlyifstandalone{\usepackage[margin=1in]{geometry}}
 \onlyifstandalone{\raggedbottom}
+\usepackage{graphicx}
 \usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
 \usepackage{makecell}
 \renewcommand{\cellalign}{cl}
@@ -130,12 +130,11 @@ where \(r_{1}^{ij}\) or \(r_{2}^{ij}\) is the bond length at grid point \((i,j)\
 \begin{figure}
   \centering
   \includegraphics[scale=0.75]{Fig1.pdf}
-  \caption[DVR contour plot]{Contour plot of a discrete variable representation (DVR) of the Born\textendash{}Oppenheimer potential energy surface of gas phase \ce{CO2}. Density functional theory single point energy calculations with the B3LYP functional and the 6-311++G(d,p) basis set were performed on carbon dioxide, incrementing each CO bond's length in steps of \SI{0.045}{\angstrom}, from \SIrange{0.955}{1.45}{\angstrom}. Below a relative energy of \SI{2500}{\wavenumber}, contour lines are spaced by \SI{100}{\wavenumber}, above they are spaced by \SI{2500}{\wavenumber}. Mesh intersections indicate individual single point energy calculations. In order to calculate vibrational frequencies, this potential energy surface is incorporated into a discretized version of the Hamiltonian for the stretching modes of \ce{CO2} (Eq.~\ref{paper_02:eq:1}), which is then numerically diagonalized. The asymmetric stretch frequency is obtained from the differences between the energy levels (Eq.~\ref{paper_02:eq:2}).}
+  \caption[DVR contour plot]{Contour plot of a discrete variable representation (DVR) of the Born\textendash{}Oppenheimer potential energy surface of gas phase \ce{CO2}. Density functional theory single point energy calculations with the B3LYP functional and the LP basis set were performed on carbon dioxide, incrementing each CO bond's length in steps of \SI{0.045}{\angstrom}, from \SIrange{0.955}{1.45}{\angstrom}. Below a relative energy of \SI{2500}{\wavenumber}, contour lines are spaced by \SI{100}{\wavenumber}, above they are spaced by \SI{2500}{\wavenumber}. Mesh intersections indicate individual single point energy calculations. In order to calculate vibrational frequencies, this potential energy surface is incorporated into a discretized version of the Hamiltonian for the stretching modes of \ce{CO2} (Eq.~\ref{paper_02:eq:1}), which is then numerically diagonalized. The asymmetric stretch frequency is obtained from the differences between the energy levels (Eq.~\ref{paper_02:eq:2}).}
   \label{paper_02:fig:1}
 \end{figure}
 
 % \section{\texorpdfstring{\caps{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}{Sensitivity of the Calculated Vibrational Signatures to the Underlying Computational and Chemical Model}}
-% Vibrational Frequency Dependence on Model Approximations
 \section{\texorpdfstring{\caps{Vibrational Frequency Dependence on Model Approximations}}{Vibrational Frequency Dependence on Model Approximations}}
 \label{paper_02:sec:III}
 

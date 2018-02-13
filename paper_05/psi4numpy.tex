@@ -26,6 +26,8 @@
 \addbibresource{../paper_04/paper.bib}
 \usepackage{amsmath}
 \usepackage{booktabs}
+\onlyifstandalone{\usepackage[margin=1in]{geometry}}
+\onlyifstandalone{\raggedbottom}
 \usepackage{graphicx}
 \usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
 \usepackage{setspace}
@@ -41,6 +43,7 @@
   texcomments=false,%
 }
 \newcommand{\caps}[1]{\uppercase{#1}}
+\hyphenation{wave-function}
 \begin{document}
 \newcommand{\numpy}{\textsc{NumPy}\xspace}
 \newcommand{\pfour}{\textsc{Psi4}\xspace}
@@ -78,7 +81,7 @@ Several of the reference implementations have been augmented by tutorial-style i
   \label{fig:ovalorg}
 \end{figure}
 
-Shortly before submission, the authors chanced upon the Quantum Chemistry Program Exchange (QCPE)\cite{QCPE, Boyd:2013:221}, whose goals of software (particularly self-contained software) accessibility, algorithm explication, and free software ``publishing'' \pfn shares. The general tools embraced by \pfn (GitHub for communication, \numpy for linear algebra, Python for interfacing, and Jupyter for illumination) further allow rapid prototyping and educational objectives. In this manner \pfn can be thought as a modern successor to QCPE built to serve the flexible needs of the community.
+Shortly before submission, we discovered the Quantum Chemistry Program Exchange (QCPE)\cite{QCPE,Boyd:2013:221}, whose goals of (self-contained) software accessibility, algorithm explication, and free software ``publishing'' the \pfn project shares. The general tools embraced by \pfn (GitHub for communication, \numpy for linear algebra, Python for interfacing, and Jupyter for illumination) further allow rapid prototyping and educational objectives. In this manner \pfn can be thought as a modern successor to QCPE built to serve the flexible needs of the community.
 
 \section{\texorpdfstring{\caps{Basic Tools}}{Basic Tools}}
 
