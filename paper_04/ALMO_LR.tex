@@ -497,9 +497,6 @@ Using the template from listing~\ref{listing:input-polarizability}:
   \lstinline|_frgm_response_idx = 0| and all \lstinline|_mask_*| options to \lstinline|false|.
 \item To perform the ``ALMO frz + pol + CT(Ar \(\rightarrow\) all)'' calculations, set \\
   \lstinline|_frgm_response_idx = 1| and all \lstinline|_mask_*| options to \lstinline|true|.
-% \item For the perturbative correction calculations (``ALMO frz + pol + CT(all \(\rightarrow\) all) [RS]''), an input file is identical to ``ALMO frz + pol + CT(all \(\rightarrow\) all) [blocked]'' with \lstinline|solver = linear|, \lstinline|maxiter = 1|, and \lstinline|conv = -1|;
-% \item For the uncoupled ALMO calculations, an input file is identical to ``ALMO frz + pol + CT(all \(\rightarrow\) all) [blocked]'' with \lstinline|solver = diis|, \lstinline|maxiter = 1|, and \lstinline|conv = -1|.
-% \item For the uncoupled canonical calculations, an input file is identical to a canonical calculation with \lstinline|solver = diis|, \lstinline|maxiter = 1|, and \lstinline|conv = -1|.
 \end{itemize}
 
 \lstinputlisting[%

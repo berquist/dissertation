@@ -34,6 +34,12 @@ preview = false,%
 \onlyifstandalone{\usepackage[margin=1in]{geometry}}
 \onlyifstandalone{\raggedbottom}
 \onlyifstandalone{\usepackage{hyperref}}
+\usepackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
 \usepackage{tabu}
 \usepackage{xspace}
 \newcommand\hf{Hartree\textendash{}Fock\xspace}%
@@ -48,7 +54,7 @@ The unifying theme is the contribution of specific intermolecular interactions t
 
 The contributions of specific intermolecular interactions are in the language of energy decomposition analysis using absolutely localized molecular orbitals, abbreviated as ALMO-EDA.
 
-Intro/background to ALMO-EDA is given in sec 4.2
+Intro/background to ALMO-EDA is given in sec~\ref{sec:introduction}
 
 In chapters blah, blah, blah, we present applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies and dipole polarizabilities.
 
@@ -84,16 +90,16 @@ Two possible ways to perform the derivation:
 
 \subsection{Phenomenological approach}
 
-For a one-dimensional spring connecting a ball to a fixed object, Hooke's law
-
+For a one-dimensional spring connecting a ball to a fixed object, Hooke's law is
 \begin{equation}
-  F = -k x
   \label{eq:hooke_1d}
+  F = -k x,
 \end{equation}
+where \(x\) is the displacement of the spring from equilibrium in meters, \(k\) is the spring constant in units of \si{\newton\per\meter}, and \(F\) is the restoring force in units of newtons acting on the displaced spring by the object it is attached to. If the sign is reversed, then the equation can be viewed as describing the force of spring acting on the attached object; it is a direction change and a matter of convention.
 
-Generalization to 3D space
-
+Hooke's law can be generalized to multiple dimensions. For example, in three-dimensional space it can be written as
 \begin{equation}
+  \label{eq:force_hooke_matrix}
   \begin{bmatrix}
     F_{1} \\ F_{2} \\ F_{3}
   \end{bmatrix}
@@ -105,34 +111,41 @@ Generalization to 3D space
   \end{bmatrix}
   \begin{bmatrix}
     x_{1} \\ x_{2} \\ x_{3}
-  \end{bmatrix}
+  \end{bmatrix},
 \end{equation}
-
-Can also be made 3N-dimensional, describes the forces on atoms given their relative positions \(\mathbf{x}\) and the ``stiffness'' of their connectivity \(\mathbf{k}\)
-
+which can represent either a single object or three one-dimensional springs. It can also be made \(3N\)-dimensional when describing the forces on \(N\) atoms (each with 3 Cartesian components) given their relative positions \(\mathbf{x}\) and the ``stiffness'' of their connectivity \(\mathbf{k}\). In the most general \(N\)-dimensional form, it can be written as
 \begin{equation}
-  F_{i} = - \sum_{j} k_{ij} x_{j}
+  \label{eq:force_hooke_sum}
+  F_{i} = - \sum_{j}^{N} k_{ij} x_{j},
 \end{equation}
-
-Rewrite in Einstein summation notation
-
+or in Einstein summation notation where repeated indices are implicitly summed (contracted) over as
 \begin{equation}
-  F_{i} = -k_{ij} x_{j}
   \label{eq:force_hooke_einstein}
+  F_{i} = -k_{ij} x_{j},
 \end{equation}
-
-We also know that the force is related to the energy. In one dimension
-
-\begin{align}
-  F &= - \nabla U \\
-  &= \frac{\partial E}{\partial x}
-\end{align}
-
-In arbitrary dimensions
-
+where both \(i,j\) range from 1 to \(N\), leading to vectors \(\mathbf{F}\) and \(\mathbf{x}\) of shape \([N]\) and a matrix \(\mathbf{k}\) of shape \([N,N]\).
+From \eqref{eq:force_hooke_matrix}, \eqref{eq:force_hooke_sum}, and \eqref{eq:force_hooke_einstein}, if off-diagonal elements in \(k\) are allowed to be nonzero, there can be coupling between springs. For example, if \(i \leftarrow 1\), in the case of coupling,
 \begin{equation}
-  F_{i} = \frac{\partial E}{\partial x_{i}}
+  \label{eq:force_hooke_example}
+  F_{1} = -(k_{11}x_{1} + k_{12}x_{2} + k_{13}x_{3}),
+\end{equation}
+which reduces to
+\begin{equation}
+  \label{eq:force_hooke_example}
+  F_{1} = -k_{11}x_{1}
+\end{equation}
+in the absence of coupling, or the same result obtained in \eqref{eq:hooke_1d}.
+
+The force is also related to the energy. In one dimension,
+\begin{align}
+  \label{eq:energy_derivative_1d}
+  F &= \nabla E \\
+  &= \frac{\partial E}{\partial x},
+\end{align}
+where \(\nabla \equiv \partial/\partial x\). For convenience, the negative sign will be dropped from the remainder of the derivation. In \(N\) dimensions, like \eqref{eq:force_hooke_einstein}, \eqref{eq:energy_derivative_1d} is
+\begin{equation}
   \label{eq:force_partial_derivative}
+  F_{i} = \frac{\partial E}{\partial x_{i}}
 \end{equation}
 
 Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_partial_derivative} gives
