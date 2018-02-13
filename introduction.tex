@@ -481,13 +481,13 @@ where the Fock matrix is defined as
   F_{pq} &= h_{pq} + \sum_{k}^{\text{d.o.}} \left[ 2(pq|kk) - (pk|qk) \right] \tag{Yamaguchi eq. 4.6} \\
          &= h_{pq} + 2J_{pq} - K_{pq},
 \end{align*}
-and I've introduced the Coulomb and exchange matrices \(\mathbf{J}\) and \(\mathbf{K}\) as well. I skipped all the steps in expanding the first derivative, and \(\eqref{4.16}\) is what results upon collecting terms with \(\mathbf{U}\).
+and I've introduced the Coulomb and exchange matrices \(\mathbf{J}\) and \(\mathbf{K}\) as well. I skipped all the steps in expanding the first derivative, and \eqref{4.16} is what results upon collecting terms with \(\mathbf{U}\).
 
 Using the RHF variational conditions, the Fock matrix from a converged calculation is diagonal in the MO basis, corresponding to the MO energies
 \begin{equation}
   F_{pq} = \delta_{pq} \epsilon_{pq}, \tag{Yamaguchi eq. 4.7}
 \end{equation}
-so \(\eqref{4.16}\) simplifies to
+so \eqref{4.16} simplifies to
 \begin{equation}
   \frac{\partial E_{\text{elec}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{m}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{mi}^{X_{A}} \epsilon_{im}, \tag{Yamaguchi eq. 4.17 modified}
 \end{equation}
@@ -505,7 +505,7 @@ we must have
   \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0. \tag{Yamaguchi eq. 3.45}
 \end{equation}
 
-This is where not using general notation in the above is a bit confusing because it seems to conflict with your original expression, but remember that similar to \(\eqref{3.81}/\eqref{3.25}\), this is in fact multiple terms: two for the basis functions, and two for the MO coefficients, giving
+This is where not using general notation in the above is a bit confusing because it seems to conflict with your original expression, but remember that similar to \eqref{3.81} and \eqref{3.25}, this is in fact multiple terms: two for the basis functions, and two for the MO coefficients, giving
 \begin{align*}
 \frac{\partial S_{pq}}{\partial X_{A}} &= \sum_{\mu\nu}^{\text{AO}} C_{\mu p} C_{\mu q} \frac{\partial S_{\mu\nu}}{\partial X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right) \tag{Yamaguchi eqs. 3.40 + 3.43} \\
                                        &= S_{pq}^{X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right). \tag{Yamaguchi eq. 3.43}
