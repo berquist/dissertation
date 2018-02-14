@@ -64,8 +64,8 @@ There is a direct connection between the macroscopic observables measurable by s
   \centering
   \caption{Adapted from Ref.~\parencite{gauss2000}.}
   \begin{tabu}{>{$}r<{$}X}
-    \toprule \\
-    \text{Energy derivative} & Molecular property\\
+    \toprule
+    \text{Energy derivative} & Molecular property \\
     \midrule
     \frac{dE}{d\varepsilon_{i}} & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
     \frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability \\
@@ -245,7 +245,12 @@ The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), 
   \label{eq:general-energy-correction}
   E^{(n)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(n-1)}},
 \end{equation}
-so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}).
+so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}). From \eqref{eq:general-energy-correction}, the first form of the second-order correction is
+\begin{equation}
+  \label{eq:second-order-correction-first-form}
+  E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
+\end{equation}
+where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed,
 \subsection{Series expansion}
 \label{ssec:series-expansion}
 
