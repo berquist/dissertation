@@ -802,8 +802,7 @@
     \vskip\abovecaptionskip
     \sbox\@tempboxa{#1: #2}%
     \ifdim \wd\@tempboxa >\hsize
-        {\let\nobreakspace\space\ClassWarning{pittetd}{%
-            The caption of #1 is longer than one line}}%
+        {\let\nobreakspace\space}%
             #1: #2\par
     \else
         \global\@minipagefalse
