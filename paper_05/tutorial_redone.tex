@@ -53,42 +53,42 @@ For matrix indices, \(\mu,\nu,\lambda,\sigma,\dots\) label atomic orbitals (AOs)
   \subsection{Derivation}\label{derivation}}
 
 Again, write the total Hamiltonian as the sum of unperturbed and perturbed components
-\begin{align}
+\begin{align*}
   \hat{H}(\mathbf{E},t) &= \hat{H}^{(0)} + \hat{V}(\mathbf{E},t) \\
-  \hat{V}(\mathbf{E},t) &= -\mathbf{\mu} \cdot \mathbf{E}(e^{\pm i \omega t} + 1)
-\end{align}
+  \hat{V}(\mathbf{E},t) &= -\mathbf{\mu} \cdot \mathbf{E}(e^{\pm i \omega t} + 1) \tag{Karna 2}
+\end{align*}
 where part of the external field now oscillates with some characteristic frequency \(\omega\). This can be incorporated into the time-dependent Schrodinger equation, which for a stationary state obeys
-\begin{align}
-  \left[ \hat{H}^{(0)} + \hat{V}(\mathbf{E},t) - i\frac{\partial}{\partial t} \right] \psi(t) &= 0, \\
-  FC - i \frac{\partial}{\partial t} SC &= SC\epsilon, \\
-  \frac{\partial}{\partial t} C^{\dagger} S C &= 0,
-\end{align}
+\begin{align*}
+  \left[ \hat{H}^{(0)} + \hat{V}(\mathbf{E},t) - i\frac{\partial}{\partial t} \right] \psi(t) &= 0, \tag{Karna 3} \\
+  FC - i \frac{\partial}{\partial t} SC &= SC\epsilon, \tag{Karna 5} \\
+  \frac{\partial}{\partial t} C^{\dagger} S C &= 0, \tag{Karna 6}
+\end{align*}
 where the full definition of the Fock matrix is
 \begin{equation}
-  F_{\mu\nu} = h_{\mu\nu} + D_{\lambda\sigma}[2J_{\mu\nu\lambda\sigma} - K_{\mu\nu\lambda\sigma}]
+  F_{\mu\nu} = h_{\mu\nu} + D_{\lambda\sigma}[2J_{\mu\nu\lambda\sigma} - K_{\mu\nu\lambda\sigma}] \tag{Karna 9}
 \end{equation}
 and the density matrix is defined as
 \begin{equation}
-  D_{\mu\nu} = C_{\mu p}n_{pq}C_{\nu q}^{\dagger},
+  D_{\mu\nu} = C_{\mu p}n_{pq}C_{\nu q}^{\dagger}, \tag{Karna 10}
 \end{equation}
 where the diagonal occupation number matrix \(n_{ii} = 2\) and \(n_{aa} = 0\) for RHF.
 
 In general, the MO coeffients are perturbation- and time-dependent, but the basis functions themselves are not. This means that when the series expansion for the perturbation above is performed on other quantities, only \(F\), \(C\), \(\epsilon\), and \(D\) are affected. For example, the Lagrangian multiplier matrix \(\epsilon\) can be expanded as
 \begin{equation}
-  \epsilon(\mathbf{E}) = \epsilon^0 + E_a\epsilon^a + \frac{1}{2!}E_aE_b\epsilon^{ab} + \frac{1}{3!}E_aE_bE_c\epsilon^{abc} + \cdots
+  \epsilon(\mathbf{E}) = \epsilon^0 + E_a\epsilon^a + \frac{1}{2!}E_aE_b\epsilon^{ab} + \frac{1}{3!}E_aE_bE_c\epsilon^{abc} + \cdots \tag{Karna 17c}
 \end{equation}
 where \(a,b,c,...\in\{x,y,z\}\), and
-\begin{align}
-  \epsilon^{a} &= e^{\pm i \omega t} \epsilon^{a}(\pm\omega) + \epsilon^{a}(0), \\
-  \epsilon^{ab} &= e^{\pm 2 i \omega t} \epsilon^{ab}(\pm\omega,\pm\omega) + e^{\pm i \omega t} \{ \epsilon^{ab}(0,\pm\omega) + \epsilon^{ab}(\pm\omega,0)\} + \epsilon^{ab}(\pm\omega,\mp\omega) + \epsilon^{ab}(0,0),
-\end{align}
+\begin{align*}
+  \epsilon^{a} &= e^{\pm i \omega t} \epsilon^{a}(\pm\omega) + \epsilon^{a}(0), \tag{Karna 19a} \\
+  \epsilon^{ab} &= e^{\pm 2 i \omega t} \epsilon^{ab}(\pm\omega,\pm\omega) + e^{\pm i \omega t} \{ \epsilon^{ab}(0,\pm\omega) + \epsilon^{ab}(\pm\omega,0)\} + \epsilon^{ab}(\pm\omega,\mp\omega) + \epsilon^{ab}(0,0), \tag{Karna 19b}
+\end{align*}
 \begin{equation}
   \begin{split}
     \epsilon^{abc} &= e^{\pm 3 i \omega t} \epsilon^{abc}(\pm\omega,\pm\omega,\pm\omega) + e^{\pm 2 i \omega t} \{\epsilon^{abc}(0,\pm\omega,\pm\omega) + \epsilon^{abc}(\pm\omega,0,\pm\omega) + \epsilon^{abc}(\pm\omega,\pm\omega,0)\} \\
     &+ e^{\pm i \omega t} \{\epsilon^{abc}(\pm\omega,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,\pm\omega) + \epsilon^{abc}(\mp\omega,\pm\omega,\pm\omega)\} \\
     &+ e^{\pm i \omega t} \{\epsilon^{abc}(0,0,\pm\omega) + \epsilon^{abc}(0,\pm\omega,0) + \epsilon^{abc}(\pm\omega,0,0)\} \\
     &+ \{\epsilon^{abc}(0,\pm\omega,\mp\omega) + \epsilon^{abc}(\pm\omega,0,\mp\omega) + \epsilon^{abc}(\pm\omega,\mp\omega,0)\} + \epsilon^{abc}(0,0,0),
-  \end{split}
+  \end{split} \tag{Karna 19c}
 \end{equation}
 showing that each order of the expansion consists of all possible phase combinations. For the first hyperpolarizability, only quantities with at most two field indices are required. Each permutationally unique subterm of the expansion corresponds to a different physical observable:
 \begin{itemize}
@@ -100,37 +100,37 @@ showing that each order of the expansion consists of all possible phase combinat
   \(\rightarrow \beta(\mp 2\omega;\pm\omega,\pm\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\pm\omega)]\)
 \item \((\pm\omega,\mp\omega) \rightarrow\) optical rectification \(\rightarrow \beta(0;\pm\omega,\mp\omega) = -Tr[H^{a} D^{bc}(\pm\omega,\mp\omega)]\)
 \end{itemize}
-where each property is calculated as the trace over the AO-basis dipole matrices \(H^{a}\) with the appropriate perturbed density. The task now comes down to calculating the necessary perturbed density for the phenomenon of interest. The second-order densities required for the four different first hyperpolarizabilities are (Karna eqs. III-2a to III-2d)
-\begin{align}
+where each property is calculated as the trace over the AO-basis dipole matrices \(H^{a}\) with the appropriate perturbed density. The task now comes down to calculating the necessary perturbed density for the phenomenon of interest. The second-order densities required for the four different first hyperpolarizabilities are
+\begin{align*}
   \begin{split}
     D^{ab}(\pm\omega,\pm\omega) &= C^{ab}(\pm\omega,\pm\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\mp\omega) \\
     &+ C^{b}(\pm\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\mp\omega),
-  \end{split} \\
+  \end{split} \tag{Karna III-2a} \\
   \begin{split}
     D^{ab}(0,\pm\omega) &= C^{ab}(0,\pm\omega) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(\mp\omega) \\
     &+ C^{b}(\pm\omega) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,\mp\omega),
-  \end{split} \\
+  \end{split} \tag{Karna III-2b} \\
   \begin{split}
     D^{ab}(\pm\omega,\mp\omega) &= C^{ab}(\pm\omega,\mp\omega) n C^{0\dagger} + C^{a}(\pm\omega) n C^{b\dagger}(\pm\omega) \\
     &+ C^{b}(\mp\omega) n C^{a\dagger}(\mp\omega) + C^{0} n C^{ab\dagger}(\mp\omega,\pm\omega),
-  \end{split} \\
+  \end{split} \tag{Karna III-2c} \\
   \begin{split}
     D^{ab}(0,0) &= C^{ab}(0,0) n C^{0\dagger} + C^{a}(0) n C^{b\dagger}(0) \\
     &+ C^{b}(0) n C^{a\dagger}(0) + C^{0} n C^{ab\dagger}(0,0).
-  \end{split}
-\end{align}
+  \end{split} \tag{Karna III-2d}
+\end{align*}
 Already a few important insights about the equations are revealed: Each perturbation index always carries its respective frequency, and the positive and negative frequencies are related by the Hermitian adjoint (except for \(C(-\omega) = -C^{0} U^{\dagger}(+\omega)\), Karna eq. 40).  We also see the appearance of terms like \(C^{ab}\), which will require \(U^{ab}\) originating from the second-order CPHF. Computationally, this is undesirable due to the increased number of iterative calculations that must be performed, so we borrow a trick that most prominently appears in perturbation theory.
 
 \hypertarget{wigners-2n-1-rule}{%
   \subsubsection{\texorpdfstring{Wigner's \(2n + 1\) rule}{Wigner's 2n + 1 rule}}\label{wigners-2n-1-rule}}
 
-From Schaefer, page 25:
+From Schaefer\cite{Yamaguchi1994}, page 25:
 \begin{quote}
   When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem\cite{doi:10.1063/1.1668053,EPSTEIN1980311}.
 \end{quote}
 \begin{table}
   \centering
-  \caption[MO coefficient derivatives and rotation matrices needed for energy derivatives]{Orders of MO coefficient derivatives and rotation matrices needed for energy derivatives following Wigner's \(2n+1\) rule.}
+  \caption[MO coefficient derivatives and rotation matrices needed for energy derivatives]{Orders of MO coefficient derivatives and rotation matrices needed for energy derivatives following Wigner's \(2n+1\) rule. Reproduced from Ref.~\parencite{Yamaguchi1994}.}
   \label{tutorial:tab:wigner}
   \begin{tabular}{cccc}
     \toprule
@@ -150,9 +150,9 @@ Since the first hyperpolarizability is calculated as a third derivative of the e
 \hypertarget{final-expressions}{%
   \subsection{Final expressions}\label{final-expressions}}
 
-To this point, most work has been in the AO basis, but it is conceptually easier to work in the MO basis, in particular due to the use of the \(\epsilon\) equations (Karna eq. 34)
+To this point, most work has been in the AO basis, but it is conceptually easier to work in the MO basis, in particular due to the use of the \(\epsilon\) equations
 \begin{equation}
-  \epsilon^{a}(\pm\omega) = G^{a}(\pm\omega) + \epsilon^{0} U^{a}(\pm\omega) - U^{a}(\pm\omega) \epsilon^{0} \pm \omega U^{a}(\pm\omega),
+  \epsilon^{a}(\pm\omega) = G^{a}(\pm\omega) + \epsilon^{0} U^{a}(\pm\omega) - U^{a}(\pm\omega) \epsilon^{0} \pm \omega U^{a}(\pm\omega), \tag{Karna 34}
 \end{equation}
 where the \(G\) matrices are the MO-basis Fock matrices
 \begin{equation}
@@ -162,14 +162,14 @@ and the \(U\) matrices are the MO-basis perturbation parameters
 \begin{equation}
   C^{ab\dots} = C^{0} U^{ab\dots},
 \end{equation}
-which will be discussed in the implementation. The final expression for the static hyperpolarizability is (Karna eq. VII-4)
+which will be discussed in the implementation. The final expression for the static hyperpolarizability is
 \begin{equation}
   \begin{split}
     \beta_{abc}(0; 0, 0) &= Tr[n \{U^{a}(0) G^{b}(0) U^{c}(0) + U^{c}(0) G^{b}(0) U^{a}(0) + U^{b}(0) G^{c}(0) U^{a}(0) \\
     &+ U^{a}(0) G^{c}(0) U^{b}(0) + U^{c}(0) G^{a}(0) U^{b}(0) + U^{b}(0) G^{a}(0) U^{c}(0)\} ] \\
     &- Tr[n \{ U^{a}(0) U^{c}(0) \epsilon^{b}(0) + U^{c}(0) U^{a}(0) \epsilon^{b}(0) + U^{b}(0) U^{a}(0) \epsilon^{c}(0) \\
     &+ U^{a}(0) U^{b}(0) \epsilon^{c}(0) + U^{c}(0) U^{b}(0) \epsilon^{a}(0) + U^{b}(0) U^{c}(0) \epsilon^{a}(0) \} ].
-  \end{split}
+  \end{split} \tag{Karna VII-4}
 \end{equation}
 By noticing that each term corresponds to a unique permutation of the field indices, it can be rewritten as
 \begin{equation}
@@ -266,7 +266,7 @@ either directly (via matrix inversion in the MO basis) or iteratively (via repea
     \mathbf{V} \\
     -\mathbf{V}
   \end{pmatrix}
-  .
+  . \tag{Neese 107}
 \end{equation}
 In the static limit \((\omega_f = 0)\), the whole superoverlap matrix vanishes, and the CPHF equations can be reduced to those used in tutorial 6a.
 

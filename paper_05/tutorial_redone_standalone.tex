@@ -1,25 +1,5 @@
 \documentclass{article}
-
-\usepackage[margin=1.25in]{geometry}
-\usepackage{hyperref}
-\usepackage{amsmath}
-
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-\usepackage{minted}
-\setminted{%
-  breaklines=true,%
-  fontsize=\footnotesize,%
-  frame=lines,%
-  linenos=true,%
-  mathescape=true,%
-  python3=true,%
-  texcomments=false,%
-}
-
-\usepackage{microtype}
-
+%
 \usepackage[%
     backend    = biber,%
     style      = chem-acs,%
@@ -33,8 +13,28 @@
 \let\citep\parencite
 \addbibresource{../paper_04/paper.bib}
 \addbibresource{./tutorial.bib}
-
+%
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{microtype}
+%
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+%
+\usepackage{minted}
+\setminted{%
+  breaklines=true,%
+  fontsize=\footnotesize,%
+  frame=none,%
+  linenos=true,%
+  mathescape=true,%
+  python3=true,%
+  texcomments=false,%
+}
+%
 \begin{document}
 \include{tutorial_redone}
-% \printbibliography
+\printbibliography
 \end{document}

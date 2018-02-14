@@ -49,23 +49,88 @@ preview = false,%
 \label{ch:introduction}
 
 \section{Introduction to the thesis}
-What is the unifying theme?
 
-The unifying theme is the contribution of specific intermolecular interactions to spectroscopic response.
+The unifying theme of this thesis is that it is possible to identify the contribution of specific intermolecular interactions to spectroscopic response. The contributions of specific intermolecular interactions are in the language of energy decomposition analysis using absolutely localized molecular orbitals, abbreviated as ALMO-EDA. The necessary background for ALMO-EDA is given in sections~\ref{sec:introduction}.
 
-The contributions of specific intermolecular interactions are in the language of energy decomposition analysis using absolutely localized molecular orbitals, abbreviated as ALMO-EDA.
+The majority of this thesis presents applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies in chapters~\ref{ch:anions}, \ref{ch:paper_02}, \ref{ch:paper_03} and dipole polarizabilities in chapter~\ref{ch:paper_04}.
 
-Intro/background to ALMO-EDA is given in sec~\ref{sec:introduction}
+The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables. Specifically, it will touch upon which observables are related to which microscopic terms, and more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between energy derivatives (analytic derivative theory), phenomenological Hamiltonians, perturbation theory, and the polarization propagator, of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
 
-In chapters blah, blah, blah, we present applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies and dipole polarizabilities.
+\section{Connection between macroscopic and microscopic properties}
 
-The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables.
+There is a direct connection between the macroscopic observables measurable by spectroscopic techniques and 
 
-\section{Connection between macroscopic and microscopic}
+\begin{table}
+  \centering
+  \caption{Adapted from Ref.~\parencite{gauss2000}.}
+  \begin{tabu}{>{$}r<{$}X}
+    \toprule \\
+    \text{Energy derivative} & Molecular property\\
+    \midrule
+    \frac{dE}{d\varepsilon_{i}} & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
+    \frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability \\
+    \frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}} & (first) hyperpolarizability \\
+    \frac{dE}{dx_{i}} & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+    \frac{d^{2}E}{dx_{i}dx_{j}} & harmonic force constants; harmonic vibrational frequencies \\
+    \frac{d^{3}E}{dx_{i}dx_{j}dx_{k}} & cubic force constants; vibrational corrections to distances and rotational constants \\
+    \frac{d^{4}E}{dx_{i}dx_{j}dx_{k}dx_{l}} & quartic force constants; anharmonic corrections to vibrational frequencies \\
+    \frac{d^{2}E}{dx_{i}d\varepsilon_{\alpha}} & dipole derivatives; infrared intensities within the harmonic approximation \\
+    \frac{d^{3}E}{dx_{i}d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability derivative; Raman intensities \\
+    \frac{d^{2}E}{dB_{\alpha}dB_{\beta}} & magnetizability \\
+    \frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}} & nuclear magnetic shielding tensor; relative NMR shifts \\
+    \frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}} & indirect spin-spin coupling constant \\
+    \frac{d^{2}E}{dB_{\alpha}dJ_{\beta}} & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+    \frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}} & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+    \frac{dE}{dm_{K_{j}}} & spin density; hyperfine interaction constants \\
+    \frac{d^{2}E}{dS_{i}dB_{\alpha}} & electronic \textit{g}-tensor \\
+    \bottomrule
+  \end{tabu}
+\end{table}
 
-maybe subsection of ADT
+Poles and residues
 
-Sources: response book draft, Barron book
+residues lead to transition moments
+
+A residue analysis provides a mean to obtain \textit{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
+\begin{equation*}
+  \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
+\end{equation*}
+Spin-orbit coupling constants between singlet/triplet states correspond to the residue of the triplet linear response function:
+\begin{equation*}
+  \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
+\end{equation*}
+
+\begin{table}
+  \centering
+  \caption{The calculation of spectroscopic parameters is directly related to linear (and nonlinear) response functions. Adapted from TODO}
+  \begin{tabular}{lll}
+    \toprule
+    \textbf{Property}                 & \textbf{Definition}                                                                    & \textbf{Type of response function} \\
+    \midrule
+    Polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \)                                   & linear \\
+    Magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \)                                            & linear \\
+    Optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \)                                     & linear \\
+    Electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \)                                 & single residue of linear \\
+    IR intensities                    & \( \braket{\braket{\hat{\mu};\partial\hat{H}_{0}/\partial R}}_{\omega} \)              & linear \\
+    NMR spin-spin coupling constants  & \( \braket{\braket{\hat{h}_{\text{SD}};\hat{h}_{\text{SD}}}}_{0} \),                   & linear \\
+                                      & \( \braket{\braket{\hat{h}_{\text{FC}};\hat{h}_{\text{FC}}}}_{0} \),                   & linear \\
+                                      & \( \braket{\braket{\hat{h}_{\text{PSO}};\hat{h}_{\text{PSO}}}}_{0} \)                  & linear \\
+    NMR chemical shifts               & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{PSO}}}}_{0} \)                           & linear \\
+    EPR \textit{g}-tensor             & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{SOC}}}}_{0} \)                           & linear \\
+    \midrule
+    static first hyperpolarizability  & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{0,0} \)                            & quadratic \\
+    second-harmonic generation        & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,\omega} \)                  & quadratic \\
+    electro-optical Pockels effect    & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,0} \)                       & quadratic \\
+    optical rectification             & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,-\omega} \)                 & quadratic \\
+    Faraday rotation                  & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega,0} \)                         & quadratic ? \\
+    magnetic circular dichroism       & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega_{f},0} \)                     & () residue of quadratic \\
+    Raman intensities                 & \( \braket{\braket{\hat{\mu};\hat{\mu},\partial\hat{H}_{0}/\partial R}}_{\omega,0} \)  & quadratic \\
+    \midrule
+    static second hyperpolarizability & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu},\hat{\mu}}}_{0,0,0} \)                & cubic \\
+    third-harmonic generation         & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu},\hat{\mu}}}_{\omega,\omega,\omega} \) & cubic \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \section{Analytic derivative theory}
 
@@ -84,7 +149,7 @@ Two possible ways to perform the derivation:
 
 \begin{enumerate}
 \item from series expansion of the energy with respect to one or more perturbations (section~\ref{ssec:series-expansion})
-\item from a phenomenological Hamiltonian (sort of like quantizing a classical expression) (section~\ref{ssec:phenomenological-approach})
+\item from a phenomenological Hamiltonian (sort of like the correspondence principle, quantizing a classical expression) (section~\ref{ssec:phenomenological-approach})
 \end{enumerate}
 
 TODO where does the perturbation theory style derivation go?
@@ -173,7 +238,7 @@ The final form of \eqref{eq:first-order-terms-bra} is now
   \label{eq:first-order-terms-final}
   \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} = E^{(1)},
 \end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
 
 The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
 \begin{equation}
@@ -312,33 +377,6 @@ and differentiating that expression with respect to another nuclear displacement
 
 In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
 
-\begin{table}
-  \centering
-  \caption{Adapted from Ref.~\parencite{gauss2000}.}
-  \begin{tabu}{>{$}r<{$}X}
-    \toprule \\
-    \text{Energy derivative} & Molecular property\\
-    \midrule
-    \frac{dE}{d\varepsilon_{i}} & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
-    \frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability \\
-    \frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}} & (first) hyperpolarizability \\
-    \frac{dE}{dx_{i}} & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
-    \frac{d^{2}E}{dx_{i}dx_{j}} & harmonic force constants; harmonic vibrational frequencies \\
-    \frac{d^{3}E}{dx_{i}dx_{j}dx_{k}} & cubic force constants; vibrational corrections to distances and rotational constants \\
-    \frac{d^{4}E}{dx_{i}dx_{j}dx_{k}dx_{l}} & quartic force constants; anharmonic corrections to vibrational frequencies \\
-    \frac{d^{2}E}{dx_{i}d\varepsilon_{\alpha}} & dipole derivatives; infrared intensities within the harmonic approximation \\
-    \frac{d^{3}E}{dx_{i}d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability derivative; Raman intensities \\
-    \frac{d^{2}E}{dB_{\alpha}dB_{\beta}} & magnetizability \\
-    \frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}} & nuclear magnetic shielding tensor; relative NMR shifts \\
-    \frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}} & indirect spin-spin coupling constant \\
-    \frac{d^{2}E}{dB_{\alpha}dJ_{\beta}} & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
-    \frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}} & nuclear spin-rotation tensor; fine structure in rotational spectra \\
-    \frac{dE}{dm_{K_{j}}} & spin density; hyperfine interaction constants \\
-    \frac{d^{2}E}{dS_{i}dB_{\alpha}} & electronic \textit{g}-tensor \\
-    \bottomrule
-  \end{tabu}
-\end{table}
-
 \section{Frequency-dependent response}
 
 \begin{itemize}
@@ -350,51 +388,6 @@ In the most general case, there are both derivatives of the AO-basis integrals t
 \end{itemize}
 
 Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
-
-Poles and residues
-
-residues lead to transition moments
-
-A residue analysis provides a mean to obtain \textit{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
-\begin{equation*}
-  \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
-\end{equation*}
-Spin-orbit coupling constants between singlet/triplet states correspond to the residue of the triplet linear response function:
-\begin{equation*}
-  \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
-\end{equation*}
-
-\begin{table}
-  \centering
-  \caption{The calculation of spectroscopic parameters is directly related to linear (and nonlinear) response functions. Adapted from TODO}
-  \begin{tabular}{lll}
-    \toprule
-    \textbf{Property}                 & \textbf{Definition}                                                                    & \textbf{Type of response function} \\
-    \midrule
-    Polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \)                                   & linear \\
-    Magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \)                                            & linear \\
-    Optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \)                                     & linear \\
-    Electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \)                                 & single residue of linear \\
-    IR intensities                    & \( \braket{\braket{\hat{\mu};\partial\hat{H}_{0}/\partial R}}_{\omega} \)              & linear \\
-    NMR spin-spin coupling constants  & \( \braket{\braket{\hat{h}_{\text{SD}};\hat{h}_{\text{SD}}}}_{0} \),                   & linear \\
-                                      & \( \braket{\braket{\hat{h}_{\text{FC}};\hat{h}_{\text{FC}}}}_{0} \),                   & linear \\
-                                      & \( \braket{\braket{\hat{h}_{\text{PSO}};\hat{h}_{\text{PSO}}}}_{0} \)                  & linear \\
-    NMR chemical shifts               & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{PSO}}}}_{0} \)                           & linear \\
-    EPR \textit{g}-tensor             & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{SOC}}}}_{0} \)                           & linear \\
-    \midrule
-    static first hyperpolarizability  & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{0,0} \)                            & quadratic \\
-    second-harmonic generation        & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,\omega} \)                  & quadratic \\
-    electro-optical Pockels effect    & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,0} \)                       & quadratic \\
-    optical rectification             & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,-\omega} \)                 & quadratic \\
-    Faraday rotation                  & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega,0} \)                         & quadratic ? \\
-    magnetic circular dichroism       & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega_{f},0} \)                     & () residue of quadratic \\
-    Raman intensities                 & \( \braket{\braket{\hat{\mu};\hat{\mu},\partial\hat{H}_{0}/\partial R}}_{\omega,0} \)  & quadratic \\
-    \midrule
-    static second hyperpolarizability & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu},\hat{\mu}}}_{0,0,0} \)                & cubic \\
-    third-harmonic generation         & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu},\hat{\mu}}}_{\omega,\omega,\omega} \) & cubic \\
-    \bottomrule
-  \end{tabular}
-\end{table}
 
 % \section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
 
