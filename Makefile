@@ -16,3 +16,4 @@ clean:
 	rm -f *.run.xml
 	rm -f *.stp
 	rm -f *.xdv
+	rm -rf ./_minted*
