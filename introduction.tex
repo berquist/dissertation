@@ -417,18 +417,6 @@ and differentiating that expression with respect to another nuclear displacement
 
 In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
 
-\section{Dynamic (frequency-dependent) response properties}
-
-\begin{itemize}
-\item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
-\item Two approaches: quasi-energy derivatives and polarization propagator
-\item In the static limit (\(\omega \rightarrow 0, t \rightarrow \infty\) (?)), equivalent to ADT, this is a more general derivation
-\item This is a one-particle approximation, that is, assume a perturbation can be described as a linear combination of single-particle excitations and deexcitations
-\item Two-particle approximation is SOPPA
-\end{itemize}
-
-Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
-
 % \section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
 
 The analytical gradient of the Hartree-Fock energy is given by (Szabo \& Ostlund eq. C.16):
@@ -444,12 +432,6 @@ The remaining terms require computing the derivatives of the Gaussian functions 
   \frac{\partial V_{Ne}}{\partial X_{A}} = -Z_{A} \sum_{i} \frac{X_{i} - X_{A}}{r_{iA}^{3}}
 \end{equation}
 In the Hartree-Fock equations, the molecular Hamiltonian is formed as \(H = T + V_{Ne}\). Presuming that the gradient of the molecular Hamiltonian is formed the same way, how can I treat this formulation of the analytical gradient with only a scalar value for the nuclear attraction term, when I must take into account the density matrix? Is this solution to the nuclear attraction gradient of no use in calculating the gradient of the energy?
-
-\begin{quote}
-{[}1{]} A. Szabo and N. S. Ostlund, \emph{Modern Quantum Chemistry: Introduction to Advanced Electronic Structure Theory}, Dover Publications Inc., New York, pp.~441-442.
-\end{quote}
-
-\subsection{Answer}
 
 There are a few points to discuss:
 
@@ -577,6 +559,18 @@ Reading list:
 \item \fullcite{doi:10.1063/1.1668053}
 \item \fullcite{EPSTEIN1980311}
 \end{itemize}
+
+\section{Dynamic (frequency-dependent) response properties}
+
+\begin{itemize}
+\item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
+\item Two approaches: quasi-energy derivatives and polarization propagator
+\item In the static limit (\(\omega \rightarrow 0, t \rightarrow \infty\) (?)), equivalent to ADT, this is a more general derivation
+\item This is a one-particle approximation, that is, assume a perturbation can be described as a linear combination of single-particle excitations and deexcitations
+\item Two-particle approximation is SOPPA
+\end{itemize}
+
+Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
 
 \section{Barron}
 % page 85
