@@ -42,6 +42,7 @@ preview = false,%
     range-units = single,%
     retain-explicit-plus = true,%
 ]{siunitx}
+\DeclareSIUnit\au{a.u.}
 \usepackage{tabu}
 \usepackage{xspace}
 \newcommand\hf{Hartree\textendash{}Fock\xspace}%
@@ -105,7 +106,7 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
 
 \begin{table}
   \centering
-  \caption{The calculation of spectroscopic parameters is directly related to linear (and nonlinear) response functions. Adapted from TODO}
+  \caption{The calculation of spectroscopic parameters is directly related to linear (and nonlinear) response functions. Adapted from~\parencite{TODO}.}
   \begin{tabular}{lll}
     \toprule
     \textbf{Property}                 & \textbf{Definition}                                                                    & \textbf{Type of response function} \\
@@ -360,7 +361,7 @@ which can be expanded identically to \eqref{eq:force_hooke_matrix} as
 or in Einstein summation notation as
 \begin{equation}
   \label{eq:polarizability_einstein}
-  \mu_{i} = \alpha_{ij} E_{j}.
+  \mu_{i} = \alpha_{ij} F_{j}.
 \end{equation}
 This is the most general case, where anisotropy may be present in the polarizability tensor, leading to nonzero off-diagonal elements.
 
@@ -403,17 +404,24 @@ However, this is more time-consuming, as there are \(2 \times (3N \,\,\text{atom
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
 
-As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations.
+As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since
+
+TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 
 \begin{figure}
   \centering
-  \includegraphics{./diff.pdf}
-  \caption{Effect of numerical noise in the}
+  \includegraphics[width=\textwidth]{./diff_overlay.pdf}
+  \caption{Effect of numerical noise on the off-diagonal matrix elements of the polarizability tensor. Nonzero differences indicate asymmetry, and the polarizability tensor is supposed to be symmetric. The red bar indicates the default step size for the applied electric field in Q-Chem 4.4, set at \SI{1.88973E-03}{\au} TODO.}
+  \label{fig:finite-difference-numerical-noise}
 \end{figure}
 
-\begin{quote}
-  namely calculation time, uncoupled and perturbative approximations to fully iterative results, lack of finite-difference error, frequency-dependent perturbations, and response to applied magnetic fields without complex energies
-\end{quote}
+\begin{itemize}
+\item calculation time
+\item uncoupled and perturbative approximations to fully iterative results
+\item lack of finite-difference error
+\item frequency-dependent perturbations
+\item response to applied magnetic fields without complex energies
+\end{itemize}
 
 \subsection{Analytic derivative theory}
 \label{ssec:analytic-derivative-theory}
