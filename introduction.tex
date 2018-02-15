@@ -34,6 +34,7 @@ preview = false,%
 \newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
 \onlyifstandalone{\usepackage[margin=1in]{geometry}}
 \onlyifstandalone{\raggedbottom}
+\usepackage{graphicx}
 \onlyifstandalone{\usepackage{hyperref}}
 \usepackage[%
     separate-uncertainty = true,%
@@ -393,16 +394,26 @@ Up to this point, it has not been necessary to specify which energy expression i
 \item numerically, by using a finite difference expression (usually based on central differences) for the desired derivative order, evaluating the energy at multiple applied field strengths and directions, or
 \item analytically, by differentiating the energy expression ``on paper'' and evaluating it directly.
 \end{enumerate}
-It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\partial^{3} E / \partial X_{A} \partial F_{i} \partial F_{j}\), it is common to have an analytic expression for \(\partial^{2} / \partial X_{A} \partial F_{i}\) (which are infrared intensities), followed by first-order finite difference with an applied electric field to obtain the polarizability derivatives, leading to six additional ??? calculations. Due to ???, it is also possible to differentiate the polarizability with respect to nuclear displacements:
+It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\partial^{3} E / \partial X_{A} \partial F_{i} \partial F_{j}\), it is possible to have an analytic expression for \(\partial^{2} / \partial X_{A} \partial F_{i}\) (which are infrared intensities), followed by first-order finite difference with an applied electric field to obtain the polarizability derivatives, leading to \(2 \times (3 \,\,\text{field directions}) = 6\) additional dipole gradient calculations. Due to ???, it is also possible to differentiate the polarizability with respect to nuclear displacements:
 \begin{equation}
-  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} = \frac{\partial}{\partial X_{A}} \left( \frac{\partial^{2} E}{\partial F_{i} \partial F_{j}} \right),
+  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} = \frac{\partial}{\partial X_{A}} \left( \frac{\partial^{2} E}{\partial F_{i} \partial F_{j}} \right).
 \end{equation}
-
+However, this is more time-consuming, as there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations that must be performed.
 
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
 
-TODO
+As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations.
+
+\begin{figure}
+  \centering
+  \includegraphics{./diff.pdf}
+  \caption{Effect of numerical noise in the}
+\end{figure}
+
+\begin{quote}
+  namely calculation time, uncoupled and perturbative approximations to fully iterative results, lack of finite-difference error, frequency-dependent perturbations, and response to applied magnetic fields without complex energies
+\end{quote}
 
 \subsection{Analytic derivative theory}
 \label{ssec:analytic-derivative-theory}
