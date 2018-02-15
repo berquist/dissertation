@@ -56,9 +56,10 @@ The unifying theme of this thesis is that it is possible to identify the contrib
 
 The majority of this thesis presents applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies in chapters~\ref{ch:anions}, \ref{ch:paper_02}, \ref{ch:paper_03} and dipole polarizabilities in chapter~\ref{ch:paper_04}.
 
-The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables. Specifically, it will touch upon which observables are related to which microscopic terms, and more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between energy derivatives (analytic derivative theory), phenomenological Hamiltonians, perturbation theory, and the polarization propagator, of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
+The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables, covering examples of which observables are related to which microscopic terms (section~\ref{sec:connection-between-macroscopic-and-microscopic}). It will also cover more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between phenomenological Hamiltonians (section~\ref{ssec:phenomenological-approach}), energy derivatives (sections~\ref{ssec:derivative-evaluation},~\ref{ssec:finite-difference-for-numerical-derivatives},~and~\ref{ssec:analytic-derivative-theory}), perturbation theory (section~\ref{ssec:perturbation-theory}), and the polarization propagator (section~\ref{sec:dynamic-properties}), of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
 
 \section{Connection between macroscopic and microscopic properties}
+\label{sec:connection-between-macroscopic-and-microscopic}
 
 TODO
 
@@ -137,6 +138,7 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
 \end{table}
 
 \section{Static (time-independent) response properties}
+\label{sec:static-properties}
 
 \begin{itemize}
 \item start from MacLaurin series expansion of the perturbation
@@ -155,106 +157,6 @@ Two possible ways to perform the derivation:
 \item from series expansion of the energy with respect to one or more perturbations (section~\ref{ssec:series-expansion})
 \item from a phenomenological Hamiltonian (sort of like the correspondence principle, quantizing a classical expression) (section~\ref{ssec:phenomenological-approach})
 \end{enumerate}
-
-TODO where does the perturbation theory style derivation go?
-
-\subsection{Perturbation theory}
-\label{ssec:perturbation-theory}
-
-In Rayleigh\textendash{}Schr{\"{o}}dinger perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322.}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
-\begin{equation}
-  \label{eq:perturbed-hamiltonian}
-  \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
-\end{equation}
-where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\psi}\) and its energy \(E\), where increasing orders account for better approximations to the exact (perturbed) energy:
-\begin{align}
-  \label{eq:expansion-wavefunction}
-  \ket{\psi} &= \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \\
-  \label{eq:expansion-energy}
-  E &= E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} + \dots
-\end{align}
-
-Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the Schr{\"{o}}dinger equation, \(\hat{H}\ket{\psi} = E\ket{\psi}\), gives
-\begin{equation}
-  \label{eq:expansion-schrodinger}
-  \begin{aligned}
-    \left( \hat{H}^{(0)} + \lambda\hat{V} \right) &\left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right] \\
-    &= \left[ E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} \right] \left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right],
-  \end{aligned}
-\end{equation}
-where the \(\{\lambda\}\) are now also useful for collecting terms of like orders. The zeroth-order terms give the Schr{\"{o}}dinger equation for the unperturbed energy,
-\begin{equation}
-  \label{eq:unperturbed-energy}
-  \hat{H}^{(0)} \ket{\psi}^{(0)} = E^{(0)} \ket{\psi}^{(0)},
-\end{equation}
-but equating all terms that are first order in \(\lambda\) on both sides gives
-\begin{equation}
-  \label{eq:first-order-terms}
-  \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} = E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}},
-\end{equation}
-where \(\lambda\) has been dropped for readability since it is present in front of each term. \eqref{eq:first-order-terms} can be simplified through integration using the bra \(\bra{\psi^{(0)}}\), which does not change the order from \(\lambda^{1}\):
-\begin{equation}
-  \label{eq:first-order-terms-bra}
-  \begin{aligned}
-    \bra{\psi^{(0)}} \left( \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} \right) &= \bra{\psi^{(0)}} \left( E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}} \right) \\
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= \braket{\psi^{(0)} | E^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | E^{(1)} | \psi^{(0)}} \\
-    &= E^{(0)} \braket{\psi^{(0)} | \psi^{(1)}} + E^{(1)} \braket{\psi^{(0)} | \psi^{(0)}}.
-  \end{aligned}
-\end{equation}
-
-It is now important to know what orthonormality conditions exist between the set of all intermediate states \(\{\ket{\psi^{(n)}}\}\). For the unperturbed state, which is usually the \hf ground state,
-\begin{equation}
-  \label{eq:hf-normalization}
-  \braket{\psi^{(0)}|\psi^{(0)}} = 1,
-\end{equation}
-and the choice of \emph{intermediate normalization} is made,
-\begin{equation}
-  \label{eq:intermediate-normalization}
-  \braket{\psi^{(0)}|\psi} \overset{!}{=} 1,
-\end{equation}
-which upon expanding the ket using \eqref{eq:expansion-wavefunction} leads to
-\begin{equation}
-  \label{eq:intermediate-normalization-single}
-  \braket{\psi^{(0)}|\psi^{(n)}} = 0
-\end{equation}
-for any intermediate state where \(n > 0\). Returning to \eqref{eq:first-order-terms-bra}, this first allows for simplification of the right-hand side,
-\begin{equation}
-  \label{eq:first-order-terms-first-simplification}
-  \begin{aligned}
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} + E^{(1)} \Ccancelto[Green]{1}{\braket{\psi^{(0)} | \psi^{(0)}}} \\
-    &= E^{(1)},
-  \end{aligned}
-\end{equation}
-and the first term on the left-hand side can be simplified using the hermiticity of the Hamiltonian followed by \eqref{eq:intermediate-normalization-single},
-\begin{equation}
-  \label{eq:hermiticity}
-  \begin{aligned}
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} &= \braket{\psi^{(1)} | \hat{H}^{(0)} | \psi^{(0)}}^{*} \\
-    &= \braket{\psi^{(1)} | E^{(0)} | \psi^{(0)}}^{*} \\
-    &= E^{(0)} \braket{\psi^{(1)} | \psi^{(0)}}^{*} \\
-    &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} \\
-    &= 0.
-  \end{aligned}
-\end{equation}
-
-The final form of \eqref{eq:first-order-terms-bra} is now
-\begin{equation}
-  \label{eq:first-order-terms-final}
-  \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} = E^{(1)},
-\end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
-
-The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
-\begin{equation}
-  \label{eq:general-energy-correction}
-  E^{(n)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(n-1)}},
-\end{equation}
-so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}). From \eqref{eq:general-energy-correction}, the first form of the second-order correction is
-\begin{equation}
-  \label{eq:second-order-correction-first-form}
-  E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
-\end{equation}
-where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed,
 
 \subsection{Phenomenological approach}
 \label{ssec:phenomenological-approach}
@@ -579,7 +481,106 @@ Reading list:
 \item \fullcite{EPSTEIN1980311}
 \end{itemize}
 
+\subsection{Perturbation theory}
+\label{ssec:perturbation-theory}
+
+In Rayleigh\textendash{}Schr{\"{o}}dinger perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322.}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
+\begin{equation}
+  \label{eq:perturbed-hamiltonian}
+  \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
+\end{equation}
+where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\psi}\) and its energy \(E\), where increasing orders account for better approximations to the exact (perturbed) energy:
+\begin{align}
+  \label{eq:expansion-wavefunction}
+  \ket{\psi} &= \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \\
+  \label{eq:expansion-energy}
+  E &= E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} + \dots
+\end{align}
+
+Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the Schr{\"{o}}dinger equation, \(\hat{H}\ket{\psi} = E\ket{\psi}\), gives
+\begin{equation}
+  \label{eq:expansion-schrodinger}
+  \begin{aligned}
+    \left( \hat{H}^{(0)} + \lambda\hat{V} \right) &\left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right] \\
+    &= \left[ E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} \right] \left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right],
+  \end{aligned}
+\end{equation}
+where the \(\{\lambda\}\) are now also useful for collecting terms of like orders. The zeroth-order terms give the Schr{\"{o}}dinger equation for the unperturbed energy,
+\begin{equation}
+  \label{eq:unperturbed-energy}
+  \hat{H}^{(0)} \ket{\psi}^{(0)} = E^{(0)} \ket{\psi}^{(0)},
+\end{equation}
+but equating all terms that are first order in \(\lambda\) on both sides gives
+\begin{equation}
+  \label{eq:first-order-terms}
+  \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} = E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}},
+\end{equation}
+where \(\lambda\) has been dropped for readability since it is present in front of each term. \eqref{eq:first-order-terms} can be simplified through integration using the bra \(\bra{\psi^{(0)}}\), which does not change the order from \(\lambda^{1}\):
+\begin{equation}
+  \label{eq:first-order-terms-bra}
+  \begin{aligned}
+    \bra{\psi^{(0)}} \left( \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} \right) &= \bra{\psi^{(0)}} \left( E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}} \right) \\
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= \braket{\psi^{(0)} | E^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | E^{(1)} | \psi^{(0)}} \\
+    &= E^{(0)} \braket{\psi^{(0)} | \psi^{(1)}} + E^{(1)} \braket{\psi^{(0)} | \psi^{(0)}}.
+  \end{aligned}
+\end{equation}
+
+It is now important to know what orthonormality conditions exist between the set of all intermediate states \(\{\ket{\psi^{(n)}}\}\). For the unperturbed state, which is usually the \hf ground state,
+\begin{equation}
+  \label{eq:hf-normalization}
+  \braket{\psi^{(0)}|\psi^{(0)}} = 1,
+\end{equation}
+and the choice of \emph{intermediate normalization} is made,
+\begin{equation}
+  \label{eq:intermediate-normalization}
+  \braket{\psi^{(0)}|\psi} \overset{!}{=} 1,
+\end{equation}
+which upon expanding the ket using \eqref{eq:expansion-wavefunction} leads to
+\begin{equation}
+  \label{eq:intermediate-normalization-single}
+  \braket{\psi^{(0)}|\psi^{(n)}} = 0
+\end{equation}
+for any intermediate state where \(n > 0\). Returning to \eqref{eq:first-order-terms-bra}, this first allows for simplification of the right-hand side,
+\begin{equation}
+  \label{eq:first-order-terms-first-simplification}
+  \begin{aligned}
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} + E^{(1)} \Ccancelto[Green]{1}{\braket{\psi^{(0)} | \psi^{(0)}}} \\
+    &= E^{(1)},
+  \end{aligned}
+\end{equation}
+and the first term on the left-hand side can be simplified using the hermiticity of the Hamiltonian followed by \eqref{eq:intermediate-normalization-single},
+\begin{equation}
+  \label{eq:hermiticity}
+  \begin{aligned}
+    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} &= \braket{\psi^{(1)} | \hat{H}^{(0)} | \psi^{(0)}}^{*} \\
+    &= \braket{\psi^{(1)} | E^{(0)} | \psi^{(0)}}^{*} \\
+    &= E^{(0)} \braket{\psi^{(1)} | \psi^{(0)}}^{*} \\
+    &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} \\
+    &= 0.
+  \end{aligned}
+\end{equation}
+
+The final form of \eqref{eq:first-order-terms-bra} is now
+\begin{equation}
+  \label{eq:first-order-terms-final}
+  \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} = E^{(1)},
+\end{equation}
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
+
+The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
+\begin{equation}
+  \label{eq:general-energy-correction}
+  E^{(n)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(n-1)}},
+\end{equation}
+so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}). From \eqref{eq:general-energy-correction}, the first form of the second-order correction is
+\begin{equation}
+  \label{eq:second-order-correction-first-form}
+  E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
+\end{equation}
+where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed,
+
 \section{Dynamic (frequency-dependent) response properties}
+\label{sec:dynamic-properties}
 
 \begin{itemize}
 \item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
