@@ -42,6 +42,8 @@ Used for proper typesetting of units and numbers, either combined or separately.
 * Displaying plus/minus uncertainty: https://tex.stackexchange.com/q/27703/94717
 * Also displaying plus/minus uncertainty: https://tex.stackexchange.com/q/234649/94717
 
+This is specific to the `pittetd` class: you cannot put `\si`, `\SI`, or any other `siunitx` command in captions, because there will be complaints about undefined commands when making the list of figures/tables. The solution is to use a short caption (in `[]`) that doesn't contain `siunitx` commands. You will probably need to do this anyway so the captions don't go over a line on the lof/lot pages.
+
 # How to do...?
 
 * How to use `\graphicspath`: https://tex.stackexchange.com/a/139403/94717
