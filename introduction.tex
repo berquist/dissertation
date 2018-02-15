@@ -68,29 +68,29 @@ There is a direct connection between the macroscopic observables measurable by s
 
 \begin{table}
   \centering
-  \caption{Adapted from Ref.~\parencite{gauss2000}.}
-  \begin{tabu}{>{$}r<{$}X}
+  \caption{Connection between specific energy derivatives and their respective molecular properties. \(\varepsilon\) is an applied electric field, \(B\) is an applied magnetic field, \(x\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}.}
+  \begin{tabular}{rl}
     \toprule
-    \text{Energy derivative} & Molecular property \\
+    \textbf{Energy derivative} & \textbf{Molecular property} \\
     \midrule
-    \frac{dE}{d\varepsilon_{i}} & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
-    \frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability \\
-    \frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}} & (first) hyperpolarizability \\
-    \frac{dE}{dx_{i}} & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
-    \frac{d^{2}E}{dx_{i}dx_{j}} & harmonic force constants; harmonic vibrational frequencies \\
-    \frac{d^{3}E}{dx_{i}dx_{j}dx_{k}} & cubic force constants; vibrational corrections to distances and rotational constants \\
-    \frac{d^{4}E}{dx_{i}dx_{j}dx_{k}dx_{l}} & quartic force constants; anharmonic corrections to vibrational frequencies \\
-    \frac{d^{2}E}{dx_{i}d\varepsilon_{\alpha}} & dipole derivatives; infrared intensities within the harmonic approximation \\
-    \frac{d^{3}E}{dx_{i}d\varepsilon_{\alpha}d\varepsilon_{\beta}} & polarizability derivative; Raman intensities \\
-    \frac{d^{2}E}{dB_{\alpha}dB_{\beta}} & magnetizability \\
-    \frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}} & nuclear magnetic shielding tensor; relative NMR shifts \\
-    \frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}} & indirect spin-spin coupling constant \\
-    \frac{d^{2}E}{dB_{\alpha}dJ_{\beta}} & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
-    \frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}} & nuclear spin-rotation tensor; fine structure in rotational spectra \\
-    \frac{dE}{dm_{K_{j}}} & spin density; hyperfine interaction constants \\
-    \frac{d^{2}E}{dS_{i}dB_{\alpha}} & electronic \textit{g}-tensor \\
+    \(\frac{dE}{d\varepsilon_{i}}\)                                    & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
+    \(\frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}}\)       & polarizability \\
+    \(\frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}}\)   & (first) hyperpolarizability \\
+    \(\frac{dE}{dx_{i}}\)                                              & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+    \(\frac{d^{2}E}{dx_{i}dx_{j}}\)                                    & harmonic force constants; harmonic vibrational frequencies \\
+    \(\frac{d^{3}E}{dx_{i}dx_{j}dx_{k}}\)                              & cubic force constants; vibrational corrections to distances and rotational constants \\
+    \(\frac{d^{4}E}{dx_{i}dx_{j}dx_{k}dx_{l}}\)                        & quartic force constants; anharmonic corrections to vibrational frequencies \\
+    \(\frac{d^{2}E}{dx_{i}d\varepsilon_{\alpha}}\)                     & dipole derivatives; infrared intensities within the harmonic approximation \\
+    \(\frac{d^{3}E}{dx_{i}d\varepsilon_{\alpha}d\varepsilon_{\beta}}\) & polarizability derivative; Raman intensities \\
+    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)                           & magnetizability \\
+    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)                           & nuclear magnetic shielding tensor; relative NMR shifts \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)                            & indirect spin-spin coupling constant \\
+    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)                           & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)                           & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+    \(\frac{dE}{dm_{K_{j}}}\)                                          & spin density; hyperfine interaction constants \\
+    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)                               & electronic \textit{g}-tensor \\
     \bottomrule
-  \end{tabu}
+  \end{tabular}
 \end{table}
 
 Poles and residues
@@ -108,15 +108,15 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
 
 \begin{table}
   \centering
-  \caption{The calculation of spectroscopic parameters is directly related to linear (and nonlinear) response functions. Adapted from~\parencite{TODO}.}
+  \caption{Connection between specific (non)linear response functions and their respective molecular properties. Adapted from Ref.~\parencite{C1CP21951K}.}
   \begin{tabular}{lll}
     \toprule
     \textbf{Property}                 & \textbf{Definition}                                                                    & \textbf{Type of response function} \\
     \midrule
-    Polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \)                                   & linear \\
-    Magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \)                                            & linear \\
-    Optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \)                                     & linear \\
-    Electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \)                                 & single residue of linear \\
+    polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \)                                   & linear \\
+    magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \)                                            & linear \\
+    optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \)                                     & linear \\
+    electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \)                                 & single residue of linear \\
     IR intensities                    & \( \braket{\braket{\hat{\mu};\partial\hat{H}_{0}/\partial R}}_{\omega} \)              & linear \\
     NMR spin-spin coupling constants  & \( \braket{\braket{\hat{h}_{\text{SD}};\hat{h}_{\text{SD}}}}_{0} \),                   & linear \\
                                       & \( \braket{\braket{\hat{h}_{\text{FC}};\hat{h}_{\text{FC}}}}_{0} \),                   & linear \\
