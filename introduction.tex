@@ -58,7 +58,9 @@ The remainder of this introduction will cover the basic language of molecular re
 
 \section{Connection between macroscopic and microscopic properties}
 
-There is a direct connection between the macroscopic observables measurable by spectroscopic techniques and 
+TODO
+
+There is a direct connection between the macroscopic observables measurable by spectroscopic techniques and
 
 \begin{table}
   \centering
@@ -132,7 +134,7 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
   \end{tabular}
 \end{table}
 
-\section{Analytic derivative theory}
+\section{Static (time-independent) response properties}
 
 \begin{itemize}
 \item start from MacLaurin series expansion of the perturbation
@@ -251,10 +253,6 @@ so to find the second-order correction to the energy, the first-order correction
   E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
 \end{equation}
 where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed,
-\subsection{Series expansion}
-\label{ssec:series-expansion}
-
-TODO
 
 \subsection{Phenomenological approach}
 \label{ssec:phenomenological-approach}
@@ -318,13 +316,17 @@ where \(\nabla \equiv \partial/\partial x\). For convenience, the negative sign 
 
 Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_partial_derivative} gives
 \begin{equation}
+  \label{eq:equated_force}
   k_{ij} x_{j} = \frac{\partial E}{\partial x_{i}}.
 \end{equation}
 
 To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side:
 \begin{align}
+  \label{eq:hooke_derivation_1}
   \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} x_{j} \right) &= \left( \frac{\partial}{\partial x_{j}} \right) \left( \frac{\partial E}{\partial x_{i}} \right) \\
+  \label{eq:hooke_derivation_2}
   \Ccancelto[carmine]{0}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} \right) \right]} x_{j} + k_{ij} \Ccancelto[Green]{1}{\left[ \left( \frac{\partial}{\partial x_{j}} \right) x_{j} \right]} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} \\
+  \label{eq:hooke_derivation_3}
   k_{ij} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}}.
 \end{align}
 
@@ -335,44 +337,77 @@ Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem, TODO t
   \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} = \frac{\partial^{2} E}{\partial x_{i} \partial x_{j}}
 \end{equation}
 
-A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(E\) that produces this dipole moment. Although the electric field is usually written as \(E\) or \(F\), here \(\epsilon\) is used to disambiguate it from the geometric force in \eqref{eq:hooke_1d}. Both \(\mu\) and \(\epsilon\) are 3D vector quantities
-
+A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(F\) that produces this dipole moment. Both \(\mu\) and \(F\) are 3-dimensional vector quantities,
 \begin{equation}
-  \mu = \alpha \epsilon
+  \vec{\mu} = \vec{\vec{\alpha}} \cdot \vec{F},
 \end{equation}
-
+which can be expanded identically to \eqref{eq:force_hooke_matrix} as
 \begin{equation}
   \begin{bmatrix}
     \mu_{1} \\ \mu_{2} \\ \mu_{3}
   \end{bmatrix}
-  = -
+  =
   \begin{bmatrix}
     \alpha_{11} & \alpha_{12} & \alpha_{13} \\
     \alpha_{21} & \alpha_{22} & \alpha_{23} \\
     \alpha_{31} & \alpha_{32} & \alpha_{33}
   \end{bmatrix}
   \begin{bmatrix}
-    \epsilon_{1} \\ \epsilon_{2} \\ \epsilon_{3}
+    F_{1} \\ F_{2} \\ F_{3},
   \end{bmatrix}
 \end{equation}
+or in Einstein summation notation as
+\begin{equation}
+  \label{eq:polarizability_einstein}
+  \mu_{i} = \alpha_{ij} E_{j}.
+\end{equation}
+This is the most general case, where anisotropy may be present in the polarizability tensor, leading to nonzero off-diagonal elements.
 
 Another definition of the molecular dipole moment induced by an external (applied) electric field is
-
 \begin{equation}
-  \mu_{i} = \frac{\partial E}{\partial \epsilon_{i}}
+  \label{eq:dipole_from_derivative}
+  \mu_{i} = \frac{\partial E}{\partial F_{i}}.
 \end{equation}
-
+Following \eqref{eq:equated_force}, equating \eqref{eq:polarizability_einstein} and \eqref{eq:dipole_from_derivative} gives
 \begin{equation}
-  \alpha_{ij} \epsilon_{j} = \frac{\partial E}{\partial \epsilon_{i}}
+  \label{eq:equated_polarizability}
+  \alpha_{ij} F_{j} = \frac{\partial E}{\partial F_{i}}
 \end{equation}
-
+The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{eq:hooke_derivation_2}, and \eqref{eq:hooke_derivation_3}:
 \begin{align}
-  \left( \frac{\partial}{\partial \epsilon_{j}} \right) \left( -\alpha_{ij} \epsilon_{j} \right) &= \left( \frac{\partial}{\partial \epsilon_{j}} \right) \left( \frac{\partial E}{\partial \epsilon_{i}} \right) \\
-  -\Ccancelto[carmine]{0}{\left( \frac{\partial \alpha_{ij}}{\partial \epsilon_{j}} \right)} \epsilon_{j} - \alpha_{ij} \Ccancelto[Green]{1}{\left( \frac{\partial \epsilon_{j}}{\partial \epsilon_{j}} \right)} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}} \\
-  -\alpha_{ij} &= \frac{\partial^{2} E}{\partial \epsilon_{j} \partial \epsilon_{i}}
+  \left( \frac{\partial}{\partial F_{j}} \right) \left( \alpha_{ij} F_{j} \right) &= \left( \frac{\partial}{\partial F_{j}} \right) \left( \frac{\partial E}{\partial F_{i}} \right) \\
+  \Ccancelto[carmine]{0}{\left( \frac{\partial \alpha_{ij}}{\partial F_{j}} \right)} F_{j} + \alpha_{ij} \Ccancelto[Green]{1}{\left( \frac{\partial F_{j}}{\partial F_{j}} \right)} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}} \\
+  \alpha_{ij} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}}
 \end{align}
 
-Comment on which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots)
+\subsection{Series expansion}
+\label{ssec:series-expansion}
+
+TODO
+
+\subsection{Derivative evaluation}
+\label{ssec:derivative-evaluation}
+
+Up to this point, it has not been necessary to specify which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots). These derivatives may be evaluated in one of two ways:
+\begin{enumerate}
+\item numerically, by using a finite difference expression (usually based on central differences) for the desired derivative order, evaluating the energy at multiple applied field strengths and directions, or
+\item analytically, by differentiating the energy expression ``on paper'' and evaluating it directly.
+\end{enumerate}
+It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\partial^{3} E / \partial X_{A} \partial F_{i} \partial F_{j}\), it is common to have an analytic expression for \(\partial^{2} / \partial X_{A} \partial F_{i}\) (which are infrared intensities), followed by first-order finite difference with an applied electric field to obtain the polarizability derivatives, leading to six additional ??? calculations. Due to ???, it is also possible to differentiate the polarizability with respect to nuclear displacements:
+\begin{equation}
+  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} = \frac{\partial}{\partial X_{A}} \left( \frac{\partial^{2} E}{\partial F_{i} \partial F_{j}} \right),
+\end{equation}
+
+
+\subsection{Finite difference for numerical derivatives}
+\label{ssec:finite-difference-for-numerical-derivatives}
+
+TODO
+
+\subsection{Analytic derivative theory}
+\label{ssec:analytic-derivative-theory}
+
+TODO
 
 For example, given the \hf energy expression,
 
@@ -382,7 +417,7 @@ and differentiating that expression with respect to another nuclear displacement
 
 In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
 
-\section{Frequency-dependent response}
+\section{Dynamic (frequency-dependent) response properties}
 
 \begin{itemize}
 \item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
@@ -551,7 +586,7 @@ The electric and magnetic multipole moments appearing in the expressions for the
 Thus for an electrically neutral molecule in a static uniform electric field,
 \begin{equation}
   \label{eq:2.6.1}
-  W[(\mathbf{E})_{0}] = 
+  W[(\mathbf{E})_{0}] =
 \end{equation}
 The field itself, \((\mathbf{E})_{0}\), is taken at the molecular origin
 
