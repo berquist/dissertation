@@ -54,7 +54,7 @@ preview = false,%
 
 The unifying theme of this thesis is that it is possible to identify the contribution of specific intermolecular interactions to spectroscopic response. The contributions of specific intermolecular interactions are in the language of energy decomposition analysis using absolutely localized molecular orbitals, abbreviated as ALMO-EDA. The necessary background for ALMO-EDA is given in sections~\ref{sec:introduction}.
 
-The majority of this thesis presents applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies in chapters~\ref{ch:anions}, \ref{ch:paper_02}, \ref{ch:paper_03} and dipole polarizabilities in chapter~\ref{ch:paper_04}.
+The majority of this thesis presents applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies in chapters~\ref{ch:anions}, \ref{ch:paper_02}, \ref{ch:paper_03} and dipole polarizabilities in chapter~\ref{ch:paper_04}, where each property is decomposed in terms of contributions to the final response from distorting the molecular geometry, allowing the non-interacting molecular densities to interact and then relax, and finally allowing charge to flow unrestricted between molecules. Chapter~\ref{ch:paper_05} presents a new model for implementing quantum chemical methods, with the first dipole hyperpolarizability as an example (sections~\ref{paper_05:ssec:hyperpolarizability_reference_implementation}~and~\ref{paper_05:ssec:hyperpolarizability_tutorial}), and how decomposition of molecular properties may be implemented and disseminated in the future.
 
 The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables, covering examples of which observables are related to which microscopic terms (section~\ref{sec:connection-between-macroscopic-and-microscopic}). It will also cover more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between phenomenological Hamiltonians (section~\ref{ssec:phenomenological-approach}), energy derivatives (sections~\ref{ssec:derivative-evaluation},~\ref{ssec:finite-difference-for-numerical-derivatives},~and~\ref{ssec:analytic-derivative-theory}), perturbation theory (section~\ref{ssec:perturbation-theory}), and the polarization propagator (section~\ref{sec:dynamic-properties}), of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
 
@@ -139,6 +139,8 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
 
 \section{Static (time-independent) response properties}
 \label{sec:static-properties}
+
+TODO
 
 \begin{itemize}
 \item start from MacLaurin series expansion of the perturbation
@@ -328,7 +330,7 @@ TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 \subsection{Analytic derivative theory}
 \label{ssec:analytic-derivative-theory}
 
-TODO
+TODO https://chemistry.stackexchange.com/q/89831/194
 
 For example, given the \hf energy expression,
 
@@ -339,7 +341,6 @@ and differentiating that expression with respect to another nuclear displacement
 In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
 
 % \section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
-
 The analytical gradient of the Hartree-Fock energy is given by (Szabo \& Ostlund eq. C.16):
 \begin{equation}
   \frac{\partial E}{\partial X_{A}} = \sum_{ij}{P_{ji} \frac{\partial H_{ij}}{\partial X_{A}}} + \frac{1}{2} \sum_{ijkl}{P_{ji}P_{kl} \frac{\partial (ij|kl)}{\partial X_{A}}} - \sum_{ij}{Q_{ji} \frac{\partial S_{ij}}{\partial X_{A}}} + \frac{\partial V_{NN}}{\partial X_{A}}
@@ -577,10 +578,12 @@ so to find the second-order correction to the energy, the first-order correction
   \label{eq:second-order-correction-first-form}
   E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
 \end{equation}
-where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed,
+where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed, TODO
 
 \section{Dynamic (frequency-dependent) response properties}
 \label{sec:dynamic-properties}
+
+TODO
 
 \begin{itemize}
 \item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
@@ -592,48 +595,48 @@ where the problem now becomes the calculation of the perturbed wavefunction \(\k
 
 Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
 
-\section{Barron}
-% page 85
-\subsection{A molecule in static fields}
-The electric and magnetic multipole moments appearing in the expressions for the interaction energy of a system of charges and currents with external electric and magnetic fields can be permanent attributes of the system or can be induced by the fields themselves. If the interaction is weak, the situation can be analyzed by expanding the energy \(W\) of the system in a Taylor series about the energy in the absence of the field.
+% \section{Barron}
+% % page 85
+% \subsection{A molecule in static fields}
+% The electric and magnetic multipole moments appearing in the expressions for the interaction energy of a system of charges and currents with external electric and magnetic fields can be permanent attributes of the system or can be induced by the fields themselves. If the interaction is weak, the situation can be analyzed by expanding the energy \(W\) of the system in a Taylor series about the energy in the absence of the field.
 
-Thus for an electrically neutral molecule in a static uniform electric field,
-\begin{equation}
-  \label{eq:2.6.1}
-  W[(\mathbf{E})_{0}] =
-\end{equation}
-The field itself, \((\mathbf{E})_{0}\), is taken at the molecular origin
+% Thus for an electrically neutral molecule in a static uniform electric field,
+% \begin{equation}
+%   \label{eq:2.6.1}
+%   W[(\mathbf{E})_{0}] =
+% \end{equation}
+% The field itself, \((\mathbf{E})_{0}\), is taken at the molecular origin
 
-Time-independent perturbation theory is now introduced to give the static molecular property tensors a quantum mechanical form. We require approximate solutions of the time-independent Schr{\"{o}}dinger equation
-\begin{equation}
-  \label{eq:2.6.12}
-  H' \psi ' = (H + V) \psi ' = W' \psi ',
-\end{equation}
-where \(H\) is the unperturbed molecular Hamiltonian \eqref{eq:2.5.21}, \(V\) is the operator equivalent of a static interaction Hamiltonian such as \eqref{eq:2.5.8} or \eqref{eq:2.5.11} whose effect is small compared with that of \(H\), and \(\psi '\) and \(W'\) are the perturbed molecular wavefunction and energy. Perturbation theory provides approximate expressions for the eigenfunctions \(\psi_{j}'\) and eigenvalues \(W_{j}'\) of the perturbed operator \(H'\) in terms of the unperturbed operator \(H\). We refer to standard works such as Davydov (1976) for the development of these approximate expressions.
+% Time-independent perturbation theory is now introduced to give the static molecular property tensors a quantum mechanical form. We require approximate solutions of the time-independent Schr{\"{o}}dinger equation
+% \begin{equation}
+%   \label{eq:2.6.12}
+%   H' \psi ' = (H + V) \psi ' = W' \psi ',
+% \end{equation}
+% where \(H\) is the unperturbed molecular Hamiltonian \eqref{eq:2.5.21}, \(V\) is the operator equivalent of a static interaction Hamiltonian such as \eqref{eq:2.5.8} or \eqref{eq:2.5.11} whose effect is small compared with that of \(H\), and \(\psi '\) and \(W'\) are the perturbed molecular wavefunction and energy. Perturbation theory provides approximate expressions for the eigenfunctions \(\psi_{j}'\) and eigenvalues \(W_{j}'\) of the perturbed operator \(H'\) in terms of the unperturbed operator \(H\). We refer to standard works such as Davydov (1976) for the development of these approximate expressions.
 
-The perturbed energy eigenvalue corresponding to the nondegenerate eigenfunction \(\psi_{n}\) is, to second order in the perturbation,
-\begin{equation}
-  \label{eq:2.6.13}
-  W_{n}' = W_{n} + \braket{n|V|n} + \sum_{j \neq n} \frac{\braket{n|V|j}\braket{j|V|n}}{W_{n} - W_{j}},
-\end{equation}
-where the sum extends over the complete set of eigenfunctions with the exception of the initial state \(\psi_{n}\). Since the energy of a system correct to the (\(2n + 1\))th order in the perturbation is given by wave functions correct to the \(n\)th order (see section~\ref{TODO}), we need only take the corresponding perturbed eigenfunction to first order in the perturbation:
-\begin{equation}
-  \label{eq:2.6.14}
-  \psi_{n}' = \psi_{n} + \sum_{j \neq n} \frac{\braket{j|V|n}}{W_{n} - W_{j}} \psi_{j}.
-\end{equation}
+% The perturbed energy eigenvalue corresponding to the nondegenerate eigenfunction \(\psi_{n}\) is, to second order in the perturbation,
+% \begin{equation}
+%   \label{eq:2.6.13}
+%   W_{n}' = W_{n} + \braket{n|V|n} + \sum_{j \neq n} \frac{\braket{n|V|j}\braket{j|V|n}}{W_{n} - W_{j}},
+% \end{equation}
+% where the sum extends over the complete set of eigenfunctions with the exception of the initial state \(\psi_{n}\). Since the energy of a system correct to the (\(2n + 1\))th order in the perturbation is given by wave functions correct to the \(n\)th order (see section~\ref{TODO}), we need only take the corresponding perturbed eigenfunction to first order in the perturbation:
+% \begin{equation}
+%   \label{eq:2.6.14}
+%   \psi_{n}' = \psi_{n} + \sum_{j \neq n} \frac{\braket{j|V|n}}{W_{n} - W_{j}} \psi_{j}.
+% \end{equation}
 
-If the perturbation is due to a static uniform electric field, \(V = -\mu_{\alpha}(E_{\alpha})_{0}\). Applying \eqref{eq:2.6.3} to \eqref{eq:2.6.13} and comparing the result with \eqref{eq:2.6.4}, we find the following expressions for the permanent electric dipole moment and the polarizability of a molecule in the state \(\psi_{n}\):
-\begin{align}
-  \mu_{0_{\alpha}} &= \braket{n|\mu_{\alpha}|n}, \\
-  \alpha_{\alpha\beta} &= -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} = \alpha_{\beta\alpha}.
-\end{align}
-These results can also be obtained by taking the expectation value of the electric dipole moment operator with the perturbed eigenfunction \eqref{eq:2.6.14}, and comparing the result with \eqref{eq:2.6.4}:
-\begin{align}
-  \mu_{\alpha} &= \braket{n'|\mu_{\alpha}|n'} \\
-               &= \braket{n|\mu_{\alpha}|n} -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} (E_{\beta})_{0}.
-\end{align}
+% If the perturbation is due to a static uniform electric field, \(V = -\mu_{\alpha}(E_{\alpha})_{0}\). Applying \eqref{eq:2.6.3} to \eqref{eq:2.6.13} and comparing the result with \eqref{eq:2.6.4}, we find the following expressions for the permanent electric dipole moment and the polarizability of a molecule in the state \(\psi_{n}\):
+% \begin{align}
+%   \mu_{0_{\alpha}} &= \braket{n|\mu_{\alpha}|n}, \\
+%   \alpha_{\alpha\beta} &= -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} = \alpha_{\beta\alpha}.
+% \end{align}
+% These results can also be obtained by taking the expectation value of the electric dipole moment operator with the perturbed eigenfunction \eqref{eq:2.6.14}, and comparing the result with \eqref{eq:2.6.4}:
+% \begin{align}
+%   \mu_{\alpha} &= \braket{n'|\mu_{\alpha}|n'} \\
+%                &= \braket{n|\mu_{\alpha}|n} -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} (E_{\beta})_{0}.
+% \end{align}
 
-Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
+% Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
 
 \onlyifstandalone{\printbibliography}
 \end{document}
