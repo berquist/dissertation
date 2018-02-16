@@ -1,0 +1,26 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{csvsimple}
+\usepackage[margin=1in]{geometry}
+\raggedbottom
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{siunitx}
+
+% There are braces around math expressions in the header because
+% otherwise the siunitx parser used for S columns won't be able to
+% center things properly; this forces the parser to ignore the
+% math. See https://tex.stackexchange.com/q/315909/94717
+
+% This is how to get the caption at the top of a longtable:
+% https://tex.stackexchange.com/q/219138/94717
+
+\begin{document}
+\csvreader[%
+respect underscore=true,
+longtable=rl*{7}{S[table-auto-round=true,table-format=2.4]},
+table head=\caption{ALMO interaction energies for different DFT functionals at representative MD snapshots. All energies are in units of TODO}\label{tab:si_014}\\\toprule snapnum & QC method & {\(E_{\text{frz}}\)} & {\(E_{\text{pol}}\)} & {\(E_{\text{del}}^\text{SCF}\)} & {\(E_{\text{BSSE}}^\text{SCF}\)} & {\(E_{\text{CT}}^\text{SCF}\)} & {\(E_{\text{tot}}^\text{SCF}\)} & {\(E_{\text{HO}}^\text{SCF}\)} \\ \midrule,
+table foot=\bottomrule,%
+]{jp6b09489_si_014.csv}{}{\csvlinetotablerow}
+\end{document}

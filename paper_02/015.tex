@@ -1,0 +1,34 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{csvsimple}
+\usepackage[margin=1in]{geometry}
+\raggedbottom
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{pdflscape}
+\usepackage{siunitx}
+
+\begin{document}
+\begin{landscape}
+  \csvreader[%
+  respect underscore=true,
+  % longtable=lrSc*{13}{S[table-auto-round=true,table-format=2.4]},
+  % longtable=lrcc*{13}{c},
+  longtable=lrcc*{13}{S[table-auto-round=true,table-format=2.4]},
+  table head=\caption{SAPT0 interaction energies for different MD snapshots using the 6-31G** basis set. All energies are in units of TODO}\label{tab:si_015}\\\toprule & snapshot \# & weight & SAPT basis & {electrostatics} & {exchange} & {``frz''} & {induction} & {exchange induction} & {induction delta hf} & {``pol''} & {``frz + pol''} & {dispersion} & {exchange dispersion} & {``disp''} & {total} & {CT} \\ \midrule,
+  table foot=\bottomrule,%
+  ]{jp6b09489_si_015_pople.csv}{}{\csvlinetotablerow}
+\end{landscape}
+
+\begin{landscape}
+  \csvreader[%
+  respect underscore=true,
+  % longtable=lrSc*{13}{S[table-auto-round=true,table-format=2.4]},
+  % longtable=lrcc*{13}{c},
+  longtable=lrcc*{13}{S[table-auto-round=true,table-format=2.4]},
+  table head=\caption{SAPT0 interaction energies for different MD snapshots using the jun-cc-pVTZ basis set. All energies are in units of TODO}\label{tab:si_015}\\\toprule & snapshot \# & weight & SAPT basis & {electrostatics} & {exchange} & {``frz''} & {induction} & {exchange induction} & {induction delta hf} & {``pol''} & {``frz + pol''} & {dispersion} & {exchange dispersion} & {``disp''} & {total} & {CT} \\ \midrule,
+  table foot=\bottomrule,%
+  ]{jp6b09489_si_015_dunning.csv}{}{\csvlinetotablerow}
+\end{landscape}
+\end{document}

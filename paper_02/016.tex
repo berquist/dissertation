@@ -1,0 +1,22 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{csvsimple}
+\usepackage[margin=1in]{geometry}
+\raggedbottom
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{siunitx}
+
+\begin{document}
+\csvreader[%
+respect underscore=true,
+longtable=l*{7}{S[table-auto-round=true,table-format=2.4]},
+table head=\caption{Weighted averages of ALMO interaction energies for different DFT functionals and basis sets. All energies are in units of TODO}\label{tab:si_016}\\\toprule QC method & {\(E_{\text{frz}}\)} & {\(E_{\text{pol}}\)} & {\(E_{\text{del}}^\text{SCF}\)} & {\(E_{\text{BSSE}}^\text{SCF}\)} & {\(E_{\text{CT}}^\text{SCF}\)} & {\(E_{\text{tot}}^\text{SCF}\)} & {\(E_{\text{HO}}^\text{SCF}\)} \\ \midrule,
+table foot=\bottomrule,%
+]{jp6b09489_si_016.csv}{}{\csvlinetotablerow}
+% \csvreader[%
+% respect underscore=true,
+% tabular=cccccccc,
+% ]{jp6b09489_si_016.csv}{}{\csvlinetotablerow}
+\end{document}

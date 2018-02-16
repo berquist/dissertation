@@ -1,0 +1,21 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{csvsimple}
+\usepackage[margin=1in]{geometry}
+\raggedbottom
+\usepackage{longtable}
+\usepackage{microtype}
+\usepackage{pdflscape}
+\usepackage{siunitx}
+
+\begin{document}
+\begin{landscape}
+  \csvreader[%
+  respect underscore=true,
+  longtable=l*{13}{S[table-auto-round=true,table-format=2.4]},
+  table head=\caption{Weighted averages of SAPT0 interaction energies for different basis sets. All energies are in units of TODO}\label{tab:si_017}\\\toprule basis set & {electrostatics} & {exchange} & {``frz''} & {induction} & {exchange induction} & {induction delta hf} & {``pol''} & {``frz + pol''} & {dispersion} & {exchange dispersion} & {``disp''} & {total} & {CT} \\ \midrule,
+  table foot=\bottomrule,%
+  ]{jp6b09489_si_017.csv}{}{\csvlinetotablerow}
+\end{landscape}
+\end{document}
