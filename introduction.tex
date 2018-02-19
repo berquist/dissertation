@@ -63,13 +63,9 @@ The remainder of this introduction will cover the basic language of molecular re
 \section{\texorpdfstring{\caps{Connection between macroscopic and microscopic properties}}{Connection between macroscopic and microscopic properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
 
-TODO
-
-There is a direct connection between the macroscopic observables measurable by spectroscopic techniques and
-
 \begin{table}
   \centering
-  \caption{Connection between specific energy derivatives and their respective molecular properties. \(F\) is an applied electric field, \(B\) is an applied magnetic field, \(X\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}.}
+  \caption[Connection between specific energy derivatives and their respective molecular properties]{Connection between specific energy derivatives and their respective molecular properties. \(F\) is an applied electric field, \(B\) is an applied magnetic field, \(X\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}.\label{tab:gauss}}
   \begin{tabulary}{0.85\textwidth}{rL}
     \toprule
     \textbf{Energy derivative} & \textbf{Molecular property} \\
@@ -94,6 +90,11 @@ There is a direct connection between the macroscopic observables measurable by s
   \end{tabulary}
 \end{table}
 
+% The experimentalist works at the macroscopic level and typically records the reponse of the electromagnetic field.
+% The theoretician works at the microscopic level and typically calculates the molecular response.
+
+There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. Although there is often quite some distance in terms of mathematical derivation and code development effort between
+
 Poles and residues
 
 residues lead to transition moments
@@ -111,10 +112,10 @@ More appropriate for time- or frequency-dependent response properties
 
 \begin{table}
   \centering
-  \caption{Connection between specific (non)linear response functions and their respective molecular properties. Adapted from Ref.~\parencite{C1CP21951K}.}
+  \caption[Connection between specific response functions and their respective molecular properties]{Connection between specific (non)linear response functions and their respective molecular properties. Adapted from Ref.~\parencite{C1CP21951K}.\label{tab:norman}}
   \begin{tabular}{lll}
     \toprule
-    \textbf{Property}                 & \textbf{Definition}                                                                    & \textbf{Type of response function} \\
+    \textbf{Molecular Property}       & \textbf{Definition}                                                                    & \textbf{Type of response function} \\
     \midrule
     polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \)                                   & linear \\
     magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \)                                            & linear \\
