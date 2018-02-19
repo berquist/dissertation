@@ -8,6 +8,8 @@
 * For `latexmk`, if you want to use `xetex/xelatex`, pass the `-xelatex` flag.
 * If you're using `minted` to display source code, you must have the `pymgmentize` Python package installed and pass `-shell-escape` to `latexmk`.
 
+* How to properly 'make' a latex project?: https://tex.stackexchange.com/q/40738/94717
+
 # General
 
 Answer to both: yes.
