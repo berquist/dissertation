@@ -9,5 +9,8 @@ xelatex:
 	# can't compile tutorial_redone.tex on its own
 	latexmk -pdf -shell-escape -xelatex tutorial_redone_standalone.tex
 
+chemrxiv:
+	latexmk -pdf psi4numpy_chemrxiv_2.tex
+
 clean:
 	latexmk -c
