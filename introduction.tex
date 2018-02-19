@@ -36,6 +36,7 @@ preview = false,%
 \onlyifstandalone{\raggedbottom}
 \usepackage{graphicx}
 \onlyifstandalone{\usepackage{hyperref}}
+\onlyifstandalone{\usepackage{setspace}}
 \usepackage[%
     separate-uncertainty = true,%
     multi-part-units = single,%
@@ -43,7 +44,7 @@ preview = false,%
     retain-explicit-plus = true,%
 ]{siunitx}
 \DeclareSIUnit\au{a.u.}
-\usepackage{tabu}
+\usepackage{tabulary}
 \usepackage{xspace}
 \newcommand\hf{Hartree\textendash{}Fock\xspace}%
 \newcommand{\caps}[1]{\uppercase{#1}}
@@ -57,7 +58,7 @@ The unifying theme of this thesis is that it is possible to identify the contrib
 
 The majority of this thesis presents applications of response theory to calculating spectroscopic properties, specifically vibrational frequencies in chapters~\ref{ch:anions}, \ref{ch:paper_02}, \ref{ch:paper_03} and dipole polarizabilities in chapter~\ref{ch:paper_04}, where each property is decomposed in terms of contributions to the final response from distorting the molecular geometry, allowing the non-interacting molecular densities to interact and then relax, and finally allowing charge to flow unrestricted between molecules. Chapter~\ref{ch:paper_05} presents a new model for implementing quantum chemical methods, with the first dipole hyperpolarizability as an example (sections~\ref{paper_05:ssec:hyperpolarizability_reference_implementation}~and~\ref{paper_05:ssec:hyperpolarizability_tutorial}), and how decomposition of molecular properties may be implemented and disseminated in the future.
 
-The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables, covering examples of which observables are related to which microscopic terms (section~\ref{sec:connection-between-macroscopic-and-microscopic}). It will also cover more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between phenomenological Hamiltonians (section~\ref{ssec:phenomenological-approach}), energy derivatives (sections~\ref{ssec:derivative-evaluation},~\ref{ssec:finite-difference-for-numerical-derivatives},~and~\ref{ssec:analytic-derivative-theory}), perturbation theory (section~\ref{ssec:perturbation-theory}), and the polarization propagator (section~\ref{sec:dynamic-properties}), of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
+The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables, covering examples of which observables are related to which microscopic terms (section~\ref{sec:connection-between-macroscopic-and-microscopic}). It will also cover more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between phenomenological Hamiltonians (section~\ref{ssec:phenomenological-approach}), series expansions (section~\ref{ssec:series-expansion}), energy derivatives (sections~\ref{ssec:derivative-evaluation},~\ref{ssec:finite-difference-for-numerical-derivatives},~and~\ref{ssec:analytic-derivative-theory}), perturbation theory (section~\ref{ssec:perturbation-theory}), and the polarization propagator (section~\ref{sec:dynamic-properties}), of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
 
 \section{\texorpdfstring{\caps{Connection between macroscopic and microscopic properties}}{Connection between macroscopic and microscopic properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
@@ -68,29 +69,29 @@ There is a direct connection between the macroscopic observables measurable by s
 
 \begin{table}
   \centering
-  \caption{Connection between specific energy derivatives and their respective molecular properties. \(\varepsilon\) is an applied electric field, \(B\) is an applied magnetic field, \(x\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}.}
-  \begin{tabular}{rl}
+  \caption{Connection between specific energy derivatives and their respective molecular properties. \(F\) is an applied electric field, \(B\) is an applied magnetic field, \(X\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}.}
+  \begin{tabulary}{0.85\textwidth}{rL}
     \toprule
     \textbf{Energy derivative} & \textbf{Molecular property} \\
     \midrule
-    \(\frac{dE}{d\varepsilon_{i}}\)                                    & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
-    \(\frac{d^{2}E}{d\varepsilon_{\alpha}d\varepsilon_{\beta}}\)       & polarizability \\
-    \(\frac{d^{3}E}{d\varepsilon_{\alpha}d^{2}\varepsilon_{\beta}}\)   & (first) hyperpolarizability \\
-    \(\frac{dE}{dx_{i}}\)                                              & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
-    \(\frac{d^{2}E}{dx_{i}dx_{j}}\)                                    & harmonic force constants; harmonic vibrational frequencies \\
-    \(\frac{d^{3}E}{dx_{i}dx_{j}dx_{k}}\)                              & cubic force constants; vibrational corrections to distances and rotational constants \\
-    \(\frac{d^{4}E}{dx_{i}dx_{j}dx_{k}dx_{l}}\)                        & quartic force constants; anharmonic corrections to vibrational frequencies \\
-    \(\frac{d^{2}E}{dx_{i}d\varepsilon_{\alpha}}\)                     & dipole derivatives; infrared intensities within the harmonic approximation \\
-    \(\frac{d^{3}E}{dx_{i}d\varepsilon_{\alpha}d\varepsilon_{\beta}}\) & polarizability derivative; Raman intensities \\
-    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)                           & magnetizability \\
-    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)                           & nuclear magnetic shielding tensor; relative NMR shifts \\
-    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)                            & indirect spin-spin coupling constant \\
-    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)                           & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
-    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)                           & nuclear spin-rotation tensor; fine structure in rotational spectra \\
-    \(\frac{dE}{dm_{K_{j}}}\)                                          & spin density; hyperfine interaction constants \\
-    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)                               & electronic \textit{g}-tensor \\
+    \(\frac{dE}{dF_{i}}\)                          & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
+    \(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)       & polarizability \\
+    \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) hyperpolarizability \\
+    \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+    \(\frac{d^{2}E}{dX_{i}dX_{j}}\)                & harmonic force constants; harmonic vibrational frequencies \\
+    \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
+    \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)    & quartic force constants; anharmonic corrections to vibrational frequencies \\
+    \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; infrared intensities within the harmonic approximation \\
+    \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
+    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
+    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
+    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+    \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
+    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
     \bottomrule
-  \end{tabular}
+  \end{tabulary}
 \end{table}
 
 Poles and residues
@@ -105,6 +106,8 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
 \begin{equation*}
   \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
 \end{equation*}
+
+More appropriate for time- or frequency-dependent response properties
 
 \begin{table}
   \centering
@@ -142,15 +145,6 @@ Spin-orbit coupling constants between singlet/triplet states correspond to the r
 \label{sec:static-properties}
 
 TODO
-
-\begin{itemize}
-\item start from MacLaurin series expansion of the perturbation
-\item identify each derivative as corresponding to a molecular property
-\item example tables of molecular properties (not until after frequency-dependent perturbations)
-\item however examples for Hessian, polarizability (static) are ok
-\item some explanation of why this is insufficient for frequency-dependent perturbations
-\item finite difference?
-\end{itemize}
 
 Sources: Toulouse; Handy has expressions for derivatives leading to integrals
 
@@ -290,6 +284,7 @@ The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{
 
 \subsection{Series expansion}
 \label{ssec:series-expansion}
+TODO this is not quite right because it doesn't handle higher-order cross-terms properly!
 
 More correctly, the derivative terms in section~\ref{ssec:phenomenological-approach} originate from series expansions of the energy in the presence of a perturbation; for \eqref{eq:hooke_1d}, it is internal geometric displacements, and in \eqref{eq:phenomenological-polarizability} it is an external electric field. The energy in the presence of an arbitrary perturbation \(P\) is written as
 \begin{equation}
@@ -305,7 +300,7 @@ where \(a\) is the point at which the derivative is taken. Choosing \(a \overset
   \label{eq:maclaurin-expansion}
   \begin{aligned}
     E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = 0} \cdot P^{n} \\
-    &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\n
+    &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\
     &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \cdots
   \end{aligned}
 \end{equation}
@@ -315,12 +310,15 @@ The perturbation \(P\) may have multiple components. For example, there are 3 po
   \begin{aligned}
     E(\mathbf{P}) &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P_{i}^{n}} \right|_{P_{i} = 0} \cdot P_{i}^{n} \\
     &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} E_{i}^{(n)} \cdot P_{i}^{n} \\
-    % \begin{split}
-    %   &= E^{(0)} \\
-    %   &+ \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \cdots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
-    %   &+ \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \cdots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \cdots
-    % \end{split}
+    &= E^{(0)} + \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \cdots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
+    &\quad + \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \cdots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \cdots
   \end{aligned}
+\end{equation}
+
+Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, replacing \(\mathbf{P}\) with an external electric field \(\mathbf{F}\), and switching to Einstein notation gives
+\begin{equation}
+  \label{eq:electric-field-expansion}
+  E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \cdots
 \end{equation}
 
 \subsection{Derivative evaluation}
@@ -328,39 +326,42 @@ The perturbation \(P\) may have multiple components. For example, there are 3 po
 
 Up to this point, it has not been necessary to specify which energy expression is being differentiated: it is the energy expression for the chosen method (HF, \(\omega\)B97M-V, MP2, CCSD(T), \dots). These derivatives may be evaluated in one of two ways:
 \begin{enumerate}
-\item numerically, by using a finite difference expression (usually based on central differences) for the desired derivative order, evaluating the energy at multiple applied field strengths and directions, or
+\item numerically, by using a finite difference expression (usually based on central differences) for the desired derivative order, evaluating the energy at multiple perturbation strengths (step sizes) and directions, or
 \item analytically, by differentiating the energy expression ``on paper'' and evaluating it directly.
 \end{enumerate} %TODO identify terms in the Raman perturbation or alter the Gauss table
 It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}}\), there are six unique ways to perform the derivative, shown in Table~\ref{tab:raman-unique-derivatives}.
 \begin{table}
   \centering
-  \begin{tabular}{ccc}
-    \toprule
-    \(X_{A}\) & \(F_{i}\) & \(F_{j}\) \\
-    \midrule
-    a & a & a \\
-    a & a & n \\
-    \color{carmine}{a} & \color{carmine}{n} & \color{carmine}{a} \\
-    n & a & a \\
-    a & n & n \\
-    n & a & n \\
-    \color{carmine}{n} & \color{carmine}{n} & \color{carmine}{a} \\
-    n & n & n \\
-    \bottomrule
-  \end{tabular}
-  \caption[Possible analytic and numerical permutations for Raman intensities]{Possible permutations of analytic (a) and numerical (n) differentiation for each perturbation term in calculating Raman intensities. The two red entries are not unique due to permutational symmetry.}
+  \begin{singlespace}
+    \begin{tabular}{ccc}
+      \toprule
+      \(X_{A}\) & \(F_{i}\) & \(F_{j}\) \\
+      \midrule
+      a & a & a \\
+      a & a & n \\
+      \cancel{a} & \cancel{n} & \cancel{a} \\
+      n & a & a \\
+      a & n & n \\
+      n & a & n \\
+      \cancel{n} & \cancel{n} & \cancel{a} \\
+      n & n & n \\
+      \bottomrule
+    \end{tabular}
+  \end{singlespace}
+  \caption[Possible analytic and numerical permutations for Raman intensities]{Possible permutations of analytic (a) and numerical (n) differentiation for each perturbation term in calculating Raman intensities. The two cancelled entries are not unique due to permutational symmetry.}
   \label{tab:raman-unique-derivatives}
 \end{table}
-More explicitly, the first row corresponds to a fully analytic third derivative, the next three rows correspond to first-order finite difference of analytic second derivatives, the next three rows correspond to second-order finite difference of analytic first derivatives, and the last row corresponds to the third-order finite difference of energies. Due to symmetry in the electric field perturbation indices, two of the eight permutations are identical to others already present; a/a/n and a/n/a are functionally identical.
+More explicitly, the first row corresponds to a fully analytic third derivative, the next three rows correspond to first-order finite difference of analytic second derivatives, the next three rows correspond to second-order finite difference of analytic first derivatives, and the last row corresponds to the third-order finite difference of energies. Due to symmetry in the electric field perturbation indices, two of the eight permutations are identical to others already present; for example, a/a/n and a/n/a are functionally identical.
 
 In practice, the fully analytic third derivative is not usually implemented, but second derivatives are, leading to two unique possibilities:
 \begin{align}
   \label{eq:raman-intensity-from-polarizability}
-  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} &= \frac{\partial}{\partial X_{A}} \left( \frac{\partial^{2} E}{\partial F_{i} \partial F_{j}} \right) = \frac{\partial \alpha_{ij}}{\partial X_{A}}, \\
+  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} &= \underbrace{\frac{\partial}{\partial X_{A}}}_{\text{numeric}} \underbrace{\left(\frac{\partial^{2} E}{\partial F_{i} \partial F_{j}}\right)}_{\text{analytic}} = \frac{\partial \alpha_{ij}}{\partial X_{A}}, \\
   \label{eq:raman-intensity-from-dipgrad}
-  &= \frac{\partial}{\partial F_{i}} \left( \frac{\partial^{2} E}{\partial X_{A} \partial F_{j}} \right) = \frac{\partial}{\partial F_{i}} \left( \frac{\partial \mu_{j}}{\partial X_{A}} \right).
+  &= \underbrace{\frac{\partial}{\partial F_{i}}}_{\text{numeric}} \underbrace{\left(\frac{\partial^{2} E}{\partial X_{A} \partial F_{j}}\right)}_{\text{analytic}} = \frac{\partial}{\partial F_{i}} \left( \frac{\partial \mu_{j}}{\partial X_{A}} \right).
 \end{align}
-In \eqref{eq:raman-intensity-from-polarizability}, the polarizability is calculated analytically for each nuclear displacement, leading to \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, there are \(2 \times (3 \,\,\text{field directions}) = 6\) dipole gradient (needed for IR intensities) calculations.
+In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
+% In \eqref{eq:raman-intensity-from-polarizability}, the polarizability is calculated analytically for each nuclear displacement, leading to \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
 
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
@@ -372,7 +373,7 @@ In \eqref{eq:raman-intensity-from-polarizability}, the polarizability is calcula
 % \item frequency-dependent perturbations
 % \item response to applied magnetic fields without complex energies
 % \end{itemize}
-% As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since the cost of analytic methods is not independent of system size, but the 
+% As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since the cost of analytic methods is not independent of system size, but the
 
 As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction.
 
