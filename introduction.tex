@@ -246,6 +246,7 @@ Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem, TODO t
 
 A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(F\) that produces this dipole moment. Both \(\mu\) and \(F\) are 3-dimensional vector quantities,
 \begin{equation}
+  \label{eq:phenomenological-polarizability}
   \vec{\mu} = \vec{\vec{\alpha}} \cdot \vec{F},
 \end{equation}
 which can be expanded identically to \eqref{eq:force_hooke_matrix} as
@@ -290,7 +291,37 @@ The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{
 \subsection{Series expansion}
 \label{ssec:series-expansion}
 
-TODO
+More correctly, the derivative terms in section~\ref{ssec:phenomenological-approach} originate from series expansions of the energy in the presence of a perturbation; for \eqref{eq:hooke_1d}, it is internal geometric displacements, and in \eqref{eq:phenomenological-polarizability} it is an external electric field. The energy in the presence of an arbitrary perturbation \(P\) is written as
+\begin{equation}
+  \label{eq:taylor-expansion}
+  \begin{aligned}
+    E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = a} \cdot (P - a)^{n} \\
+    &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)}(a) \cdot (P - a)^{n} \\
+    &= E^{(0)}(a) + E^{(1)}(a) \cdot (P - a) + \frac{1}{2} E^{(2)}(a) \cdot (P - a)^{2} + \frac{1}{6} E^{(3)}(a) \cdot (P - a)^{3} + \cdots ,
+  \end{aligned}
+\end{equation}
+where \(a\) is the point at which the derivative is taken. Choosing \(a \overset{!}{=} 0\) turns the Taylor series into a Maclaurin series:
+\begin{equation}
+  \label{eq:maclaurin-expansion}
+  \begin{aligned}
+    E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = 0} \cdot P^{n} \\
+    &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\n
+    &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \cdots
+  \end{aligned}
+\end{equation}
+The perturbation \(P\) may have multiple components. For example, there are 3 possible Cartesian components to an external electric field \(\mathbf{F} = (F_{x}, F_{y}, F_{z})\) and \(3N\) atomic coordinates. Generalizing the dimensionality of \(P\) to \(k\) and inserting into \eqref{eq:maclaurin-expansion} gives
+\begin{equation}
+  \label{eq:maclaurin-expansion-vector}
+  \begin{aligned}
+    E(\mathbf{P}) &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P_{i}^{n}} \right|_{P_{i} = 0} \cdot P_{i}^{n} \\
+    &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} E_{i}^{(n)} \cdot P_{i}^{n} \\
+    % \begin{split}
+    %   &= E^{(0)} \\
+    %   &+ \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \cdots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
+    %   &+ \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \cdots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \cdots
+    % \end{split}
+  \end{aligned}
+\end{equation}
 
 \subsection{Derivative evaluation}
 \label{ssec:derivative-evaluation}
