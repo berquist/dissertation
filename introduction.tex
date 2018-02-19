@@ -299,17 +299,51 @@ Up to this point, it has not been necessary to specify which energy expression i
 \begin{enumerate}
 \item numerically, by using a finite difference expression (usually based on central differences) for the desired derivative order, evaluating the energy at multiple applied field strengths and directions, or
 \item analytically, by differentiating the energy expression ``on paper'' and evaluating it directly.
-\end{enumerate}
-It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\partial^{3} E / \partial X_{A} \partial F_{i} \partial F_{j}\), it is possible to have an analytic expression for \(\partial^{2} / \partial X_{A} \partial F_{i}\) (which are infrared intensities), followed by first-order finite difference with an applied electric field to obtain the polarizability derivatives, leading to \(2 \times (3 \,\,\text{field directions}) = 6\) additional dipole gradient calculations. Due to ???, it is also possible to differentiate the polarizability with respect to nuclear displacements:
-\begin{equation}
-  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} = \frac{\partial}{\partial X_{A}} \left( \frac{\partial^{2} E}{\partial F_{i} \partial F_{j}} \right).
-\end{equation}
-However, this is more time-consuming, as there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations that must be performed.
+\end{enumerate} %TODO identify terms in the Raman perturbation or alter the Gauss table
+It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}}\), there are six unique ways to perform the derivative, shown in Table~\ref{tab:raman-unique-derivatives}.
+\begin{table}
+  \centering
+  \begin{tabular}{ccc}
+    \toprule
+    \(X_{A}\) & \(F_{i}\) & \(F_{j}\) \\
+    \midrule
+    a & a & a \\
+    a & a & n \\
+    \color{carmine}{a} & \color{carmine}{n} & \color{carmine}{a} \\
+    n & a & a \\
+    a & n & n \\
+    n & a & n \\
+    \color{carmine}{n} & \color{carmine}{n} & \color{carmine}{a} \\
+    n & n & n \\
+    \bottomrule
+  \end{tabular}
+  \caption[Possible analytic and numerical permutations for Raman intensities]{Possible permutations of analytic (a) and numerical (n) differentiation for each perturbation term in calculating Raman intensities. The two red entries are not unique due to permutational symmetry.}
+  \label{tab:raman-unique-derivatives}
+\end{table}
+More explicitly, the first row corresponds to a fully analytic third derivative, the next three rows correspond to first-order finite difference of analytic second derivatives, the next three rows correspond to second-order finite difference of analytic first derivatives, and the last row corresponds to the third-order finite difference of energies. Due to symmetry in the electric field perturbation indices, two of the eight permutations are identical to others already present; a/a/n and a/n/a are functionally identical.
+
+In practice, the fully analytic third derivative is not usually implemented, but second derivatives are, leading to two unique possibilities:
+\begin{align}
+  \label{eq:raman-intensity-from-polarizability}
+  \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} &= \frac{\partial}{\partial X_{A}} \left( \frac{\partial^{2} E}{\partial F_{i} \partial F_{j}} \right) = \frac{\partial \alpha_{ij}}{\partial X_{A}}, \\
+  \label{eq:raman-intensity-from-dipgrad}
+  &= \frac{\partial}{\partial F_{i}} \left( \frac{\partial^{2} E}{\partial X_{A} \partial F_{j}} \right) = \frac{\partial}{\partial F_{i}} \left( \frac{\partial \mu_{j}}{\partial X_{A}} \right).
+\end{align}
+In \eqref{eq:raman-intensity-from-polarizability}, the polarizability is calculated analytically for each nuclear displacement, leading to \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, there are \(2 \times (3 \,\,\text{field directions}) = 6\) dipole gradient (needed for IR intensities) calculations.
 
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
 
-As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since
+% \begin{itemize}
+% \item calculation time
+% \item uncoupled and perturbative approximations to fully iterative results
+% \item lack of finite-difference error
+% \item frequency-dependent perturbations
+% \item response to applied magnetic fields without complex energies
+% \end{itemize}
+% As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since the cost of analytic methods is not independent of system size, but the 
+
+As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction.
 
 TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 
@@ -319,14 +353,6 @@ TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
   \caption[Asymmetry in the 1st-order finite-difference polarizability]{Effect of numerical noise on the off-diagonal matrix elements of the polarizability tensor. Nonzero differences indicate asymmetry, and the polarizability tensor is supposed to be symmetric. The red bar indicates the default step size for the applied electric field in Q-Chem 4.4, set at \SI{1.88973E-03}{\au} TODO.}
   \label{fig:finite-difference-numerical-noise}
 \end{figure}
-
-\begin{itemize}
-\item calculation time
-\item uncoupled and perturbative approximations to fully iterative results
-\item lack of finite-difference error
-\item frequency-dependent perturbations
-\item response to applied magnetic fields without complex energies
-\end{itemize}
 
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/89831/194}{Analytic derivative theory}}{Analytic derivative theory}}
 \label{ssec:analytic-derivative-theory}
