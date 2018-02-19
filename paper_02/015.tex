@@ -8,27 +8,52 @@
 \usepackage{microtype}
 \usepackage{pdflscape}
 \usepackage{siunitx}
+\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
+\DeclareSIUnit\kcal{\kilo\cal}
 
 \begin{document}
-\begin{landscape}
-  \csvreader[%
-  respect underscore=true,
-  % longtable=lrSc*{13}{S[table-auto-round=true,table-format=2.4]},
-  % longtable=lrcc*{13}{c},
-  longtable=lrcc*{13}{S[table-auto-round=true,table-format=2.4]},
-  table head=\caption{SAPT0 interaction energies for different MD snapshots using the 6-31G** basis set. All energies are in units of TODO}\label{tab:si_015}\\\toprule & snapshot \# & weight & SAPT basis & {electrostatics} & {exchange} & {``frz''} & {induction} & {exchange induction} & {induction delta hf} & {``pol''} & {``frz + pol''} & {dispersion} & {exchange dispersion} & {``disp''} & {total} & {CT} \\ \midrule,
-  table foot=\bottomrule,%
-  ]{jp6b09489_si_015_pople.csv}{}{\csvlinetotablerow}
-\end{landscape}
+% \begin{landscape}
+%   \csvreader[%
+%   respect underscore=true,
+%   % longtable=lrSc*{13}{S[table-auto-round=true,table-format=2.4]},
+%   % longtable=lrcc*{13}{c},
+%   longtable=lrcc*{13}{S[table-auto-round=true,table-format=2.4]},
+%   table head=\caption{SAPT0 interaction energies for different MD snapshots using the 6-31G** basis set. All energies are in units of \si{\kcal\per\mole}.}\label{tab:si_015}\\\toprule & snapshot \# & weight & SAPT basis & {\(E_{\text{el}}^{(10)}\)} & {\(E_{\text{exch}}^{(10)}\)} & {``frz''} & {\(E_{\text{ind}}^{(20)}\)} & {\(E_{\text{ind-exch}}^{(20)}\)} & {\(\delta_{\text{HF}}\)} & {``pol''} & {``frz + pol''} & {\(E_{\text{disp}}^{(20)}\)} & {\(E_{\text{disp-exch}}^{(20)}\)} & {``disp''} & {total} & {\(E_{\text{CT}}\)} \\ \midrule,
+%   table foot=\bottomrule,%
+%   ]{jp6b09489_si_015_pople.csv}{}{\csvlinetotablerow}
+% \end{landscape}
+
+% Don't use this; rather, separate the individual data points from the averages.
+% \begin{landscape}
+%   \csvreader[%
+%   respect underscore=true,
+%   % longtable=lrSc*{13}{S[table-auto-round=true,table-format=2.4]},
+%   % longtable=lrcc*{13}{c},
+%   longtable=lrcc*{13}{S[table-auto-round=true,table-format=2.4]},
+%   table head=\caption{SAPT0 interaction energies for different MD snapshots using the jun-cc-pVTZ basis set. All energies are in units of \si{\kcal\per\mole}.}\label{tab:si_015}\\\toprule & snapshot \# & weight & SAPT basis & {\(E_{\text{el}}^{(10)}\)} & {\(E_{\text{exch}}^{(10)}\)} & {``frz''} & {\(E_{\text{ind}}^{(20)}\)} & {\(E_{\text{ind-exch}}^{(20)}\)} & {\(\delta_{\text{HF}}\)} & {``pol''} & {``frz + pol''} & {\(E_{\text{disp}}^{(20)}\)} & {\(E_{\text{disp-exch}}^{(20)}\)} & {``disp''} & {total} & {\(E_{\text{CT}}\)} \\ \midrule,
+%   table foot=\bottomrule,%
+%   ]{jp6b09489_si_015_dunning.csv}{}{\csvlinetotablerow}
+% \end{landscape}
 
 \begin{landscape}
+  \footnotesize
   \csvreader[%
   respect underscore=true,
-  % longtable=lrSc*{13}{S[table-auto-round=true,table-format=2.4]},
-  % longtable=lrcc*{13}{c},
-  longtable=lrcc*{13}{S[table-auto-round=true,table-format=2.4]},
-  table head=\caption{SAPT0 interaction energies for different MD snapshots using the jun-cc-pVTZ basis set. All energies are in units of TODO}\label{tab:si_015}\\\toprule & snapshot \# & weight & SAPT basis & {electrostatics} & {exchange} & {``frz''} & {induction} & {exchange induction} & {induction delta hf} & {``pol''} & {``frz + pol''} & {dispersion} & {exchange dispersion} & {``disp''} & {total} & {CT} \\ \midrule,
+  longtable=cSc*{13}{S[table-auto-round=true,table-format=2.4]},
+  table head=\caption{SAPT0 interaction energies for different MD snapshots using the jun-cc-pVTZ basis set. All energies are in units of \si{\kcal\per\mole}.}\label{tab:si_015}\\\toprule snapshot \# & {weight} & SAPT basis & {\(E_{\text{el}}^{(10)}\)} & {\(E_{\text{exch}}^{(10)}\)} & {``frz''} & {\(E_{\text{ind}}^{(20)}\)} & {\(E_{\text{ind-exch}}^{(20)}\)} & {\(\delta_{\text{HF}}\)} & {``pol''} & {``frz + pol''} & {\(E_{\text{disp}}^{(20)}\)} & {\(E_{\text{disp-exch}}^{(20)}\)} & {``disp''} & {total} & {\(E_{\text{CT}}\)} \\ \midrule,
   table foot=\bottomrule,%
-  ]{jp6b09489_si_015_dunning.csv}{}{\csvlinetotablerow}
+  ]{jp6b09489_si_015_dunning_cleaned_data.csv}{}{\csvlinetotablerow}  
+\end{landscape}
+
+% average (unweighted) [monomer],average (weighted) [monomer],100 * fraction of total (unweighted) [monomer],100 * fraction of total (weighted) [monomer],average (unweighted) [dimer],average (weighted) [dimer],100 * fraction of total (unweighted) [dimer],100 * fraction of total (weighted) [dimer]
+
+\begin{landscape}
+  \footnotesize
+  \csvreader[%
+  respect underscore=true,
+  longtable=c*{8}{S[table-auto-round=true,table-format=3.2]},
+  table head=\caption{SAPT0 interaction energies for different MD snapshots using the jun-cc-pVTZ basis set. All energies are in units of \si{\kcal\per\mole}.}\label{tab:si_015}\\\toprule SAPT component & {average (unweighted) [monomer]} & {average (weighted) [monomer]} & {100 * fraction of total (unweighted) [monomer]} & {100 * fraction of total (weighted) [monomer]} & {average (unweighted) [dimer]} & {average (weighted) [dimer]} & {100 * fraction of total (unweighted) [dimer]} & {100 * fraction of total (weighted) [dimer]} \\ \midrule,
+  table foot=\bottomrule,%
+  ]{jp6b09489_si_015_dunning_cleaned_summary.csv}{}{\csvlinetotablerow}  
 \end{landscape}
 \end{document}

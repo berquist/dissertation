@@ -207,32 +207,6 @@ To quantify the sensitivity of both mechanisms to the computational approach, we
   \centering
   \caption[Charge transfer dependence of \texorpdfstring{\ce{CO2} \(\nu_3\)}{carbon dioxide asymmetric stretch} frequencies]{Dependence of CT contributions to the \(\nu_3\) frequency based on functional (BLYP, B3LYP, and HF) and basis set (SP, LP, VDZ, VTZ, and VQZ). Calculations are on an optimized gas-phase cluster of \ce{CO2} with a single cation/anion pair. All frequencies reported in \si{\wavenumber}. We distinguish two mechanisms by which CT can enter the frequency: (i) a ``geometry mechanism'' where CT determines the optimized geometry of the cluster, calculated as the difference between standard harmonic frequency results at the optimized standard (``CT on'') and ALMO (``CT off'') geometries. (ii) a ``curvature mechanism'' where CT enters by modifying the force constant at the optimized geometry, calculated as the difference between the ``CT on'' and ``CT off'' frequencies at the optimized standard (``CT on'') geometry.}
   \label{paper_02:tab:3}
-  % \begin{tabular}{cccc}
-  %   \toprule
-  %   (i) ``Geometry Mechanism'' & \multicolumn{3}{c}{Method} \\
-  %   \cmidrule{2-4}
-  %   Basis & BLYP & B3LYP & HF \\
-  %   \midrule
-  %   SP & -3.16 & -3.50 & -3.33 \\
-  %   LP & -2.80 & -3.38 & -3.72 \\
-  %   VDZ & -2.46 & -3.11 & -2.93 \\
-  %   VTZ & -1.90 & -2.35 & -1.19 \\
-  %   VQZ & -2.44 & N/A & N/A \\
-  %   \bottomrule
-  % \end{tabular}
-  % \begin{tabular}{cccc}
-  %   \toprule
-  %   (ii) ``Curvature Mechanism'' & \multicolumn{3}{c}{Method} \\
-  %   \cmidrule{2-4}
-  %   Basis & BLYP & B3LYP & HF \\
-  %   \midrule
-  %   SP & -2.72 & -2.86 & -2.80 \\
-  %   LP & -1.31 & -1.25 & -1.55 \\
-  %   VDZ & -2.92 & -2.97 & -2.53 \\
-  %   VTZ & -1.43 & -1.33 & -0.94 \\
-  %   VQZ & -1.18 & N/A & N/A \\
-  %   \bottomrule
-  % \end{tabular}
   \begin{tabular}{ccccccc}
     \toprule
     & \multicolumn{3}{c}{(i) ``Geometry Mechanism''} & \multicolumn{3}{c}{(ii) ``Curvature Mechanism''} \\
@@ -339,7 +313,7 @@ To understand how the choice of decomposition method affects the predicted solut
 
 \begin{table}
   \centering
-  \caption[Comparison of ALMO and SAPT interaction energies for MD clusters]{Comparison of ALMO- versus SAPT0-decomposed interaction energies averaged over \num{15} representative molecular dynamics snapshots. ALMO calculations were performed within the SP basis to allow comparison to results from Ref.~\parencite{Brinzer2015}. For SAPT0, we report both monomer-centered basis set (MCBS) and dimer-centered basis set (DCBS) results. Energies are reported in \si{\kcal\per\mole}.}
+  \caption[Comparison of ALMO and SAPT0 interaction energies for MD clusters]{Comparison of ALMO- versus SAPT0-decomposed interaction energies averaged over \num{15} representative molecular dynamics snapshots. ALMO calculations were performed within the SP basis to allow comparison to results from Ref.~\parencite{Brinzer2015}. For SAPT0, we report both monomer-centered basis set (MCBS) and dimer-centered basis set (DCBS) results. Energies are reported in \si{\kcal\per\mole}.}
   \label{paper_02:tab:6}
   \begin{tabular}{lcccccc}
     \toprule
@@ -377,7 +351,7 @@ The conclusion changes when comparing \emph{relative trends} in binding energies
 
 \begin{table}
   \centering% TODO
-  \caption[Correlation between ALMO and SAPT terms]{Correlation coefficients (\(R^2\)) between different solute-solvent interaction energy components as calculated at the ALMO-DFT (B3LYP), ALMO-HF, and SAPT0 level within the SP basis. (a) Comparison between individual components and the total interaction energy (\(E_{\text{tot}}\)) calculated for each methodology. (b) Correlation coefficients between contributions to the \cotil interaction energy calculated via ALMO as compared to the corresponding SAPT0 energy terms. Reported SAPT0 results are within the dimer-centered basis set (DCBS), except for the charge transfer component, which is calculated as the difference between monomer- and dimer-centered basis set results for the induction energy.}
+  \caption[Correlation between ALMO and SAPT0 terms]{Correlation coefficients (\(R^2\)) between different solute-solvent interaction energy components as calculated at the ALMO-DFT (B3LYP), ALMO-HF, and SAPT0 level within the SP basis. (a) Comparison between individual components and the total interaction energy (\(E_{\text{tot}}\)) calculated for each methodology. (b) Correlation coefficients between contributions to the \cotil interaction energy calculated via ALMO as compared to the corresponding SAPT0 energy terms. Reported SAPT0 results are within the dimer-centered basis set (DCBS), except for the charge transfer component, which is calculated as the difference between monomer- and dimer-centered basis set results for the induction energy.}
   \label{paper_02:tab:7}
   \begin{threeparttable}
     \begin{tabular}{lccc}
@@ -442,11 +416,11 @@ where \(n\) is the size of the QM region (measured in number of ion pairs) and \
 \begin{figure}
   \centering
   \includegraphics{Fig5.pdf}
-  \caption[DVR convergence with respect to number of QM ion pairs]{Dependence of DVR \(\nu_{3}\) mean frequency (\(\overline{\nu}\)) on the number of solvent ion pairs treated quantum mechanically (\(n_{QM}\)). Mean frequencies were calculated from \(N = 10\) representative MD snapshots using a B3LYP/SP potential energy surface. Error bars represent the standard deviation of the mean (\(SD_{\overline{x}} = \sigma_{x}/\sqrt{N}\)). The data were fitted to an exponential decay (\({\overline{\nu}}_{QM} = A\exp\left( - kn_{QM} \right) + {\overline{\nu}}_{converged}\)), with weights of \(1/SD_{\overline{x}}^{2}\) (\(R^2 = 0.99\)). The resulting estimate for the fully converged frequency at this level of theory is \(2388.8 \pm \SI{1.5}{\wavenumber}\).}
+  \caption[DVR convergence with respect to number of QM ion pairs]{Dependence of DVR \(\nu_{3}\) mean frequency (\(\overline{\nu}\)) on the number of solvent ion pairs treated quantum mechanically (\(n_{QM}\)). Mean frequencies were calculated from \(N = 10\) representative MD snapshots using a B3LYP/SP potential energy surface. Error bars represent the standard deviation of the mean (\(SD_{\overline{x}} = \sigma_{x}/\sqrt{N}\)). The data were fitted to an exponential decay (\({\overline{\nu}}_{QM} = A\exp\left( - kn_{QM} \right) + {\overline{\nu}}_{converged}\)), with weights of \(1/SD_{\overline{x}}^{2}\) (\(R^2 = 0.99\)). The resulting estimate for the fully converged frequency at this level of theory is \SI{2388.8 \pm 1.5}{\wavenumber}.}
   \label{paper_02:fig:5}
 \end{figure}
 
-We determine the converged frequency to be \(c = 2388.8 \pm \SI{1.5}{\wavenumber}\) (Fig.~\ref{paper_02:fig:5}). This data indicates that the \num{6} QM calculations are nearly numerically converged (\(\overline{\nu}\left( 6 \right) - \overline{\nu}\left( \infty \right) = \SI{0.3}{\wavenumber}\)). To test the qualitative accuracy of the calculations using smaller QM regions, we examined the correlation between frequencies calculated with \(n = 0-5\) QM pairs and \num{6} QM pairs for each snapshot (for details, see Supporting Information). We find that the \(n = 0-1\) results do not correlate well with the \(n = 6\) benchmark (\(R^{2} = 0.41\) and \num{0.66}, respectively). The \(n = 2\) calculations yield an acceptable correlation coefficient of \(R^2 = 0.82\) at a \num{\sim 9}-fold reduced computational cost compared to \(n = 6\) (\num{\sim 0.8} versus \num{\sim 7} CPU hours for a single point calculation). The \(n = 3-4\) calculations show even better correlations with \(R^2 = 0.87 -- 0.96\), respectively, but the computational cost increase to \num{\sim 3} CPU hours does not appear justified. In summary, the \(n = 2\) calculations reproduce trends in the \ce{CO2} asymmetric stretch frequency reasonably well and offer a good balance between accuracy and cost for our DVR calculations.
+We determine the converged frequency to be \(c = \SI{2388.8 \pm 1.5}{\wavenumber}\) (Fig.~\ref{paper_02:fig:5}). This data indicates that the \num{6} QM calculations are nearly numerically converged (\(\overline{\nu}\left( 6 \right) - \overline{\nu}\left( \infty \right) = \SI{0.3}{\wavenumber}\)). To test the qualitative accuracy of the calculations using smaller QM regions, we examined the correlation between frequencies calculated with \(n = 0-5\) QM pairs and \num{6} QM pairs for each snapshot (for details, see Supporting Information). We find that the \(n = 0-1\) results do not correlate well with the \(n = 6\) benchmark (\(R^{2} = 0.41\) and \num{0.66}, respectively). The \(n = 2\) calculations yield an acceptable correlation coefficient of \(R^2 = 0.82\) at a \num{\sim 9}-fold reduced computational cost compared to \(n = 6\) (\num{\sim 0.8} versus \num{\sim 7} CPU hours for a single point calculation). The \(n = 3-4\) calculations show even better correlations with \(R^2 = 0.87 -- 0.96\), respectively, but the computational cost increase to \num{\sim 3} CPU hours does not appear justified. In summary, the \(n = 2\) calculations reproduce trends in the \ce{CO2} asymmetric stretch frequency reasonably well and offer a good balance between accuracy and cost for our DVR calculations.
 
 \subsection{Predicted Solvation Shift}
 \label{paper_02:ssec:IIIF}
