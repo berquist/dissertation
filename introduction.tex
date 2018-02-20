@@ -60,7 +60,7 @@ The majority of this thesis presents applications of response theory to calculat
 
 The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables, covering examples of which observables are related to which microscopic terms (section~\ref{sec:connection-between-macroscopic-and-microscopic}). It will also cover more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between phenomenological Hamiltonians (section~\ref{ssec:phenomenological-approach}), series expansions (section~\ref{ssec:series-expansion}), energy derivatives (sections~\ref{ssec:derivative-evaluation},~\ref{ssec:finite-difference-for-numerical-derivatives},~and~\ref{ssec:analytic-derivative-theory}), perturbation theory (section~\ref{ssec:perturbation-theory}), and the polarization propagator (section~\ref{sec:dynamic-properties}), of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
 
-For more background literature on the theoretical development and applications of response theory to molecular properties, see reviews by Gauss\cite{gauss2000}, Neese\cite{NEESE2009526}, Norman\cite{C1CP21951K}, and books by Yamaguchi\cite{Yamaguchi1994}, Szabo\cite{szabo1989modern}, McWeeny\cite{mcweeny1989methods}, and Barron\cite{barron2004molecular}.
+For more background literature on the theoretical development and applications of response theory to molecular properties, see reviews by Gauss\cite{gauss2000}, Neese\cite{NEESE2009526}, Norman\cite{C1CP21951K}, Helgaker\cite{doi:10.1021/cr2002239} and books by Yamaguchi\cite{Yamaguchi1994}, Szabo\cite{szabo1989modern}, McWeeny\cite{mcweeny1989methods}, and Barron\cite{barron2004molecular}.
 
 \section[\texorpdfstring{\caps{Macroscopic and microscopic response connections}}{Macroscopic and microscopic response connections}]{\texorpdfstring{\caps{Connection between macroscopic and microscopic properties}}{Connection between macroscopic and microscopic properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
@@ -97,22 +97,20 @@ For more background literature on the theoretical development and applications o
 % The experimentalist works at the macroscopic level and typically records the reponse of the electromagnetic field.
 % The theoretician works at the microscopic level and typically calculates the molecular response.
 
-There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. Although there is often quite some distance in terms of mathematical derivation and code development effort between
+There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. Although there is often quite some distance in terms of mathematical derivation and code development effort between the succinct representation on the left and the property on the right of each table, these are the true starting points for molecular property calculations based on quantum chemistry.
 
-Poles and residues
-
-residues lead to transition moments
-
-A residue analysis provides a mean to obtain \textit{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
-\begin{equation*}
-  \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
-\end{equation*}
-Spin-orbit coupling constants between singlet/triplet states correspond to the residue of the triplet linear response function:
-\begin{equation*}
-  \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
-\end{equation*}
-
-More appropriate for time- or frequency-dependent response properties
+% More appropriate for time- or frequency-dependent response properties
+%TODO
+% Poles and residues
+% residues lead to transition moments
+% A residue analysis provides a mean to obtain \textit{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
+% \begin{equation*}
+%   \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
+% \end{equation*}
+% Spin-orbit coupling constants between singlet/triplet states correspond to the residue of the triplet linear response function:
+% \begin{equation*}
+%   \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
+% \end{equation*}
 
 \begin{table}
   \centering
@@ -136,8 +134,8 @@ More appropriate for time- or frequency-dependent response properties
     second-harmonic generation        & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,\omega} \)                  & quadratic \\
     electro-optical Pockels effect    & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,0} \)                       & quadratic \\
     optical rectification             & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu}}}_{\omega,-\omega} \)                 & quadratic \\
-    Faraday rotation                  & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega,0} \)                         & quadratic ? \\
-    magnetic circular dichroism       & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega_{f},0} \)                     & () residue of quadratic \\
+    Faraday rotation                  & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega,0} \)                         & quadratic \\
+    magnetic circular dichroism       & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{m}}}_{\omega_{f},0} \)                     & single residue of quadratic \\
     Raman intensities                 & \( \braket{\braket{\hat{\mu};\hat{\mu},\partial\hat{H}_{0}/\partial R}}_{\omega,0} \)  & quadratic \\
     \midrule
     static second hyperpolarizability & \( \braket{\braket{\hat{\mu};\hat{\mu},\hat{\mu},\hat{\mu}}}_{0,0,0} \)                & cubic \\
@@ -149,16 +147,12 @@ More appropriate for time- or frequency-dependent response properties
 \section{\texorpdfstring{\caps{Static (time-independent) response properties}}{Static (time-independent) response properties}}
 \label{sec:static-properties}
 
-TODO
-
-Sources: Toulouse; Handy has expressions for derivatives leading to integrals
-
-Two possible ways to perform the derivation:
-
+The two primary ways to perform the derivation are
 \begin{enumerate}
-\item from series expansion of the energy with respect to one or more perturbations (section~\ref{ssec:series-expansion})
-\item from a phenomenological Hamiltonian (sort of like the correspondence principle, quantizing a classical expression) (section~\ref{ssec:phenomenological-approach})
+\item from a phenomenological Hamiltonian, similar to the correspondence principle when quantizing a classical expression (section~\ref{ssec:phenomenological-approach}), or
+\item from series expansion of the energy with respect to one or more perturbations (section~\ref{ssec:series-expansion}).
 \end{enumerate}
+It is also possible to obtain expressions for static properties by the reduction of any expressions for dynamic properties to the static limit (zero frequency: \(\omega = 0\)). The purpose of this section is to avoid some complexity in the derivation of time-dependent response by understanding the simpler case of static response first.
 
 \subsection{Phenomenological approach}
 \label{ssec:phenomenological-approach}
@@ -287,9 +281,8 @@ The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{
   \alpha_{ij} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}}
 \end{align}
 
-\subsection{Series expansion}
+\subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/74683/194}{Series expansion}}{Series expansion}}
 \label{ssec:series-expansion}
-TODO this is not quite right because it doesn't handle higher-order cross-terms properly!
 
 More correctly, the derivative terms in section~\ref{ssec:phenomenological-approach} originate from series expansions of the energy in the presence of a perturbation; for \eqref{eq:hooke_1d}, it is internal geometric displacements, and in \eqref{eq:phenomenological-polarizability} it is an external electric field. The energy in the presence of an arbitrary perturbation \(P\) is written as
 \begin{equation}
@@ -300,7 +293,7 @@ More correctly, the derivative terms in section~\ref{ssec:phenomenological-appro
     &= E^{(0)}(a) + E^{(1)}(a) \cdot (P - a) + \frac{1}{2} E^{(2)}(a) \cdot (P - a)^{2} + \frac{1}{6} E^{(3)}(a) \cdot (P - a)^{3} + \dots ,
   \end{aligned}
 \end{equation}
-where \(a\) is the point at which the derivative is taken. Choosing \(a \overset{!}{=} 0\) turns the Taylor series into a Maclaurin series:
+where \(a\) is the point at which the derivative is taken. Choosing \(a \overset{!}{=} 0\) (expanding around the perturbation at zero strength) turns the Taylor series into a Maclaurin series:
 \begin{equation}
   \label{eq:maclaurin-expansion}
   \begin{aligned}
@@ -313,18 +306,21 @@ The perturbation \(P\) may have multiple components. For example, there are 3 po
 \begin{equation}
   \label{eq:maclaurin-expansion-vector}
   \begin{aligned}
-    E(\mathbf{P}) &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P_{i}^{n}} \right|_{P_{i} = 0} \cdot P_{i}^{n} \\
-    &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} E_{i}^{(n)} \cdot P_{i}^{n} \\
-    &= E^{(0)} + \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \dots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
-    &\quad + \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \dots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \dots
+    E(\mathbf{P}) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial \mathbf{P}^{n}} \right|_{\mathbf{P} = \mathbf{0}} \cdot \mathbf{P}^{n}% \\
+    % &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P_{i}^{n}} \right|_{P_{i} = 0} \cdot P_{i}^{n} \\
+    % &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} E_{i}^{(n)} \cdot P_{i}^{n} \\
+    % &= E^{(0)} + \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \dots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
+    % &\quad + \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \dots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \dots
   \end{aligned}
 \end{equation}
 
 Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, replacing \(\mathbf{P}\) with an external electric field \(\mathbf{F}\), and switching to Einstein notation gives
 \begin{equation}
   \label{eq:electric-field-expansion}
-  E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots
+  E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
 \end{equation}
+
+TODO mu is component of dipole (moment), alpha is component of polarizability, beta is component of first hyperpolarizability, gamma is component of second hyperpolarizability, etc., each describing an addition correction to how a system interacts with the external electric field.
 
 \subsection{Derivative evaluation}
 \label{ssec:derivative-evaluation}
@@ -333,9 +329,9 @@ Up to this point, it has not been necessary to specify which energy expression i
 \begin{enumerate}
 \item numerically, by using a finite difference expression (usually based on central differences) for the desired derivative order, evaluating the energy at multiple perturbation strengths (step sizes) and directions, or
 \item analytically, by differentiating the energy expression ``on paper'' and evaluating it directly.
-\end{enumerate} %TODO identify terms in the Raman perturbation or alter the Gauss table
+\end{enumerate}
 It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}}\), there are six unique ways to perform the derivative, shown in Table~\ref{tab:raman-unique-derivatives}.
-\begin{table}
+\begin{table}[htbp]
   \centering
   \begin{singlespace}
     \begin{tabular}{ccc}
@@ -358,7 +354,7 @@ It is also possible to combine numerical and analytic approaches to obtain highe
 \end{table}
 More explicitly, the first row corresponds to a fully analytic third derivative, the next three rows correspond to first-order finite difference of analytic second derivatives, the next three rows correspond to second-order finite difference of analytic first derivatives, and the last row corresponds to the third-order finite difference of energies. Due to symmetry in the electric field perturbation indices, two of the eight permutations are identical to others already present; for example, a/a/n and a/n/a are functionally identical.
 
-In practice, the fully analytic third derivative is not usually implemented, but second derivatives are, leading to two unique possibilities:
+In practice, the fully analytic third derivative is often not implemented, but second derivatives are, leading to two unique possibilities:
 \begin{align}
   \label{eq:raman-intensity-from-polarizability}
   \frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}} &= \underbrace{\frac{\partial}{\partial X_{A}}}_{\text{numeric}} \underbrace{\left(\frac{\partial^{2} E}{\partial F_{i} \partial F_{j}}\right)}_{\text{analytic}} = \frac{\partial \alpha_{ij}}{\partial X_{A}}, \\
