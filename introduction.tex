@@ -295,7 +295,7 @@ More correctly, the derivative terms in section~\ref{ssec:phenomenological-appro
   \begin{aligned}
     E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = a} \cdot (P - a)^{n} \\
     &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)}(a) \cdot (P - a)^{n} \\
-    &= E^{(0)}(a) + E^{(1)}(a) \cdot (P - a) + \frac{1}{2} E^{(2)}(a) \cdot (P - a)^{2} + \frac{1}{6} E^{(3)}(a) \cdot (P - a)^{3} + \cdots ,
+    &= E^{(0)}(a) + E^{(1)}(a) \cdot (P - a) + \frac{1}{2} E^{(2)}(a) \cdot (P - a)^{2} + \frac{1}{6} E^{(3)}(a) \cdot (P - a)^{3} + \dots ,
   \end{aligned}
 \end{equation}
 where \(a\) is the point at which the derivative is taken. Choosing \(a \overset{!}{=} 0\) turns the Taylor series into a Maclaurin series:
@@ -304,7 +304,7 @@ where \(a\) is the point at which the derivative is taken. Choosing \(a \overset
   \begin{aligned}
     E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = 0} \cdot P^{n} \\
     &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\
-    &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \cdots
+    &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \dots
   \end{aligned}
 \end{equation}
 The perturbation \(P\) may have multiple components. For example, there are 3 possible Cartesian components to an external electric field \(\mathbf{F} = (F_{x}, F_{y}, F_{z})\) and \(3N\) atomic coordinates. Generalizing the dimensionality of \(P\) to \(k\) and inserting into \eqref{eq:maclaurin-expansion} gives
@@ -313,15 +313,15 @@ The perturbation \(P\) may have multiple components. For example, there are 3 po
   \begin{aligned}
     E(\mathbf{P}) &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P_{i}^{n}} \right|_{P_{i} = 0} \cdot P_{i}^{n} \\
     &= \sum_{n = 0}^{\infty} \sum_{i = 1}^{k} \frac{1}{n!} E_{i}^{(n)} \cdot P_{i}^{n} \\
-    &= E^{(0)} + \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \cdots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
-    &\quad + \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \cdots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \cdots
+    &= E^{(0)} + \left[ (E_{1}^{(1)} \cdot P_{1}) + (E_{2}^{(1)} \cdot P_{2}) + \dots + (E_{k}^{(1)} \cdot P_{k}) \right] \\
+    &\quad + \frac{1}{2} \left[ (E_{1}^{(2)} \cdot P_{1}^{2}) + (E_{2}^{(2)} \cdot P_{2}^{2}) + \dots + (E_{k}^{(2)} \cdot P_{k}^{2}) \right] + \dots
   \end{aligned}
 \end{equation}
 
 Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, replacing \(\mathbf{P}\) with an external electric field \(\mathbf{F}\), and switching to Einstein notation gives
 \begin{equation}
   \label{eq:electric-field-expansion}
-  E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \cdots
+  E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots
 \end{equation}
 
 \subsection{Derivative evaluation}
@@ -544,78 +544,78 @@ Reading list:
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
 
-In Rayleigh\textendash{}Schr{\"{o}}dinger perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322.}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
+In Rayleigh\textendash{}Schr{\"{o}}dinger perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322; identical notation is followed throughout, except the summation index \(n\) is generally replaced with \(k\).}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
 \begin{equation}
   \label{eq:perturbed-hamiltonian}
   \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
 \end{equation}
-where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\psi}\) and its energy \(E\), where increasing orders account for better approximations to the exact (perturbed) energy:
+where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\Psi_{i}}\) and its energy \(\mathcal{E}_{i}\) for a given state \(i\), where increasing orders account for better approximations to the exact (perturbed) energy:
 \begin{align}
   \label{eq:expansion-wavefunction}
-  \ket{\psi} &= \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \\
+  \ket{\Psi_{i}} &= \ket{\psi_{i}^{(0)}} + \lambda\ket{\psi_{i}^{(1)}} + \lambda^{2}\ket{\psi_{i}^{(2)}} + \dots \\
   \label{eq:expansion-energy}
-  E &= E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} + \dots
+  \mathcal{E}_{i} &= E_{i}^{(0)} + \lambda E_{i}^{(1)} + \lambda^{2} E_{i}^{(2)} + \dots
 \end{align}
 
-Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the Schr{\"{o}}dinger equation, \(\hat{H}\ket{\psi} = E\ket{\psi}\), gives
+Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the Schr{\"{o}}dinger equation, \(\hat{H}\ket{\Psi_{i}} = \mathcal{E}_{i}\ket{\Psi_{i}}\), gives
 \begin{equation}
   \label{eq:expansion-schrodinger}
   \begin{aligned}
-    \left( \hat{H}^{(0)} + \lambda\hat{V} \right) &\left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right] \\
-    &= \left[ E^{(0)} + \lambda E^{(1)} + \lambda^{2} E^{(2)} \right] \left[ \ket{\psi^{(0)}} + \lambda\ket{\psi^{(1)}} + \lambda^{2}\ket{\psi^{(2)}} + \dots \right],
+    \left( \hat{H}^{(0)} + \lambda\hat{V} \right) &\left[ \ket{\psi_{i}^{(0)}} + \lambda\ket{\psi_{i}^{(1)}} + \lambda^{2}\ket{\psi_{i}^{(2)}} + \dots \right] \\
+    &= \left[ E_{i}^{(0)} + \lambda E_{i}^{(1)} + \lambda^{2} E_{i}^{(2)} + \dots \right] \left[ \ket{\psi_{i}^{(0)}} + \lambda\ket{\psi_{i}^{(1)}} + \lambda^{2}\ket{\psi_{i}^{(2)}} + \dots \right],
   \end{aligned}
 \end{equation}
 where the \(\{\lambda\}\) are now also useful for collecting terms of like orders. The zeroth-order terms give the Schr{\"{o}}dinger equation for the unperturbed energy,
 \begin{equation}
   \label{eq:unperturbed-energy}
-  \hat{H}^{(0)} \ket{\psi}^{(0)} = E^{(0)} \ket{\psi}^{(0)},
+  \hat{H}^{(0)} \ket{\psi_{i}^{(0)}} = E_{i}^{(0)} \ket{\psi_{i}^{(0)}},
 \end{equation}
 but equating all terms that are first order in \(\lambda\) on both sides gives
 \begin{equation}
   \label{eq:first-order-terms}
-  \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} = E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}},
+  \hat{H}^{(0)} \ket{\psi_{i}^{(1)}} + \hat{V} \ket{\psi_{i}^{(0)}} = E_{i}^{(0)} \ket{\psi_{i}^{(1)}} + E_{i}^{(1)} \ket{\psi_{i}^{(0)}},
 \end{equation}
-where \(\lambda\) has been dropped for readability since it is present in front of each term. \eqref{eq:first-order-terms} can be simplified through integration using the bra \(\bra{\psi^{(0)}}\), which does not change the order from \(\lambda^{1}\):
+where \(\lambda\) has been dropped for readability since it is present in front of each term. \eqref{eq:first-order-terms} can be simplified through integration using the bra \(\bra{\psi_{i}^{(0)}}\), which does not change the order from \(\lambda^{1}\):
 \begin{equation}
   \label{eq:first-order-terms-bra}
   \begin{aligned}
-    \bra{\psi^{(0)}} \left( \hat{H}^{(0)} \ket{\psi^{(1)}} + \hat{V} \ket{\psi^{(0)}} \right) &= \bra{\psi^{(0)}} \left( E^{(0)} \ket{\psi^{(1)}} + E^{(1)} \ket{\psi^{(0)}} \right) \\
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= \braket{\psi^{(0)} | E^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | E^{(1)} | \psi^{(0)}} \\
-    &= E^{(0)} \braket{\psi^{(0)} | \psi^{(1)}} + E^{(1)} \braket{\psi^{(0)} | \psi^{(0)}}.
+    \bra{\psi_{i}^{(0)}} \left( \hat{H}^{(0)} \ket{\psi_{i}^{(1)}} + \hat{V} \ket{\psi_{i}^{(0)}} \right) &= \bra{\psi_{i}^{(0)}} \left( E_{i}^{(0)} \ket{\psi_{i}^{(1)}} + E_{i}^{(1)} \ket{\psi_{i}^{(0)}} \right) \\
+    \braket{\psi_{i}^{(0)} | \hat{H}^{(0)} | \psi_{i}^{(1)}} + \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} &= \braket{\psi_{i}^{(0)} | E_{i}^{(0)} | \psi_{i}^{(1)}} + \braket{\psi_{i}^{(0)} | E_{i}^{(1)} | \psi_{i}^{(0)}} \\
+    &= E_{i}^{(0)} \braket{\psi_{i}^{(0)} | \psi_{i}^{(1)}} + E_{i}^{(1)} \braket{\psi_{i}^{(0)} | \psi_{i}^{(0)}}.
   \end{aligned}
 \end{equation}
 
-It is now important to know what orthonormality conditions exist between the set of all intermediate states \(\{\ket{\psi^{(n)}}\}\). For the unperturbed state, which is usually the \hf ground state,
+It is now important to know what orthonormality conditions exist between the set of all corrected states \(\left\{\ket{\psi_{i}^{(n)}}\right\}\). For the unperturbed state, which is usually the \hf ground state,
 \begin{equation}
   \label{eq:hf-normalization}
-  \braket{\psi^{(0)}|\psi^{(0)}} = 1,
+  \braket{\psi_{i}^{(0)}|\psi_{i}^{(0)}} = 1,
 \end{equation}
 and the choice of \emph{intermediate normalization} is made,
 \begin{equation}
   \label{eq:intermediate-normalization}
-  \braket{\psi^{(0)}|\psi} \overset{!}{=} 1,
+  \braket{\psi_{i}^{(0)}|\Psi_{i}} \overset{!}{=} 1,
 \end{equation}
 which upon expanding the ket using \eqref{eq:expansion-wavefunction} leads to
 \begin{equation}
   \label{eq:intermediate-normalization-single}
-  \braket{\psi^{(0)}|\psi^{(n)}} = 0
+  \braket{\psi_{i}^{(0)}|\psi_{i}^{(n)}} = 0
 \end{equation}
-for any intermediate state where \(n > 0\). Returning to \eqref{eq:first-order-terms-bra}, this first allows for simplification of the right-hand side,
+for any correction state where \(n > 0\). Returning to \eqref{eq:first-order-terms-bra}, this first allows for simplification of the right-hand side,
 \begin{equation}
   \label{eq:first-order-terms-first-simplification}
   \begin{aligned}
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} + \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} + E^{(1)} \Ccancelto[Green]{1}{\braket{\psi^{(0)} | \psi^{(0)}}} \\
-    &= E^{(1)},
+    \braket{\psi_{i}^{(0)} | \hat{H}^{(0)} | \psi_{i}^{(1)}} + \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} &= E_{i}^{(0)} \Ccancelto[carmine]{0}{\braket{\psi_{i}^{(0)} | \psi_{i}^{(1)}}} + E_{i}^{(1)} \Ccancelto[Green]{1}{\braket{\psi_{i}^{(0)} | \psi_{i}^{(0)}}} \\
+    &= E_{i}^{(1)},
   \end{aligned}
 \end{equation}
 and the first term on the left-hand side can be simplified using the hermiticity of the Hamiltonian followed by \eqref{eq:intermediate-normalization-single},
 \begin{equation}
   \label{eq:hermiticity}
   \begin{aligned}
-    \braket{\psi^{(0)} | \hat{H}^{(0)} | \psi^{(1)}} &= \braket{\psi^{(1)} | \hat{H}^{(0)} | \psi^{(0)}}^{*} \\
-    &= \braket{\psi^{(1)} | E^{(0)} | \psi^{(0)}}^{*} \\
-    &= E^{(0)} \braket{\psi^{(1)} | \psi^{(0)}}^{*} \\
-    &= E^{(0)} \Ccancelto[carmine]{0}{\braket{\psi^{(0)} | \psi^{(1)}}} \\
+    \braket{\psi_{i}^{(0)} | \hat{H}^{(0)} | \psi_{i}^{(1)}} &= \braket{\psi_{i}^{(1)} | \hat{H}^{(0)} | \psi_{i}^{(0)}}^{*} \\
+    &= \braket{\psi_{i}^{(1)} | E_{i}^{(0)} | \psi_{i}^{(0)}}^{*} \\
+    &= E_{i}^{(0)} \braket{\psi_{i}^{(1)} | \psi_{i}^{(0)}}^{*} \\
+    &= E_{i}^{(0)} \Ccancelto[carmine]{0}{\braket{\psi_{i}^{(0)} | \psi_{i}^{(1)}}} \\
     &= 0.
   \end{aligned}
 \end{equation}
@@ -623,26 +623,26 @@ and the first term on the left-hand side can be simplified using the hermiticity
 The final form of \eqref{eq:first-order-terms-bra} is now
 \begin{equation}
   \label{eq:first-order-terms-final}
-  \braket{\psi^{(0)} | \hat{V} | \psi^{(0)}} = E^{(1)},
+  \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} = E_{i}^{(1)},
 \end{equation}
 revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
 
 The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
 \begin{equation}
   \label{eq:general-energy-correction}
-  E^{(n)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(n-1)}},
+  E_{i}^{(n)} = \braket{\psi_{i}^{(0)}|\hat{V}|\psi_{i}^{(n-1)}},
 \end{equation}
 so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}). From \eqref{eq:general-energy-correction}, the first form of the second-order correction is
 \begin{equation}
   \label{eq:second-order-correction-first-form}
-  E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
+  E_{i}^{(2)} = \braket{\psi_{i}^{(0)}|\hat{V}|\psi_{i}^{(1)}},
 \end{equation}
-where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set \(\{\ket{k}\}\),\footnote{The notation of Szabo and Ostlund\cite{szabo1989modern} is followed, ignoring the state-specific label \(i\) since we are only interested in the ground state, and replacing the summation index \(n\) with \(k\).}
+where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi_{i}^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set \(\left\{\ket{\psi_{k}^{(0)}}\right\} \equiv \left\{\ket{k}\right\}\),
 \begin{equation}
   \label{eq:orthonormal-eigenfunction-expansion}
-  \ket{\psi^{(1)}} = \sum_{k} c_{k}^{(1)} \ket{k},
+  \ket{\psi_{i}^{(1)}} = \sum_{k} c_{k}^{(1)} \ket{k},
 \end{equation}
-leading to
+[TODO add state labels] leading to
 \begin{equation}
   \label{eq:coefficient-selection}
   \braket{k|\psi^{(1)}} = c_{k}^{(1)}.
@@ -668,9 +668,9 @@ where the last term cancels due to \(\braket{a|b} = \delta_{ab}\), and \(k \neq 
   \label{eq:something-something-expansion}
   \begin{aligned}
     \braket{k|\hat{H}^{(0)}|\psi^{(1)}} &= \bra{k} \hat{H}^{(0)} | \left( \sum_{a} c_{a}^{(1)} \ket{a} \right) \\
-      &= \bra{k} \hat{H}^{(0)}| \left( c_{a}^{(1)} \ket{a} + c_{b}^{(1)} \ket{b} + \cdots + c_{k}^{(1)} \ket{k} + \cdots \right) \\
-      &= \bra{k} \left( E_{a}^{(0)} c_{a}^{(1)} \ket{a} + E_{b}^{(0)} c_{b}^{(1)} \ket{b} + \cdots + E_{k}^{(0)} c_{k}^{(1)} \ket{k} + \cdots \right) \\
-      &= E_{a}^{(0)} c_{a}^{(1)} \Ccancelto[carmine]{0}{\braket{k|a}} + E_{b}^{(0)} c_{b}^{(1)} \Ccancelto[carmine]{0}{\braket{k|b}} + \cdots + E_{k}^{(0)} c_{k}^{(1)} \Ccancelto[Green]{1}{\braket{k|k}} + \cdots \\
+      &= \bra{k} \hat{H}^{(0)}| \left( c_{a}^{(1)} \ket{a} + c_{b}^{(1)} \ket{b} + \dots + c_{k}^{(1)} \ket{k} + \dots \right) \\
+      &= \bra{k} \left( E_{a}^{(0)} c_{a}^{(1)} \ket{a} + E_{b}^{(0)} c_{b}^{(1)} \ket{b} + \dots + E_{k}^{(0)} c_{k}^{(1)} \ket{k} + \dots \right) \\
+      &= E_{a}^{(0)} c_{a}^{(1)} \Ccancelto[carmine]{0}{\braket{k|a}} + E_{b}^{(0)} c_{b}^{(1)} \Ccancelto[carmine]{0}{\braket{k|b}} + \dots + E_{k}^{(0)} c_{k}^{(1)} \Ccancelto[Green]{1}{\braket{k|k}} + \dots \\
       &= E_{k}^{(0)} c_{k}^{(1)} \\
       &= E_{k}^{(0)} \braket{k|\psi^{(1)}}.
     \end{aligned}
