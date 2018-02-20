@@ -400,6 +400,7 @@ In the most general case, there are both derivatives of the AO-basis integrals t
 % \section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
 The analytical gradient of the Hartree-Fock energy is given by (Szabo \& Ostlund eq. C.16):
 \begin{equation}
+  \label{eq:szabo-c16}
   \frac{\partial E}{\partial X_{A}} = \sum_{ij}{P_{ji} \frac{\partial H_{ij}}{\partial X_{A}}} + \frac{1}{2} \sum_{ijkl}{P_{ji}P_{kl} \frac{\partial (ij|kl)}{\partial X_{A}}} - \sum_{ij}{Q_{ji} \frac{\partial S_{ij}}{\partial X_{A}}} + \frac{\partial V_{NN}}{\partial X_{A}}
 \end{equation}
 Of course, the Born-Oppenheimer approximation means that the nuclear repulsion term is easy to handle, and the derivative is given as:
@@ -517,7 +518,7 @@ Recognizing that we only need diagonal terms, this can be rewritten as
 which is then plugged back into the first derivative expression to give
 \begin{align*}
   \frac{\partial E_{\text{elec}}}{\partial X_{A}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{i}^{\text{d.o.}} \left( -\frac{1}{2} S_{ii}^{X_{A}} \right) \epsilon_{ii} \\
-                                                  &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{ii}. \tag{Yamaguchi eq. 4.21}
+                                                  &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{ii}. \label{eq:yamaguchi-4.21}\tag{Yamaguchi eq. 4.21}
 \end{align*}
 
 Rewrite the last term
@@ -623,7 +624,7 @@ The final form of \eqref{eq:first-order-terms-bra} is now
   \label{eq:first-order-terms-final}
   \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} = E_{i}^{(1)},
 \end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can TODO This will be revisited in an application
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:szabo-c16} and \eqref{eq:yamaguchi-4.21}.
 
 The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
 \begin{equation}
@@ -635,62 +636,68 @@ so to find the second-order correction to the energy, the first-order correction
   \label{eq:second-order-correction-first-form}
   E_{i}^{(2)} = \braket{\psi_{i}^{(0)}|\hat{V}|\psi_{i}^{(1)}},
 \end{equation}
-where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi_{i}^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set \(\left\{\ket{\psi_{k}^{(0)}}\right\} \equiv \left\{\ket{k}\right\}\),
+where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi_{i}^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\) that are orthogonal to the unperturbed state (in line with \eqref{eq:intermediate-normalization-single}),
+\begin{equation}
+  \label{eq:orthogonal-to-reference-state}
+  \braket{k|\psi_{i}^{(0)}} \overset{!}{=} 0,
+\end{equation}
+and form a complete orthonormal set \(\left\{\ket{\psi_{k}^{(0)}}\right\} \equiv \left\{\ket{k}\right\}\),
 \begin{equation}
   \label{eq:orthonormal-eigenfunction-expansion}
   \ket{\psi_{i}^{(1)}} = \sum_{k} c_{k}^{(1)} \ket{k},
 \end{equation}
-[TODO add state labels] leading to
+leading to
 \begin{equation}
   \label{eq:coefficient-selection}
-  \braket{k|\psi^{(1)}} = c_{k}^{(1)}.
+  \braket{k|\psi_{i}^{(1)}} = c_{k}^{(1)}.
 \end{equation}
-Using \eqref{eq:intermediate-normalization-single} and the fact that the set \(\{\ket{k}\}\) is orthonormal, the resolution of the identity can be inserted:
+Using \eqref{eq:intermediate-normalization-single} and the fact that the set \(\{\ket{k}\}\) is complete, the resolution of the identity can be inserted:
 \begin{equation}
   \label{eq:resolution-of-the-identity}
-  \ket{\psi^{(1)}} = \sum_{k} \ket{k} \braket{k|\psi^{(1)}}
+  \ket{\psi_{i}^{(1)}} = \sum_{k} \ket{k} \braket{k|\psi_{i}^{(1)}}
 \end{equation}
+% TODO this is the path from 6.7b to 6.9 to 6.11:
 
-TODO this is the path from 6.7b to 6.9 to 6.11: rearrange \eqref{eq:first-order-terms} to collect all terms with the same ket
+To calculate the first-order correction to the wavefunction, first rearrange \eqref{eq:first-order-terms} to collect all terms with the same ket,
 \begin{equation}
   \label{eq:first-order-terms-group-kets}
-  ( E^{(0)} - \hat{H}^{(0)} ) \ket{\psi^{(1)}} = ( \hat{V} - E^{(1)} ) \ket{\psi^{(0)}}
+  ( E_{i}^{(0)} - \hat{H}^{(0)} ) \ket{\psi_{i}^{(1)}} = ( \hat{V} - E_{i}^{(1)} ) \ket{\psi_{i}^{(0)}},
 \end{equation}
 and multiply \eqref{eq:first-order-terms-group-kets} on the left with \(\bra{k}\) to give
 \begin{equation}
   \label{eq:first-order-terms-group-kets-cancelled}
-  E^{(0)} \braket{k|\psi^{(1)}} - \braket{k|\hat{H}^{(0)}|\psi^{(1)}} = \braket{k|\hat{V}|\psi^{(0)}} - E^{(1)} \Ccancelto[carmine]{0}{\braket{k|\psi^{(0)}}}
+  E_{i}^{(0)} \braket{k|\psi_{i}^{(1)}} - \braket{k|\hat{H}^{(0)}|\psi_{i}^{(1)}} = \braket{k|\hat{V}|\psi_{i}^{(0)}} - E_{i}^{(1)} \Ccancelto[carmine]{0}{\braket{k|\psi_{i}^{(0)}}},
 \end{equation}
-where the last term cancels due to \(\braket{a|b} = \delta_{ab}\), and \(k \neq \psi^{(0)}\) (TODO eqref this last one). To deal with the second term, use \eqref{eq:orthonormal-eigenfunction-expansion}, cancelling terms again due to orthonormality, and finally inserting \eqref{eq:coefficient-selection}:
+where the last term cancels due to \(\braket{a|b} = \delta_{ab}, \{a,b\}\in k\), and \(\ket{k} \neq \ket{\psi_{i}^{(0)}}\) from \eqref{eq:orthogonal-to-reference-state}. To deal with the second term, use \eqref{eq:orthonormal-eigenfunction-expansion}, cancelling terms again due to orthonormality, and finally inserting \eqref{eq:coefficient-selection}:
 \begin{equation}
   \label{eq:something-something-expansion}
   \begin{aligned}
-    \braket{k|\hat{H}^{(0)}|\psi^{(1)}} &= \bra{k} \hat{H}^{(0)} | \left( \sum_{a} c_{a}^{(1)} \ket{a} \right) \\
+    \braket{k|\hat{H}^{(0)}|\psi_{i}^{(1)}} &= \bra{k} \hat{H}^{(0)} | \left( \sum_{a} c_{a}^{(1)} \ket{a} \right) \\
       &= \bra{k} \hat{H}^{(0)}| \left( c_{a}^{(1)} \ket{a} + c_{b}^{(1)} \ket{b} + \dots + c_{k}^{(1)} \ket{k} + \dots \right) \\
       &= \bra{k} \left( E_{a}^{(0)} c_{a}^{(1)} \ket{a} + E_{b}^{(0)} c_{b}^{(1)} \ket{b} + \dots + E_{k}^{(0)} c_{k}^{(1)} \ket{k} + \dots \right) \\
       &= E_{a}^{(0)} c_{a}^{(1)} \Ccancelto[carmine]{0}{\braket{k|a}} + E_{b}^{(0)} c_{b}^{(1)} \Ccancelto[carmine]{0}{\braket{k|b}} + \dots + E_{k}^{(0)} c_{k}^{(1)} \Ccancelto[Green]{1}{\braket{k|k}} + \dots \\
       &= E_{k}^{(0)} c_{k}^{(1)} \\
-      &= E_{k}^{(0)} \braket{k|\psi^{(1)}}.
+      &= E_{k}^{(0)} \braket{k|\psi_{i}^{(1)}}.
     \end{aligned}
 \end{equation}
 Plugging \eqref{eq:something-something-expansion} back into \eqref{eq:first-order-terms-group-kets-cancelled} gives
 \begin{align}
   \label{eq:szabo-ostlund-6.11}
-  \left( E^{(0)} - E_{k}^{(0)} \right) \braket{k|\psi^{(1)}} &= \braket{k|\hat{V}|\psi^{(0)}} \\
+  \left( E_{i}^{(0)} - E_{k}^{(0)} \right) \braket{k|\psi_{i}^{(1)}} &= \braket{k|\hat{V}|\psi_{i}^{(0)}} \\
   \label{eq:szabo-ostlund-6.11nl}
-  \braket{k|\psi^{(1)}} &= \frac{\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)},
+  \braket{k|\psi_{i}^{(1)}} &= \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)},
 \end{align}
 which upon inserting into \eqref{eq:resolution-of-the-identity}, gives the final form of the first-order correction to the perturbed wavefunction:
 \begin{equation}
   \label{eq:first-order-wavefunction}
-  \ket{\psi^{(1)}} = \sum_{k} \ket{k} \frac{\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)}
+  \ket{\psi_{i}^{(1)}} = \sum_{k\neq i} \ket{k} \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)}.
 \end{equation}
 Inserting \eqref{eq:first-order-wavefunction} into \eqref{eq:second-order-correction-first-form} then gives the second-order correction to the perturbed energy:
 \begin{equation}
   \label{eq:second-order-energy}
   \begin{aligned}
-    E^{(2)} &= \bra{\psi^{(0)}} \hat{V} \left( \sum_{k} \ket{k} \frac{\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)} \right) \\
-    &= \sum_{k} \frac{\braket{\psi^{(0)}|\hat{V}|k}\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)}
+    E_{i}^{(2)} &= \bra{\psi_{i}^{(0)}} \hat{V} \left( \sum_{k\neq i} \ket{k} \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)} \right) \\
+    &= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{V}|k}\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)}.
   \end{aligned}
 \end{equation}
 \section{\texorpdfstring{\caps{Dynamic (frequency-dependent) response properties}}{Static (time-independent) response properties}}
