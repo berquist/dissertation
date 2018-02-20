@@ -364,7 +364,6 @@ In practice, the fully analytic third derivative is not usually implemented, but
   &= \underbrace{\frac{\partial}{\partial F_{i}}}_{\text{numeric}} \underbrace{\left(\frac{\partial^{2} E}{\partial X_{A} \partial F_{j}}\right)}_{\text{analytic}} = \frac{\partial}{\partial F_{i}} \left( \frac{\partial \mu_{j}}{\partial X_{A}} \right).
 \end{align}
 In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
-% In \eqref{eq:raman-intensity-from-polarizability}, the polarizability is calculated analytically for each nuclear displacement, leading to \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
 
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
@@ -638,8 +637,64 @@ so to find the second-order correction to the energy, the first-order correction
   \label{eq:second-order-correction-first-form}
   E^{(2)} = \braket{\psi^{(0)}|\hat{V}|\psi^{(1)}},
 \end{equation}
-where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set. The notation of Szabo and Ostlund\cite{szabo1989modern} is followed, TODO
+where the problem now becomes the calculation of the perturbed wavefunction \(\ket{\psi^{(1)}}\). The strategy is to expand it as a linear combination of eigenfunctions of \(\hat{H}^{(0)}\), which form a complete orthonormal set \(\{\ket{k}\}\),\footnote{The notation of Szabo and Ostlund\cite{szabo1989modern} is followed, ignoring the state-specific label \(i\) since we are only interested in the ground state, and replacing the summation index \(n\) with \(k\).}
+\begin{equation}
+  \label{eq:orthonormal-eigenfunction-expansion}
+  \ket{\psi^{(1)}} = \sum_{k} c_{k}^{(1)} \ket{k},
+\end{equation}
+leading to
+\begin{equation}
+  \label{eq:coefficient-selection}
+  \braket{k|\psi^{(1)}} = c_{k}^{(1)}.
+\end{equation}
+Using \eqref{eq:intermediate-normalization-single} and the fact that the set \(\{\ket{k}\}\) is orthonormal, the resolution of the identity can be inserted:
+\begin{equation}
+  \label{eq:resolution-of-the-identity}
+  \ket{\psi^{(1)}} = \sum_{k} \ket{k} \braket{k|\psi^{(1)}}
+\end{equation}
 
+TODO this is the path from 6.7b to 6.9 to 6.11: rearrange \eqref{eq:first-order-terms} to collect all terms with the same ket
+\begin{equation}
+  \label{eq:first-order-terms-group-kets}
+  ( E^{(0)} - \hat{H}^{(0)} ) \ket{\psi^{(1)}} = ( \hat{V} - E^{(1)} ) \ket{\psi^{(0)}}
+\end{equation}
+and multiply \eqref{eq:first-order-terms-group-kets} on the left with \(\bra{k}\) to give
+\begin{equation}
+  \label{eq:first-order-terms-group-kets-cancelled}
+  E^{(0)} \braket{k|\psi^{(1)}} - \braket{k|\hat{H}^{(0)}|\psi^{(1)}} = \braket{k|\hat{V}|\psi^{(0)}} - E^{(1)} \Ccancelto[carmine]{0}{\braket{k|\psi^{(0)}}}
+\end{equation}
+where the last term cancels due to \(\braket{a|b} = \delta_{ab}\), and \(k \neq \psi^{(0)}\) (TODO eqref this last one). To deal with the second term, use \eqref{eq:orthonormal-eigenfunction-expansion}, cancelling terms again due to orthonormality, and finally inserting \eqref{eq:coefficient-selection}:
+\begin{equation}
+  \label{eq:something-something-expansion}
+  \begin{aligned}
+    \braket{k|\hat{H}^{(0)}|\psi^{(1)}} &= \bra{k} \hat{H}^{(0)} | \left( \sum_{a} c_{a}^{(1)} \ket{a} \right) \\
+      &= \bra{k} \hat{H}^{(0)}| \left( c_{a}^{(1)} \ket{a} + c_{b}^{(1)} \ket{b} + \cdots + c_{k}^{(1)} \ket{k} + \cdots \right) \\
+      &= \bra{k} \left( E_{a}^{(0)} c_{a}^{(1)} \ket{a} + E_{b}^{(0)} c_{b}^{(1)} \ket{b} + \cdots + E_{k}^{(0)} c_{k}^{(1)} \ket{k} + \cdots \right) \\
+      &= E_{a}^{(0)} c_{a}^{(1)} \Ccancelto[carmine]{0}{\braket{k|a}} + E_{b}^{(0)} c_{b}^{(1)} \Ccancelto[carmine]{0}{\braket{k|b}} + \cdots + E_{k}^{(0)} c_{k}^{(1)} \Ccancelto[Green]{1}{\braket{k|k}} + \cdots \\
+      &= E_{k}^{(0)} c_{k}^{(1)} \\
+      &= E_{k}^{(0)} \braket{k|\psi^{(1)}}.
+    \end{aligned}
+\end{equation}
+Plugging \eqref{eq:something-something-expansion} back into \eqref{eq:first-order-terms-group-kets-cancelled} gives
+\begin{align}
+  \label{eq:szabo-ostlund-6.11}
+  \left( E^{(0)} - E_{k}^{(0)} \right) \braket{k|\psi^{(1)}} &= \braket{k|\hat{V}|\psi^{(0)}} \\
+  \label{eq:szabo-ostlund-6.11nl}
+  \braket{k|\psi^{(1)}} &= \frac{\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)},
+\end{align}
+which upon inserting into \eqref{eq:resolution-of-the-identity}, gives the final form of the first-order correction to the perturbed wavefunction:
+\begin{equation}
+  \label{eq:first-order-wavefunction}
+  \ket{\psi^{(1)}} = \sum_{k} \ket{k} \frac{\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)}
+\end{equation}
+Inserting \eqref{eq:first-order-wavefunction} into \eqref{eq:second-order-correction-first-form} then gives the second-order correction to the perturbed energy:
+\begin{equation}
+  \label{eq:second-order-energy}
+  \begin{aligned}
+    E^{(2)} &= \bra{\psi^{(0)}} \hat{V} \left( \sum_{k} \ket{k} \frac{\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)} \right) \\
+    &= \sum_{k} \frac{\braket{\psi^{(0)}|\hat{V}|k}\braket{k|\hat{V}|\psi^{(0)}}}{\left( E^{(0)} - E_{k}^{(0)} \right)}
+  \end{aligned}
+\end{equation}
 \section{\texorpdfstring{\caps{Dynamic (frequency-dependent) response properties}}{Static (time-independent) response properties}}
 \label{sec:dynamic-properties}
 
@@ -696,7 +751,7 @@ Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
 %                &= \braket{n|\mu_{\alpha}|n} -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} (E_{\beta})_{0}.
 % \end{align}
 
-% Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
+p% Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
 
 \onlyifstandalone{\printbibliography}
 \end{document}
