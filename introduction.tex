@@ -97,7 +97,7 @@ For more background literature on the theoretical development and applications o
 % The experimentalist works at the macroscopic level and typically records the reponse of the electromagnetic field.
 % The theoretician works at the microscopic level and typically calculates the molecular response.
 
-There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. Although there is often quite some distance in terms of mathematical derivation and code development effort between the succinct representation on the left and the property on the right of each table, these are the true starting points for molecular property calculations based on quantum chemistry.
+There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. TODO Although there is often quite some distance in terms of mathematical derivation and code development effort between the succinct representation on the left and the property on the right of each table, these are the true starting points for molecular property calculations based on quantum chemistry.
 
 % More appropriate for time- or frequency-dependent response properties
 %TODO
@@ -254,8 +254,8 @@ which can be expanded identically to \eqref{eq:force_hooke_matrix} as
     \alpha_{31} & \alpha_{32} & \alpha_{33}
   \end{bmatrix}
   \begin{bmatrix}
-    F_{1} \\ F_{2} \\ F_{3},
-  \end{bmatrix}
+    F_{1} \\ F_{2} \\ F_{3}
+  \end{bmatrix},
 \end{equation}
 or in Einstein summation notation as
 \begin{equation}
@@ -284,7 +284,7 @@ The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/74683/194}{Series expansion}}{Series expansion}}
 \label{ssec:series-expansion}
 
-More correctly, the derivative terms in section~\ref{ssec:phenomenological-approach} originate from series expansions of the energy in the presence of a perturbation; for \eqref{eq:hooke_1d}, it is internal geometric displacements, and in \eqref{eq:phenomenological-polarizability} it is an external electric field. The energy in the presence of an arbitrary perturbation \(P\) is written as
+More generally, the derivative terms in section~\ref{ssec:phenomenological-approach} originate from series expansions of the energy in the presence of a perturbation; for \eqref{eq:hooke_1d}, it is internal geometric displacements, and in \eqref{eq:phenomenological-polarizability} it is an external electric field. The energy in the presence of an arbitrary perturbation \(P\) is written as
 \begin{equation}
   \label{eq:taylor-expansion}
   \begin{aligned}
@@ -322,6 +322,19 @@ Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, repl
 
 TODO mu is component of dipole (moment), alpha is component of polarizability, beta is component of first hyperpolarizability, gamma is component of second hyperpolarizability, etc., each describing an addition correction to how a system interacts with the external electric field.
 
+It is also possible to consider multiple perturbations simultaneously. Adding another perturbation \(\mathbf{Q}\) to \eqref{eq:maclaurin-expansion-vector} gives
+\begin{equation}
+  \label{eq:two-perturbation-expansion}
+  E(\mathbf{P}, \mathbf{Q}) = E^{(0,0)} + \left(E^{(1,0)} + E^{(0,1)}\right) + \left(E^{(2,0)} + E^{(0,2)} + E^{(1,1)}\right) + \dots,
+\end{equation}
+where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)th-order in the perturbation \(\mathbf{P}\) and \(m\)th-order in the perturbation \(\mathbf{Q}\). The expected terms from both independent series expansions occur, but there is also a cross-term \(E^{(1,1)}\). All mixed derivatives in table~\ref{tab:gauss} that are at least 2nd-order total correspond to such cross-terms. For example, consider adding an external magnetic field to \eqref{eq:electric-field-expansion}:
+\begin{equation}
+  \label{eq:electric-and-magnetic-field-expansion}
+  1 + 1 = 2,
+\end{equation}
+where the term is directly related to the optical rotation, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. Section~\ref{TODO} will show how frequency dependence can be properly introduced to this term and in general.
+
+TODO find optical rotation/quadratic response article from Filipp Furche
 \subsection{Derivative evaluation}
 \label{ssec:derivative-evaluation}
 
@@ -700,6 +713,8 @@ Inserting \eqref{eq:first-order-wavefunction} into \eqref{eq:second-order-correc
     &= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{V}|k}\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)}.
   \end{aligned}
 \end{equation}
+
+
 \section{\texorpdfstring{\caps{Dynamic (frequency-dependent) response properties}}{Static (time-independent) response properties}}
 \label{sec:dynamic-properties}
 
