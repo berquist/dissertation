@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+
+\begin{document}
+From \url{https://en.wikipedia.org/wiki/Interaction_picture}:
+\begin{table}[htpb]
+  \centering
+  \begin{tabular}{clll}
+    \toprule
+    & \multicolumn{3}{c}{Picture} \\
+    \cmidrule{2-4}
+    Evolution of: & Heisenberg & Schr{\"{o}}dinger & Interaction (Dirac) \\
+    \midrule
+    Ket state & constant & \(\ket{\psi_{\mathrm{S}}(t)} = e^{-iH_{\mathrm{S}}t/\hbar} \ket{\psi_{\mathrm{S}}(0)}\) & \(\ket{\psi_{\mathrm{I}}(t)} = e^{iH_{0,\mathrm{S}}t/\hbar} \ket{\psi_{\mathrm{S}}(t)}\) \\
+    Observable & \(A_{\mathrm{H}}(t) = e^{iH_{\mathrm{S}}t/\hbar} A_{\mathrm{S}} e^{-iH_{\mathrm{S}}t/\hbar}\) & constant & \(A_{\mathrm{I}}(t) = e^{iH_{0,\mathrm{S}}t/\hbar} A_{\mathrm{S}} e^{-iH_{0,\mathrm{S}}t/\hbar}\) \\
+    Density matrix & constant & \(\rho_{\mathrm{S}}(t) = e^{-iH_{\mathrm{S}}t/\hbar} \rho_{\mathrm{S}}(0) e^{iH_{\mathrm{S}}t/\hbar}\) & \(\rho_{\mathrm{I}}(t) = e^{iH_{0,\mathrm{S}}t/\hbar} \rho_{\mathrm{S}}(t) e^{-iH_{0,\mathrm{S}}t/\hbar}\) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+\end{document}
