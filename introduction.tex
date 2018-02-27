@@ -60,7 +60,15 @@ The remainder of this introduction will cover the basic language of molecular re
 
 For more background literature on the theoretical development and applications of response theory to molecular properties, see reviews by Gauss\cite{gauss2000}, Neese\cite{NEESE2009526}, Norman\cite{C1CP21951K}, Helgaker\cite{doi:10.1021/cr2002239} and books by Yamaguchi\cite{Yamaguchi1994}, Szabo\cite{szabo1989modern}, McWeeny\cite{mcweeny1989methods}, and Barron\cite{barron2004molecular}.
 
-\section[\texorpdfstring{\caps{Macroscopic and microscopic response connections}}{Macroscopic and microscopic response connections}]{\texorpdfstring{\caps{Connection between macroscopic and microscopic properties}}{Connection between macroscopic and microscopic properties}}
+\section{\texorpdfstring{\caps{Terms and Fundamental Definitions}}{Terms and Fundamental Definitions}}
+
+Throughout the introduction and the remainder of this thesis, a number of terms appear and may seem to be used interchangeably. In quantum chemistry literature, the phrase \emph{molecular property} is used to denote any quantity that can be calculated from the wavefunction. By this definition, not all molecular properties are \emph{observables}, that is, they do not necessarily correspond to experimentally-measurable quantities. Such molecular properties may not also be uniquely defined. One of the most prominent examples of non-observable molecular properties is the calculation of atomic partial charges, with Mulliken and L{\"{o}}wdin population analyses being the two most commonly-known partitioning schemes for dividing the electron density into atomic contributions. However, this thesis associates molecular properties with observables, which may also be synonymous with \emph{physical properties}. The term \emph{chemical property} is avoided as it is more associated with reactivity than observable quantities.
+
+% - Also need to differentiate between molecular property, observable, and _molecular response_ -> _response property_
+
+% - Aside from the summer school (!), molecular response not defined anywhere
+
+\section[\texorpdfstring{\caps{Macroscopic and Microscopic Response Connections}}{Macroscopic and Microscopic Response Connections}]{\texorpdfstring{\caps{Connection Between Macroscopic and Microscopic Properties}}{Connection Between Macroscopic and Microscopic Properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
 
 \begin{table}
@@ -317,22 +325,28 @@ Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, repl
   \label{eq:electric-field-expansion}
   E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
 \end{equation}
-
-TODO mu is component of dipole (moment), alpha is component of polarizability, beta is component of first hyperpolarizability, gamma is component of second hyperpolarizability, etc., each describing an addition correction to how a system interacts with the external electric field.
+where \(mu_{i}\) is a component of the dipole (moment), expressed in operator form as
+\begin{equation}
+  \label{eq:dipole-operator}
+  \hat{\mu} = (\hat{\mu}_{x}, \hat{\mu}_{y}, \hat{\mu}_{z}) = -e(\hat{x}, \hat{y}, \hat{z}),
+\end{equation}
+\(\alpha\) is a component of the polarizability, \(\beta\) is a component of the first hyperpolarizability, \(\gamma\) is a component of the second hyperpolarizability, etc., each describing an additional correction to how a system interacts with the external electric field.
 
 It is also possible to consider multiple perturbations simultaneously. Adding another perturbation \(\mathbf{Q}\) to \eqref{eq:maclaurin-expansion-vector} gives
 \begin{equation}
   \label{eq:two-perturbation-expansion}
-  E(\mathbf{P}, \mathbf{Q}) = E^{(0,0)} + \left(E^{(1,0)} + E^{(0,1)}\right) + \left(E^{(2,0)} + E^{(0,2)} + E^{(1,1)}\right) + \dots,
+  E(\mathbf{P}, \mathbf{Q}) = E^{(0,0)} + \left(E^{(1,0)} \cdot \mathbf{P} + E^{(0,1)} \mathbf{Q}\right) + \frac{1}{2} \left(E^{(2,0)} \cdot \mathbf{P}^{2} + E^{(0,2)} \cdot \mathbf{Q}^{2} + E^{(1,1)} \cdot \mathbf{P} \cdot \mathbf{Q}\right) + \dots,
 \end{equation}
 where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)th-order in the perturbation \(\mathbf{P}\) and \(m\)th-order in the perturbation \(\mathbf{Q}\). The expected terms from both independent series expansions occur, but there is also a cross-term \(E^{(1,1)}\). All mixed derivatives in table~\ref{tab:gauss} that are at least 2nd-order total correspond to such cross-terms. For example, consider adding an external magnetic field to \eqref{eq:electric-field-expansion}:
 \begin{equation}
   \label{eq:electric-and-magnetic-field-expansion}
-  1 + 1 = 2,
+  E(\mathbf{F}, \mathbf{B}) = E_{0} + \mu_{i} \cdot F_{i} + m_{i} \cdot B_{i} + \frac{1}{2} \left( \alpha_{ij} \cdot F_{i}F_{j} + \xi_{ij} \cdot B_{i}B_{j} + G_{ij} \cdot F_{i}B_{j} \right) \dots,
 \end{equation}
-where the term is directly related to the optical rotation, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. Section~\ref{TODO} will show how frequency dependence can be properly introduced to this term and in general.
+where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. Section~\ref{TODO} will show how frequency dependence can be properly introduced to this term and in general.
 
-TODO find optical rotation/quadratic response article from Filipp Furche
+% \begin{equation}
+%   \mu_{j}^{(1)}(\omega) = \sum_{k} \alpha_{jk}(\omega) E_{k}(\omega) + \frac{i\omega}{c} \sum_{k} G_{jk}(\omega) B_{k}(\omega) + \sum_{kl} P_{jkl}(\omega) \frac{\partial E_{k}(\omega)}{\partial l} + O\left(\frac{1}{\lambda^{2}}\right)
+% \end{equation}
 \subsection{Derivative evaluation}
 \label{ssec:derivative-evaluation}
 
@@ -696,23 +710,27 @@ Plugging \eqref{eq:something-something-expansion} back into \eqref{eq:first-orde
   \label{eq:szabo-ostlund-6.11}
   \left( E_{i}^{(0)} - E_{k}^{(0)} \right) \braket{k|\psi_{i}^{(1)}} &= \braket{k|\hat{V}|\psi_{i}^{(0)}} \\
   \label{eq:szabo-ostlund-6.11nl}
-  \braket{k|\psi_{i}^{(1)}} &= \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)},
+  \braket{k|\psi_{i}^{(1)}} &= \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}},
 \end{align}
 which upon inserting into \eqref{eq:resolution-of-the-identity}, gives the final form of the first-order correction to the perturbed wavefunction:
 \begin{equation}
   \label{eq:first-order-wavefunction}
-  \ket{\psi_{i}^{(1)}} = \sum_{k\neq i} \ket{k} \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)}.
+  \ket{\psi_{i}^{(1)}} = \sum_{k\neq i} \ket{k} \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}}.
 \end{equation}
 Inserting \eqref{eq:first-order-wavefunction} into \eqref{eq:second-order-correction-first-form} then gives the second-order correction to the perturbed energy:
 \begin{equation}
   \label{eq:second-order-energy}
   \begin{aligned}
-    E_{i}^{(2)} &= \bra{\psi_{i}^{(0)}} \hat{V} \left( \sum_{k\neq i} \ket{k} \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)} \right) \\
-    &= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{V}|k}\braket{k|\hat{V}|\psi_{i}^{(0)}}}{\left( E_{i}^{(0)} - E_{k}^{(0)} \right)}.
+    E_{i}^{(2)} &= \bra{\psi_{i}^{(0)}} \hat{V} \left\{ \sum_{k\neq i} \ket{k} \frac{\braket{k|\hat{V}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}} \right\} \\
+    &= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{V}|k}\braket{k|\hat{V}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}}.
   \end{aligned}
 \end{equation}
-
-
+In the case where \(\hat{V}\) is operator with multiple components, such as the dipole operator in \eqref{eq:dipole-operator}, the energy becomes a rank-2 tensor, the polarizability matrix:
+\begin{equation}
+  \label{eq:static-polarizability-from-perturbation-theory}
+  \alpha_{ab}= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{\mu}_{a}|k}\braket{k|\hat{\mu}_{b}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}}.
+\end{equation}
+TODO This expression is still incomplete regarding time-varying perturbations and mixed-operator properties.
 \section{\texorpdfstring{\caps{Dynamic (frequency-dependent) response properties}}{Static (time-independent) response properties}}
 \label{sec:dynamic-properties}
 
@@ -729,6 +747,8 @@ TODO
 Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
 
 Up to this point, only static perturbations have been considered, whcih
+
+time-dependent extension of \ref{ssec:series-expansion}
 
 % \section{Barron}
 % % page 85
