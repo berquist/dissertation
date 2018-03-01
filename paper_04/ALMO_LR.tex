@@ -81,14 +81,11 @@ We present the analytic implementation of linear response equations on top of ab
 \label{sec:introduction}
 
 Experimental spectroscopy is a powerful tool for understanding the structure and function of molecular systems, especially when combined with theory and computation\cite{AUTSCHBACH200383,NEESE2009526,doi:10.1021/cr2002239}. Absolutely localized molecular orbitals (ALMOs)\cite{Khaliullin2006} and their associated energy decomposition analysis (ALMO-EDA)\cite{Khaliullin2007} provide a intuitive picture of how interactions at the microscopic scale translate to physical insight at the macroscopic scale. ALMO-EDA is capable of separating the total interaction energy of two or more user-defined arbitrary fragments into the following components:
-
 \begin{equation}
   \label{eq:almo-eda}
   \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}},
 \end{equation}
-
 where
-
 \begin{itemize}
 \item \(\Delta E_{\text{gd}}\) is the energy raising due to the distortion from each fragment's isolated geometry into the cluster geometry;
 \item \(\Delta E_{\text{frz}}\) is the ``frozen density'' interaction, which accounts for classical electrostatics and Pauli repulsion between the fragments, and is usually positive;
@@ -97,14 +94,12 @@ where
 \end{itemize}
 
 This separation is achieved via a constrained self-consistent field calculation, called SCF for molecular interactions (SCF(MI)), producing ALMOs that incorporate fragment polarization but not charge transfer. There are multiple approximations to \(\Delta E_{\text{CT}}\), which can be further broken apart into a perturbative correction and higher-order effects stemming from a self-consistent treatment, where all orbital constraints are lifted and supersystem SCF iterations are performed (equation 5 in \citen{Khaliullin2008}):
-
 \begin{equation}
   \label{eq:almo-eda-ct}
   \Delta E_{\text{CT}} = \Delta E_{\text{CT}}^{\text{RS}} + \Delta E_{\text{CT}}^{\text{HO}}.
 \end{equation}
 
 Each of these terms can be broken apart further into a sum of a true electron delocalization term and a BSSE term:
-
 \begin{equation}
   \begin{aligned}
     \label{eq:almo-eda-ct-bsse}
@@ -114,7 +109,6 @@ Each of these terms can be broken apart further into a sum of a true electron de
 \end{equation}
 
 Such an energy decomposition is made possible due to the bottom-up construction of ALMOs, where each ALMO is formed from atomic orbitals (AOs) only on a specific fragment, leading to MOs that are spatially localized onto fragments. In a previous work\cite{Brinzer_2015_212425}, we showed that a similar decomposition is possible for peaks in vibrational spectra according to
-
 \begin{equation}
   \begin{aligned}
     \label{eq:almo-frequencies}
@@ -122,7 +116,6 @@ Such an energy decomposition is made possible due to the bottom-up construction 
     \Delta \omega_{\text{int}} &= \Delta \omega_{\text{gd}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}},
   \end{aligned}
 \end{equation}
-
 where each term has an analogous meaning to the original ALMO-EDA, except changes in the vibrational frequencies \(\{\omega\}\) rather than the interaction energy are used. We seek a more general decomposition of response properties, starting with those based on linear response (LR), where each \(\omega\) in \eq{eq:almo-frequencies} is replaced with \(\lr{P}{Q}_{\omega_{Q}}\), representing the influence of a perturbation \(\op{Q}\) with frequency \(\omega_{Q}\) on \(\op{P}\).
 
 This is not the first work to seek a fragment- or subsystem-based decomposition of molecular response properties. The LoProp method\cite{doi:10.1063/1.1778131,JCC:JCC20632} starts from canonical orbitals and performs a series of localizations followed by orthogonalizations, leading to atom- and atom pair-centered contributions. While a top-down approach with only post-SCF localization avoids difficulties with a localized SCF implementation, the use of localized charges and dipole moments requires a finite difference approach beyond first derivatives. Several bottom-up approaches, where localized orbitals or subsystems are formed during the SCF iterations, also exist. More closely related to a many-body expansion (MBE) is the fragment molecular orbital (FMO)\cite{MOCHIZUKI2006418} calculation of frequency-dependent polarizabilities. The use of MBE-derived expressions requires a response calculation for each term in the fragment expansion, where ALMO-based LR solves the equations for all fragments simultaneously. Response equations have also been formulated within subsystem density functional theory (sDFT)\cite{Neugebauer_2009_84104,Pavanello_2013_204118}. sDFT requires the use of an additional kinetic energy functional, while ALMO-based LR can be used with all common exchange-correlation functionals. A comprehensive adaptation of response equations up to dynamic first and second hyperpolarizabilities\cite{JCC:JCC540120409} has been performed with nonorthogonal localized molecular orbitals (NOLMOs)\cite{doi:10.1021/acs.jctc.7b00321}. NOLMOs are not connected to an EDA, preventing a property decomposition into EDA-like terms that are the foundation of ALMO-based LR. An attractive fragment-based method designed specifically for the decomposition of molecular interaction energies is symmetry-adapted perturbation theory (SAPT)\cite{doi:10.1021/cr00031a008}, which is systematically improvable due to its foundations in perturbation theory. However, because the fragment orbitals are not variationally optimized together (unlike \(\Delta E_{\text{pol}}^{\text{ALMO-EDA}}\)), the formulation of derivatives even at the uncorrelated monomer approximation (SAPT0) is nontrivial.
@@ -140,7 +133,6 @@ For the remainder of the paper, unless otherwise stated, the indices \(i,j,k,l,.
 \label{ssec:linear-response-formalism}
 
 The linear response of a molecule in its ground state \(\ket{0}\) to perturbations corresponding to operators \(\op{P}\) and \(\op{Q}\) can be written as the sum over all excited states \(\{n\}\),
-
 \begin{equation}
   \lr{P}{Q}_{\omega}
   =
@@ -150,9 +142,7 @@ The linear response of a molecule in its ground state \(\ket{0}\) to perturbatio
     + \frac{\braket{0|\op{Q}|n} \braket{n|\op{P}|0}}{\omega_{n} + \omega}
     \right],
 \end{equation}
-
 where \(\omega\) is the frequency of the perturbation \(\op{Q}\) and \(\omega_{n} = E_{n} - E_{0}\). Examples of second-order response properties include the polarizability (\(\op{P} = \op{Q} = \op{\mu}\)), magnetizability (\(\op{P} = \op{Q} = \op{m}\)), vibrational frequencies (\(\op{P} = \op{Q} = \op{x}\)), etc. This paper focuses on molecular response within the static limit (\(\omega = 0\)),
-
 \begin{equation}
   \lr{P}{Q}_{0}
   =
@@ -160,9 +150,7 @@ where \(\omega\) is the frequency of the perturbation \(\op{Q}\) and \(\omega_{n
   =
   - \tr{\mat{P}^{\dagger} \mat{X}},
 \end{equation}
-
 where \((\mat{P})_{ia} = \braket{i|\op{P}|a}\) and \((\mat{Q})_{ia} = \braket{i|\op{Q}|a}\). \(\mat{X} = \mat{G}^{-1} \mat{Q}\) is the ``response vector'' corresponding to orbital rotations induced by perturbation \(\op{Q}\). The orbital Hessian matrix \(\mat{G}\) is defined as
-
 \begin{equation}
   \begin{aligned}
     ^{RR}\mat{G}^{\sigma} &= \mat{A}^{\sigma} + \mat{B}^{\sigma} \\
@@ -170,23 +158,19 @@ where \((\mat{P})_{ia} = \braket{i|\op{P}|a}\) and \((\mat{Q})_{ia} = \braket{i|
   \end{aligned}
 \end{equation}
 for real (\(R\)) and imaginary (\(I\)) perturbations, respectively\cite{doi:10.1080/00268976.2015.1024182}. The spin case \(\sigma\) can either be singlet (\(\sigma = s\)) or triplet (\(\sigma = t\)) depending on whether the perturbation operator conserves or flips spin, respectively:
-
 \begin{equation}
   \begin{aligned}
     A^{s}_{ia,jb} &= \Delta_{ia} + 2(ia|jb) - (ij|ab) \\
     A^{t}_{ia,jb} &= \Delta_{ia} - (ij|ab)
   \end{aligned}
 \end{equation}
-
 \begin{equation}
   \begin{aligned}
     B^{s}_{ia,jb} &= 2(ia|jb) - (ib|ja) \\
     B^{t}_{ia,jb} &= - (ib|ja)
   \end{aligned}
 \end{equation}
-
 where \(\Delta_{ia} = (\varepsilon_{a} - \varepsilon_{i}) \delta_{ia,jb}\) is an orbital energy difference. The CIS or Tamm-Dancoff approximation (TDA) is recovered when \(\mat{B} = \mat{0}\). Rather than directly inverting the orbital Hessian, which would cost \Order{o^3 v^3}, one solves iteratively for \(\mat{X}\) by expanding the inverse, for example in the real singlet case
-
 \begin{equation}
   \label{eq:update}
   X_{ia}^{(n+1)}
@@ -196,7 +180,6 @@ where \(\Delta_{ia} = (\varepsilon_{a} - \varepsilon_{i}) \delta_{ia,jb}\) is an
 \end{equation}
 
 Repeated indices imply summation (Einstein sum convention). Here, the superscript in parentheses denotes the iteration number. To avoid the expensive transformation of two-electron repulsion integrals from atomic orbital into molecular orbital basis, one performs the contraction over orbital pair \(jb\) in the atomic orbital basis,
-
 \begin{equation}
   \left(\mat{A}^{s} + \mat{B}^{s}\right)_{ia,jb} X_{jb}
   =
@@ -208,16 +191,13 @@ Repeated indices imply summation (Einstein sum convention). Here, the superscrip
   \right]
   C_{\nu a}
 \end{equation}
-
 with the perturbed density matrix \(D_{\mu\nu}^{X} = C_{\lambda j} X_{jb} C_{\sigma b}\).
 
 To work with \emph{non-orthogonal orbitals}, we replace the \(\Delta_{ia}^{-1}\) denominator in \eq{eq:update} with a full matrix inversion of
-
 \begin{equation}
   \label{eq:energy-denominator}
   E_{ia,jb} = F_{ab}S_{ij} - F_{ij}S_{ab},
 \end{equation}
-
 where \(\mat{F}\) and \(\mat{S}\) are the MO-basis Fock and overlap matrix, respectively
 
 \subsection{Adaptation of linear response equations for absolutely localized MOs}
