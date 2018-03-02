@@ -500,10 +500,10 @@ S_{pq} = \delta_{pq}, \tag{Yamaguchi eq. 3.44}
 \end{equation}
 we must have
 \begin{equation}
-  \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0. \tag{Yamaguchi eq. 3.45}
+  \label{eq:yamaguchi-3.45}\tag{Yamaguchi eq. 3.45}
+  \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0.
 \end{equation}
-
-This is where not using general notation in the above is a bit confusing because it seems to conflict with your original expression, but remember that similar to \eqref{3.81} and \eqref{3.25}, this is in fact multiple terms: two for the basis functions, and two for the MO coefficients, giving
+Expanding the left-hand side of \eqref{eq:yamaguchi-3.45} in a manner identical to \eqref{3.81}
 \begin{align*}
 \frac{\partial S_{pq}}{\partial X_{A}} &= \sum_{\mu\nu}^{\text{AO}} C_{\mu p} C_{\mu q} \frac{\partial S_{\mu\nu}}{\partial X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right) \tag{Yamaguchi eqs. 3.40 + 3.43} \\
                                        &= S_{pq}^{X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right). \tag{Yamaguchi eq. 3.43}
@@ -533,22 +533,27 @@ Since is it almost always advantageous to avoid MO transformations and work in t
     &= \sum_{\mu\nu}^{\text{AO}} W_{\mu\nu} S_{\mu\nu}^{X_{A}}
   \end{aligned}
 \end{equation}
-to use the energy-weighted density matrix \(\mathbf{W}\), also sometimes called \(\mathbf{Q}\).
+to use the energy-weighted density matrix \(\mathbf{W}\), also sometimes called \(\mathbf{Q}\):\footnote{The convention in Szabo \& Ostlund is to absorb the RHF factor of 2 into the density matrix, which is not done here.}
+\begin{equation}
+  \label{eq:szabo-c12}
+  \tag{Szabo \& Ostlund C.12}
+  \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{\mu\nu}^{\text{AO}} P_{\mu\nu} h_{\mu\mu}^{X_{A}} + \sum_{\mu\nu\lambda\sigma}^{\text{AO}} P_{\mu\nu}P_{\lambda\sigma} \left\{ 2(\mu\nu|\lambda\sigma)^{X_{A}} - (\mu\lambda|\nu\sigma)^{X_{A}} \right\} - 2 \sum_{\mu\nu}^{\text{AO}} Q_{\mu\nu} S_{\mu\nu}^{X_{A}} + V_{NN}^{X_{A}}
+\end{equation}
 
-Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why you do not see any density or MO coefficient derivatives in the gradient expression.
+Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why density or MO coefficient derivatives are not present in the gradient expression.
 
-Differentiation of \eqref{TODO} once more with respect to another nuclear displacement \(Y_{B}\) is
+Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another nuclear displacement \(Y_{B}\) is
 \begin{equation}
   \label{eq:yamaguchi-4.54-and-4.55-and-3.127}\tag{Yamaguchi eqs. 4.54, 4.55, 3.127}
   \begin{aligned}
-    \frac{\partial^{2} E_{\text{elec}}^{\text{RHF}}}{\partial X_{A} \partial Y_{B}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}Y_{B}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}Y_{B}} - (ij|ij)^{X_{A}Y_{B}} \right\} \\
+    \frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial X_{A} \partial Y_{B}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}Y_{B}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}Y_{B}} - (ij|ij)^{X_{A}Y_{B}} \right\} \\
     &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}Y_{B}} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{X_{A}}U_{ip}^{Y_{B}} + U_{ip}^{Y_{B}}U_{ip}^{X_{A}} - S_{ip}^{X_{A}}S_{ip}^{Y_{B}} - S_{ip}^{Y_{B}}S_{ip}^{X_{A}} \right\} \epsilon_{i} \\
     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{Y_{B}} F_{pi}^{X_{A}} + U_{pi}^{X_{A}} F_{pi}^{Y_{B}} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{X_{A}} U_{pi}^{Y_{B}} \epsilon_{p} \\
     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{X_{A}} U_{qj}^{Y_{B}} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\} \\
     &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
   \end{aligned}
 \end{equation}
-where the nucleus-nucleus repulsion energy derivative is included for completeness. This is final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. TODO explain U matrix
+where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. TODO explain U matrix
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
@@ -634,7 +639,7 @@ The final form of \eqref{eq:first-order-terms-bra} is now
   \label{eq:first-order-terms-final}
   \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} = E_{i}^{(1)},
 \end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:szabo-c16} and \eqref{eq:yamaguchi-4.21}.
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:yamaguchi-4.21}.
 
 The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
 \begin{equation}
@@ -776,7 +781,7 @@ time-dependent extension of \ref{ssec:series-expansion}
 %                &= \braket{n|\mu_{\alpha}|n} -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} (E_{\beta})_{0}.
 % \end{align}
 
-p% Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
+% Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
 
 \onlyifstandalone{\printbibliography}
 \end{document}
