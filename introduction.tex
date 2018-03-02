@@ -238,10 +238,12 @@ To solve for the stiffness coefficients, take the partial derivative of both sid
 
 This tells that the internal stiffness is related to the second derivative of the energy with respect to nuclear coordinate displacements. The internal stiffness matrix is the molecular Hessian, where each ``spring constant'' is called a force constant, which describes how a change or perturbation to one atomic coordinate affects a change in another atomic coordinate.
 
-Wikipedia: symmetry of second derivatives, Euler's (interchange) theorem, TODO this may only be for real perturbations.
+Another important property is that in general, due to Young's theorem, the order of differentiation is not important, and the perturbations may be interchanged:
 \begin{equation}
-  \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} = \frac{\partial^{2} E}{\partial x_{i} \partial x_{j}}
+  \label{eq:youngs-theorem}
+  \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} = \frac{\partial^{2} E}{\partial x_{i} \partial x_{j}},
 \end{equation}
+leading to a symmetric matrix \(\mathbf{k}\). In practice, this has implications for computational cost which will be discussed in section~\ref{TODO}.
 
 A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(F\) that produces this dipole moment. Both \(\mu\) and \(F\) are 3-dimensional vector quantities,
 \begin{equation}
@@ -414,16 +416,54 @@ TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/89831/194}{\color{black}{Analytic derivative theory}}}{Analytic derivative theory}}
 \label{ssec:analytic-derivative-theory}
 
-For example, given the \hf energy expression,
+For example, given the restricted \hf total energy expression,
+% \begin{equation}
+%   \label{eq:rhf-energy}
+%   1 + 1 = 2,
+% \end{equation}
+\begin{equation}
+  \label{eq:yamaguchi-4.1-and-3.115}\tag{Yamaguchi eqs. 4.1, 3.115}
+  E = 2 \sum_{i}^{\text{d.o.}} h_{ii} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj) - (ij|ij) \right\} + \sum_{A>B}^{N} \frac{Z_{A}Z_{B}}{R_{AB}},
+\end{equation}
+the first derivative with respect to a nuclear displacement \(X_{A}\) is\footnote{Additionally, see section C.3 of Szabo and Ostlund\cite{szabo1989modern} and Ref.~\parencite{Pople1979}.}
+% \begin{equation}
+%   \label{eq:rhf-gradient}
+%   1 + 1 = 2,
+% \end{equation}
+% \begin{equation}
+%   \label{eq:yamaguchi-4.21}
+%   \frac{\partial E}{\partial a} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{a} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{a} - (ij|ij)^{a} \right\} - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{a} \epsilon_{i},
+% \end{equation}
+\begin{equation}
+  \label{eq:yamaguchi-4.21-and-3.119}\tag{Yamaguchi eqs. 4.21, 3.119}
+  \frac{\partial E}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right\} - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{i} - \sum_{B\neq A}^{N} \left(X_{A}-X_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{3}},
+\end{equation}
+and differentiating that expression once more with respect to another nuclear displacement \(Y_{B}\) is
+% \begin{equation}
+%   \label{eq:rhf-hessian}
+%   1 + 1 = 2.
+% \end{equation}
+% \begin{equation}
+%   \label{eq:yamaguchi-4.54-and-4.55}\tag{Yamaguchi eqs. 4.54 and 4.55}
+%   \begin{aligned}
+%     \frac{\partial^{2} E}{\partial a \partial b} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{ab} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{ab} - (ij|ij)^{ab} \right\} \\
+%     &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{ab} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{a}U_{ip}^{b} + U_{ip}^{b}U_{ip}^{a} - S_{ip}^{a}S_{ip}^{b} - S_{ip}^{b}S_{ip}^{a} \right\} \epsilon_{i} \\
+%     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{b} F_{pi}^{a} + U_{pi}^{a} F_{pi}^{b} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{a} U_{pi}^{b} \epsilon_{p} \\
+%     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{a} U_{qj}^{b} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\}
+%   \end{aligned}
+% \end{equation}
+\begin{equation}
+  \label{eq:yamaguchi-4.54-and-4.55-and-3.127}\tag{Yamaguchi eqs. 4.54, 4.55, 3.127}
+  \begin{aligned}
+    \frac{\partial^{2} E}{\partial X_{A} \partial Y_{B}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}Y_{B}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}Y_{B}} - (ij|ij)^{X_{A}Y_{B}} \right\} \\
+    &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}Y_{B}} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{X_{A}}U_{ip}^{Y_{B}} + U_{ip}^{Y_{B}}U_{ip}^{X_{A}} - S_{ip}^{X_{A}}S_{ip}^{Y_{B}} - S_{ip}^{Y_{B}}S_{ip}^{X_{A}} \right\} \epsilon_{i} \\
+    &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{Y_{B}} F_{pi}^{X_{A}} + U_{pi}^{X_{A}} F_{pi}^{Y_{B}} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{X_{A}} U_{pi}^{Y_{B}} \epsilon_{p} \\
+    &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{X_{A}} U_{qj}^{Y_{B}} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\} \\
+    &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
+  \end{aligned}
+\end{equation}
+where the nucleus-nucleus repulsion energy is included for completeness. In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
 
-the first derivative with respect to a nuclear displacement \(X_{A}\) is
-
-and differentiating that expression with respect to another nuclear displacement \(Y_{B}\) is
-
-In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
-
-% \section{Analytical gradient of the Hartree-Fock nuclear-electronic repulsion term}
-The analytical gradient of the Hartree-Fock energy is given by (Szabo \& Ostlund eq. C.16):
 \begin{equation}
   \label{eq:szabo-c16}
   \frac{\partial E}{\partial X_{A}} = \sum_{ij}{P_{ji} \frac{\partial H_{ij}}{\partial X_{A}}} + \frac{1}{2} \sum_{ijkl}{P_{ji}P_{kl} \frac{\partial (ij|kl)}{\partial X_{A}}} - \sum_{ij}{Q_{ji} \frac{\partial S_{ij}}{\partial X_{A}}} + \frac{\partial V_{NN}}{\partial X_{A}}
@@ -460,8 +500,8 @@ where the third/last term is the true AO integral derivative, and the first two 
 The simplest term to write out, but the most difficult to implement, is the AO integral derivative. I will use \(\mu,\nu\) rather than \(\chi_{\mu},\chi_{\nu}\), so they refer to both AO basis functions \emph{and} their matrix indices.
 
 \begin{align*}
-  \frac{\partial V_{\mu\nu}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \left< \mu | \hat{V} | \nu \right> \tag{Yamaguchi eq. 3.24} \\
-                                             &= \left< \frac{\partial \mu}{\partial X_{A}} | \hat{V} | \nu \right> + \left< \mu | \frac{\partial \hat{V}}{\partial X_{A}} | \nu \right> + \left< \mu | \hat{V} | \frac{\partial \nu}{\partial X_{A}} \right> \label{3.25}\tag{Yamaguchi eq. 3.25}
+  \frac{\partial V_{\mu\nu}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \Braket{ \mu \left| \hat{V} \right| \nu } \tag{Yamaguchi eq. 3.24} \\
+                                             &= \Braket{ \frac{\partial \mu}{\partial X_{A}} \left| \hat{V} \right| \nu } + \Braket{ \mu \left| \frac{\partial \hat{V}}{\partial X_{A}} \right| \nu } + \Braket{ \mu \left| \hat{V} \right| \frac{\partial \nu}{\partial X_{A}} } \label{3.25}\tag{Yamaguchi eq. 3.25}
 \end{align*}
 
 What you have presented, %TODO nuke numbering?
@@ -474,7 +514,7 @@ is only the derivative of the operator. The basis function derivatives are also 
 
 Now for the derivative of the MO coefficients/density matrix. Clearly they don't appear in the final HF gradient expression. They disappear through the magic of Wigner's \(2n + 1\) rule. From page 25:
 \begin{quote}
-When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem {[}29-31{]}.
+When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem\cite{doi:10.1063/1.1668053,EPSTEIN1980311}.
 \end{quote}
 More explicitly, we have the zeroth-order wavefunction, so we must be able to calculate the first-order correction to the energy. Worded differently, any first derivative of the energy must be easily calculated without differentiating MO coefficients, which is only required for second derivatives, such as the molecular Hessian or the dipole polarizability.
 
@@ -555,15 +595,6 @@ Rewrite the last term
 to use the energy-weighted density matrix \(\mathbf{W}\), which in your expression is called \(\mathbf{Q}\).
 
 Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why you do not see any density or MO coefficient derivatives in the gradient expression.
-
-Reading list:
-
-\begin{itemize}
-\item \fullcite{Yamaguchi1994}
-\item \fullcite{Pople1979}
-\item \fullcite{doi:10.1063/1.1668053}
-\item \fullcite{EPSTEIN1980311}
-\end{itemize}
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
