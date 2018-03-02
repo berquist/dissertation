@@ -400,9 +400,9 @@ In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\
 % \item frequency-dependent perturbations
 % \item response to applied magnetic fields without complex energies
 % \end{itemize}
-% As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since the cost of analytic methods is not independent of system size, but the
+% As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since the cost of analytic methods is not independent of system size, but the
 
-As discussed in section~\ref{ssec:decomp-line-resp} and ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction.
+As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction.
 
 TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 
@@ -416,103 +416,42 @@ TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/89831/194}{\color{black}{Analytic derivative theory}}}{Analytic derivative theory}}
 \label{ssec:analytic-derivative-theory}
 
-For example, given the restricted \hf total energy expression,
-% \begin{equation}
-%   \label{eq:rhf-energy}
-%   1 + 1 = 2,
-% \end{equation}
+As mentioned in section~\ref{ssec:derivative-evaluation}, the first requirement for evaluating analytic energy derivatives is to form the necessary mathematical expression. In the most general case, there are both derivatives of the AO-basis integrals themselves and of the density matrix, which leads to derivatives of the MO coefficients. To illustrate some of the mechanics of differentiation, consider the derivative of the MO-basis matrix representation of the electron-nuclear attraction operator \(\hat{V}_{eN}\) with respect to a nuclear coordinate \(X_{A}\), which is a term needed for the molecular gradient:
+\begin{align}
+  \tag{Yamaguchi eq. 3.80}
+  \frac{\partial V_{ij}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \left( \sum_{\mu\nu}^{\text{AO}} C_{\mu i} C_{\nu j} V_{\mu\nu} \right) \\
+  \label{3.81}\tag{Yamaguchi eq. 3.81}
+                                         &= \sum_{\mu\nu}^{\text{AO}} \left( \frac{\partial C_{\mu i}}{\partial X_{A}} C_{\nu j} V_{\mu\nu} + C_{\mu i} \frac{\partial C_{\nu j}}{\partial X_{A}} V_{\mu\nu} + C_{\mu i} C_{\nu j} \frac{\partial V_{\mu\nu}}{\partial X_{A}} \right),
+\end{align}
+where the third (last) term is the true AO integral derivative, and the first two terms, the MO coefficient derivatives, come from differentiating the density matrix, which is defined as
 \begin{equation}
-  \label{eq:yamaguchi-4.1-and-3.115}\tag{Yamaguchi eqs. 4.1, 3.115}
-  E = 2 \sum_{i}^{\text{d.o.}} h_{ii} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj) - (ij|ij) \right\} + \sum_{A>B}^{N} \frac{Z_{A}Z_{B}}{R_{AB}},
+  \label{eq:density-matrix}
+  P_{\mu\nu}^{\text{RHF}} = \sum_{i}^{\text{d.o.}} C_{\mu i} C_{\nu i}
 \end{equation}
-the first derivative with respect to a nuclear displacement \(X_{A}\) is\footnote{Additionally, see section C.3 of Szabo and Ostlund\cite{szabo1989modern} and Ref.~\parencite{Pople1979}.}
-% \begin{equation}
-%   \label{eq:rhf-gradient}
-%   1 + 1 = 2,
-% \end{equation}
-% \begin{equation}
-%   \label{eq:yamaguchi-4.21}
-%   \frac{\partial E}{\partial a} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{a} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{a} - (ij|ij)^{a} \right\} - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{a} \epsilon_{i},
-% \end{equation}
+in the AO basis.
+
+The AO integral derivative can be further expanded. Using \(\mu,\nu\) rather than \(\chi_{\mu},\chi_{\nu}\) so they refer to both AO basis functions \emph{and} their matrix indices,
+\begin{align}
+  \tag{Yamaguchi eq. 3.24}
+  \frac{\partial V_{\mu\nu}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \Braket{ \mu \left| \hat{V} \right| \nu } \\
+  \label{3.25}\tag{Yamaguchi eq. 3.25}
+                                             &= \Braket{ \frac{\partial \mu}{\partial X_{A}} \left| \hat{V} \right| \nu } + \Braket{ \mu \left| \frac{\partial \hat{V}}{\partial X_{A}} \right| \nu } + \Braket{ \mu \left| \hat{V} \right| \frac{\partial \nu}{\partial X_{A}} },
+\end{align}
+where the first and third terms are derivatives of basis functions and the second term is a derivative of the operator itself. Although AO integral derivatives are a necessary component of most derivative expressions, they do not play a direct role in response equations, and do not need to be discussed further.
+
+The derivatives of the MO coefficients/density matrix will be considered in the context of the \hf equations. Starting from the restricted \hf electronic energy expression,
 \begin{equation}
-  \label{eq:yamaguchi-4.21-and-3.119}\tag{Yamaguchi eqs. 4.21, 3.119}
-  \frac{\partial E}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right\} - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{i} - \sum_{B\neq A}^{N} \left(X_{A}-X_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{3}},
+  \label{eq:yamaguchi-4.1}\tag{Yamaguchi eq. 4.1}
+  E_{\text{elec}}^{\text{RHF}} = 2 \sum_{i}^{\text{d.o.}} h_{ii} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj) - (ij|ij) \right\},
 \end{equation}
-and differentiating that expression once more with respect to another nuclear displacement \(Y_{B}\) is
-% \begin{equation}
-%   \label{eq:rhf-hessian}
-%   1 + 1 = 2.
-% \end{equation}
-% \begin{equation}
-%   \label{eq:yamaguchi-4.54-and-4.55}\tag{Yamaguchi eqs. 4.54 and 4.55}
-%   \begin{aligned}
-%     \frac{\partial^{2} E}{\partial a \partial b} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{ab} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{ab} - (ij|ij)^{ab} \right\} \\
-%     &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{ab} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{a}U_{ip}^{b} + U_{ip}^{b}U_{ip}^{a} - S_{ip}^{a}S_{ip}^{b} - S_{ip}^{b}S_{ip}^{a} \right\} \epsilon_{i} \\
-%     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{b} F_{pi}^{a} + U_{pi}^{a} F_{pi}^{b} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{a} U_{pi}^{b} \epsilon_{p} \\
-%     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{a} U_{qj}^{b} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\}
-%   \end{aligned}
-% \end{equation}
+where TODO, the first derivative with respect to a nuclear displacement \(X_{A}\) is\footnote{Additionally, see section C.3 of Szabo and Ostlund\cite{szabo1989modern} and Ref.~\parencite{Pople1979}.}
 \begin{equation}
-  \label{eq:yamaguchi-4.54-and-4.55-and-3.127}\tag{Yamaguchi eqs. 4.54, 4.55, 3.127}
-  \begin{aligned}
-    \frac{\partial^{2} E}{\partial X_{A} \partial Y_{B}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}Y_{B}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}Y_{B}} - (ij|ij)^{X_{A}Y_{B}} \right\} \\
-    &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}Y_{B}} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{X_{A}}U_{ip}^{Y_{B}} + U_{ip}^{Y_{B}}U_{ip}^{X_{A}} - S_{ip}^{X_{A}}S_{ip}^{Y_{B}} - S_{ip}^{Y_{B}}S_{ip}^{X_{A}} \right\} \epsilon_{i} \\
-    &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{Y_{B}} F_{pi}^{X_{A}} + U_{pi}^{X_{A}} F_{pi}^{Y_{B}} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{X_{A}} U_{pi}^{Y_{B}} \epsilon_{p} \\
-    &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{X_{A}} U_{qj}^{Y_{B}} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\} \\
-    &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
-  \end{aligned}
+  \label{eq:yamaguchi-4.21}\tag{Yamaguchi eq. 4.21}
+  \frac{\partial E}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right\} - 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}} \epsilon_{i},
 \end{equation}
-where the nucleus-nucleus repulsion energy is included for completeness. In the most general case, there are both derivatives of the AO-basis integrals themselves (such as the nth term in eqn) and of the density matrix (such as the term in), which leads to derivatives of the MO coefficients.
+Notice that the MO coefficient derivatives do not appear in the final HF gradient expression.
 
-\begin{equation}
-  \label{eq:szabo-c16}
-  \frac{\partial E}{\partial X_{A}} = \sum_{ij}{P_{ji} \frac{\partial H_{ij}}{\partial X_{A}}} + \frac{1}{2} \sum_{ijkl}{P_{ji}P_{kl} \frac{\partial (ij|kl)}{\partial X_{A}}} - \sum_{ij}{Q_{ji} \frac{\partial S_{ij}}{\partial X_{A}}} + \frac{\partial V_{NN}}{\partial X_{A}}
-\end{equation}
-Of course, the Born-Oppenheimer approximation means that the nuclear repulsion term is easy to handle, and the derivative is given as:
-\begin{equation}
-  \frac{\partial V_{NN}}{\partial X_{A}} = Z_{A} \sum_{B} \frac{Z_{B} (X_{B} - X_{A})}{R_{AB}^{3}}
-\end{equation}
-The remaining terms require computing the derivatives of the Gaussian functions (depending upon the molecular integral evaluation scheme used). However, in Szabo \& Ostlund the nuclear-electronic attraction term is provided as:
-\begin{equation}
-  \frac{\partial V_{Ne}}{\partial X_{A}} = -Z_{A} \sum_{i} \frac{X_{i} - X_{A}}{r_{iA}^{3}}
-\end{equation}
-In the Hartree-Fock equations, the molecular Hamiltonian is formed as \(H = T + V_{Ne}\). Presuming that the gradient of the molecular Hamiltonian is formed the same way, how can I treat this formulation of the analytical gradient with only a scalar value for the nuclear attraction term, when I must take into account the density matrix? Is this solution to the nuclear attraction gradient of no use in calculating the gradient of the energy?
-
-There are a few points to discuss:
-
-\begin{itemize}
-\item Since there are \(3N\) possible \(\{X_{A}\}\), each term where an \(X_{A}\) appears will result in \(3N\) matrix elements. In your first equation, that will be \(S\), \(T\), \(V\), and the 2-electron contribution, which should really be rewritten into a Fock matrix term \(F\) where the ket is precontracted with the density.
-\item There is nothing wrong with this solution, though it is a little strange because it's in the MO basis, and we normally prefer to work in the AO basis to avoid any unnecessary transformations. I'm going to drop the \(Ne\) from here on out since \(V\) is understood in this context to only be the one-electron nuclear attraction term.
-\item I think you're asking what happens to the density matrix. The derivative of \(V\) expands into multiple parts, as we will see below. I will reference a bunch of equations that use \(h\), where \(\left( h = H = H^{\text{core}} \right) \equiv T_{e} + V_{Ne}\), and differentiating into a sum should hopefully be clear. What follows should work for any real-valued one-electron operator. I will use the book by Yamaguchi with liberties taken. In many places I use \(p,q\) rather than \(i,j\), as these indices run over all MOs, not just occupied ones.
-\end{itemize}
-
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
-
-Expanding \(\frac{\partial V_{ij}}{\partial X_{A}}\) using the product rule gives
-\begin{align*}
-  \frac{\partial V_{ij}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \left( \sum_{\mu\nu}^{\text{AO}} C_{\mu i} C_{\nu j} V_{\mu\nu} \right) \tag{Yamaguchi eq. 3.80} \\
-                                         &= \sum_{\mu\nu}^{\text{AO}} \left( \frac{\partial C_{\mu i}}{\partial X_{A}} C_{\nu j} V_{\mu\nu} + C_{\mu i} \frac{\partial C_{\nu j}}{\partial X_{A}} V_{\mu\nu} + C_{\mu i} C_{\nu j} \frac{\partial V_{\mu\nu}}{\partial X_{A}} \right), \label{3.81}\tag{Yamaguchi eq. 3.81}
-\end{align*}
-where the third/last term is the true AO integral derivative, and the first two terms, the MO coefficient derivatives, come from differentiating the density matrix.
-
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
-
-The simplest term to write out, but the most difficult to implement, is the AO integral derivative. I will use \(\mu,\nu\) rather than \(\chi_{\mu},\chi_{\nu}\), so they refer to both AO basis functions \emph{and} their matrix indices.
-
-\begin{align*}
-  \frac{\partial V_{\mu\nu}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \Braket{ \mu \left| \hat{V} \right| \nu } \tag{Yamaguchi eq. 3.24} \\
-                                             &= \Braket{ \frac{\partial \mu}{\partial X_{A}} \left| \hat{V} \right| \nu } + \Braket{ \mu \left| \frac{\partial \hat{V}}{\partial X_{A}} \right| \nu } + \Braket{ \mu \left| \hat{V} \right| \frac{\partial \nu}{\partial X_{A}} } \label{3.25}\tag{Yamaguchi eq. 3.25}
-\end{align*}
-
-What you have presented, %TODO nuke numbering?
-\begin{equation}
-  \frac{\partial \hat{V}}{\partial X_{A}} = -Z_{A} \sum_{i} \frac{X_{i} - X_{A}}{r_{iA}^{3}},
-\end{equation}
-is only the derivative of the operator. The basis function derivatives are also required, as the AOs in this case depend on the nuclear positions. Contrast this with an electric field perturbation, where only the derivative of the operator is required, or magnetic field derivatives, where basis functions \emph{may} be perturbation-dependent if gauge-including atomic orbitals (GIAOs) are used. Also important is that the index \(i\) here refers to an electron, \emph{not} an occupied MO. This is an electric field integral.
-
-\begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
-
-Now for the derivative of the MO coefficients/density matrix. Clearly they don't appear in the final HF gradient expression. They disappear through the magic of Wigner's \(2n + 1\) rule. From page 25:
+They disappear through the magic of Wigner's \(2n + 1\) rule. From page 25:
 \begin{quote}
 When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem\cite{doi:10.1063/1.1668053,EPSTEIN1980311}.
 \end{quote}
@@ -528,11 +467,6 @@ where the index \(m\) runs over all occupied and unoccupied/virtual MOs. The sam
 \end{equation}
 where it is usually easiest to have the dimension of \(\mathbf{U}\) be \([N_{\text{orb}}, N_{\text{orb}}]\), with only the occ-virt and virt-occ blocks being non-zero. The problem now becomes solving for \(\mathbf{U}\) and eliminating it from the final gradient expression. I will walk through parts of section 4.3 to show how this is done.
 
-Given the energy expression for an RHF wavefunction,
-\begin{equation}
-  E = 2 \sum_{i}^{\text{d.o.}} h_{ii} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj) - (ij|ij) \right], \tag{Yamaguchi eq. 4.1}
-\end{equation}
-the first derivative with respect to \(X_{A}\) is
 \begin{equation}
   \frac{\partial E_{\text{elec}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left[ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right] + 4 \sum_{m}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{mi}^{X_{A}} F_{im}, \label{4.16}\tag{Yamaguchi eq. 4.16}
 \end{equation}
@@ -595,6 +529,28 @@ Rewrite the last term
 to use the energy-weighted density matrix \(\mathbf{W}\), which in your expression is called \(\mathbf{Q}\).
 
 Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why you do not see any density or MO coefficient derivatives in the gradient expression.
+
+and differentiating that expression once more with respect to another nuclear displacement \(Y_{B}\) is
+% \begin{equation}
+%   \label{eq:yamaguchi-4.54-and-4.55}\tag{Yamaguchi eqs. 4.54 and 4.55}
+%   \begin{aligned}
+%     \frac{\partial^{2} E}{\partial a \partial b} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{ab} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{ab} - (ij|ij)^{ab} \right\} \\
+%     &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{ab} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{a}U_{ip}^{b} + U_{ip}^{b}U_{ip}^{a} - S_{ip}^{a}S_{ip}^{b} - S_{ip}^{b}S_{ip}^{a} \right\} \epsilon_{i} \\
+%     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{b} F_{pi}^{a} + U_{pi}^{a} F_{pi}^{b} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{a} U_{pi}^{b} \epsilon_{p} \\
+%     &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{a} U_{qj}^{b} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\}
+%   \end{aligned}
+% \end{equation}
+\begin{equation}
+  \label{eq:yamaguchi-4.54-and-4.55-and-3.127}\tag{Yamaguchi eqs. 4.54, 4.55, 3.127}
+  \begin{aligned}
+    \frac{\partial^{2} E}{\partial X_{A} \partial Y_{B}} &= 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}Y_{B}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}Y_{B}} - (ij|ij)^{X_{A}Y_{B}} \right\} \\
+    &- 2 \sum_{i}^{\text{d.o.}} S_{ii}^{X_{A}Y_{B}} \epsilon_{i} - 2 \sum_{i}^{\text{d.o.}} \sum_{p}^{\text{all}} \left\{ U_{ip}^{X_{A}}U_{ip}^{Y_{B}} + U_{ip}^{Y_{B}}U_{ip}^{X_{A}} - S_{ip}^{X_{A}}S_{ip}^{Y_{B}} - S_{ip}^{Y_{B}}S_{ip}^{X_{A}} \right\} \epsilon_{i} \\
+    &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \left( U_{pi}^{Y_{B}} F_{pi}^{X_{A}} + U_{pi}^{X_{A}} F_{pi}^{Y_{B}} \right) + 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{pi}^{X_{A}} U_{pi}^{Y_{B}} \epsilon_{p} \\
+    &+ 4 \sum_{p}^{\text{all}} \sum_{i}^{\text{d.o.}} \sum_{q}^{\text{all}} \sum_{j}^{\text{d.o.}} U_{pi}^{X_{A}} U_{qj}^{Y_{B}} \left\{ 4(pi|qj) - (pq|ij) - (pj|iq) \right\} \\
+    &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
+  \end{aligned}
+\end{equation}
+where the nucleus-nucleus repulsion energy is included for completeness. This is final expression for the molecular Hessian derived in \eqref{eq:hooke_derivation_3}.
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
