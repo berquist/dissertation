@@ -121,15 +121,15 @@
 %
 \raggedbottom
 %
-\input{./preamble}
-\begin{document}
-%
 \hypersetup{%
   backref,%
   citecolor=black,%
   linkcolor=black,%
   urlcolor=carmine,%
 }
+%
+\input{./preamble}
+\begin{document}
 %
 \maketitle
 \makecommittee
@@ -142,20 +142,19 @@
 \tableofcontents
 \listoftables
 \listoffigures
-\listofalgorithms
 %
 \preface
 \input{./preface}
 %
 \graphicspath{{introduction/}{paper_01/}{paper_02/}{paper_03/}{paper_04/}{paper_05/}}
 \input{./introduction}
-\input{./paper_01/anions}
-\input{./paper_02/AbInitio_revised}
-\input{./paper_03/SpectroscopicMap}
+% \input{./paper_01/anions}
+% \input{./paper_02/AbInitio_revised}
+% \input{./paper_03/SpectroscopicMap}
 \input{./paper_04/ALMO_LR}
-\input{./paper_05/psi4numpy}
-\input{./other_contributions}
+% \input{./paper_05/psi4numpy}
+% \input{./other_contributions}
 %
-\printbibliography
+\printbibliography[title=\caps{Bibliography}]
 %
 \end{document}
