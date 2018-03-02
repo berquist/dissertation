@@ -79,7 +79,7 @@ Throughout the introduction and the remainder of this thesis, a number of terms 
       \toprule
       \textbf{Energy derivative} & \textbf{Molecular property} \\
       \midrule
-      \(\frac{dE}{dF_{i}}\)                          & dipole moment; in a similar manner also multipole moments, electric field gradients, etc. \\
+      \(\frac{dE}{dF_{i}}\)                          & \href{https://chemistry.stackexchange.com/q/31075/194}{\color{black}{dipole moment}}; in a similar manner also multipole moments, electric field gradients, etc. \\
       \(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)       & polarizability \\
       \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) hyperpolarizability \\
       \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
@@ -327,7 +327,7 @@ Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, repl
   \label{eq:electric-field-expansion}
   E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
 \end{equation}
-where \(mu_{i}\) is a component of the dipole (moment), expressed in operator form as
+where \(\mu_{i}\) is a component of the \href{https://chemistry.stackexchange.com/a/74733/194}{\color{black}{dipole (moment)}}, expressed in operator form as
 \begin{equation}
   \label{eq:dipole-operator}
   \hat{\mu} = (\hat{\mu}_{x}, \hat{\mu}_{y}, \hat{\mu}_{z}) = -e(\hat{x}, \hat{y}, \hat{z}),
@@ -503,12 +503,11 @@ we must have
   \label{eq:yamaguchi-3.45}\tag{Yamaguchi eq. 3.45}
   \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0.
 \end{equation}
-Expanding the left-hand side of \eqref{eq:yamaguchi-3.45} in a manner identical to \eqref{3.81}
+Expanding the left-hand side of \eqref{eq:yamaguchi-3.45} in a manner identical to \eqref{3.81} gives
 \begin{align*}
 \frac{\partial S_{pq}}{\partial X_{A}} &= \sum_{\mu\nu}^{\text{AO}} C_{\mu p} C_{\mu q} \frac{\partial S_{\mu\nu}}{\partial X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right) \tag{Yamaguchi eqs. 3.40 + 3.43} \\
                                        &= S_{pq}^{X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right). \tag{Yamaguchi eq. 3.43}
 \end{align*}
-
 The sum over all MOs can be eliminated by reusing the orthonormality condition, so in the first term \(m \overset{!}{=} q\) and for the second term \(m \overset{!}{=} p\), and the overlap matrix in the MO basis is unity for those terms, giving
 \begin{equation}
   \frac{\partial S_{pq}}{\partial X_{A}} = S_{pq}^{X_{A}} + U_{qp}^{X_{A}} + U_{pq}^{X_{A}} \overset{!}{=} 0. \tag{Yamaguchi eq. 3.46}
@@ -536,7 +535,7 @@ Since is it almost always advantageous to avoid MO transformations and work in t
 to use the energy-weighted density matrix \(\mathbf{W}\), also sometimes called \(\mathbf{Q}\):\footnote{The convention in Szabo \& Ostlund is to absorb the RHF factor of 2 into the density matrix, which is not done here.}
 \begin{equation}
   \label{eq:szabo-c12}
-  \tag{Szabo \& Ostlund C.12}
+  \tag{Szabo \& Ostlund eq. C.12}
   \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{\mu\nu}^{\text{AO}} P_{\mu\nu} h_{\mu\mu}^{X_{A}} + \sum_{\mu\nu\lambda\sigma}^{\text{AO}} P_{\mu\nu}P_{\lambda\sigma} \left\{ 2(\mu\nu|\lambda\sigma)^{X_{A}} - (\mu\lambda|\nu\sigma)^{X_{A}} \right\} - 2 \sum_{\mu\nu}^{\text{AO}} Q_{\mu\nu} S_{\mu\nu}^{X_{A}} + V_{NN}^{X_{A}}
 \end{equation}
 
