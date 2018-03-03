@@ -390,7 +390,7 @@ In practice, the fully analytic third derivative is often not implemented, but s
   \label{eq:raman-intensity-from-dipgrad}
   &= \underbrace{\frac{\partial}{\partial F_{i}}}_{\text{numeric}} \underbrace{\left(\frac{\partial^{2} E}{\partial X_{A} \partial F_{j}}\right)}_{\text{analytic}} = \frac{\partial}{\partial F_{i}} \left( \frac{\partial \mu_{j}}{\partial X_{A}} \right).
 \end{align}
-In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{TODO}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
+In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{doi:10.1080/00268978000103541}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
 
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
