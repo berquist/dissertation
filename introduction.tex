@@ -45,8 +45,8 @@ preview = false,%
 ]{siunitx}
 \DeclareSIUnit\au{a.u.}
 \usepackage{tabulary}
-\usepackage{xspace}
-\newcommand\hf{Hartree\textendash{}Fock\xspace}%
+\newcommand\hf{Hartree\textendash{}Fock}
+\newcommand{\qchem}{\textsc{Q-Chem}}
 \newcommand{\caps}[1]{\uppercase{#1}}
 \begin{document}
 \chapter{Introduction}
@@ -68,7 +68,7 @@ The term \emph{response} also requires disambiguation. Experimentally, \emph{mol
 
 However, in the context of this work, molecular response is sometimes used interchangeably with \emph{response property}, which is intuitively a property associated with external applied fields, but here refers to any molecular property arising from the solution of the \emph{response equations}.
 
-The response equations relevant for this work are the coupled perturbed \hf (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, an eigenvalue problem is solved for \((\mathbf{A} - \mathbf{\omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{A}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the internal (TODO pole structure) of the system, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{AU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals. Details about the solution of the CPHF equations are given in section TODO blah, and a basic implementation is given in section TODO blah. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, (TODO talk about residues of response functions and poles)
+The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, an eigenvalue problem is solved for \((\mathbf{A} - \mathbf{\omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{A}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the internal (TODO pole structure) of the system, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{AU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals. Details about the solution of the CPHF equations are given in section TODO blah, and a basic implementation is given in section TODO blah. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, (TODO talk about residues of response functions and poles)
 
 \section[\texorpdfstring{\caps{Macroscopic and Microscopic Response Connections}}{Macroscopic and Microscopic Response Connections}]{\texorpdfstring{\caps{Connection Between Macroscopic and Microscopic Properties}}{Connection Between Macroscopic and Microscopic Properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
@@ -411,8 +411,7 @@ TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{./diff_overlay.pdf}
-  \caption[Asymmetry in the 1st-order finite-difference polarizability]{Effect of numerical noise on the off-diagonal matrix elements of the polarizability tensor. Nonzero differences indicate asymmetry, and the polarizability tensor is supposed to be symmetric. The red bar indicates the default step size for the applied electric field in Q-Chem 4.4, set at \SI{1.88973E-03}{\au} TODO.}
-  \label{fig:finite-difference-numerical-noise}
+  \caption[Asymmetry in the 1st-order finite-difference polarizability]{Effect of numerical noise on the off-diagonal matrix elements of the polarizability tensor. Nonzero differences indicate asymmetry, and the polarizability tensor is supposed to be symmetric. The red bar indicates the default step size for the applied electric field in \qchem{} 5.1, set at \SI{1.88973E-05}{\au}.\label{fig:finite-difference-numerical-noise}}
 \end{figure}
 
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/89831/194}{\color{black}{Analytic derivative theory}}}{Analytic derivative theory}}
@@ -452,7 +451,7 @@ where the index \(m\) runs over all occupied and unoccupied/virtual MOs. Althoug
 \end{equation}
 where the dimension of \(\mathbf{U}\) is \([N_{\text{orb}}, N_{\text{orb}}]\).
 
-Now consider the derivatives of the MO coefficients/density matrix in the context of the \hf equations. Starting from the restricted \hf electronic energy expression,\footnote{\(\mu,\nu,\lambda,\sigma,\dots\) are AO indices, \(i,j,k,l,\dots\) are occupied MO indices, and \(p,q,r,s,\dots\) are general MO indices. \(\left(\hat{h} = \hat{H}^{\text{core}} \right) \equiv \hat{T}_{e} + \hat{V}_{Ne}\) is the one-electron core Hamiltonian operator, which itself is the sum of the electronic kinetic energy and electron-nuclear attraction energy operators, here in matrix representation, similar to \eqref{eq:yamaguchi-3.80}. \((pq|rs)\) is an MO-basis two-electron (repulsion) integral in Mulliken notation (see Table 2.2 of Ref.~\parencite{szabo1989modern}).}
+Now consider the derivatives of the MO coefficients/density matrix in the context of the \hf{} equations. Starting from the restricted \hf{} electronic energy expression,\footnote{\(\mu,\nu,\lambda,\sigma,\dots\) are AO indices, \(i,j,k,l,\dots\) are occupied MO indices, and \(p,q,r,s,\dots\) are general MO indices. \(\left(\hat{h} = \hat{H}^{\text{core}} \right) \equiv \hat{T}_{e} + \hat{V}_{Ne}\) is the one-electron core Hamiltonian operator, which itself is the sum of the electronic kinetic energy and electron-nuclear attraction energy operators, here in matrix representation, similar to \eqref{eq:yamaguchi-3.80}. \((pq|rs)\) is an MO-basis two-electron (repulsion) integral in Mulliken notation (see Table 2.2 of Ref.~\parencite{szabo1989modern}).}
 \begin{equation}
   \label{eq:yamaguchi-4.1}\tag{Yamaguchi eq. 4.1}
   E_{\text{elec}}^{\text{RHF}} = 2 \sum_{i}^{\text{d.o.}} h_{ii} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj) - (ij|ij) \right\},
@@ -600,7 +599,7 @@ where \(\lambda\) has been dropped for readability since it is present in front 
   \end{aligned}
 \end{equation}
 
-It is now important to know what orthonormality conditions exist between the set of all corrected states \(\left\{\ket{\psi_{i}^{(n)}}\right\}\). For the unperturbed state, which is usually the \hf ground state,
+It is now important to know what orthonormality conditions exist between the set of all corrected states \(\left\{\ket{\psi_{i}^{(n)}}\right\}\). For the unperturbed state, which is usually the \hf{} ground state,
 \begin{equation}
   \label{eq:hf-normalization}
   \braket{\psi_{i}^{(0)}|\psi_{i}^{(0)}} = 1,
@@ -640,7 +639,7 @@ The final form of \eqref{eq:first-order-terms-bra} is now
   \label{eq:first-order-terms-final}
   \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} = E_{i}^{(1)},
 \end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:yamaguchi-4.21}.
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf{} and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:yamaguchi-4.21}.
 
 The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
 \begin{equation}
