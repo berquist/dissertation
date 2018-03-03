@@ -245,7 +245,7 @@ Another important property is that in general, due to Young's theorem, the order
   \label{eq:youngs-theorem}
   \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}} = \frac{\partial^{2} E}{\partial x_{i} \partial x_{j}},
 \end{equation}
-leading to a symmetric matrix \(\mathbf{k}\). In practice, this has implications for computational cost which will be discussed in section~\ref{TODO}.
+leading to a symmetric matrix \(\mathbf{k}\). In practice, this has implications for computational cost which will be discussed in section~\ref{ssec:analytic-derivative-theory}.
 
 A similar derivation holds for the dipole polarizability, \(\alpha\), which is the ratio of the induced dipole moment \(\mu\) of a system to the electric field \(F\) that produces this dipole moment. Both \(\mu\) and \(F\) are 3-dimensional vector quantities,
 \begin{equation}
@@ -553,7 +553,7 @@ Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another n
     &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
   \end{aligned}
 \end{equation}
-where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. TODO explain U matrix
+where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable. [TODO this is where I discuss how since only one set of U needs to be formed for a second derivative, it is computationally advantageous to do so for the ``cheapest'' perturbation, but here it looks like there's two sets of U matrices?]
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
