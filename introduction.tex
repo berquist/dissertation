@@ -346,7 +346,7 @@ where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)
   \label{eq:electric-and-magnetic-field-expansion}
   E(\mathbf{F}, \mathbf{B}) = E_{0} + \mu_{i} \cdot F_{i} + m_{i} \cdot B_{i} + \frac{1}{2} \left( \alpha_{ij} \cdot F_{i}F_{j} + \xi_{ij} \cdot B_{i}B_{j} + G_{ij} \cdot F_{i}B_{j} \right) \dots,
 \end{equation}
-where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. Section~\ref{TODO} will show how frequency dependence can be properly introduced to this term and in general.
+where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. Section~\ref{sec:dynamic-properties} will show how frequency dependence can be properly introduced to this term and in general.
 
 % \begin{equation}
 %   \mu_{j}^{(1)}(\omega) = \sum_{k} \alpha_{jk}(\omega) E_{k}(\omega) + \frac{i\omega}{c} \sum_{k} G_{jk}(\omega) B_{k}(\omega) + \sum_{kl} P_{jkl}(\omega) \frac{\partial E_{k}(\omega)}{\partial l} + O\left(\frac{1}{\lambda^{2}}\right)
@@ -739,49 +739,6 @@ Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
 Up to this point, only static perturbations have been considered, whcih
 
 time-dependent extension of \ref{ssec:series-expansion}
-
-% \section{Barron}
-% % page 85
-% \subsection{A molecule in static fields}
-% The electric and magnetic multipole moments appearing in the expressions for the interaction energy of a system of charges and currents with external electric and magnetic fields can be permanent attributes of the system or can be induced by the fields themselves. If the interaction is weak, the situation can be analyzed by expanding the energy \(W\) of the system in a Taylor series about the energy in the absence of the field.
-
-% Thus for an electrically neutral molecule in a static uniform electric field,
-% \begin{equation}
-%   \label{eq:2.6.1}
-%   W[(\mathbf{E})_{0}] =
-% \end{equation}
-% The field itself, \((\mathbf{E})_{0}\), is taken at the molecular origin
-
-% Time-independent perturbation theory is now introduced to give the static molecular property tensors a quantum mechanical form. We require approximate solutions of the time-independent Schr{\"{o}}dinger equation
-% \begin{equation}
-%   \label{eq:2.6.12}
-%   H' \psi ' = (H + V) \psi ' = W' \psi ',
-% \end{equation}
-% where \(H\) is the unperturbed molecular Hamiltonian \eqref{eq:2.5.21}, \(V\) is the operator equivalent of a static interaction Hamiltonian such as \eqref{eq:2.5.8} or \eqref{eq:2.5.11} whose effect is small compared with that of \(H\), and \(\psi '\) and \(W'\) are the perturbed molecular wavefunction and energy. Perturbation theory provides approximate expressions for the eigenfunctions \(\psi_{j}'\) and eigenvalues \(W_{j}'\) of the perturbed operator \(H'\) in terms of the unperturbed operator \(H\). We refer to standard works such as Davydov (1976) for the development of these approximate expressions.
-
-% The perturbed energy eigenvalue corresponding to the nondegenerate eigenfunction \(\psi_{n}\) is, to second order in the perturbation,
-% \begin{equation}
-%   \label{eq:2.6.13}
-%   W_{n}' = W_{n} + \braket{n|V|n} + \sum_{j \neq n} \frac{\braket{n|V|j}\braket{j|V|n}}{W_{n} - W_{j}},
-% \end{equation}
-% where the sum extends over the complete set of eigenfunctions with the exception of the initial state \(\psi_{n}\). Since the energy of a system correct to the (\(2n + 1\))th order in the perturbation is given by wave functions correct to the \(n\)th order (see section~\ref{TODO}), we need only take the corresponding perturbed eigenfunction to first order in the perturbation:
-% \begin{equation}
-%   \label{eq:2.6.14}
-%   \psi_{n}' = \psi_{n} + \sum_{j \neq n} \frac{\braket{j|V|n}}{W_{n} - W_{j}} \psi_{j}.
-% \end{equation}
-
-% If the perturbation is due to a static uniform electric field, \(V = -\mu_{\alpha}(E_{\alpha})_{0}\). Applying \eqref{eq:2.6.3} to \eqref{eq:2.6.13} and comparing the result with \eqref{eq:2.6.4}, we find the following expressions for the permanent electric dipole moment and the polarizability of a molecule in the state \(\psi_{n}\):
-% \begin{align}
-%   \mu_{0_{\alpha}} &= \braket{n|\mu_{\alpha}|n}, \\
-%   \alpha_{\alpha\beta} &= -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} = \alpha_{\beta\alpha}.
-% \end{align}
-% These results can also be obtained by taking the expectation value of the electric dipole moment operator with the perturbed eigenfunction \eqref{eq:2.6.14}, and comparing the result with \eqref{eq:2.6.4}:
-% \begin{align}
-%   \mu_{\alpha} &= \braket{n'|\mu_{\alpha}|n'} \\
-%                &= \braket{n|\mu_{\alpha}|n} -2 \sum_{j \neq n} \frac{\braket{n|\mu_{\alpha}|j}\braket{j|\mu_{\beta}|n}}{W_{n} - W_{j}} (E_{\beta})_{0}.
-% \end{align}
-
-% Similar expressions can be found for the other static molecular property tensors, but they are not reproduced here since only the dynamic versions are required in what follows, and these are derived below. Buckingham (1967, 1978) has given a full account of the static electric molecular property tensors to high order.
 
 \onlyifstandalone{\printbibliography}
 \end{document}
