@@ -819,7 +819,7 @@ Before going further, the Hamiltonian must be specified. The partitioning introd
 so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is slowly turned on and oscillates with time at a characteristic frequency. Representing the perturbation in terms of Fourier components:
 \begin{equation}
   \label{eq:fourier-components}
-  \hat{V}(t) = x_{1} \hat{V}_{1} e^{-i\omega t} + x_{2} \hat{V}_{2} e^{+i\omega t}
+  \hat{V}(t) = x_{1} \hat{B} e^{-i\omega t} + x_{2} \hat{A} e^{+i\omega t}
 \end{equation} %TODO I am really not satisfied with this
 shows that the perturbation, and therefore the Hamiltonian, is periodic in time (\(\hat{H}(t + T) = \hat{H}(t)\)) with a period of \(T = 2\pi/\omega\). This gives the required integration bounds for \eqref{eq:phase-isolated-tdse}, leading to
 \begin{equation}
@@ -836,15 +836,14 @@ The time-averaged quasienergy can now be expanded with respect to the perturbati
   \label{eq:quasienergy-expansion}
   \mathcal{Q}(x_{1},x_{2}) = \mathcal{Q}^{(0)} + \mathcal{Q}^{(10)}x_{1} + \mathcal{Q}^{(01)}x_{2} + \frac{1}{2}\mathcal{Q}^{(20)}x_{1}^{2} + \mathcal{Q}^{(11)}x_{1}x_{2} + \frac{1}{2}\mathcal{Q}^{(02)}x_{2}^{2} + \dots,
 \end{equation}
-analogous to the series expansion in Section~\ref{ssec:series-expansion}. However, the expansion coefficients \(\partial^{n}
-mathcal{Q}/\partial x^{n}\) are still not in a position to be directly calculable for an approximate theory due to the presence of the integral in \eqref{eq:quasienergy}, unlike in the static case, so the time-dependent theory must be further derived for exact states.
+analogous to the series expansion in Section~\ref{ssec:series-expansion}. However, the expansion coefficients \(\partial^{n}\mathcal{Q}/\partial x^{n}\) are still not in a position to be directly calculable for an approximate theory due to the presence of the integral in \eqref{eq:quasienergy}, unlike in the static case, so the time-dependent theory must be further derived for exact states.
 
 Using the time-dependent form of \eqref{eq:first-order-terms-final},
 \begin{equation}
   \label{eq:quasienergy-10}
   \begin{aligned}
-    \mathcal{Q}^{(10)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \braket{\tilde{\Psi}_{0}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}_{0}} \\
-    &= \braket{\tilde{\Psi}_{0}|\hat{V}_{1}|\tilde{\Psi}_{0}} \delta(\omega).
+    \mathcal{Q}^{(10)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}} \\
+    &= \braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{0}} \delta(\omega).
 \end{aligned}
 \end{equation}
 The rule used in \eqref{eq:quasienergy-10} is
@@ -855,7 +854,7 @@ The rule used in \eqref{eq:quasienergy-10} is
 where \(\delta(\omega)\) is the Kronecker delta for finite \(T\) and the Dirac delta for \(T \rightarrow \infty\). The conclusion is that only static first-order properties are non-zero, where the physical intuition is that absorption or emission of a photon with \(\omega \neq 0\) would violate energy conservation. Using \eqref{eq:second-order-correction-first-form} and \eqref{eq:intermediate-normalization},
 \begin{equation}
   \label{eq:quasienergy-20}
-  \mathcal{Q}^{(20)} = \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\braket{\tilde{\Psi}_{0}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}^{(10)}(t)},
+  \mathcal{Q}^{(20)} = \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}^{(10)}(t)},
 \end{equation}
 where the first-order wavefunction correction is (similar to \eqref{eq:orthonormal-eigenfunction-expansion})
 \begin{equation}
@@ -865,34 +864,31 @@ where the first-order wavefunction correction is (similar to \eqref{eq:orthonorm
 where \(\omega_{n0} = E_{n} - E_{0}\) are the unperturbed system excitation energies. The first-order wavefunction expansion coefficients are found similarly to \eqref{eq:coefficient-selection},
 \begin{equation}
   \label{eq:56}
-  c_{n}^{(10)}(t) = -i \int_{-\infty}^{t} \mathrm{d}t' \, \braket{\tilde{\Psi}_{n}|\hat{V}_{1}e^{-i\omega t'}e^{\gamma t'}|\tilde{\Psi}_{0}}e^{i\omega_{n0}t'},
+  c_{n}^{(10)}(t) = -i \int_{-\infty}^{t} \mathrm{d}t' \, \braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t'}e^{\gamma t'}|\tilde{\Psi}_{0}}e^{i\omega_{n0}t'},
 \end{equation}
 where a factor of \(e^{\gamma t}\) with \(\gamma \rightarrow 0^{+}\) adiabatically switches on the perturbation from \(t' \rightarrow -\infty\) and imposes the initial condition \(c_{n}^{(10)}(t \rightarrow -\infty) = 0\). Performing the integration in \eqref{eq:56} gives
 \begin{equation}
   \label{eq:57}
-  c_{n}^{(10)}(t) = \frac{\braket{\tilde{\Psi}_{n}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}_{0}}e^{i\omega_{n0}t}}{\omega - \omega_{n0} + i\gamma},
+  c_{n}^{(10)}(t) = \frac{\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}e^{i\omega_{n0}t}}{\omega - \omega_{n0} + i\gamma},
 \end{equation} % TODO why is it dropped from the numerator
 where the factor \(e^{\gamma t}\) is dropped from the numerator, but now supplies a damping factor for when the field oscillation comes close to a resonance (excitation energy). Now \eqref{eq:quasienergy-20}, \eqref{eq:first-order-wavefunction}, and \eqref{eq:57} are combined,
 \begin{equation}
   \label{eq:58}
   \begin{aligned}
-    \mathcal{Q}^{(20)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \\
-    &= 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{V}_{1}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{V}_{1}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \delta(2\omega),
+    \mathcal{Q}^{(20)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \\
+    &= 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \delta(2\omega),
   \end{aligned}
 \end{equation}
 which is also nonzero only for the static case. Performing the same steps for the mixed term,
 \begin{equation}
   \label{eq:59}
   \begin{aligned}
-    \mathcal{Q}^{(11)} = &\frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \left[ \braket{\tilde{\Psi}_{0}|\hat{V}_{2}e^{+i\omega t}|\tilde{\Psi}^{(10)}(t)} + \braket{\tilde{\Psi}_{0}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}^{(01)}(t)} \right] \\
-    = &\frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \left[ \frac{\braket{\tilde{\Psi}_{0}|\hat{V}_{2}e^{+i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \right. \\
-    &+ \left. \frac{\braket{\tilde{\Psi}_{0}|\hat{V}_{1}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{V}_{2}e^{+i\omega t}|\tilde{\Psi}_{0}}}{-\omega - \omega_{n0} + i\gamma} \right]  \\
-    = &\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{V}_{2}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{V}_{1}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} - \sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{V}_{1}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{V}_{2}|\tilde{\Psi}_{0}}}{\omega + \omega_{n0} - i\gamma},
+    \mathcal{Q}^{(11)} = &\frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \left[ \braket{\tilde{\Psi}_{0}|\hat{A}e^{+i\omega t}|\tilde{\Psi}^{(10)}(t)} + \braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}^{(01)}(t)} \right] \\
+    = &\frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \left[ \frac{\braket{\tilde{\Psi}_{0}|\hat{A}e^{+i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} + \frac{\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{A}e^{+i\omega t}|\tilde{\Psi}_{0}}}{-\omega - \omega_{n0} + i\gamma} \right]  \\
+    = &\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{A}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} - \sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{A}|\tilde{\Psi}_{0}}}{\omega + \omega_{n0} - i\gamma},
   \end{aligned}
 \end{equation}
-which finally does not vanish for \(\omega \neq 0\). Physically, it corresponds to the absorption of a virtual photon due to \(\hat{V}_{1}\) that probes the excited states of the system, followed by emission of a photon due to \(\hat{V}_{2}\), which is allowed due to net energy conservation. \(\mathcal{Q}^{(11)}\) is the \emph{linear response function}
-
-of operators \(\hat{V}_{2}\) and \(\hat{V}_{1}\) in the spectral representation and it is often denoted as \(\mathcal{Q}^{(11)} = \braket{\braket{\hat{V}_{2};\hat{V}_{1}}}_{\omega}\) (see Table~\ref{tab:norman}). Physically, it can be viewed as the change in the expectation value of the operator \(\hat{V}_{2}\) due to the perturbation \(\hat{V}_{1}e^{-i\omega t}\). Due to the pole structure introduced by the denominator (with de-excitation energies arising from the second term), \eqref{eq:59} contains information about all the excitation energies of the system. Higher-order derivatives of the quasienergy lead to non-linear response functions: third derivatives correspond to quadratic response, and fourth derivatives correspond to cubic response, and so on.
+which finally does not vanish for \(\omega \neq 0\). Physically, it corresponds to the absorption of a virtual photon due to \(\hat{B}\) that probes the excited states of the system, followed by emission of a photon due to \(\hat{A}\), which is allowed due to net energy conservation. \(\mathcal{Q}^{(11)}\) is the \emph{linear response function} of operators \(\hat{A}\) and \(\hat{B}\) in the spectral representation and it is often denoted as \(\mathcal{Q}^{(11)} = \braket{\braket{\hat{A};\hat{B}}}_{\omega}\) (see Table~\ref{tab:norman}). Physically, it can be viewed as the change in the expectation value of the operator \(\hat{A}\) due to the perturbation \(\hat{B}e^{-i\omega t}\). Due to the pole structure introduced by the denominator (with de-excitation energies arising from the second term), \eqref{eq:59} contains information about all the excitation energies of the system. Higher-order derivatives of the quasienergy lead to non-linear response functions: third derivatives correspond to quadratic response, and fourth derivatives correspond to cubic response, and so on.
 
 \onlyifstandalone{\printbibliography}
 % Karna JCC:JCC540120409
