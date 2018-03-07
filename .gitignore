@@ -36,6 +36,7 @@ test_bibliography.pdf
 *.log
 *.lol
 *.lot
+*.lox
 *.out
 *.run.xml
 *.stp

@@ -46,6 +46,13 @@
 \usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{braket}
+\usepackage[%
+    inline = true,%
+    margin = false,%
+    status = draft,%
+    author =%
+]{fixme}
+\fxusetheme{color}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{makecell}
@@ -67,7 +74,6 @@
 %
 \usepackage{cancel}
 \newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
-\newcommand\hf{Hartree\textendash{}Fock\xspace}%
 %
 \usepackage[%
     separate-uncertainty = true,%
@@ -110,7 +116,11 @@
 \BeforeBeginEnvironment{minted}{\begin{singlespace}}
 \AfterEndEnvironment{minted}{\end{singlespace}}
 %
-\newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
+\newcommand\cotil{\ce{CO2}\textendash{}IL}
+\newcommand\hefe{Hellmann\textendash{}Feynman}
+\newcommand\hf{Hartree\textendash{}Fock}
+\newcommand\qchem{\textsc{Q-Chem}}
+\newcommand\schrod{Schr{\"{o}}dinger}
 \newcommand{\latin}[1]{\textit{#1}}
 % optionally don't use uppercase for document classes that aren't
 % garbage
@@ -148,12 +158,12 @@
 %
 \graphicspath{{introduction/}{paper_01/}{paper_02/}{paper_03/}{paper_04/}{paper_05/}}
 \input{./introduction}
-% \input{./paper_01/anions}
-% \input{./paper_02/AbInitio_revised}
-% \input{./paper_03/SpectroscopicMap}
+\input{./paper_01/anions}
+\input{./paper_02/AbInitio_revised}
+\input{./paper_03/SpectroscopicMap}
 \input{./paper_04/ALMO_LR}
-% \input{./paper_05/psi4numpy}
-% \input{./other_contributions}
+\input{./paper_05/psi4numpy}
+\input{./other_contributions}
 %
 \printbibliography[title=\caps{Bibliography}]
 %

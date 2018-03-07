@@ -32,6 +32,13 @@ preview = false,%
 % https://tex.stackexchange.com/q/105902/94717
 % \newcommand\Ccancel[2][black]{\renewcommand\CancelColor{\color{#1}}\cancel{#2}}
 \newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+\usepackage[%
+    inline = true,%
+    margin = false,%
+    status = draft,%
+    author =%
+]{fixme}
+\fxusetheme{color}
 \onlyifstandalone{\usepackage[margin=1in]{geometry}}
 \onlyifstandalone{\raggedbottom}
 \usepackage{graphicx}
@@ -45,10 +52,14 @@ preview = false,%
 ]{siunitx}
 \DeclareSIUnit\au{a.u.}
 \usepackage{tabulary}
+\newcommand\hefe{Hellmann\textendash{}Feynman}
 \newcommand\hf{Hartree\textendash{}Fock}
-\newcommand{\qchem}{\textsc{Q-Chem}}
+\newcommand\qchem{\textsc{Q-Chem}}
+\newcommand\schrod{Schr{\"{o}}dinger}
 \newcommand{\caps}[1]{\uppercase{#1}}
 \begin{document}
+\onlyifstandalone{\tableofcontents}
+\onlyifstandalone{\listoffixmes}
 \chapter{Introduction}
 \label{ch:introduction}
 
@@ -64,11 +75,21 @@ For more background literature on the theoretical development and applications o
 
 Throughout the introduction and the remainder of this thesis, a number of terms appear and may seem to be used interchangeably. In quantum chemistry literature, the phrase \emph{molecular property} is used to denote any quantity that can be calculated from the wavefunction. By this definition, not all molecular properties are \emph{observables}, as they do not necessarily correspond to experimentally-measurable quantities. Such molecular properties may not also be uniquely defined. One of the most prominent examples of non-observable molecular properties is the calculation of atomic partial charges, with Mulliken and L{\"{o}}wdin population analyses being the two most commonly-known partitioning schemes for dividing the electron density into atomic contributions. However, this thesis associates molecular properties with observables, which may also be synonymous with \emph{physical properties}. The term \emph{chemical property} is avoided as it is more closely associated with reactivity than observable quantities.
 
-The term \emph{response} also requires disambiguation. Experimentally, \emph{molecular response} refers to changes in a molecule's electronic and geometric state due to incident electromagnetic radiation (spectroscopy) or physical manipulation (such as structural deformation leading to piezoelectric response\cite{doi:10.1021/jz400355v,doi:10.1021/jp412740j,doi:10.1021/acs.jpcb.7b10085}). Computationally, within the Born-Oppenheimer approximation, molecular response encompasses how the electronic state is altered due to both external and internal perturbations. Examples of external perturbations are [TODO blah blah], and examples of internal perturbations are [TODO blah blah]. Although external perturbations have a clear correspondence to spectroscopy, internal perturbations are more a description of a molecule's intrinsic properties in the absence of a field (TODO).
+The term \emph{response} also requires disambiguation. Experimentally, \emph{molecular response} refers to changes in a molecule's electronic and geometric state due to incident electromagnetic radiation (spectroscopy) or physical manipulation (such as structural deformation leading to piezoelectric response)\cite{doi:10.1021/jz400355v,doi:10.1021/jp412740j,doi:10.1021/acs.jpcb.7b10085}. Computationally, within the Born-Oppenheimer approximation, molecular response encompasses how the electronic state is altered due to both external and internal perturbations. Examples of external perturbations are \fxnote{TODO blah blah}, and examples of internal perturbations are \fxnote{TODO blah blah}. Although external perturbations have a clear correspondence to spectroscopy, internal perturbations are more a description of a molecule's intrinsic properties in the absence of a field \fxnote{TODO}.
 
 However, in the context of this work, molecular response is sometimes used interchangeably with \emph{response property}, which is intuitively a property associated with external applied fields, but here refers to any molecular property arising from the solution of the \emph{response equations}.
 
-The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, an eigenvalue problem is solved for \((\mathbf{A} - \mathbf{\omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{A}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the internal (TODO pole structure) of the system, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{AU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals. Details about the solution of the CPHF equations are given in section TODO blah, and a basic implementation is given in section TODO blah. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, (TODO talk about residues of response functions and poles)
+The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, an eigenvalue problem is solved for \((\mathbf{A} - \mathbf{\omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{A}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the internal \fxnote{TODO pole structure} of the system, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{AU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals. Details about the solution of the CPHF equations are given in section \fxnote{TODO}, and a basic implementation is given in section \fxnote{TODO}. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, \fxnote{TODO talk about residues of response functions and poles}
+
+\begin{anfxnote}{terminology}
+  \begin{itemize}
+  \item interchangeability of time- and frequency-dependent response
+  \item \emph{linear} response
+  \item \emph{response function}
+  \item This is a one-particle approximation, that is, assume a perturbation can be described as a linear combination of single-particle excitations and deexcitations
+  \item Two-particle approximation is SOPPA
+  \end{itemize}
+\end{anfxnote}
 
 \section[\texorpdfstring{\caps{Macroscopic and Microscopic Response Connections}}{Macroscopic and Microscopic Response Connections}]{\texorpdfstring{\caps{Connection Between Macroscopic and Microscopic Properties}}{Connection Between Macroscopic and Microscopic Properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
@@ -105,7 +126,7 @@ The response equations relevant for this work are the coupled perturbed \hf{} (C
 % The experimentalist works at the macroscopic level and typically records the reponse of the electromagnetic field.
 % The theoretician works at the microscopic level and typically calculates the molecular response.
 
-There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. TODO Although there is often quite some distance in terms of mathematical derivation and code development effort between the succinct representation on the left and the property on the right of each table, these are the true starting points for molecular property calculations based on quantum chemistry.
+There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. \fxnote{TODO Although there is often quite some distance in terms of mathematical derivation and code development effort between the succinct representation on the left and the property on the right of each table, these are the true starting points for molecular property calculations based on quantum chemistry.}
 
 % More appropriate for time- or frequency-dependent response properties
 %TODO
@@ -341,12 +362,12 @@ It is also possible to consider multiple perturbations simultaneously. Adding an
   \label{eq:two-perturbation-expansion}
   E(\mathbf{P}, \mathbf{Q}) = E^{(0,0)} + \left(E^{(1,0)} \cdot \mathbf{P} + E^{(0,1)} \mathbf{Q}\right) + \frac{1}{2} \left(E^{(2,0)} \cdot \mathbf{P}^{2} + E^{(0,2)} \cdot \mathbf{Q}^{2} + E^{(1,1)} \cdot \mathbf{P} \cdot \mathbf{Q}\right) + \dots,
 \end{equation}
-where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)th-order in the perturbation \(\mathbf{P}\) and \(m\)th-order in the perturbation \(\mathbf{Q}\). The expected terms from both independent series expansions occur, but there is also a cross-term \(E^{(1,1)}\). All mixed derivatives in table~\ref{tab:gauss} that are at least 2nd-order total correspond to such cross-terms. For example, consider adding an external magnetic field to \eqref{eq:electric-field-expansion}:
+where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)th-order in the perturbation \(\mathbf{P}\) and \(m\)th-order in the perturbation \(\mathbf{Q}\). The expected terms from both independent series expansions occur, but there is also a cross-term \(E^{(1,1)}\). All mixed derivatives in Table~\ref{tab:gauss} that are at least 2nd-order total correspond to such cross-terms. For example, consider adding an external magnetic field to \eqref{eq:electric-field-expansion}:
 \begin{equation}
   \label{eq:electric-and-magnetic-field-expansion}
   E(\mathbf{F}, \mathbf{B}) = E_{0} + \mu_{i} \cdot F_{i} + m_{i} \cdot B_{i} + \frac{1}{2} \left( \alpha_{ij} \cdot F_{i}F_{j} + \xi_{ij} \cdot B_{i}B_{j} + G_{ij} \cdot F_{i}B_{j} \right) \dots,
 \end{equation}
-where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in table~\ref{tab:norman}. Section~\ref{sec:dynamic-properties} will show how frequency dependence can be properly introduced to this term and in general.
+where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in Table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in Table~\ref{tab:norman}. Section~\ref{sec:dynamic-properties} will show how frequency dependence can be properly introduced to this term and in general.
 
 % \begin{equation}
 %   \mu_{j}^{(1)}(\omega) = \sum_{k} \alpha_{jk}(\omega) E_{k}(\omega) + \frac{i\omega}{c} \sum_{k} G_{jk}(\omega) B_{k}(\omega) + \sum_{kl} P_{jkl}(\omega) \frac{\partial E_{k}(\omega)}{\partial l} + O\left(\frac{1}{\lambda^{2}}\right)
@@ -406,7 +427,7 @@ In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\
 
 As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction.
 
-TODO numerical noise in figure~\ref{fig:finite-difference-numerical-noise}
+\fxnote{TODO numerical noise in Figure~\ref{fig:finite-difference-numerical-noise}}
 
 \begin{figure}
   \centering
@@ -445,7 +466,7 @@ It is convenient to rewrite the MO coefficient derivatives,
   \tag{Yamaguchi eq. 3.7}
   \frac{\partial C_{\mu i}}{\partial X_{A}} = \sum_{m}^{\text{MO}} U_{mi}^{X_{A}} C_{\mu m},
 \end{equation}
-where the index \(m\) runs over all occupied and unoccupied/virtual MOs. Although \(X_{A}\) is being used for the perturbation, all parts of this derivation hold for any general perturbation. The key insight is that we can write the effect of a perturbation on the MO coefficients as the contraction of the unmodified MO coeffcients with a unitary matrix describing single-particle excitations from occupied to virtual MOs, as well as deexcitations from virtual to occupied MOs. In matrix form, this is
+where the index \(m\) runs over all occupied and unoccupied/virtual MOs. Although \(X_{A}\) is being used for the perturbation, all parts of this derivation hold for any general perturbation. The key insight is that the effect of a perturbation on the MO coefficients can be written as the contraction of the unmodified MO coeffcients with a unitary matrix describing single-particle excitations from occupied to virtual MOs, as well as deexcitations from virtual to occupied MOs. In matrix form, this is
 \begin{equation}
   \mathbf{C}^{(X_{A})} = \mathbf{C}^{(0)} \left( \mathbf{U}^{(X_{A})} \right)^{T},
 \end{equation}
@@ -495,7 +516,7 @@ which can be further simplified as
   \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right\} + 4 \sum_{i}^{\text{d.o.}} U_{ii}^{X_{A}} \epsilon_{ii}. \tag{Yamaguchi eq. 4.17}
 \end{equation}
 
-Now we use one of the most important tricks in quantum chemistry. Given the orthonormality of the MOs,
+Now one of the most important tricks in quantum chemistry is used. Given the orthonormality of the MOs,
 \begin{equation}
 S_{pq} = \delta_{pq}, \tag{Yamaguchi eq. 3.44}
 \end{equation}
@@ -553,12 +574,45 @@ Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another n
     &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
   \end{aligned}
 \end{equation}
-where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable. [TODO this is where I discuss how since only one set of U needs to be formed for a second derivative, it is computationally advantageous to do so for the ``cheapest'' perturbation, but here it looks like there's two sets of U matrices?]
+where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable. \fxnote{TODO this is where I discuss how since only one set of U needs to be formed for a second derivative, it is computationally advantageous to do so for the ``cheapest'' perturbation, but here it looks like there's two sets of U matrices?}
+
+\fxnote{TODO lead in to \hefe{}; many terms disappear if the basis functions are not perturbation dependent}
+
+\subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/81350/194}{\color{black}{The \hefe{} theorem}}}{The Hellmann-Feynman Theorem}}
+
+Given the standard energy expression,
+\begin{equation}
+  E = \Braket{\psi|\hat{H}|\psi},
+\end{equation}
+where \(\psi\) is an orthonormal state, and it is assumed that \(\hat{H}\) and \(\psi\) (and therefore \(E\)) explicitly depend on \(P\),
+\begin{align}
+  \label{eq:hellmann-feynman-step1}
+  \frac{\mathrm{d}E}{\mathrm{d}P} &= \Braket{\frac{\partial\psi}{\partial P}|\hat{H}|\psi} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} + \Braket{\psi|\hat{H}|\frac{\partial\psi}{\partial P}} \\
+  \label{eq:hellmann-feynman-step2}
+                                  &= E\Braket{\frac{\partial\psi}{\partial P}|\psi} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} + E\Braket{\psi|\frac{\partial\psi}{\partial P}} \\
+  \label{eq:hellmann-feynman-step3}
+                                  &= E\frac{\mathrm{d}}{\mathrm{d}P}\Ccancelto[Green]{1}{\Braket{\psi|\psi}} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} \\
+  \label{eq:hellmann-feynman-step4}
+                                  &= E\Ccancelto[carmine]{0}{\frac{\mathrm{d}}{\mathrm{d}P}(1)} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} \\
+  \label{eq:hellmann-feynman-step5}
+                                  &= \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} \\
+  \label{eq:hellmann-feynman-step6}
+                                  &= \Braket{\frac{\partial\hat{H}}{\partial P}}.
+\end{align}
+The energy appears in the last term of \eqref{eq:hellmann-feynman-step2} due to the hermiticity of the Hamiltonian, allowing it to act on the bra:
+\begin{equation}
+  \begin{aligned}
+    \Braket{\psi|\hat{H}|\frac{\partial\psi}{\partial P}} &= \Braket{\psi|\hat{H}^{\dagger}|\frac{\partial\psi}{\partial P}} \\
+    &= \left( \Bra{\psi \hat{H}^{\dagger}} \right) \Ket{\frac{\partial\psi}{\partial P}} \\
+    &= \left( \Bra{\psi} E \right) \Ket{\frac{\partial\psi}{\partial P}} \\
+    &= E\Braket{\psi|\frac{\partial\psi}{\partial P}}
+  \end{aligned}
+\end{equation}
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
 
-In Rayleigh\textendash{}Schr{\"{o}}dinger perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322; identical notation is followed throughout, except the summation index \(n\) is generally replaced with \(k\).}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
+In Rayleigh\textendash{}\schrod{} perturbation theory\footnote{See Szabo \& Ostlund\cite{szabo1989modern} page 322; identical notation is followed throughout, except the summation index \(n\) is generally replaced with \(k\).}, the exact Hamiltonian \(\hat{H}\) of a system under an applied perturbation \(\hat{V}\) can be written as
 \begin{equation}
   \label{eq:perturbed-hamiltonian}
   \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
@@ -571,7 +625,12 @@ where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation an
   \mathcal{E}_{i} &= E_{i}^{(0)} + \lambda E_{i}^{(1)} + \lambda^{2} E_{i}^{(2)} + \dots
 \end{align}
 
-Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the Schr{\"{o}}dinger equation, \(\hat{H}\ket{\Psi_{i}} = \mathcal{E}_{i}\ket{\Psi_{i}}\), gives
+Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, and \eqref{eq:expansion-energy} into the \schrod{} equation,
+\begin{equation}
+  \label{eq:schrodinger-equation}
+  \hat{H}\ket{\Psi_{i}} = \mathcal{E}_{i}\ket{\Psi_{i}},
+\end{equation}
+gives
 \begin{equation}
   \label{eq:expansion-schrodinger}
   \begin{aligned}
@@ -579,7 +638,7 @@ Combining \eqref{eq:perturbed-hamiltonian}, \eqref{eq:expansion-wavefunction}, a
     &= \left[ E_{i}^{(0)} + \lambda E_{i}^{(1)} + \lambda^{2} E_{i}^{(2)} + \dots \right] \left[ \ket{\psi_{i}^{(0)}} + \lambda\ket{\psi_{i}^{(1)}} + \lambda^{2}\ket{\psi_{i}^{(2)}} + \dots \right],
   \end{aligned}
 \end{equation}
-where the \(\{\lambda\}\) are now also useful for collecting terms of like orders. The zeroth-order terms give the Schr{\"{o}}dinger equation for the unperturbed energy,
+where the \(\{\lambda\}\) are now also useful for collecting terms of like orders. The zeroth-order terms give the \schrod{} equation for the unperturbed energy,
 \begin{equation}
   \label{eq:unperturbed-energy}
   \hat{H}^{(0)} \ket{\psi_{i}^{(0)}} = E_{i}^{(0)} \ket{\psi_{i}^{(0)}},
@@ -671,7 +730,6 @@ Using \eqref{eq:intermediate-normalization-single} and the fact that the set \(\
   \label{eq:resolution-of-the-identity}
   \ket{\psi_{i}^{(1)}} = \sum_{k} \ket{k} \braket{k|\psi_{i}^{(1)}}
 \end{equation}
-% TODO this is the path from 6.7b to 6.9 to 6.11:
 
 To calculate the first-order correction to the wavefunction, first rearrange \eqref{eq:first-order-terms} to collect all terms with the same ket,
 \begin{equation}
@@ -720,25 +778,41 @@ In the case where \(\hat{V}\) is operator with multiple components, such as the 
   \label{eq:static-polarizability-from-perturbation-theory}
   \alpha_{ab}= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{\mu}_{a}|k}\braket{k|\hat{\mu}_{b}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}}.
 \end{equation}
-TODO This expression is still incomplete regarding time-varying perturbations and mixed-operator properties.
+\fxnote{TODO This expression is still incomplete regarding time-varying perturbations and mixed-operator properties.}
+
 \section{\texorpdfstring{\caps{Dynamic (frequency-dependent) response properties}}{Static (time-independent) response properties}}
 \label{sec:dynamic-properties}
 
-TODO
+Up to this point, only static perturbations have been considered, where the strength of an applied field does not oscillate or vary with time. This is perfectly satisfactory for many properties, such as those that are intrinsic to the system or do not depend on field strength. For example, it does not make sense to have a field strength directly associated with a change in nuclear positions; this is not the same thing as having nuclear positions change in the presence of an applied field. Similarly, from Table~\ref{tab:gauss}, rotational and nuclear magnetic moments do not have a strength associated with them. This holds generally for ``internal'' perturbations. However, many non-linear optical processes in particular take advantage of oscillating fields, so frequency- or time-dependent molecular response properties must be calculable.
 
-\begin{itemize}
-\item Again, unclear on how ADT works in the presence of time-dependent or oscillating fields
-\item Two approaches: quasi-energy derivatives and polarization propagator
-\item In the static limit (\(\omega \rightarrow 0, t \rightarrow \infty\) (?)), equivalent to ADT, this is a more general derivation
-\item This is a one-particle approximation, that is, assume a perturbation can be described as a linear combination of single-particle excitations and deexcitations
-\item Two-particle approximation is SOPPA
-\end{itemize}
+In order to deal with frequency-dependent response, a slightly different path must be taken, in part because the total energy of the system is no longer stationary with time, so energy derivatives as encountered in Section~\ref{ssec:analytic-derivative-theory} are not physically well-defined. There are numerous possible derivation frameworks which cannot be done justice here. Equivalent results arise from time-dependent perturbation theory, quasi-energy derivatives\cite{Christiansen1998,gauss2000,C1CP21951K}, and the polarization propagator\cite{mcweeny1989methods}, to name a few. Ideally, there is a time-dependent extension of Section~\ref{ssec:series-expansion} that at some step allows for identification of coefficients in a series expansion with response functions. Similarly, in the static limit (\(\omega \rightarrow 0\)), results from analytic derivative theory should be recovered, making time-dependent response theory a more general framework for response properties. The following derivation will borrow most heavily from Refs.~\parencite{Christiansen1998}~and~\parencite{Toulouse2015}.
 
-Sources: Toulouse; McWeeny, summer school book draft, Karna/Dupuis
+The starting point is the now the time-dependent \schrod{} equation,
+\begin{equation}
+  \label{eq:time-dependent-schrodinger-equation}
+  \hat{H}(t) \ket{\Psi(t)} = i\frac{\partial}{\partial t} \ket{\Psi(t)},
+\end{equation}
+which, unlike \eqref{eq:schrodinger-equation} does not have the energy on the right-hand side due to the lack of stationary solutions. It is useful to factor out the time-dependent phase of the wavefunction,
+\begin{equation}
+  \label{eq:phase-isolated-wavefunction}
+  \ket{\Psi(t)} = e^{-i\mathcal{F}(t)} \ket{\tilde{\Psi}(t)},
+\end{equation}
+where \(\Psi(t)\) is the original unfactored wavefunction, \(\mathcal{F}(t)\) is a phase factor, and \(\tilde{\Psi}(t)\) is the \emph{phase-isolated wavefunction}.\footnote{This notation is consistent with Ref.~\parencite{gauss2000}. In Ref.~\parencite{Toulouse2015}, \(\bar{\Psi}(t)\) is the total wavefunction and \(\Psi(t)\) is the phase-isolated wavefunction. In Ref.~\parencite{Christiansen1998}, \(\ket{\bar{0}}\) is the total wavefunction, \(\ket{\tilde{0}}\) is the phase-isolated wavefunction, and \(\ket{0}\) is the stationary wavefunction, recovered from \(\ket{\tilde{0}(t \rightarrow 0)}\).}
 
-Up to this point, only static perturbations have been considered, whcih
+% Karna JCC:JCC540120409
+% The starting point in most frameworks is similar to that of time-independent perturbation theory, where the partitioning introduced in \eqref{eq:perturbed-hamiltonian} is modified:
+% \begin{equation}
+%   \label{eq:perturbed-hamiltonian-time-dependent}
+%   \hat{H}(t) = \hat{H}^{(0)} + \hat{V}(t)
+% \end{equation}
+% so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is slowly turned on an oscillates with time at a characteristic frequency. Generally, it may consist of multiple components:
+% \begin{equation}
+%   \label{eq:fourier-components}
+%   \hat{V}(t) = x_{1} \hat{V}_{1} e^{-i\omega t} + x_{2} \hat{V}_{2} e^{+i\omega t}
+% \end{equation}
 
-time-dependent extension of \ref{ssec:series-expansion}
+
+% \footnote{\(\dot{A}(t) = \frac{\mathrm{d}A(t)}{\mathrm{d}t}\)}
 
 \onlyifstandalone{\printbibliography}
 \end{document}
