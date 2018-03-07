@@ -785,11 +785,11 @@ In the case where \(\hat{V}\) is operator with multiple components, such as the 
 
 Up to this point, only static perturbations have been considered, where the strength of an applied field does not oscillate or vary with time. This is perfectly satisfactory for many properties, such as those that are intrinsic to the system or do not depend on field strength. For example, it does not make sense to have a field strength directly associated with a change in nuclear positions; this is not the same thing as having nuclear positions change in the presence of an applied field. Similarly, from Table~\ref{tab:gauss}, rotational and nuclear magnetic moments do not have a strength associated with them. This holds generally for ``internal'' perturbations. However, many non-linear optical processes in particular take advantage of oscillating fields, so frequency- or time-dependent molecular response properties must be calculable.
 
-In order to deal with frequency-dependent response, a slightly different path must be taken, in part because the total energy of the system is no longer stationary with time, so energy derivatives as encountered in Section~\ref{ssec:analytic-derivative-theory} are not physically well-defined. There are numerous possible derivation frameworks which cannot be done justice here. Equivalent results arise from time-dependent perturbation theory, quasi-energy derivatives\cite{Christiansen1998,gauss2000,C1CP21951K}, and the polarization propagator\cite{mcweeny1989methods}, to name a few. Ideally, there is a time-dependent extension of Section~\ref{ssec:series-expansion} that at some step allows for identification of coefficients in a series expansion with response functions. Similarly, in the static limit (\(\omega \rightarrow 0\)), results from analytic derivative theory should be recovered, making time-dependent response theory a more general framework for response properties. The following derivation will borrow most heavily from Refs.~\parencite{Christiansen1998}~and~\parencite{Toulouse2015}.
+In order to deal with frequency-dependent response, a slightly different path must be taken, in part because the total energy of the system is no longer stationary with time, so energy derivatives as encountered in Section~\ref{ssec:analytic-derivative-theory} are not physically well-defined. There are numerous possible derivation frameworks which cannot be done justice here. Equivalent results arise from time-dependent perturbation theory, quasi-energy derivatives\cite{Christiansen1998,gauss2000,C1CP21951K,Tolouse2015}, and the polarization propagator\cite{mcweeny1989methods}, to name a few. Ideally, there is a time-dependent extension of Section~\ref{ssec:series-expansion} that at some step allows for identification of coefficients in a series expansion with response functions. Similarly, in the static limit (\(\omega \rightarrow 0\)), results from analytic derivative theory should be recovered, making time-dependent response theory a more general framework for response properties.
 
-The starting point is the now the time-dependent \schrod{} equation,
+The starting point is the now the time-dependent \schrod{} equation (TDSE),
 \begin{equation}
-  \label{eq:time-dependent-schrodinger-equation}
+  \label{eq:tdse}
   \hat{H}(t) \ket{\Psi(t)} = i\frac{\partial}{\partial t} \ket{\Psi(t)},
 \end{equation}
 which, unlike \eqref{eq:schrodinger-equation} does not have the energy on the right-hand side due to the lack of stationary solutions. It is useful to factor out the time-dependent phase of the wavefunction,
@@ -797,22 +797,38 @@ which, unlike \eqref{eq:schrodinger-equation} does not have the energy on the ri
   \label{eq:phase-isolated-wavefunction}
   \ket{\Psi(t)} = e^{-i\mathcal{F}(t)} \ket{\tilde{\Psi}(t)},
 \end{equation}
-where \(\Psi(t)\) is the original unfactored wavefunction, \(\mathcal{F}(t)\) is a phase factor, and \(\tilde{\Psi}(t)\) is the \emph{phase-isolated wavefunction}.\footnote{This notation is consistent with Ref.~\parencite{gauss2000}. In Ref.~\parencite{Toulouse2015}, \(\bar{\Psi}(t)\) is the total wavefunction and \(\Psi(t)\) is the phase-isolated wavefunction. In Ref.~\parencite{Christiansen1998}, \(\ket{\bar{0}}\) is the total wavefunction, \(\ket{\tilde{0}}\) is the phase-isolated wavefunction, and \(\ket{0}\) is the stationary wavefunction, recovered from \(\ket{\tilde{0}(t \rightarrow 0)}\).}
+where \(\Psi(t)\) is the original unfactored wavefunction, \(\mathcal{F}(t)\) is a phase factor, and \(\tilde{\Psi}(t)\) is the \emph{phase-isolated wavefunction}.\footnote{This notation is consistent with Ref.~\parencite{gauss2000}. In Ref.~\parencite{Toulouse2015}, \(\bar{\Psi}(t)\) is the total wavefunction and \(\Psi(t)\) is the phase-isolated wavefunction. In Ref.~\parencite{Christiansen1998}, \(\ket{\bar{0}}\) is the total wavefunction, \(\ket{\tilde{0}}\) is the phase-isolated wavefunction, and \(\ket{0}\) is the stationary wavefunction, recovered from \(\ket{\tilde{0}(t \rightarrow 0)}\).} Rearrange the TDSE \eqref{eq:tdse},
+\begin{equation}
+  \label{eq:tdse-rearranged}
+  \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\Psi(t)} = 0,
+\end{equation}
+and use the phase-isolated wavefunction\footnote{\(\dot{A}(t) = \mathrm{d}A(t)/\mathrm{d}t\)}
+\begin{equation}
+  \label{eq:phase-isolated-tdse}
+  \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)} = \dot{\mathcal{F}}(t) \ket{\tilde{\Psi}(t)},
+\end{equation}
+where \(\dot{\mathcal{F}}(t)\) now looks likes the energy from the time-independent \schrod{} equation (TISE). This ``energy'' is still not stationary with time, however it can be made stationary through integration over the time coordinate.
 
-% Karna JCC:JCC540120409
-% The starting point in most frameworks is similar to that of time-independent perturbation theory, where the partitioning introduced in \eqref{eq:perturbed-hamiltonian} is modified:
-% \begin{equation}
-%   \label{eq:perturbed-hamiltonian-time-dependent}
-%   \hat{H}(t) = \hat{H}^{(0)} + \hat{V}(t)
-% \end{equation}
-% so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is slowly turned on an oscillates with time at a characteristic frequency. Generally, it may consist of multiple components:
-% \begin{equation}
-%   \label{eq:fourier-components}
-%   \hat{V}(t) = x_{1} \hat{V}_{1} e^{-i\omega t} + x_{2} \hat{V}_{2} e^{+i\omega t}
-% \end{equation}
-
-
-% \footnote{\(\dot{A}(t) = \frac{\mathrm{d}A(t)}{\mathrm{d}t}\)}
+Before going further, the Hamiltonian must be specified. The partitioning introduced in \eqref{eq:perturbed-hamiltonian} is modified:
+\begin{equation}
+  \label{eq:perturbed-hamiltonian-time-dependent}
+  \hat{H}(t) = \hat{H}^{(0)} + \hat{V}(t),
+\end{equation}
+so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is slowly turned on and oscillates with time at a characteristic frequency. Representing the perturbation in terms of Fourier components:
+\begin{equation}
+  \label{eq:fourier-components}
+  \hat{V}(t) = x_{1} \hat{V}_{1} e^{-i\omega t} + x_{2} \hat{V}_{2} e^{+i\omega t}
+\end{equation} %TODO I am really not satisfied with this
+shows that the perturbation, and therefore the Hamiltonian, is periodic in time (\(\hat{H}(t + T) = \hat{H}(t)\)) with a period of \(T = 2\pi/\omega\). This gives the required integration bounds for \eqref{eq:phase-isolated-tdse}, leading to
+\begin{equation}
+  \label{eq:quasienergy}
+  \begin{aligned}
+    \mathcal{Q} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \dot{\mathcal{F}}(t) \\
+    &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \frac{\bra{\tilde{\Psi}(t)} \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)}}{\braket{\tilde{\Psi}(t)|\tilde{\Psi}(t)}},
+  \end{aligned}
+\end{equation}
+where \(\mathcal{Q}\) is the \emph{time-averaged quasienergy}. The second part of \eqref{eq:quasienergy} is the variational condition for \(\tilde{\Psi}(t)\), making \(\mathcal{Q}\) stationary with respect to fluctuations in \(\tilde{\Psi}(t)\). In the time-independent case, the quasienergy reduces to the (time-independent) energy, and the phase-isolated wavefunction reduces to the (time-independent) wavefunction.
 
 \onlyifstandalone{\printbibliography}
+% Karna JCC:JCC540120409
 \end{document}
