@@ -9,11 +9,12 @@ __license__   = "BSD-3-Clause"
 __date__      = "2017-12-19"
 \end{minted}
 
-\hypertarget{scf-first-hyperpolarizability}{%
-  \section{SCF First Hyperpolarizability}\label{scf-first-hyperpolarizability}}
+% \hypertarget{scf-first-hyperpolarizability}{%
+%   \section{SCF First Hyperpolarizability}\label{scf-first-hyperpolarizability}}
 
-\hypertarget{introduction}{%
-  \subsection{Introduction}\label{introduction}}
+% \hypertarget{introduction}{%
+%   \subsection{Introduction}\label{introduction}}
+\subsubsection{Introduction}
 
 In Tutorial 6a, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed Hartree-Fock (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
 \begin{equation}
@@ -49,8 +50,9 @@ Before going further, some notational conventions should be mentioned.  When use
 
 For matrix indices, \(\mu,\nu,\lambda,\sigma,\dots\) label atomic orbitals (AOs)/basis functions, \(i,j,k,l,\dots\) label occupied molecular orbitals (MOs), \(a,b,c,d,\dots\) label unoccupied/virtual MOs, and \(p,q,r,s,\dots\) label all MOs. Einstein summation is used, so repeated indices are contracted over.
 
-\hypertarget{derivation}{%
-  \subsection{Derivation}\label{derivation}}
+% \hypertarget{derivation}{%
+%   \subsection{Derivation}\label{derivation}}
+\subsubsection{Derivation}
 
 Again, write the total Hamiltonian as the sum of unperturbed and perturbed components
 \begin{align*}
@@ -146,8 +148,9 @@ From Schaefer\cite{Yamaguchi1994}, page 25:
 \end{table}
 Since the first hyperpolarizability is calculated as a third derivative of the energy, perturbed coefficients with only one field index should be required. From table~\ref{tutorial:tab:wigner}, we can also see why SCF gradients (\(\frac{\partial E}{\partial R_A}\), where \(R_A\) is the \(A\)-th Cartesian component of nucleus \(R\)) avoid the need to solve for \(U\) matrices.
 
-\hypertarget{final-expressions}{%
-  \subsection{Final expressions}\label{final-expressions}}
+% \hypertarget{final-expressions}{%
+%   \subsection{Final expressions}\label{final-expressions}}
+\subsubsection{Final Expressions}
 
 To this point, most work has been in the AO basis, but it is conceptually easier to work in the MO basis, in particular due to the use of the \(\epsilon\) equations
 \begin{equation}
@@ -176,8 +179,9 @@ By noticing that each term corresponds to a unique permutation of the field indi
 \end{equation}
 where the permutation indices are initially assigned as \(d = a, e = b, f = c\). The frequency notation has also been dropped, since each \(abc\) (and therefore each \(def\)) will always carry the appropriate field index, making this the most general form of the first hyperpolarizability. If the indices \(abc\) are also permuted, then all 27 components of the first hyperpolarizability tensor will be computed.
 
-\hypertarget{computational-procedure}{%
-  \subsection{Computational Procedure}\label{computational-procedure}}
+% \hypertarget{computational-procedure}{%
+%   \subsection{Computational Procedure}\label{computational-procedure}}
+\subsubsection{Computational Procedure}
 
 The basic quantities we need are the matrices \(C, \mu, F, \epsilon\), and \(U\). The MO coefficients \(C\) are already obtained from the ground-state calculation, along with \(\epsilon^{0}\) (the MO energies) and \(F^{0}\) (the AO-basis Fock matrix). The dipole matrices \(\mu\) are needed for the linear response (polarizability) calculation, which results in response vectors that compose the off-diagonal blocks of the \(U^{a}\) matrix. \(G^{a}\) is obtained from \(F^{a}\), which comes from performing a single Fock build with the perturbed density \(D^{a}\).  Finally, \(\epsilon^{a}\) can be constructed.
 
@@ -421,19 +425,16 @@ First dipole hyperpolarizability (static):
  [  0.      -11.22412  -0.     ]]
 \end{minted}
 
-\hypertarget{references}{%
-  \subsection{References}\label{references}}
+\subsubsection{References}
 
-\hypertarget{primary-equations-and-implementation}{%
-  \subsubsection{Primary equations and implementation}\label{primary-equations-and-implementation}}
+Primary equations and implementation:
 
 \begin{itemize}
   \tightlist
 \item \fullcite{JCC:JCC540120409}
 \end{itemize}
 
-\hypertarget{n-1-rule}{%
-  \subsubsection{\texorpdfstring{\(2n + 1\) rule}{2n + 1 rule}}\label{n-1-rule}}
+\(2n + 1\) rule:
 
 \begin{itemize}
   \tightlist
@@ -442,8 +443,7 @@ First dipole hyperpolarizability (static):
 \item \fullcite{EPSTEIN1980311}
 \end{itemize}
 
-\hypertarget{additional-reading}{%
-  \subsubsection{Additional reading}\label{additional-reading}}
+Additional reading:
 
 \begin{itemize}
   \tightlist
