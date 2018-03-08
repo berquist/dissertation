@@ -399,10 +399,46 @@ In practice, the fully analytic third derivative is often not implemented, but s
 \end{align}
 In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{doi:10.1080/00268978000103541}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
 
-\subsection{Finite difference for numerical derivatives}
+\subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/80335/194}{Finite difference for numerical derivatives}}{Finite difference for numerical derivatives}}
 \label{ssec:finite-difference-for-numerical-derivatives}
 
-As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. These include the presence of finite-difference error due to step size sensitivity, the inability to handle frequency-dependent perturbations, the inability to handle response to applied magnetic fields without complex energies, and the poor calculation time scaling (especially for geometric derivatives). A particularly insidious example of errors related to the step size is given in Figure~\ref{fig:finite-difference-numerical-noise}. Many tests of numerical derivative errors consider relative or absolute accuracy in comparison to the exact analytic result. Figure~\ref{fig:finite-difference-numerical-noise} shows does not compare the error between the numerical and analytic results, but between matrix elements of the numerical result. In this case, the fundamental structure of the electric field response is violated: asymmetry implies that the polarizability is dependent on the order of which the probing electric fields are applied, and \eqref{eq:youngs-theorem} does not hold.
+Numerical differentiation for molecular properties is conceptually simple and relatively straightforward to implement. Consider the definition of a (first) derivative,
+\begin{equation}
+  \label{eq:explicit-derivative}
+  f'(x) = \lim_{h\rightarrow 0} \frac{f(x + h) - f(x)}{h},
+\end{equation}
+where \(f(x)\) is the function of an independent variable \(x\) being differentiated with respect to that variable. If \(h\) is set to a small finite number (\(h > 0\)),
+\begin{equation}
+  \label{eq:finite-difference-forward}
+  f'(x) \approx f'(x|h) = \frac{f(x + h) - f(x)}{h},
+\end{equation}
+the exact (analytic) derivative is approximated using a step size \(h\). \eqref{eq:finite-difference-forward} is the \textit{forward} (finite) difference, as the step is taken by incrementing the independent variable. More common is \textit{central} difference,
+\begin{equation}
+  \label{eq:finite-difference-central}
+  f'(x|h) = \frac{f(x + \frac{1}{2}h) - f(x - \frac{1}{2}h)}{h}.
+\end{equation}
+Replace \(f\) with the molecular energy, and let \(h\) be the strength of an applied electric field along the \(z\)-direction. \eqref{eq:finite-difference-central} becomes
+\begin{equation}
+  \label{eq:finite-difference-dipole}
+  \mu_{z}(h_{z}) = \frac{E(\frac{1}{2}h_{z}) - E(\frac{1}{2}h_{z})}{h_{z}},
+\end{equation}
+the \(z\)-component of the electric dipole moment. \(x\) disappears because the derivative is taken at zero field. \eqref{eq:finite-difference-dipole} may be useful for methods that do not commonly have analytic derivatives of any order, such as CCSDT. Of more interest is replacing the energies with analytic dipole moments to give an element of the polarizability tensor:
+\begin{equation}
+  \label{eq:finite-difference-polarizability}
+  \alpha_{xz}(h_{x}) = \frac{\mu_{z}(\frac{1}{2}h_{x}) - \mu_{z}(\frac{1}{2}h_{x})}{h_{x}}.
+\end{equation}
+\eqref{eq:finite-difference-polarizability} is an example of a mixed analytic/numerical derivative as discussed in section~\ref{ssec:derivative-evaluation}. A fully-numeric polarizability calculation would require applying 2nd-order central difference,
+\begin{equation}
+  \label{eq:finite-difference-central-2}
+  f''(x|h) = \frac{f(x + h) - 2f(x) - f(x - h)}{h^{2}},
+\end{equation}
+to give
+\begin{equation}
+  \label{eq:finite-difference-polarizability2}
+  \alpha_{zz}(h_{z}) = \frac{E(h_{z}) - 2E_{0} - E(h_{z})}{h_{z}^{2}}.
+\end{equation}
+
+As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. These include the presence of finite-difference error due to step size sensitivity, the inability to handle frequency-dependent perturbations, the inability to handle response to applied magnetic fields without complex energies, and the poor calculation time scaling (especially for geometric derivatives). A particularly insidious example of error related to the step size is given in Figure~\ref{fig:finite-difference-numerical-noise}. Many tests of numerical derivative errors consider relative or absolute accuracy in comparison to the exact analytic result. Figure~\ref{fig:finite-difference-numerical-noise} does not compare the error between the numerical and analytic results, but between matrix elements of the numerical result. In this case, the fundamental structure of the electric field response is violated: asymmetry implies that the polarizability is dependent on the order of which the probing electric fields are applied, and \eqref{eq:youngs-theorem} does not hold, giving an unphysical result.
 
 \begin{figure}
   \centering
