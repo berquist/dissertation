@@ -402,18 +402,7 @@ In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\
 \subsection{Finite difference for numerical derivatives}
 \label{ssec:finite-difference-for-numerical-derivatives}
 
-% \begin{itemize}
-% \item calculation time
-% \item uncoupled and perturbative approximations to fully iterative results
-% \item lack of finite-difference error
-% \item frequency-dependent perturbations
-% \item response to applied magnetic fields without complex energies
-% \end{itemize}
-% As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. The most commonly encountered disadvantage is calculation time: compared to a single closed-form calculation, external (electric and magnetic) field perturbations require 6 additional calculations for each derivative order, and those depending on nuclear displacements require \(6N\) additional calculations. Admittedly, it is difficult to compare calculation time further since the cost of analytic methods is not independent of system size, but the
-
-As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction.
-
-\fxnote{TODO numerical noise in Figure~\ref{fig:finite-difference-numerical-noise}}
+As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss2000}, there are considerable disadvantages to performing numerical differentiation of the wavefunction. These include the presence of finite-difference error due to step size sensitivity, the inability to handle frequency-dependent perturbations, the inability to handle response to applied magnetic fields without complex energies, and the poor calculation time scaling (especially for geometric derivatives). A particularly insidious example of errors related to the step size is given in Figure~\ref{fig:finite-difference-numerical-noise}. Many tests of numerical derivative errors consider relative or absolute accuracy in comparison to the exact analytic result. Figure~\ref{fig:finite-difference-numerical-noise} shows does not compare the error between the numerical and analytic results, but between matrix elements of the numerical result. In this case, the fundamental structure of the electric field response is violated: asymmetry implies that the polarizability is dependent on the order of which the probing electric fields are applied, and \eqref{eq:youngs-theorem} does not hold.
 
 \begin{figure}
   \centering
