@@ -368,7 +368,7 @@ class helper_CPHF(object):
         self.polar = np.empty((3, 3))
         for numx in range(3):
             for numf in range(3):
-                self.polar[numx, numf] = self.x[numx].dot(self.rhsvecs[numf])
+                self.polar[numx, numf] = self.x[numx].dot(self.rhsvecs[numf])|\label{line:form_polarizability}|
 
 if __name__ == '__main__':
     print('\n')

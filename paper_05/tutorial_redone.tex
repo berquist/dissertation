@@ -16,7 +16,7 @@ __date__      = "2017-12-19"
 %   \subsection{Introduction}\label{introduction}}
 \subsubsection{Introduction}
 
-In Tutorial 6a, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed Hartree-Fock (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
+In \href{https://github.com/psi4/psi4numpy/blob/066f378f26240a4802371ef32849230853581329/Tutorials/06_Molecular_Properties/6a_CP-SCF.ipynb}{Tutorial 6a}, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed Hartree-Fock (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
 \begin{equation}
   E(\mathbf{E}) = \sum_{n=0}^{\infty} \frac{1}{n!}E^{(n)}(\mathbf{a})\cdot(\mathbf{E}-\mathbf{a})^{n},
 \end{equation}
@@ -41,7 +41,7 @@ Translated into the language of analytic derivative theory, is it represented as
 \begin{equation}
   \beta_{abc} = \left.\frac{\partial^{3} E}{\partial E_a \partial E_b \partial E_c}\right|_{\mathbf{E}=\mathbf{0}},
 \end{equation}
-though it is not yet clear how to take derivatives of the energy beyond what is presented in tutorial 6a. Additionally, nothing has been stated about time dependence; everything to this point has been the static case, where the strength of fields do not vary with time. We will first incorporate time dependence, and equations for derivative theory will result.
+though it is not yet clear how to take derivatives of the energy beyond what is presented in \href{https://github.com/psi4/psi4numpy/blob/066f378f26240a4802371ef32849230853581329/Tutorials/06_Molecular_Properties/6a_CP-SCF.ipynb}{tutorial 6a}. Additionally, nothing has been stated about time dependence; everything to this point has been the static case, where the strength of fields do not vary with time. We will first incorporate time dependence, and equations for derivative theory will result.
 
 \hypertarget{notation}{%
   \subsubsection{Notation}\label{notation}}
@@ -271,7 +271,7 @@ either directly (via matrix inversion in the MO basis) or iteratively (via repea
   \end{pmatrix}
   . \tag{Neese 107}
 \end{equation}
-In the static limit \((\omega_f = 0)\), the whole superoverlap matrix vanishes, and the CPHF equations can be reduced to those used in tutorial 6a.
+In the static limit \((\omega_f = 0)\), the whole superoverlap matrix vanishes, and the CPHF equations can be reduced to those used in \href{https://github.com/psi4/psi4numpy/blob/066f378f26240a4802371ef32849230853581329/Tutorials/06_Molecular_Properties/6a_CP-SCF.ipynb}{tutorial 6a}.
 
 \begin{minted}[]{python}
 solver = helper_CPHF(mol)

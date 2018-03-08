@@ -81,7 +81,7 @@ However, in the context of this work, molecular response is sometimes used inter
 
 \fxnote{polarization propagator}
 
-The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, a non-Hermitian eigenvalue problem is solved for \((\mathbf{G} - \mathbf{\omega\Omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{G}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the transitions between the states of the system in the given MO basis, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{GU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals caused by the perturbation. Details about the solution of the CPHF equations are given in section \fxnote{TODO}, and a basic implementation is given in section~\ref{paper_05:ssec:hyperpolarizability_reference_implementation} using the electric dipole operator as the perturbation. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, namely the residues of the response function (eigenvectors from the TD equation combined with the operator of interest), describe the perturbation-mediated transitions between states.
+The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, a non-Hermitian eigenvalue problem is solved for \((\mathbf{G} - \mathbf{\omega\Omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{G}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the transitions between the states of the system in the given molecular orbital (MO) basis, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{GU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals caused by the perturbation. Details about the solution of the CPHF equations are given in section \fxnote{TODO}, and a basic implementation is given in section~\ref{paper_05:ssec:hyperpolarizability_reference_implementation} using the electric dipole operator as the perturbation. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, namely the residues of the response function (eigenvectors from the TD equation combined with the operator of interest), describe the perturbation-mediated transitions between states.
 
 The solution of the CPSCF equations to calculate the parameters that describe the wavefunction's response to the perturbation \(\hat{V}\) determines the \emph{linear response} of the system. Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent. This thesis is primarily concerned with static response properties, however an introduction to dynamic response is presented. The most common formulation of these equations is single-particle in nature, with both particle-hole and hole-particle terms, giving the \emph{random phase approximation} (RPA). If not the external perturbation but response equations themselves are expanded using order analysis, the \hf{} equations give the zeroth-order polarization propagator, RPA corresponds to the first-order polarization propagator, and the full two-particle terms are part of the second-order polarization propagator (SOPPA)\cite{ODDERSHEDE198433}.
 
@@ -295,6 +295,7 @@ The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{
 \begin{align}
   \left( \frac{\partial}{\partial F_{j}} \right) \left( \alpha_{ij} F_{j} \right) &= \left( \frac{\partial}{\partial F_{j}} \right) \left( \frac{\partial E}{\partial F_{i}} \right) \\
   \Ccancelto[carmine]{0}{\left( \frac{\partial \alpha_{ij}}{\partial F_{j}} \right)} F_{j} + \alpha_{ij} \Ccancelto[Green]{1}{\left( \frac{\partial F_{j}}{\partial F_{j}} \right)} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}} \\
+  \label{eq:polarizability-derivative-definition}
   \alpha_{ij} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}}
 \end{align}
 
@@ -399,7 +400,7 @@ In practice, the fully analytic third derivative is often not implemented, but s
 \end{align}
 In \eqref{eq:raman-intensity-from-polarizability} there are \(2 \times (3N \,\,\text{atomic coordinates}) = 6N\) atom-displaced polarizability calculations. This is closer to the textbook definition of Raman intensities, which are the change in molecular polarizability along each normal mode coordinate\cite{doi:10.1080/00268978000103541}. In \eqref{eq:raman-intensity-from-dipgrad}, the dipole gradient (needed for IR intensities) is calculated analytically for \(2 \times (3 \,\,\text{field directions}) = 6\) finite electric field calculations.
 
-\subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/80335/194}{Finite difference for numerical derivatives}}{Finite difference for numerical derivatives}}
+\subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/80335/194}{\color{black}{Finite difference for numerical derivatives}}}{Finite difference for numerical derivatives}}
 \label{ssec:finite-difference-for-numerical-derivatives}
 
 Numerical differentiation for molecular properties is conceptually simple and relatively straightforward to implement. Consider the definition of a (first) derivative,
@@ -449,7 +450,7 @@ As discussed in section~\ref{ssec:decomp-line-resp} and Ref.~\parencite{gauss200
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/89831/194}{\color{black}{Analytic derivative theory}}}{Analytic derivative theory}}
 \label{ssec:analytic-derivative-theory}
 
-As mentioned in section~\ref{ssec:derivative-evaluation}, the first requirement for evaluating analytic energy derivatives is to form the necessary mathematical expression. In the most general case, there are both derivatives of the AO-basis integrals themselves and of the density matrix, which leads to derivatives of the MO coefficients. To illustrate some of the mechanics of differentiation, consider the derivative of the MO-basis matrix representation of the electron-nuclear attraction operator \(\hat{V}_{eN}\) with respect to a nuclear coordinate \(X_{A}\), which is a term needed for the molecular gradient:
+As mentioned in section~\ref{ssec:derivative-evaluation}, the first requirement for evaluating analytic energy derivatives is to form the necessary mathematical expression. In the most general case, there are both derivatives of the atomic orbital (AO) basis integrals themselves and of the density matrix, which leads to derivatives of the MO coefficients. To illustrate some of the mechanics of differentiation, consider the derivative of the MO-basis matrix representation of the electron-nuclear attraction operator \(\hat{V}_{eN}\) with respect to a nuclear coordinate \(X_{A}\), which is a term needed for the molecular gradient:
 \begin{align}
   \label{eq:yamaguchi-3.80}\tag{Yamaguchi eq. 3.80}
   \frac{\partial V_{ij}}{\partial X_{A}} &= \frac{\partial}{\partial X_{A}} \left( \sum_{\mu\nu}^{\text{AO}} C_{\mu i} C_{\nu j} V_{\mu\nu} \right) \\
@@ -569,7 +570,7 @@ to use the energy-weighted density matrix \(\mathbf{W}\), also sometimes called 
 \begin{equation}
   \label{eq:szabo-c12}
   \tag{Szabo \& Ostlund eq. C.12}
-  \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{\mu\nu}^{\text{AO}} P_{\mu\nu} h_{\mu\mu}^{X_{A}} + \sum_{\mu\nu\lambda\sigma}^{\text{AO}} P_{\mu\nu}P_{\lambda\sigma} \left\{ 2(\mu\nu|\lambda\sigma)^{X_{A}} - (\mu\lambda|\nu\sigma)^{X_{A}} \right\} - 2 \sum_{\mu\nu}^{\text{AO}} Q_{\mu\nu} S_{\mu\nu}^{X_{A}} + V_{NN}^{X_{A}}
+  \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{\mu\nu}^{\text{AO}} P_{\mu\nu} h_{\mu\nu}^{X_{A}} + \sum_{\mu\nu\lambda\sigma}^{\text{AO}} P_{\mu\nu}P_{\lambda\sigma} \left\{ 2(\mu\nu|\lambda\sigma)^{X_{A}} - (\mu\lambda|\nu\sigma)^{X_{A}} \right\} - 2 \sum_{\mu\nu}^{\text{AO}} Q_{\mu\nu} S_{\mu\nu}^{X_{A}} + V_{NN}^{X_{A}}
 \end{equation}
 
 Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why density or MO coefficient derivatives are not present in the gradient expression.
@@ -585,40 +586,16 @@ Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another n
     &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
   \end{aligned}
 \end{equation}
-where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable. \fxnote{TODO this is where I discuss how since only one set of U needs to be formed for a second derivative, it is computationally advantageous to do so for the ``cheapest'' perturbation, but here it looks like there's two sets of U matrices?}
+where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable.
 
-\fxnote{TODO lead in to \hefe{}; many terms disappear if the basis functions are not perturbation dependent}
-
-\subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/81350/194}{\color{black}{The \hefe{} theorem}}}{The Hellmann-Feynman Theorem}}
-
-Given the standard energy expression,
+However, the case of the molecular Hessian is an exceptional one, because the AOs are perturbation-dependent: for a fixed electron position, the amplitude of a basis function will change if it moved, and they are typically atom-centered. In the case that the basis set is \textit{not} perturbation dependent, as is most often in the case in electric field perturbations, \eqref{eq:yamaguchi-4.54-and-4.55-and-3.127} reduces to
 \begin{equation}
-  E = \Braket{\psi|\hat{H}|\psi},
+  \label{eq:yamaguchi-17.54} \tag{Yamaguchi eq. 17.54}
+  \frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}} = -4 \sum_{a}^{\text{virt}} \sum_{i}^{\text{d.o.}} U_{ai}^{F_{\beta}} h_{ai}^{F_{\alpha}},
 \end{equation}
-where \(\psi\) is an orthonormal state, and it is assumed that \(\hat{H}\) and \(\psi\) (and therefore \(E\)) explicitly depend on \(P\),
-\begin{align}
-  \label{eq:hellmann-feynman-step1}
-  \frac{\mathrm{d}E}{\mathrm{d}P} &= \Braket{\frac{\partial\psi}{\partial P}|\hat{H}|\psi} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} + \Braket{\psi|\hat{H}|\frac{\partial\psi}{\partial P}} \\
-  \label{eq:hellmann-feynman-step2}
-                                  &= E\Braket{\frac{\partial\psi}{\partial P}|\psi} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} + E\Braket{\psi|\frac{\partial\psi}{\partial P}} \\
-  \label{eq:hellmann-feynman-step3}
-                                  &= E\frac{\mathrm{d}}{\mathrm{d}P}\Ccancelto[Green]{1}{\Braket{\psi|\psi}} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} \\
-  \label{eq:hellmann-feynman-step4}
-                                  &= E\Ccancelto[carmine]{0}{\frac{\mathrm{d}}{\mathrm{d}P}(1)} + \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} \\
-  \label{eq:hellmann-feynman-step5}
-                                  &= \Braket{\psi|\frac{\partial\hat{H}}{\partial P}|\psi} \\
-  \label{eq:hellmann-feynman-step6}
-                                  &= \Braket{\frac{\partial\hat{H}}{\partial P}}.
-\end{align}
-The energy appears in the last term of \eqref{eq:hellmann-feynman-step2} due to the hermiticity of the Hamiltonian, allowing it to act on the bra:
-\begin{equation}
-  \begin{aligned}
-    \Braket{\psi|\hat{H}|\frac{\partial\psi}{\partial P}} &= \Braket{\psi|\hat{H}^{\dagger}|\frac{\partial\psi}{\partial P}} \\
-    &= \left( \Bra{\psi \hat{H}^{\dagger}} \right) \Ket{\frac{\partial\psi}{\partial P}} \\
-    &= \left( \Bra{\psi} E \right) \Ket{\frac{\partial\psi}{\partial P}} \\
-    &= E\Braket{\psi|\frac{\partial\psi}{\partial P}}
-  \end{aligned}
-\end{equation}
+where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see section~\ref{TODO} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}).
+
+The form of \eqref{eq:yamaguchi-17.54} should make it clear that for a second derivative of an HF wavefunction, only one set \(\mathbf{U}\) matrices is needed. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices, but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) would only require \(3\) \(\mathbf{U}\) matrices.
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
