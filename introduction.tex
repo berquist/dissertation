@@ -85,55 +85,47 @@ The response equations relevant for this work are the coupled perturbed \hf{} (C
 
 The solution of the CPSCF equations to calculate the parameters that describe the wavefunction's response to the perturbation \(\hat{V}\) determines the \emph{linear response} of the system. Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent. This thesis is primarily concerned with static response properties, however an introduction to dynamic response is presented. The most common formulation of these equations is single-particle in nature, with both particle-hole and hole-particle terms, giving the \emph{random phase approximation} (RPA). If not the external perturbation but response equations themselves are expanded using order analysis, the \hf{} equations give the zeroth-order polarization propagator, RPA corresponds to the first-order polarization propagator, and the full two-particle terms are part of the second-order polarization propagator (SOPPA)\cite{ODDERSHEDE198433}.
 
+\fxnote{minus sign in front of series expansion terms}
+
 \section[\texorpdfstring{\caps{Macroscopic and Microscopic Response Connections}}{Macroscopic and Microscopic Response Connections}]{\texorpdfstring{\caps{Connection Between Macroscopic and Microscopic Properties}}{Connection Between Macroscopic and Microscopic Properties}}
 \label{sec:connection-between-macroscopic-and-microscopic}
 
 \begin{table}
   \centering
-  \caption[Connection between energy derivatives and molecular properties]{Connection between specific energy derivatives and their respective molecular properties. \(F\) is an applied electric field, \(B\) is an applied magnetic field, \(X\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}.\label{tab:gauss}}
+  \caption[Connection between energy derivatives and molecular properties]{Connection between specific energy derivatives and their respective molecular properties. \(F\) is an applied electric field, \(B\) is an applied magnetic field, \(X\) is a nuclear coordinate, \(m\) is a nuclear magnetic moment, \(J\) is a total rotational moment, \(I\) is a nuclear spin, and \(S\) is the intrinsic electronic spin. Adapted from Ref.~\parencite{gauss2000}~and~\parencite{jensen2013introduction}.\label{tab:gauss}}
   \begin{singlespace}
     \begin{tabulary}{0.85\textwidth}{rL}
       \toprule
       \textbf{Energy derivative} & \textbf{Molecular property} \\
       \midrule
       \(\frac{dE}{dF_{i}}\)                          & \href{https://chemistry.stackexchange.com/q/31075/194}{\color{black}{dipole moment}}; in a similar manner also multipole moments, electric field gradients, etc. \\
-      \(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)       & polarizability \\
-      \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) hyperpolarizability \\
+      \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
       \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+      \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
+      \(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)       & (electric) polarizability \\
       \(\frac{d^{2}E}{dX_{i}dX_{j}}\)                & harmonic force constants; harmonic vibrational frequencies \\
-      \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
-      \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)    & quartic force constants; anharmonic corrections to vibrational frequencies \\
       \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; infrared intensities within the harmonic approximation \\
-      \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
       \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
       \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
       \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
       \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
       \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
-      \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
       \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
+      \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
+      \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
+      \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
+      \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
+      \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
+      \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
+      \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
+      \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
+      \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
       \bottomrule
     \end{tabulary}
   \end{singlespace}
 \end{table}
 
-% The experimentalist works at the macroscopic level and typically records the reponse of the electromagnetic field.
-% The theoretician works at the microscopic level and typically calculates the molecular response.
-
-There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. \fxnote{TODO Although there is often quite some distance in terms of mathematical derivation and code development effort between the succinct representation on the left and the property on the right of each table, these are the true starting points for molecular property calculations based on quantum chemistry.}
-
-% More appropriate for time- or frequency-dependent response properties
-%TODO
-% Poles and residues
-% residues lead to transition moments
-% A residue analysis provides a mean to obtain \textit{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
-% \begin{equation*}
-%   \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
-% \end{equation*}
-% Spin-orbit coupling constants between singlet/triplet states correspond to the residue of the triplet linear response function:
-% \begin{equation*}
-%   \lim_{\omega \to \omega_{f}} (\omega - \omega_{f}) \braket{\braket{\hat{H}_{\text{so}};\hat{V}^{\omega_{f}}}}
-% \end{equation*}
+There is often a direct connection between the macroscopic observables measurable by spectroscopic techniques and the molecular response calculated at the microscopic scale. Tables~\ref{tab:gauss}~and~\ref{tab:norman} give examples of the most common molecular properties of interest and their relationships to energy derivatives and response functions, respectively. Although the effort required for implementing general energy derivatives may be considerable, the entries in both tables are the true starting points for molecular property calculations based on quantum chemical wavefunctions.
 
 \begin{table}
   \centering
@@ -361,7 +353,7 @@ where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)
   \label{eq:electric-and-magnetic-field-expansion}
   E(\mathbf{F}, \mathbf{B}) = E_{0} + \mu_{i} \cdot F_{i} + m_{i} \cdot B_{i} + \frac{1}{2} \left( \alpha_{ij} \cdot F_{i}F_{j} + \xi_{ij} \cdot B_{i}B_{j} + G_{ij} \cdot F_{i}B_{j} \right) \dots,
 \end{equation}
-where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in Table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in Table~\ref{tab:norman}. Section~\ref{sec:dynamic-properties} will show how frequency dependence can be properly introduced to this term and in general.
+where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in Table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}}\) in Table~\ref{tab:norman}. Section~\ref{sec:dynamic-properties} will show how frequency dependence can be properly introduced to this term and in general.
 
 % \begin{equation}
 %   \mu_{j}^{(1)}(\omega) = \sum_{k} \alpha_{jk}(\omega) E_{k}(\omega) + \frac{i\omega}{c} \sum_{k} G_{jk}(\omega) B_{k}(\omega) + \sum_{kl} P_{jkl}(\omega) \frac{\partial E_{k}(\omega)}{\partial l} + O\left(\frac{1}{\lambda^{2}}\right)
@@ -883,6 +875,14 @@ which is also nonzero only for the static case. Performing the same steps for th
   \end{aligned}
 \end{equation}
 which finally does not vanish for \(\omega \neq 0\). Physically, it corresponds to the absorption of a virtual photon due to \(\hat{B}\) that probes the excited states of the system, followed by emission of a photon due to \(\hat{A}\), which is allowed due to net energy conservation. \(\mathcal{Q}^{(11)}\) is the \emph{linear response function} of operators \(\hat{A}\) and \(\hat{B}\) in the spectral representation and it is often denoted as \(\mathcal{Q}^{(11)} = \braket{\braket{\hat{A};\hat{B}}}_{\omega}\) (see Table~\ref{tab:norman}). Physically, it can be viewed as the change in the expectation value of the operator \(\hat{A}\) due to the perturbation \(\hat{B}e^{-i\omega t}\). Due to the pole structure introduced by the denominator (with de-excitation energies arising from the second term), \eqref{eq:59} contains information about all the excitation energies of the system. Higher-order derivatives of the quasienergy lead to non-linear response functions: third derivatives correspond to quadratic response, and fourth derivatives correspond to cubic response, and so on.
+
+\subsection{Residues}
+
+% A residue analysis provides a mean to obtain \emph{excited state properties} from the ground state response function. The poles equal excitation energies and the residues are given by
+% \begin{equation}
+%   \label{eq:residue}
+%   \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{A};\hat{B}^{\omega_{1}}}} = \braket{0|\hat{A}|n} \braket{n|\hat{B}^{\omega_{1}}|0}
+% \end{equation}
 
 \onlyifstandalone{\printbibliography}
 % Karna JCC:JCC540120409
