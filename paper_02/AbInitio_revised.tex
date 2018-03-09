@@ -57,7 +57,7 @@ The text in this chapter has been adapted from \fullcite{Berquist2017}. The auth
 \section{\texorpdfstring{\caps{Summary}}{Summary}}
 \label{paper_02:sec:summary}
 
-This work elucidates the molecular binding mechanism of \ce{CO2} in \ce{[C4C1im][PF6]} ionic liquid (IL) and its interplay with the \ce{CO2} asymmetric stretch frequency \(\nu_{3}\), and establishes computational protocols for the reliable construction of spectroscopic maps for simulating ultrafast 2D-IR data of \ce{CO2} solvated in ILs. While charge transfer drives the static frequency shift between \emph{different} ionic liquids [\emph{J. Chem. Phys.} \textbf{142}, 212425 (2015)], we find here that electrostatic and Pauli repulsion effects dominate the dynamical frequency shift between different geometries sampled from the finite-temperature dynamics within a single ionic liquid. This finding is also surprising because dispersion interactions dominate the \cotil interaction energies, but are comparably constant across different geometries. An important practical consequence of this finding is that density functional theory is expected to be sufficiently accurate for constructing potential energy surfaces for \ce{CO2} in \ce{[C4C1im][PF6]}, as needed for accurate anharmonic calculations to construct a reliable spectroscopic map. Similarly, we established appropriate computational and chemical models for treating the extended solvent environment. We found that a QM/MM treatment including at least \num{2} cation-ion pairs at the QM level and at least \num{32} pairs at the MM level is necessary to converge vibrational frequencies to within \SI{1}{\wavenumber}. Using these insights, this work identifies a computational protocol as well as a chemical model necessary to construct accurate spectroscopic maps from first principles.
+This work elucidates the molecular binding mechanism of \ce{CO2} in \ce{[C4C1im][PF6]} ionic liquid (IL) and its interplay with the \ce{CO2} asymmetric stretch frequency \(\nu_{3}\), and establishes computational protocols for the reliable construction of spectroscopic maps for simulating ultrafast 2D-IR data of \ce{CO2} solvated in ILs. While charge transfer drives the static frequency shift between \emph{different} ionic liquids [\parencite{Brinzer2015}], we find here that electrostatic and Pauli repulsion effects dominate the dynamical frequency shift between different geometries sampled from the finite-temperature dynamics within a single ionic liquid. This finding is also surprising because dispersion interactions dominate the \cotil interaction energies, but are comparably constant across different geometries. An important practical consequence of this finding is that density functional theory is expected to be sufficiently accurate for constructing potential energy surfaces for \ce{CO2} in \ce{[C4C1im][PF6]}, as needed for accurate anharmonic calculations to construct a reliable spectroscopic map. Similarly, we established appropriate computational and chemical models for treating the extended solvent environment. We found that a QM/MM treatment including at least \num{2} cation-ion pairs at the QM level and at least \num{32} pairs at the MM level is necessary to converge vibrational frequencies to within \SI{1}{\wavenumber}. Using these insights, this work identifies a computational protocol as well as a chemical model necessary to construct accurate spectroscopic maps from first principles.
 
 \section{\texorpdfstring{\caps{Introduction}}{Introduction}}
 \label{paper_02:sec:I}
@@ -547,6 +547,24 @@ To confirm that the good agreement in relative trends is not an artifact of the 
 
 \begin{table}
   \centering
+  \caption[Solvatochromic shift dependence on charge transfer]{Effect of allowing or disallowing charge transfer using the ALMO approximation when applied during geometry optimization and/or the harmonic frequency calculation. on the \ce{CO2} \(\nu_3\) harmonic frequency. Clusters are with 1 \ce{CO2}, 1 MMIM cation, and 1 anion. All frequencies are in \si{\wavenumber} and unscaled. All calculations were performed using B3LYP/SP with a (100,302) grid.}
+  \begin{tabular}{cSSSS}
+    \toprule
+    Anion & {full} & {\makecell{ALMO geom \\ SCF Hessian}} & {\makecell{ALMO geom \\ ALMO Hessian}} & {\makecell{SCF geom \\ ALMO Hessian}} \\
+    \midrule
+    \ce{[BF4]-} & 2434.70 & 2438.56 & 2441.62 & 2437.69 \\
+    \ce{[DCA]-} & 2430.90 & 2439.10 & 2442.59 & 2434.75 \\
+    \ce{[PF6]-} & 2437.50 & 2438.47 & 2441.03 & 2440.03 \\
+    \ce{[SCN]-} & 2430.30 & 2438.78 & 2441.37 & 2433.14 \\
+    \ce{[TFA]-} & 2429.80 & 2438.39 & 2441.06 & 2432.93 \\
+    \ce{[Tf2N]-} & 2437.70 & 2438.76 & 2440.85 & 2439.46 \\
+    \ce{[TfO]-} & 2433.90 & 2439.37 & 2442.54 & 2436.75 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}
+  \centering
   \caption[Solvatochromic shift dependence on counterpoise corrections]{Effect of counterpoise correction on \ce{CO2} \(\nu_3\) harmonic frequency when applied during geometry optimization and/or the harmonic frequency calculation. Clusters are with 1 \ce{CO2}, 1 MMIM cation, and 1 anion. All frequencies are in \si{\wavenumber} and unscaled. The first column is from our previous paper. CP-corrected calculations were performed using Cuby as a driver for Turbomole 6.6 at the B3LYP/SP level with numerical integration grid 7.}
   \label{paper_02:tab:S4}
   CP-correction for geometry? / CP-correction for frequencies?
@@ -566,6 +584,59 @@ To confirm that the good agreement in relative trends is not an artifact of the 
   \end{tabular}
 \end{table}
 
+\begin{table}
+  \centering
+  \caption[Counterpoise correction analysis for \ce{[C1C1im][BF4]}]{Counterpoise correction analysis for \ce{[C1C1im][BF4]}. All calculations use B3LYP/SP. The CP geometry is from Cuby driving Turbomole. The no CP geometry is from Q-Chem. (100,302) is the grid used in all calculations for the 1st paper\cite{Brinzer2015}.}
+  \begin{threeparttable}
+    \begin{tabular}{ccccS}
+      \toprule
+      Geometry? & Hessian? & Program & XC grid & {Frequency (\si{\wavenumber})} \\
+      \midrule
+      CP & CP & Cuby (Turbomole) & 7 & 2450.89 \\
+      CP & CP & Cuby (Turbomole) & m5 & 2450.871 \\
+      CP & no CP & Cuby (Turbomole) & 7 & 2435.634 \\
+      CP & no CP & Turbomole & 7 & 2434.72\tnote{1} \\
+      CP & no CP & Q-Chem & (75,302) & 2431.55 \\
+      CP & no CP & Q-Chem & (100,302) & 2431.48\tnote{2} \\
+      CP & no CP & Q-Chem & (99,590) & 2431.77\tnote{3} \\
+      no CP & no CP & Q-Chem & (100,302) & 2434.69 \\
+      no CP & CP & Cuby (Turbomole) & 7 & 2454.767 \\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+    \item[1] Difference Hessian no CP/CP: \(2450.89 - 2434.72 = 16.17\)
+    \item[2] \((100,302) - (75,302) = -0.07\)
+    \item[3] \((99,590) - (75,302) = 0.22\)
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
+\begin{table}
+  \centering
+  \caption[Counterpoise correction analysis for \ce{[C1C1im][PF6]}]{Counterpoise correction analysis for \ce{[C1C1im][PF6]}. All calculations use B3LYP/SP. The CP geometry is from Cuby driving Turbomole. The no CP geometry is from Q-Chem. (100,302) is the grid used in all calculations for the 1st paper\cite{Brinzer2015}.}
+  \begin{threeparttable}
+    \begin{tabular}{ccccS}
+      \toprule
+      Geometry? & Hessian? & Program & XC grid & {Frequency (\si{\wavenumber})} \\
+      \midrule
+      CP & CP & Cuby (Turbomole) & 7 & 2469.473 \\
+      CP & no CP & Cuby (Turbomole) & 7 & 2436.846 \\
+      CP & no CP & Turbomole & 7 & 2435.93\tnote{1} \\
+      CP & no CP & Q-Chem & (75,302) & 2432.81 \\
+      CP & no CP & Q-Chem & (100,302) & 2432.58\tnote{2} \\
+      CP & no CP & Q-Chem & (99,590) & 2432.99\tnote{3} \\
+      no CP & no CP & Q-Chem & (100,302) & 2437.74 \\
+      no CP & CP & Cuby (Turbomole) & 7 & 2479.806 \\
+      \bottomrule
+    \end{tabular}
+    \begin{tablenotes}
+    \item[1] Difference Hessian no CP/CP: \(2469.473 - 2435.93 = 33.543\)
+    \item[2] \((100,302) - (75,302) = -0.23\)
+    \item[3] \((99,590) - (75,302) = 0.18\)
+    \end{tablenotes}
+  \end{threeparttable}
+\end{table}
+
 \subsection{Potential Energy Surface Fitting}
 \label{paper_02:ssec:SI5}
 
@@ -579,7 +650,7 @@ We fitted the discrete variable representation (DVR) of the Born-Oppenheimer pot
     & + c_{1}( x - x_{0} )^{4} + c_{2}( y - y_{0} )^{4}
   \end{split}
 \end{equation*}
-The resulting fit to the data was excellent (\(R^2 = 0.9997\)).
+The resulting fit to the data was excellent (\(R^2 = 0.9997\)). The parameters are given in Table~\ref{paper_02:tab:S5}.
 
 The force constants and internal coordinates were calculated (the F matrix) and multiplied by the appropriate mass weighting (G matrix). The product was diagonalized to obtain eigenvalues and eigenvectors, which give the normal modes and frequencies of the symmetric stretch (\(\nu_{1} = \SI{1377}{\wavenumber}\)) and antisymmetric stretch (\(\nu_{3} = \SI{2414}{\wavenumber}\)).
 
@@ -695,8 +766,6 @@ To test the qualitative accuracy of the calculations using smaller QM regions, w
   \caption[Self-correlation of QM/MM frequencies with increasing QM region size]{Correlation plots for QM/MM harmonic frequencies of \num{10} MD snapshots, with increasing numbers of anion-cation pairs treated quantum mechanically.}
   \label{paper_02:fig:S5}
 \end{figure}
-
-% TODO contents of Excel spreadsheet
 
 \onlyifstandalone{\printbibliography}
 \end{document}
