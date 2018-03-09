@@ -62,6 +62,7 @@ preview = false,%
 \onlyifstandalone{\listoffixmes}
 \chapter{Introduction}
 \label{ch:introduction}
+\newcommand{\ks}{Kohn\textendash{}Sham}
 
 The unifying theme of this thesis is that it is possible to identify the contribution of specific intermolecular interactions to spectroscopic response. The contributions of specific intermolecular interactions are in the language of energy decomposition analysis using absolutely localized molecular orbitals, abbreviated as ALMO-EDA. The necessary background for ALMO-EDA is given in sections~\ref{sec:introduction}.
 
@@ -72,6 +73,7 @@ The remainder of this introduction will cover the basic language of molecular re
 For more background literature on the theoretical development and applications of response theory to molecular properties, see reviews by Gauss\cite{gauss2000}, Neese\cite{NEESE2009526}, Norman\cite{C1CP21951K}, Helgaker\cite{doi:10.1021/cr2002239} and books by Szabo\cite{szabo1989modern}, McWeeny\cite{mcweeny1989methods}, Yamaguchi\cite{Yamaguchi1994}, and Barron\cite{barron2004molecular}.
 
 \section{\texorpdfstring{\caps{Terms and Fundamental Definitions}}{Terms and Fundamental Definitions}}
+\label{sec:terms-and-fundamental-definitions}
 
 Throughout the introduction and the remainder of this thesis, a number of terms appear and may seem to be used interchangeably. In quantum chemistry literature, the phrase \emph{molecular property} is used to denote any quantity that can be calculated from the wavefunction. By this definition, not all molecular properties are \emph{observables}, as they do not necessarily correspond to experimentally-measurable quantities. Such molecular properties may not also be uniquely defined. One of the most prominent examples of non-observable molecular properties is the calculation of atomic partial charges, with Mulliken and L{\"{o}}wdin population analyses being the two most commonly-known partitioning schemes for dividing the electron density into atomic contributions. However, this thesis associates molecular properties with observables, which may also be synonymous with \emph{physical properties}. The term \emph{chemical property} is avoided as it is more closely associated with reactivity than observable quantities.
 
@@ -79,9 +81,7 @@ The term \emph{response} also requires disambiguation. Experimentally, \emph{mol
 
 However, in the context of this work, molecular response is sometimes used interchangeably with \emph{response property}, which is intuitively a property associated with external applied fields, but here refers to any molecular property arising from the solution of the \emph{response equations} or \emph{response functions}.
 
-\fxnote{polarization propagator}
-
-The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, a non-Hermitian eigenvalue problem is solved for \((\mathbf{G} - \mathbf{\omega\Omega})\mathbf{U} = \mathbf{0}\), where \(\mathbf{G}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the transitions between the states of the system in the given molecular orbital (MO) basis, and the eigenvalues are the system's excitation energies (poles). In the CP equations, a set of linear equations are solved for \(\mathbf{GU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals caused by the perturbation. Details about the solution of the CPHF equations are given in section \fxnote{TODO}, and a basic implementation is given in section~\ref{paper_05:ssec:hyperpolarizability_reference_implementation} using the electric dipole operator as the perturbation. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, namely the residues of the response function (eigenvectors from the TD equation combined with the operator of interest), describe the perturbation-mediated transitions between states.
+The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed Kohn\textendash{}Sham (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, a non-Hermitian eigenvalue problem is solved for \((\mathbf{G} - \mathbf{\omega\Delta})\mathbf{U} = \mathbf{0}\), where \(\mathbf{G}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the transitions between the states of the system in the given molecular orbital (MO) basis, and the eigenvalues \(\omega\) are the system's excitation energies (poles)\footnote{\(\mathbf{\Delta}\) is an identity matrix, except the lower diagonal is negated.}. In the CP equations, a set of linear equations are solved for \(\mathbf{GU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals caused by the perturbation. Details about the solution of the CPHF equations are given in section~\ref{ssec:coupled-perturbed-equations}, and a basic implementation is given in section~\ref{paper_05:ssec:hyperpolarizability_reference_implementation} using the electric dipole operator as the perturbation. Although the remainder of this thesis will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, namely the residues of the response function (eigenvectors from the TD equation combined with the operator of interest), describe the perturbation-mediated transitions between states.
 
 The solution of the CPSCF equations to calculate the parameters that describe the wavefunction's response to the perturbation \(\hat{V}\) determines the \emph{linear response} of the system. Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent. This thesis is primarily concerned with static response properties, however an introduction to dynamic response is presented. The most common formulation of these equations is single-particle in nature, with both particle-hole and hole-particle terms, giving the \emph{random phase approximation} (RPA). If not the external perturbation but response equations themselves are expanded using order analysis, the \hf{} equations give the zeroth-order polarization propagator, RPA corresponds to the first-order polarization propagator, and the full two-particle terms are part of the second-order polarization propagator (SOPPA)\cite{ODDERSHEDE198433}.
 
@@ -544,12 +544,14 @@ Expanding the left-hand side of \eqref{eq:yamaguchi-3.45} in a manner identical 
 \end{align*}
 The sum over all MOs can be eliminated by reusing the orthonormality condition, so in the first term \(m \overset{!}{=} q\) and for the second term \(m \overset{!}{=} p\), and the overlap matrix in the MO basis is unity for those terms, giving
 \begin{equation}
-  \frac{\partial S_{pq}}{\partial X_{A}} = S_{pq}^{X_{A}} + U_{qp}^{X_{A}} + U_{pq}^{X_{A}} \overset{!}{=} 0. \tag{Yamaguchi eq. 3.46}
+  \label{eq:yamaguchi-3.46} \tag{Yamaguchi eq. 3.46}
+  \frac{\partial S_{pq}}{\partial X_{A}} = S_{pq}^{X_{A}} + U_{qp}^{X_{A}} + U_{pq}^{X_{A}} \overset{!}{=} 0.
 \end{equation}
 
 Recognizing that we only need diagonal terms, this can be rewritten as
 \begin{equation}
-  U_{pp}^{X_{A}} = -\frac{1}{2} S_{pp}^{X_{A}}, \tag{Yamaguchi eq. 4.20}
+  \label{eq:yamaguchi-4.20} \tag{Yamaguchi eq. 4.20}
+  U_{pp}^{X_{A}} = -\frac{1}{2} S_{pp}^{X_{A}},
 \end{equation}
 which is then plugged back into the first derivative expression to give
 \begin{align*}
@@ -593,9 +595,14 @@ However, the case of the molecular Hessian is an exceptional one, because the AO
   \label{eq:yamaguchi-17.54} \tag{Yamaguchi eq. 17.54}
   \frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}} = -4 \sum_{a}^{\text{virt}} \sum_{i}^{\text{d.o.}} U_{ai}^{F_{\beta}} h_{ai}^{F_{\alpha}},
 \end{equation}
-where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see section~\ref{TODO} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}).
+where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see section~\ref{TODO} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}). In general, when the AO basis is perturbation independent, the energy derivative with respect to two arbitrary perturbations \(\lambda\) and \(\theta\) can be written as
+\begin{equation}
+  \label{eq:neese-77} \tag{Neese eq. 77}
+  \frac{\partial^{2} E}{\partial \lambda \partial \theta} = \sum_{\mu\nu} \left( P_{\mu\nu} \frac{\partial^{2} h_{\mu\nu}}{\partial \lambda \partial \theta} + \frac{\partial P_{\mu\nu}}{\partial \theta} \frac{\partial h_{\mu\nu}}{\partial \lambda} \right),
+\end{equation}
+where the first term is an expectation value and the second term requires solution of the response equations.
 
-The form of \eqref{eq:yamaguchi-17.54} should make it clear that for a second derivative of an HF wavefunction, only one set \(\mathbf{U}\) matrices is needed. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices, but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) would only require \(3\) \(\mathbf{U}\) matrices.
+The form of \eqref{eq:yamaguchi-17.54} and \eqref{eq:neese-77} should make it clear that for a second derivative of an HF wavefunction, only one set \(\mathbf{U}\) matrices is needed. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices, but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) would only require \(3\) \(\mathbf{U}\) matrices.
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
@@ -886,6 +893,42 @@ which finally does not vanish for \(\omega \neq 0\). Physically, it corresponds 
 %   \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{A};\hat{B}^{\omega_{1}}}} = \braket{0|\hat{A}|n} \braket{n|\hat{B}^{\omega_{1}}|0}
 % \end{equation}
 
+\section{The coupled-perturbed equations}
+\label{ssec:coupled-perturbed-equations}
+
+While the solution of the coupled-perturbed equations has been alluded to in sections~\ref{sec:terms-and-fundamental-definitions}~and~\ref{ssec:analytic-derivative-theory}, little mention has been made of their form. \eqref{eq:yamaguchi-4.20} gives the diagonal elements, but in fact the entire occupied-occupied and virtual-virtual blocks can be fixed using the same condition:
+\begin{align}
+  \label{eq:neese-83} \tag{Neese eq. 83}
+  U_{ij}^{\lambda} &= -\frac{1}{2} S_{ij}^{(\lambda)} \\
+  \label{eq:neese-84} \tag{Neese eq. 84}
+  U_{ab}^{\lambda} &= -\frac{1}{2} S_{ab}^{(\lambda)}
+\end{align}
+because the SCF energy is invariant to orbital rotations within those spaces once it is converged. From these conditions and the remaining part of the orthonormality condition \eqref{eq:yamaguchi-3.46}, repeated with the appropriate complex conjugate,
+\begin{equation}
+  \label{eq:neese-85} \tag{Neese eq. 85}
+  U_{ia}^{\lambda} = -U_{ai}^{*} - S_{ia}^{(\lambda)}
+\end{equation}
+only the occupied-virtual block (\(ia\)) has not been formed. Starting from the Roothaan\textendash{}Hall or \ks{} equations (depending on the contents of the Fock operator),
+\begin{equation}
+  \label{eq:neese-78} \tag{Neese eq. 78}
+  \sum_{\nu} F_{\mu\nu} C_{\nu i} = \epsilon_{i} \sum_{\nu} S_{\mu\nu} C_{\nu i},
+\end{equation}
+differentiation with respect to a general perturbation \(\lambda\) gives
+\begin{equation}
+  \label{eq:neese-79} \tag{Neese eq. 79}
+  \sum_{\nu} \left( \frac{\partial F_{\mu\nu}}{\partial\lambda} C_{\nu i} + \left( F_{\mu\nu} - \epsilon_{i}S_{\mu\nu} \right) \frac{\partial C_{\nu i}}{\partial\lambda} \right) = \frac{\partial\epsilon_{i}}{\partial\lambda} \sum_{\nu} S_{\mu\nu} C_{\nu i} + \epsilon_{i} \sum_{\nu} \frac{\partial S_{\mu\nu}}{\partial\lambda} C_{\nu i},
+\end{equation}
+where the Fock or \ks{} matrix \(F_{\mu\nu}\) implicitly depends on the MO coefficients \(\mathbf{C}\). Given the \ks{} matrix,
+
+its derivative is
+\begin{equation}
+  \label{eq:neese-87}
+  \begin{aligned}
+    \frac{\partial F_{\mu\nu}}{\partial\lambda} = &\quad \frac{\partial h_{\mu\nu}}{\partial\lambda} + \sum_{\kappa\tau} P_{\kappa\tau} \left( \frac{\partial(\braket{\mu\kappa|\nu\tau} - c_{\text{HF}}\braket{\mu\kappa|\tau\nu})}{\partial\lambda} \right) + \int V_{\text{XC}}[\rho(\mathbf{r})] \frac{\partial(\varphi_{\mu}^{*}\varphi_{\nu})}{\partial\lambda} + \varphi_{\mu}^{*}\varphi_{\nu}f_{\text{XC}}[\rho] \sum_{\kappa\tau} P_{\kappa\tau} \frac{\partial(\varphi_{\kappa}^{*}\varphi_{\tau})}{\partial\lambda} \,\mathrm{d}\mathbf{r} \\
+    &+ \sum_{jp\kappa\tau} \left( U_{pj}^{*\lambda} C_{\kappa p}^{*} C_{\tau j} + U_{pj}^{\lambda} C_{\kappa j}^{*} C_{\tau p} \right) \left( \braket{\mu\kappa|\nu\tau} - c_{\text{HF}}\braket{\mu\kappa|\tau\nu} \right) \\
+    &+ \int \left( f_{\text{XC}}[\rho(\mathbf{r})] \sum_{pj\kappa\tau} \left( U_{pj}^{*\lambda} C_{\kappa p}^{*} C_{\tau j} + U_{pj}^{\lambda} C_{\kappa j}^{*} C_{\tau p} \right) \right) \varphi_{\mu}^{*}\varphi_{\nu} \,\mathrm{d}\mathbf{r}
+  \end{aligned}
+\end{equation}
 \onlyifstandalone{\printbibliography}
 % Karna JCC:JCC540120409
 \end{document}
