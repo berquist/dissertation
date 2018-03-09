@@ -209,7 +209,9 @@ In this manner, arbitrary ERI transformations may be performed, allowing both sp
 
 A key component in SCF-level theories is the contraction of the 4-index electron repulsion integrals with the 2-index density matrix to form \(J\) and \(K\) matrices:
 \begin{align}
+  \label{eq:psi4numpy-coulomb}
   J_{\lambda \sigma}[D] &\equiv (\lambda\sigma|\mu\nu) D_{\mu\nu}, \\
+  \label{eq:psi4numpy-exchange}
   K_{\lambda \sigma}[D] &\equiv (\lambda\mu|\sigma\nu) D_{\mu\nu}
 \end{align}
 \pfour provides objects for computing generalized Coulomb (J) and Exchange (K) matrices, with specialized algorithms for integral-direct, PK supermatrix\cite{20}, or density fitting (DF) scenarios.  For the DF-JK object, it is often advantageous to use a factorized form of the density matrix,

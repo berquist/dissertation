@@ -158,12 +158,14 @@ where \((\mat{P})_{ia} = \braket{i|\op{P}|a}\) and \((\mat{Q})_{ia} = \braket{i|
 \end{equation}
 for real (\(R\)) and imaginary (\(I\)) perturbations, respectively\cite{doi:10.1080/00268976.2015.1024182}. The spin case \(\sigma\) can either be singlet (\(\sigma = s\)) or triplet (\(\sigma = t\)) depending on whether the perturbation operator conserves or flips spin, respectively:
 \begin{equation}
+  \label{eq:orbital-hessian-a}
   \begin{aligned}
     A^{s}_{ia,jb} &= \Delta_{ia} + 2(ia|jb) - (ij|ab) \\
     A^{t}_{ia,jb} &= \Delta_{ia} - (ij|ab)
   \end{aligned}
 \end{equation}
 \begin{equation}
+  \label{eq:orbital-hessian-b}
   \begin{aligned}
     B^{s}_{ia,jb} &= 2(ia|jb) - (ib|ja) \\
     B^{t}_{ia,jb} &= - (ib|ja)
@@ -208,7 +210,6 @@ The first requirement for adapting the non-orthogonal linear response equations 
   \label{eq:projected-virtuals}
   \ket{\phi_{a}} = N_{a} \left( 1 - \op{D}_{\text{occ}} \right) \ket{\psi_{a}}
 \end{equation}
-
 where \(\op{D}_{\text{occ}} \rightarrow (\mat{D}_{\text{occ}})_{\mu\nu} = C_{\mu i} C_{\nu i}\). Otherwise, this contamination would manifest as spurious low-lying excited states, leading to artificial poles in the polarizability. This requirement for projection is unimportant for ground-state SCF(MI) calculations, where the virtual orbitals do not have an effect on the final result (energy).
 
 The second requirement is to maintain consistency with the fragment-local nature of SCF(MI), where CT is not allowed. Each occupied-virtual MO contribution to the molecular response is restricted to be within the same fragment. This corresponds to forcing all \(ia\) (or \(jb\)) pairs to be zero when \(i \in F_{I}, a \in (F_{J} \neq F_{I})\). Algorithmically, we do this by always working in the full CT-allowed basis, then zeroing out CT-disallowed matrix elements. For the energy denominator, the zero rows and columns must be removed to avoid introducing artificial singularities. The advantage of working in the full CT basis and zeroing matrix elements is twofold: it prevents code duplication due to no need for separate non-orthogonal and ALMO-based response routines, and it enables selection of individual fragments to quantify their CT contribution to the final response property. This is in contrast to ALMO-CIS+CT\cite{Ge_2017_44111}, which starts from the reduced CT-disallowed basis and adds a distance-dependent CT correction. An outline of the algorithm is available in the SI.
