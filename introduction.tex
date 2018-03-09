@@ -232,13 +232,11 @@ where \(\nabla \equiv \partial/\partial x\). For convenience, the negative sign 
   \label{eq:force_partial_derivative}
   F_{i} = \frac{\partial E}{\partial x_{i}}.
 \end{equation}
-
 Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_partial_derivative} gives
 \begin{equation}
   \label{eq:equated_force}
   k_{ij} x_{j} = \frac{\partial E}{\partial x_{i}}.
 \end{equation}
-
 To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side:
 \begin{align}
   \label{eq:hooke_derivation_1}
@@ -248,7 +246,6 @@ To solve for the stiffness coefficients, take the partial derivative of both sid
   \label{eq:hooke_derivation_3}
   k_{ij} &= \frac{\partial^{2} E}{\partial x_{j} \partial x_{i}}.
 \end{align}
-
 This tells that the internal stiffness is related to the second derivative of the energy with respect to nuclear coordinate displacements. The internal stiffness matrix is the molecular Hessian, where each ``spring constant'' is called a force constant, which describes how a change or perturbation to one atomic coordinate affects a change in another atomic coordinate.
 
 Another important property is that in general, due to Young's theorem, the order of differentiation is not important, and the perturbations may be interchanged:
