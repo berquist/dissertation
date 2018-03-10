@@ -21,6 +21,8 @@ paper_05/psi4numpy.pdf
 
 test_bibliography.pdf
 
+presentation/presentation.pdf
+
 ## LaTeX
 
 *.aux
@@ -42,6 +44,10 @@ test_bibliography.pdf
 *.stp
 *.toc
 *.xdv
+
+# beamer
+*.nav
+*.snm
 
 # glossaries/acronyms
 *.acn
