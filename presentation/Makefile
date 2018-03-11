@@ -1,6 +1,9 @@
 all:
 	latexmk -pdf -xelatex -shell-escape presentation.tex
 
+chemfig:
+	latexmk -pdf -xelatex -shell-escape chemfig_examples.tex
+
 clean:
 	latexmk -c
 	rm -f *.bbl

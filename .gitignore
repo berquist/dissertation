@@ -43,6 +43,7 @@ presentation/presentation.pdf
 *.run.xml
 *.stp
 *.toc
+*.vrb
 *.xdv
 
 # beamer
