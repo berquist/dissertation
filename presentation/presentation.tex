@@ -67,9 +67,9 @@
 
 \usepackage{booktabs}
 \usepackage{braket}
-% \usepackage{chemfig}
 \usepackage{graphicx}
 \usepackage[version=4]{mhchem}
+\usepackage{tabulary}
 
 
 \title{My Dissertation}
@@ -84,7 +84,7 @@
   \titlepage
 }
 
-\title{Decomposition of Intermolecular Interactions in \textit{ab initio} Spectroscopy}
+\title{Decomposition of Intermolecular Interactions in \textit{Ab Initio} Spectroscopy}
 
 \frame{
   \titlepage
@@ -106,29 +106,34 @@
 
 % 0.35 for two side by side
 \begin{frame}
-  \frametitle{\ce{CO2} asymmetric stretch lies in an isolated spectral window}
+  % \frametitle{\ce{CO2} asymmetric stretch lies in an isolated spectral window}
   \centering
-  \includegraphics[scale=0.65]{./figures/experimental_spectra_TfO.pdf}
+  \includegraphics[scale=0.70]{./figures/experimental_spectra_TfO.pdf}
 \end{frame}
 
 \begin{frame}
   \centering
-  \includegraphics[scale=0.65]{./figures/experimental_spectra_shifting.pdf}
+  \includegraphics[scale=0.70]{./figures/experimental_spectra_shifting.pdf}
 \end{frame}
 
 \begin{frame}
   \centering
-  \includegraphics[scale=0.65]{./figures/frequencies_calc_vs_expt1.pdf}
+  \includegraphics[scale=0.70]{./figures/frequencies_calc_vs_expt1.pdf}
 \end{frame}
 
 \begin{frame}
-  \includegraphics[scale=0.08]{./figures/cluster_BF4.png}
-  \includegraphics[scale=0.08]{./figures/cluster_DCA.png}
-  \includegraphics[scale=0.08]{./figures/cluster_PF6.png}
-  \includegraphics[scale=0.08]{./figures/cluster_SCN.png}
-  \includegraphics[scale=0.07]{./figures/cluster_TFA.png}
-  \includegraphics[scale=0.08]{./figures/cluster_Tf2N.png}
-  \includegraphics[scale=0.09]{./figures/cluster_TfO.png}
+  \begin{columns}
+    \column{0.25\textwidth}
+    \includegraphics[scale=0.08]{./figures/cluster_BF4.png}
+    \includegraphics[scale=0.08]{./figures/cluster_DCA.png}
+    \column{0.25\textwidth}
+    \includegraphics[scale=0.08]{./figures/cluster_PF6.png}
+    \includegraphics[scale=0.08]{./figures/cluster_SCN.png}
+    \column{0.25\textwidth}
+    \includegraphics[scale=0.07]{./figures/cluster_TFA.png}
+    \includegraphics[scale=0.08]{./figures/cluster_Tf2N.png}
+    \column{0.25\textwidth}\includegraphics[scale=0.09]{./figures/cluster_TfO.png}
+  \end{columns}
 \end{frame}
 
 \begin{frame}
@@ -183,11 +188,46 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Spectroscopic properties are directly connected to energy derivatives}
+  \centering
+  \scriptsize
+  \begin{tabulary}{1.00\textwidth}{rL}
+    \toprule
+    \textbf{Derivative} & \textbf{Molecular property} \\
+    \midrule
+    \(\frac{dE}{dF_{i}}\)                          & dipole moment; similarly,  multipole moments, electric field gradients, etc. \\
+    \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
+    \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+    \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
+    \(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)       & polarizability \\
+    \(\frac{d^{2}E}{dX_{i}dX_{j}}\)                & harmonic force constants and vibrational frequencies \\
+    \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
+    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
+    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
+    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
+    % \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
+    % \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
+    % \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
+    % \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
+    % \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
+    ... & ... \\
+    \bottomrule
+  \end{tabulary}
+\end{frame}
+
+\begin{frame}
   \frametitle{Spectroscopic properties are directly connected to response functions}
   \centering
   \begin{tabular}{ll}
     \toprule
-    \textbf{Molecular Property}       & \textbf{Linear Response Function} \\
+    \textbf{Molecular property}       & \textbf{Linear response function} \\
     \midrule
     polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \) \\
     magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \) \\
@@ -199,6 +239,7 @@
                                       & \( \braket{\braket{\hat{h}_{\text{PSO}};\hat{h}_{\text{PSO}}}}_{0} \) \\
     NMR chemical shifts               & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{PSO}}}}_{0} \) \\
     EPR \textit{g}-tensor             & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{SOC}}}}_{0} \) \\
+    ... & ... \\
     \bottomrule
   \end{tabular}
 \end{frame}
