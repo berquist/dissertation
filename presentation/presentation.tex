@@ -121,19 +121,22 @@
   \includegraphics[scale=0.70]{./figures/frequencies_calc_vs_expt1.pdf}
 \end{frame}
 
+% https://tex.stackexchange.com/q/157222/94717
 \begin{frame}
   \begin{columns}
     \column{0.25\textwidth}
-    \includegraphics[scale=0.08]{./figures/cluster_BF4.png}
-    \includegraphics[scale=0.08]{./figures/cluster_DCA.png}
+    \uncover<+->{\includegraphics[scale=0.08]{./figures/cluster_BF4.png}}
+    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_DCA.png}}
     \column{0.25\textwidth}
-    \includegraphics[scale=0.08]{./figures/cluster_PF6.png}
-    \includegraphics[scale=0.08]{./figures/cluster_SCN.png}
+    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_PF6.png}}
+    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_SCN.png}}
     \column{0.25\textwidth}
-    \includegraphics[scale=0.07]{./figures/cluster_TFA.png}
-    \includegraphics[scale=0.08]{./figures/cluster_Tf2N.png}
-    \column{0.25\textwidth}\includegraphics[scale=0.09]{./figures/cluster_TfO.png}
+    \uncover<.->{\includegraphics[scale=0.07]{./figures/cluster_TFA.png}}
+    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_Tf2N.png}}
+    \column{0.25\textwidth}
+    \uncover<.->{\includegraphics[scale=0.09]{./figures/cluster_TfO.png}}
   \end{columns}
+  % \uncover<+->{}
 \end{frame}
 
 \begin{frame}
@@ -267,6 +270,47 @@
 % \begin{frame}
 % \end{frame}
 
+
+\begin{frame}
+  \frametitle{Example: Static polarizability}
+  As an energy derivative,
+  \begin{equation*}
+    \alpha_{rs} = - \left. \frac{\text{d}^{2}E}{\text{d}F_{r}\text{d}F_{s}} \right|_{\mathbf{F}=\mathbf{0}}
+  \end{equation*}
+  which is equivalent to the response theory formulation
+  \begin{equation*}
+    \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}.
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Acknowledgements}
+  \begin{columns}
+    % \column{0.35\textwidth}
+    % \begin{itemize}
+    % \item Evgeny Epifanovsky
+    % \item Q-Chem
+    % \item Adrian Morrison
+    % \item Daniel Lambrecht
+    % \end{itemize}
+    % \column{0.65\textwidth}
+    % \begin{center}
+    %   \includegraphics[scale=0.40]{./images/lambrecht_group.png} \\
+    %   \includegraphics[scale=0.40]{./images/pitt_logo.pdf}
+    % \end{center}
+    \column{0.65\textwidth}
+    \begin{minipage}{1.0\linewidth}
+    \end{minipage}
+    \column{0.35\textwidth}
+    \begin{minipage}{1.0\linewidth}
+      \centering
+      \includegraphics[width=\linewidth,keepaspectratio]{./figures/Qchem-logo.png}
+      \includegraphics[width=\linewidth,keepaspectratio]{./figures/PQI-Letter-Logo-black.png}
+      \includegraphics[width=\linewidth,keepaspectratio]{./figures/logo_crc.jpg}
+      \includegraphics[width=\linewidth,keepaspectratio]{./figures/logo_novartis.png}
+    \end{minipage}
+  \end{columns}
+\end{frame}
 
 \begin{frame}
   \frametitle{Thank you}
