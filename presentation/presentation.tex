@@ -153,6 +153,10 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Context: \ce{CO2} solvation by ionic liquids}
+\end{frame}
+
 % \begin{frame}
 %   \begin{figure}
 %     \includegraphics[scale=1.00]{./figures/lewis_C4C1im.pdf}
@@ -248,14 +252,14 @@
   \centering
   \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_TfO.pdf}
   \scriptsize
-  \ce{[C4C1im][TfO]}
+  experiment, \ce{[C4C1im][TfO]}
 \end{frame}
 
 \begin{frame}
   \centering
   \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_shifting.pdf}
   \scriptsize
-  \ce{[C4C1im]+}
+  experiment, \ce{[C4C1im]+}
 \end{frame}
 
 \begin{frame}
@@ -279,7 +283,7 @@
     \column{0.25\textwidth}
     \uncover<.->{\includegraphics[scale=0.09]{./figures/cluster_TfO.png}}
   \end{columns}
-  % \uncover<+->{}
+  \uncover<+->{What is the connection between our molecular models and the spectra?}
 \end{frame}
 % This is great, we have these very simple molecular models that
 
@@ -363,6 +367,46 @@
     ... & ... \\
     \bottomrule
   \end{tabulary}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Why do analytic derivatives?}
+  \scriptsize
+  \begin{itemize}
+  \item The easiest way to calculate energy derivatives would be to use numerical differentiation
+    \begin{itemize}\scriptsize
+    \item \(6N\) calculations for first derivatives
+    \item \(36N^{2}\) calculations for second derivatives
+    \item \(208N^{3}\) calculations for third derivatives
+    \end{itemize}
+  \end{itemize}
+  \begin{table}
+    \centering
+    \tiny
+    \begin{tabular}{llllll}
+      \toprule
+      Computed from & \(\Delta R\) & \(\left(\frac{d\mu_{Z}}{dR}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{2}\mu_{Z}}{dR^{2}}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{3}\mu_{Z}}{dR^{3}}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{4}\mu_{Z}}{dR^{4}}\right)_{R=R_{\text{eq}}}\) \\
+      \midrule
+      \(\mu_{Z}\) & \num{e-2} & -0.317\textcolor{red}{36764} & 0.1787\textcolor{red}{1386} & 0.76\textcolor{red}{3567} & 0.0750 \\
+      \(\mu_{Z}\) & \num{e-3} & -0.31741\textcolor{red}{264} & 0.1787\textcolor{red}{12} & 0.76\textcolor{red}{4} & \dots \\
+      \(\mu_{Z}\) & \num{e-4} & -0.3174130\textcolor{red}{9} & 0.1787 & \dots & \dots \\
+      \(\mu_{Z}\) & \num{e-5} & -0.317413\textcolor{red}{1} & 0.1\textcolor{red}{8} & \dots & \dots \\
+      & & & & & \\
+      \(d\mu_{Z}/dR\) & \num{e-2} & \dots & 0.17871\textcolor{red}{606} & 0.763\textcolor{red}{69391} & 0.07\textcolor{red}{48442} \\
+      \(d\mu_{Z}/dR\) & \num{e-3} & \dots & 0.178711\textcolor{red}{65} & 0.763\textcolor{red}{745} & 0.07\textcolor{red}{14} \\
+      \(d\mu_{Z}/dR\) & \num{e-4} & \dots & 0.1787115\textcolor{red}{7} & 0.76\textcolor{red}{56} & \dots \\
+      \(d\mu_{Z}/dR\) & \num{e-5} & \dots & 0.17871\textcolor{red}{39} & 0.77 & \dots \\
+      & & & & & \\
+      Fully analytic value & & -0.317413034 & 0.17811155 & \dots & \dots \\
+      \bottomrule
+    \end{tabular}
+    T.-C. Jagau, J. Gauss and K. Ruud, J. Chem. Phys. 139, 154106 (2013)
+  \end{table}
+  \begin{itemize}
+  \item Numerical derivatives have limited and (non-systematic) numerical precision
+  \item Scaling for higher-order derivatives unfavorable
+  \end{itemize}
+  % {\tiny Adapted from K. Ruud, Molecular Properties Summer School 2015}
 \end{frame}
 
 \begin{frame}
@@ -457,46 +501,6 @@
   \begin{equation*}
     \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}.
   \end{equation*}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Why do analytic derivatives?}
-  \scriptsize
-  \begin{itemize}
-  \item The easiest way to calculate energy derivatives would be to use numerical differentiation
-    \begin{itemize}\scriptsize
-    \item \(6N\) calculations for first derivatives
-    \item \(36N^{2}\) calculations for second derivatives
-    \item \(208N^{3}\) calculations for third derivatives
-    \end{itemize}
-  \end{itemize}
-  \begin{table}
-    \centering
-    \tiny
-    \begin{tabular}{llllll}
-      \toprule
-      Computed from & \(\Delta R\) & \(\left(\frac{d\mu_{Z}}{dR}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{2}\mu_{Z}}{dR^{2}}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{3}\mu_{Z}}{dR^{3}}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{4}\mu_{Z}}{dR^{4}}\right)_{R=R_{\text{eq}}}\) \\
-      \midrule
-      \(\mu_{Z}\) & \num{e-2} & -0.317\textcolor{red}{36764} & 0.1787\textcolor{red}{1386} & 0.76\textcolor{red}{3567} & 0.0750 \\
-      \(\mu_{Z}\) & \num{e-3} & -0.31741\textcolor{red}{264} & 0.1787\textcolor{red}{12} & 0.76\textcolor{red}{4} & \dots \\
-      \(\mu_{Z}\) & \num{e-4} & -0.3174130\textcolor{red}{9} & 0.1787 & \dots & \dots \\
-      \(\mu_{Z}\) & \num{e-5} & -0.317413\textcolor{red}{1} & 0.1\textcolor{red}{8} & \dots & \dots \\
-      & & & & & \\
-      \(d\mu_{Z}/dR\) & \num{e-2} & \dots & 0.17871\textcolor{red}{606} & 0.763\textcolor{red}{69391} & 0.07\textcolor{red}{48442} \\
-      \(d\mu_{Z}/dR\) & \num{e-3} & \dots & 0.178711\textcolor{red}{65} & 0.763\textcolor{red}{745} & 0.07\textcolor{red}{14} \\
-      \(d\mu_{Z}/dR\) & \num{e-4} & \dots & 0.1787115\textcolor{red}{7} & 0.76\textcolor{red}{56} & \dots \\
-      \(d\mu_{Z}/dR\) & \num{e-5} & \dots & 0.17871\textcolor{red}{39} & 0.77 & \dots \\
-      & & & & & \\
-      Fully analytic value & & -0.317413034 & 0.17811155 & \dots & \dots \\
-      \bottomrule
-    \end{tabular}
-    T.-C. Jagau, J. Gauss and K. Ruud, J. Chem. Phys. 139, 154106 (2013)
-  \end{table}
-  \begin{itemize}
-  \item Numerical derivatives have limited and (non-systematic) numerical precision
-  \item Scaling for higher-order derivatives unfavorable
-  \end{itemize}
-  % {\tiny Adapted from K. Ruud, Molecular Properties Summer School 2015}
 \end{frame}
 
 \begin{frame}
