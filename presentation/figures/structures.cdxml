@@ -3,7 +3,7 @@
 <CDXML
  CreationProgram="ChemDraw 16.0.1.4"
  Name="structures.cdxml"
- BoundingBox="140.92 168.20 328.75 402.75"
+ BoundingBox="65.65 168.20 328.75 430.37"
  WindowPosition="0 0"
  WindowSize="0 0"
  FractionalWidths="yes"
@@ -79,7 +79,7 @@
 </colortable><fonttable>
 <font id="21" charset="x-mac-roman" name="Helvetica"/>
 </fonttable><page
- id="264"
+ id="276"
  BoundingBox="0 0 540 720"
  HeaderPosition="36"
  FooterPosition="36"
@@ -434,8 +434,14 @@
  id="110"
  p="170.83 316.47"
  Z="237"
+ NumHydrogens="0"
+ NeedsClean="yes"
  AS="N"
-/><n
+><t
+ p="167.22 320.16"
+ BoundingBox="167.66 312.79 174.02 320.34"
+ LabelJustification="Left"
+><s font="21" size="10" color="0" face="96">C</s></t></n><n
  id="112"
  p="185.23 316.47"
  Z="239"
@@ -755,7 +761,7 @@
  NeedsClean="yes"
  AS="N"
 ><fragment
- id="265"
+ id="277"
 ><n
  id="210"
  p="307.60 277.60"
@@ -831,7 +837,7 @@
  NeedsClean="yes"
  AS="N"
 ><fragment
- id="266"
+ id="278"
 ><n
  id="221"
  p="257.72 277.60"
@@ -1025,7 +1031,7 @@
  NeedsClean="yes"
  AS="N"
 ><fragment
- id="267"
+ id="279"
 ><n
  id="232"
  p="260.10 332.31"
@@ -1174,7 +1180,7 @@
  NeedsClean="yes"
  AS="N"
 ><fragment
- id="268"
+ id="280"
 ><n
  id="243"
  p="257.70 396.63"
@@ -1297,4 +1303,99 @@
  Z="328"
  GraphicType="Symbol"
  SymbolType="CircleMinus"
-><represent attribute="Charge" object="200"/></graphic></fragment></page></CDXML>
+><represent attribute="Charge" object="200"/></graphic></fragment><fragment
+ id="264"
+ BoundingBox="65.65 413.17 128.94 430.37"
+ Z="331"
+><n
+ id="263"
+ p="68.50 426.50"
+ Z="330"
+ Element="7"
+ NumHydrogens="0"
+ NeedsClean="yes"
+ AS="N"
+><t
+ p="64.89 430.09"
+ BoundingBox="65.65 422.91 71.34 430.09"
+ LabelJustification="Left"
+><s font="21" size="10" color="0" face="96">N</s></t></n><n
+ id="265"
+ p="82.90 426.50"
+ Z="332"
+ NumHydrogens="0"
+ NeedsClean="yes"
+ AS="N"
+><t
+ p="79.29 430.18"
+ BoundingBox="79.73 422.82 86.09 430.37"
+ LabelJustification="Left"
+><s font="21" size="10" color="0" face="96">C</s></t></n><n
+ id="267"
+ p="97.30 426.50"
+ Z="334"
+ Element="7"
+ NumHydrogens="0"
+ Charge="-1"
+ NeedsClean="yes"
+ AS="N"
+><t
+ p="93.69 430.09"
+ BoundingBox="94.45 422.91 100.14 430.09"
+ LabelJustification="Left"
+><s font="21" size="10" color="0" face="96">N</s></t></n><n
+ id="269"
+ p="111.70 426.50"
+ Z="336"
+ NumHydrogens="0"
+ NeedsClean="yes"
+ AS="N"
+><t
+ p="108.08 430.18"
+ BoundingBox="108.52 422.82 114.89 430.37"
+ LabelJustification="Left"
+><s font="21" size="10" color="0" face="96">C</s></t></n><n
+ id="271"
+ p="126.09 426.50"
+ Z="338"
+ Element="7"
+ NumHydrogens="0"
+ NeedsClean="yes"
+ AS="N"
+><t
+ p="122.48 430.09"
+ BoundingBox="123.24 422.91 128.94 430.09"
+ LabelJustification="Left"
+><s font="21" size="10" color="0" face="96">N</s></t></n><b
+ id="266"
+ Z="333"
+ B="263"
+ E="265"
+ Order="3"
+ BS="N"
+/><b
+ id="268"
+ Z="335"
+ B="265"
+ E="267"
+ BS="N"
+/><b
+ id="270"
+ Z="337"
+ B="267"
+ E="269"
+ BS="N"
+/><b
+ id="272"
+ Z="339"
+ B="269"
+ E="271"
+ Order="3"
+ BS="N"
+/><graphic
+ id="274"
+ BoundingBox="97.48 417.11 89.98 417.11"
+ Z="341"
+ GraphicType="Symbol"
+ SymbolType="CircleMinus"
+><represent attribute="Charge" object="267"/></graphic></fragment></page></CDXML>
