@@ -1,5 +1,7 @@
 \documentclass{beamer}
 
+\RequirePackage{xparse}
+
 %% https://www.quora.com/Presentations-What-are-the-best-beamer-themes
 \setbeamertemplate{frametitle}
   {\begin{centering}\smallskip
@@ -55,7 +57,6 @@
     minnames   = 1,%
     maxnames   = 10,%
 ]{biblatex}
-\let\cite\autocite
 \addbibresource{../library.bib}
 \addbibresource{../library2.bib}
 \addbibresource{../paper_04/paper.bib}
@@ -65,11 +66,27 @@
 \addbibresource{../5773968.bib}
 \addbibresource{../in_preparation.bib}
 
-\usepackage{booktabs}
-\usepackage{braket}
-\usepackage{graphicx}
-\usepackage[version=4]{mhchem}
-\usepackage{tabulary}
+\AtEveryCitekey{\iffootnote{\color{PittBlue}\tiny}{}}
+\NewDocumentCommand{\nmfootfullcite}{m}{%
+    \AtNextCite{%
+        \let\thefootnote\relax
+        \let\mkbibfootnote\mkbibfootnotetext
+    }{%
+        \footfullcite{#1}
+    }
+}
+
+\RequirePackage{booktabs}
+\RequirePackage{braket}
+\RequirePackage{graphicx}
+\RequirePackage{microtype}
+\RequirePackage{minted}
+\RequirePackage[version=4]{mhchem}
+\RequirePackage{tabulary}
+
+\NewDocumentCommand{\vect}{m}{%
+        \ensuremath{\boldsymbol{\mathbf{#1}}}%
+}%
 
 
 \title{My Dissertation}
@@ -119,6 +136,7 @@
 \begin{frame}
   \centering
   \includegraphics[scale=0.70]{./figures/frequencies_calc_vs_expt1.pdf}
+  % \nmfootfullcite{Brinzer2015}
 \end{frame}
 
 % https://tex.stackexchange.com/q/157222/94717
@@ -202,8 +220,8 @@
     \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
     \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
     \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
-    \(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)       & polarizability \\
-    \(\frac{d^{2}E}{dX_{i}dX_{j}}\)                & harmonic force constants and vibrational frequencies \\
+    \textcolor{AlertColor}{\(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)}       & \textcolor{AlertColor}{polarizability} \\
+    \textcolor{AlertColor}{\(\frac{d^{2}E}{dX_{i}dX_{j}}\)}                & \textcolor{AlertColor}{harmonic force constants and vibrational frequencies} \\
     \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
     \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
     \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
@@ -223,6 +241,27 @@
     ... & ... \\
     \bottomrule
   \end{tabulary}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quick-and-dirty linear response}
+  The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
+  \begin{equation*}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{0|\hat{P}|n}\braket{n|\hat{Q}|0}}{\omega_{n} - \omega_{Q}} + \frac{\braket{0|\hat{Q}|n}\braket{n|\hat{P}|0}}{\omega_{n} + \omega_{Q}} \right]
+  \end{equation*}
+  where \(\omega_{n} = E_{n} - E_{0}\). For single-configuration methods in the static limit (\(\omega_{Q} = 0\)),
+  \begin{equation*}
+    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{0} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
+  \end{equation*}
+  where
+  \begin{equation*}
+    (\vect{P}_{\alpha})_{ia} = -2 \braket{ i | \hat{P}_{\alpha} | a }
+  \end{equation*}
+  is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted orbital Hessian. The key step is forming the response vector
+  \begin{equation*}
+    X_{ia} = G_{ia,jb}^{-1} Q_{jb}.
+  \end{equation*}
+  \(X_{ia}\) is equivalent to the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
 \end{frame}
 
 \begin{frame}
@@ -300,14 +339,25 @@
     % \end{center}
     \column{0.65\textwidth}
     \begin{minipage}{1.0\linewidth}
+      \begin{itemize}
+      \item Prof. Daniel Lambrecht
+      \item Prof. Sean Garrett-Roe
+      \item Prof. Ken Jordan
+      \item Evgeny Epifanovsky (Q-Chem)
+      \item Daniel Smith (MolSSI, Psi4)
+      \item Tom Brinzer
+      \end{itemize}
     \end{minipage}
     \column{0.35\textwidth}
     \begin{minipage}{1.0\linewidth}
       \centering
-      \includegraphics[width=\linewidth,keepaspectratio]{./figures/Qchem-logo.png}
-      \includegraphics[width=\linewidth,keepaspectratio]{./figures/PQI-Letter-Logo-black.png}
-      \includegraphics[width=\linewidth,keepaspectratio]{./figures/logo_crc.jpg}
-      \includegraphics[width=\linewidth,keepaspectratio]{./figures/logo_novartis.png}
+      \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/Qchem-logo.png}
+      \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/PQI-Letter-Logo-black.png}
+      \includegraphics[width=0.85\linewidth,keepaspectratio]{./figures/logo_crc.jpg}
+      \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_novartis.png}
+      \includegraphics[scale=0.15]{./figures/logo_cclib.png}
+      \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/psi4numpybanner_eqn.png}
+      \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_molssi_text.jpg}
     \end{minipage}
   \end{columns}
 \end{frame}
@@ -326,6 +376,153 @@
   \item \fullcite{Berquist2018}
   \item \fullcite{Jakubek2018}
   \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Extra slides}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation: working equations (RHF)}
+  \begin{align*}
+    \Delta_{ia} &= \epsilon_{a} - \epsilon_{i} \\
+    A_{ia,jb}^{s} &= \Delta_{ia}\delta_{ia,jb} + 2(ia|jb) - (ij|ab) \\
+    B_{ia,jb}^{s} &= 2(ia|jb) - (ib|ja) \\
+    A_{ia,jb}^{t} &= \Delta_{ia}\delta_{ia,jb} - (ij|ab) \\
+    B_{ia,jb}^{t} &= - (ib|ja) \\
+    ^{\text{RR}}\vect{G}^{uu} &= (\vect{A}^{u} + \vect{B}^{u}) \\
+    ^{\text{II}}\vect{G}^{uu} &= (\vect{A}^{u} - \vect{B}^{u})
+  \end{align*}
+  \scriptsize
+  \begin{itemize}
+  \item \(\vect{G}\) gives orbital rotation Hessians, equivalen to the random phase approximation (RPA) equations \\
+  \item R, I: real, imaginary perturbations \(\rightarrow\) electric and magnetic Hessians \\
+  \item setting \(\vect{B} = \vect{0}\) gives the Tamm-Dancoff approximation (TDA) \\
+  \item setting \( G_{ia,jb} = (\epsilon_{a} - \epsilon_{i})\delta_{ia,jb} \) gives uncoupled Hartree-Fock \\
+  \item \(s,t\): singlet (spin-conserving) and triplet (altering) operators \\
+  \item \(i,j\): occupied MOs, \(a,b\): virtual MOs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation: AO-direct algorithm}
+  Rather than explicitly forming \(G_{ia,jb}\), inverting it, and contracting with \(Q_{jb}\) to form the response vector \(X_{ia}\), the solution is found iteratively (example is RPA/singlet):
+  \begin{equation*}
+    X_{ia}^{(\zeta+1)} \leftarrow \frac{Q_{jb} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}}{\Delta_{ia}}
+  \end{equation*}
+  The uncoupled result comes from the initial guess, when \(X_{ia}^{(0)} = 0\):
+  \begin{equation*}
+    X_{ia}^{(1)} = \frac{Q_{ia}}{\Delta_{ia}}
+  \end{equation*}
+  Convergence is usually accelerated with CG, DIIS, ...
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation: AO-direct algorithm}
+  \scriptsize
+  The key step in each iteration is forming the matrix-vector product
+  \begin{equation*}
+    (\vect{A}+\vect{B})_{ia,jb}X_{jb} = \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}
+  \end{equation*}
+  which is found through back-transforming to the AO basis, starting from the generalized density:
+  \begin{equation*}
+    D_{\lambda\sigma}^{X} \equiv C_{\lambda j} X_{jb} C_{\sigma b}
+  \end{equation*}
+  which is contracted with two-electron integrals formed either exactly or through approximate methods (RI, ...):
+  \begin{align*}
+    (\vect{A}+\vect{B})_{ia,jb}X_{jb} &= C_{\mu i} \left\{ 4(\mu\nu|\lambda\sigma)D_{\lambda\sigma}^{X} - (\mu\lambda|\nu\sigma)D_{\lambda\sigma}^{X} - (\mu\sigma|\lambda\nu)D_{\lambda\sigma}^{X} \right\} C_{\nu a} \\
+    &= C_{\mu i} \left\{ 4J_{\mu\nu}^{X} - K_{\mu\nu}^{X} - K_{\nu\mu}^{X} \right\} C_{\nu a}
+  \end{align*}
+  In \texttt{libint}, this is \texttt{JobNum = 30}.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Implementation: library usage}
+  \texttt{responseman} is a thin wrapper around \texttt{libresponse}, and is not meant to calculate final properties (similar to \texttt{**RESPONSE} vs. \texttt{**PROPERTIES} in DALTON). \\
+  \begin{minted}[linenos,gobble=0,mathescape]{c++}
+    void solve_linear_response(
+        arma::cube &results,
+        MatVec_i *matvec,
+        arma::cube &C,
+        arma::mat &moene,
+        arma::uvec &occupations,
+        std::vector<double> &omega,
+        arma::cube &V,
+        std::vector<int> &b_prefactors,
+        libresponse::configurable &cfg
+    );
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Implementation: integral engine}
+  \scriptsize
+  \begin{minted}[linenos,gobble=0,mathescape]{c++}
+if (ints_engine == "libfock" || ints_engine == "both") {
+    matvec_libfock = new MatVec_libfock();
+    libqints::basis_1e1c_cgto<double> b1;
+    libqints::qchem::bagen_1e1c_cgto_qchem(b1);
+    matvec_libfock->init(b1, mem_mb);
+    matvec = matvec_libfock;
+} else if (ints_engine == "qchem" || ints_engine == "both") {
+    matvec_qchem = new MatVec_qchem();
+    matvec_qchem->init();
+    matvec = matvec_qchem;
+} else
+    ...
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hardware and software}
+  \begin{itemize}
+  \item CPU: Intel Xeon E5-2670 (Sandy Bridge), 2.60 GHz, 16 cores
+  \item DALTON 2015.0; Intel 2013.0
+  \item ORCA 3.0.3
+  \item Q-Chem \texttt{branches/libresponse r21370} with \texttt{libresponse r72}, \texttt{libqints r1058}, \texttt{libfock r198}; Intel 2015.1
+  \item \texttt{scf\_convergence = 9}, \texttt{thresh = 12}, \texttt{cpscf\_max\_error\_norm = 14}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Current capabilities}
+  QC methods:
+  \begin{itemize}
+  \item RHF, UHF references \(\rightarrow\) DALTON is ROHF, is this the first true general UHF linear response code?
+  \item Hartree-Fock via \texttt{libfock/libqints} or \texttt{libint}
+  \end{itemize}
+  Operators (\texttt{libint}):
+  \begin{itemize}
+  \item dipole (length), quadrupole at arbitrary origin
+  \item Fermi contact at nuclear positions
+  \item dipole velocity/linear momentum
+  \item angular momentum at arbitrary origin
+  \item one-electron spin-orbit over all nuclei w/ arbitrary charges
+  \end{itemize}
+  Properties via \texttt{responseman}:
+  \begin{itemize}
+  \item static polarizability
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Planned capabilities}
+  \begin{itemize}
+  \item Convergence acceleration (DIIS via \texttt{libsolve})
+  \item DFT via \texttt{libint/dftman} \(\rightarrow\) all functionals should work
+  \item Operators: two-electron spin-orbit, arbitrary-order electric field multipoles at arbitrary origin, spin dipole at nuclear positions
+  \item time-dependent/dynamic properties
+  \item residues \(\rightarrow\) transition moments
+    \begin{equation*}
+      \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
+    \end{equation*}
+  \item complex response via \texttt{gen\_scfman}
+    \begin{equation*}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = \sum_{n>0} \left[ \frac{\braket{0|\hat{P}|n}\braket{n|\hat{Q}|0}}{\omega_{n} - \omega_{Q} - i\gamma_{n0}} + \frac{\braket{0|\hat{Q}|n}\braket{n|\hat{P}|0}}{\omega_{n} + \omega_{Q} + i\gamma_{n0}} \right]
+    \end{equation*}
+  \item quadratic response \(\braket{\braket{\hat{P};\hat{Q},\hat{R}}}_{\omega_{Q},\omega_{R}}\)
+  \item ALMO...
+  \end{itemize}
 \end{frame}
 
 \end{document}
