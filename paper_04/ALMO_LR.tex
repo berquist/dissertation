@@ -179,7 +179,6 @@ where \(\Delta_{ia} = (\varepsilon_{a} - \varepsilon_{i}) \delta_{ia,jb}\) is an
   \frac{Q_{ia} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(n)}}
        {\Delta_{ia}}
 \end{equation}
-
 Repeated indices imply summation (Einstein sum convention). Here, the superscript in parentheses denotes the iteration number. To avoid the expensive transformation of two-electron repulsion integrals from atomic orbital into molecular orbital basis, one performs the contraction over orbital pair \(jb\) in the atomic orbital basis,
 \begin{equation}
   \left(\mat{A}^{s} + \mat{B}^{s}\right)_{ia,jb} X_{jb}
@@ -292,6 +291,7 @@ From tables~\ref{table:polarizability-results-def2-svp}~and~\ref{table:polarizab
   \begin{tabular}{ccc}
     \toprule
                                            & \multicolumn{2}{c}{basis set} \\
+                                             \cmidrule{2-3}
     percentage change due to mechanism     & def2-SVP    & def2-SVPD       \\
     \midrule
     response (\textit{off/on} - off/off)   & 20.8        & 1.5             \\
@@ -327,7 +327,8 @@ Calculated this way, the wavefunction mechanism may include some higher-order ef
   \label{tab:almo-eda-higher-order-pct-of-ct}
   \begin{tabular}{ccc}
     \toprule
-                    & \multicolumn{2}{c}{basis set} \\
+                & \multicolumn{2}{c}{basis set} \\
+                  \cmidrule{2-3}
     BSSE corrected? & def2-SVP    & def2-SVPD   \\
     \midrule
     no              & 24.2        & 17.1        \\
