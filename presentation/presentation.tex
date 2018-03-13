@@ -57,14 +57,14 @@
     minnames   = 1,%
     maxnames   = 10,%
 ]{biblatex}
-% \addbibresource{../library.bib}
-% \addbibresource{../library2.bib}
-% \addbibresource{../paper_04/paper.bib}
-% \addbibresource{../paper_05/psi4numpy.bib}
-% \addbibresource{../paper_05/tutorial.bib}
-% \addbibresource{../5746059.bib}
-% \addbibresource{../5773968.bib}
-% \addbibresource{../in_preparation.bib}
+\addbibresource{../library.bib}
+\addbibresource{../library2.bib}
+\addbibresource{../paper_04/paper.bib}
+\addbibresource{../paper_05/psi4numpy.bib}
+\addbibresource{../paper_05/tutorial.bib}
+\addbibresource{../5746059.bib}
+\addbibresource{../5773968.bib}
+\addbibresource{../in_preparation.bib}
 \addbibresource{./presentation.bib}
 
 \AtEveryCitekey{\iffootnote{\color{PittBlue}\tiny}{}}
@@ -435,6 +435,10 @@
 \end{frame}
 
 \begin{frame}
+  
+\end{frame}
+
+\begin{frame}
   \uncover<1->{\begin{equation*}
       \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
   \end{equation*}}
@@ -624,12 +628,12 @@
   \begin{enumerate}
   \item \fullcite{Berquist2014}
   \item \fullcite{Shao2015}
-  \item \fullcite{Brinzer2015}
+  \item {\setbeamercolor{bibliography entry author}{fg=green}\fullcite{Brinzer2015}}
   \item \fullcite{Daly2016}
   \item \fullcite{Berquist2017}
   \item \fullcite{Brinzer2017}
   \item \fullcite{Smith2018}
-  \item \fullcite{Berquist2018}
+  \item {\setbeamercolor{bibliography entry author}{green}\fullcite{Berquist2018}}
   \item \fullcite{Jakubek2018}
   \end{enumerate}
 \end{frame}
