@@ -256,7 +256,7 @@ alone''',
             ('full', r'+\omega_{\mathrm{CT}}'),
         ])
         xticks = list(range(len(calc_types_no_pc)))
-        freqs_no_pc =
+        # freqs_no_pc =
 
         xytext_CT_offset_map = {
             'cation': 0.0,

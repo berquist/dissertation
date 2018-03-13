@@ -65,6 +65,7 @@
 % \addbibresource{../5746059.bib}
 % \addbibresource{../5773968.bib}
 % \addbibresource{../in_preparation.bib}
+\addbibresource{./presentation.bib}
 
 \AtEveryCitekey{\iffootnote{\color{PittBlue}\tiny}{}}
 \NewDocumentCommand{\nmfootfullcite}{m}{%
@@ -291,7 +292,7 @@
 % not physisorbing
 
 \begin{frame}
-  \frametitle{ALMO-EDA}
+  \frametitle{Energy decomposition analysis with absolutely localized molecular orbitals (ALMO-EDA)}
   \centering
   \begin{equation*}
     \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
@@ -309,6 +310,11 @@
 
 \begin{frame}
   \frametitle{ALMO-EDA}
+  Translate from
+  \begin{equation*}
+    \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
+  \end{equation*}
+  to
   \begin{equation*}
     \begin{aligned}
       \omega_{\text{tot}} &= \omega_{\text{free}} + \Delta \omega_{\text{int}} \\
@@ -323,15 +329,34 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Complementary occupied-virtual pairs (COVPs)}
   \centering
   \begin{figure}
     \begin{subfigure}[b]{0.50\linewidth}
       \includegraphics[width=\linewidth,keepaspectratio,natwidth=601,natheight=535]{./figures/PF6.to_CO2.1.png}
+      \caption*{From \ce{[PF6]-} to \ce{CO2}}
     \end{subfigure}%
     \begin{subfigure}[b]{0.50\linewidth}
       \includegraphics[width=\linewidth,keepaspectratio,natwidth=586,natheight=538]{./figures/PF6.from_CO2.1.png}
+      \caption*{From \ce{CO2} to \ce{[C1C1im]+}}
     \end{subfigure}
   \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\ce{CO2} deviation from linearity is caused by CT from anion}
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{./figures/angle_vs_ct_to_from.pdf}
+  \scriptsize
+  B3LYP/6-31G(d,p)
+\end{frame}
+
+\begin{frame}
+  % Electrocatalysis, directly related to charge transfer
+  % \includegraphics[scale=0.50]{./figures/overpotential.pdf}
+  \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/application_of_ct.pdf}
+  % \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/application_of_ct.png}
+  \nmfootfullcite{Rosen643}
 \end{frame}
 
 \begin{frame}
@@ -450,11 +475,11 @@
   \frametitle{Quick-and-dirty linear response}
   The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
   \begin{equation*}
-    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{0|\hat{P}|n}\braket{n|\hat{Q}|0}}{\omega_{n} - \omega_{Q}} + \frac{\braket{0|\hat{Q}|n}\braket{n|\hat{P}|0}}{\omega_{n} + \omega_{Q}} \right]
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{\Psi_{0}|\hat{P}|\Psi_{n}}\braket{\Psi_{n}|\hat{Q}|\Psi_{0}}}{E_{n} - E_{0} - \omega_{Q}} + \frac{\braket{\Psi_{0}|\hat{Q}|\Psi_{n}}\braket{\Psi_{n}|\hat{P}|\Psi_{0}}}{E_{n} - E_{0} + \omega_{Q}} \right]
   \end{equation*}
-  where \(\omega_{n} = E_{n} - E_{0}\). For single-configuration methods in the static limit (\(\omega_{Q} = 0\)),
+  In computable form,
   \begin{equation*}
-    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{0} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
+    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{\omega_{Q}} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
   \end{equation*}
   where
   \begin{equation*}
@@ -518,6 +543,52 @@
     \caption*{\arlidimer{}, HF/def2-SVPD}
   \end{figure}
 \end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \begin{subfigure}[b]{0.49\linewidth}
+      \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVP.pdf}
+      \caption*{\scriptsize def2-SVP}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\linewidth}
+      \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVPD.pdf}
+      \caption*{\scriptsize def2-SVPD}
+    \end{subfigure}
+  \end{figure}
+\end{frame}
+
+% \begin{frame}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
+%     \caption*{\arlidimer{}, HF/def2-SVP}
+%   \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
+%     \caption*{\arlidimer{}, HF/def2-SVP}
+%   \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
+%     \caption*{\arlidimer{}, HF/def2-SVPD}
+%   \end{figure}
+% \end{frame}
+
+% \begin{frame}
+%   \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
+%     \caption*{\arlidimer{}, HF/def2-SVPD}
+%   \end{figure}
+% \end{frame}
 
 % \begin{frame}
 %   \frametitle{Acknowledgements}
