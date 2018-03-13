@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[xcolor=usenames,dvipsnames,svgnames]{beamer}
 
 \RequirePackage{xparse}
 
@@ -148,10 +148,12 @@
 \begin{frame}
   \frametitle{What is molecular response?}
   \begin{itemize}
-  \item The experimentalist works at the \textcolor{green}{macroscopic level} and typically records the \textcolor{blue}{response of the electromagnetic field}.
-  \item The theoretician works at the \textcolor{green}{microscopic level} and typically calculates the \textcolor{blue}{molecular response}.
+  \item The experimentalist works at the \textcolor{Green}{macroscopic level} and typically records the \textcolor{blue}{response of the electromagnetic field}.
+  \item The theoretician works at the \textcolor{Green}{microscopic level} and typically calculates the \textcolor{blue}{molecular response}.
   % \item In order to connect experiment and theory we must reconcile these two different approaches.
   \end{itemize}
+  \centering
+  \includegraphics[scale=0.25]{./figures/computational_chemistry.pdf}
 \end{frame}
 
 \begin{frame}
@@ -360,41 +362,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Spectroscopic properties are directly connected to energy derivatives}
-  \centering
-  \scriptsize
-  \begin{tabulary}{1.00\textwidth}{rL}
-    \toprule
-    \textbf{Derivative} & \textbf{Molecular property} \\
-    \midrule
-    \(\frac{dE}{dF_{i}}\)                          & dipole moment; similarly,  multipole moments, electric field gradients, etc. \\
-    \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
-    \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
-    \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
-    \textcolor{AlertColor}{\(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)}       & \textcolor{AlertColor}{polarizability} \\
-    \textcolor{AlertColor}{\(\frac{d^{2}E}{dX_{i}dX_{j}}\)}                & \textcolor{AlertColor}{harmonic force constants and vibrational frequencies} \\
-    \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
-    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
-    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
-    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
-    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
-    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
-    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
-    % \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
-    % \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
-    % \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
-    % \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
-    % \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
-    ... & ... \\
-    \bottomrule
-  \end{tabulary}
-\end{frame}
-
-\begin{frame}
   \frametitle{Why do analytic derivatives?}
   \scriptsize
   \begin{itemize}
@@ -440,6 +407,42 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Spectroscopic properties are directly connected to energy derivatives}
+  \centering
+  \scriptsize
+  \begin{tabulary}{1.00\textwidth}{rL}
+    \toprule
+    \textbf{Derivative} & \textbf{Molecular property} \\
+    \midrule
+    \(\frac{dE}{dF_{i}}\)                          & dipole moment; similarly,  multipole moments, electric field gradients, etc. \\
+    \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
+    \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+    \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
+    \textcolor{AlertColor}{\(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)}       & \textcolor{AlertColor}{polarizability} \\
+    \textcolor{AlertColor}{\(\frac{d^{2}E}{dX_{i}dX_{j}}\)}                & \textcolor{AlertColor}{harmonic force constants and vibrational frequencies} \\
+    \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
+    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
+    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
+    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
+    % \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
+    % \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
+    % \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
+    % \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
+    % \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
+    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
+    ... & ... \\
+    \bottomrule
+  \end{tabulary}
+\end{frame}
+
+
+\begin{frame}
   \uncover<1->{\begin{equation*}
       \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
   \end{equation*}}
@@ -452,6 +455,27 @@
         &+ \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{frz}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{pol}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{CT}}
     \end{aligned}
   \end{equation*}}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quick-and-dirty linear response}
+  The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
+  \begin{equation*}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{\Psi_{0}|\hat{P}|\Psi_{n}}\braket{\Psi_{n}|\hat{Q}|\Psi_{0}}}{E_{n} - E_{0} - \omega_{Q}} + \frac{\braket{\Psi_{0}|\hat{Q}|\Psi_{n}}\braket{\Psi_{n}|\hat{P}|\Psi_{0}}}{E_{n} - E_{0} + \omega_{Q}} \right]
+  \end{equation*}
+  In computable form,
+  \begin{equation*}
+    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{\omega_{Q}} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
+  \end{equation*}
+  where
+  \begin{equation*}
+    (\vect{P}_{\alpha})_{ia} = -2 \braket{ i | \hat{P}_{\alpha} | a }
+  \end{equation*}
+  is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted orbital Hessian. The key step is forming the response vector
+  \begin{equation*}
+    X_{ia} = G_{ia,jb}^{-1} Q_{jb}.
+  \end{equation*}
+  \(X_{ia}\) is equivalent to the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
 \end{frame}
 
 \begin{frame}
@@ -476,26 +500,6 @@
   \end{tabular}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Quick-and-dirty linear response}
-  The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
-  \begin{equation*}
-    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{\Psi_{0}|\hat{P}|\Psi_{n}}\braket{\Psi_{n}|\hat{Q}|\Psi_{0}}}{E_{n} - E_{0} - \omega_{Q}} + \frac{\braket{\Psi_{0}|\hat{Q}|\Psi_{n}}\braket{\Psi_{n}|\hat{P}|\Psi_{0}}}{E_{n} - E_{0} + \omega_{Q}} \right]
-  \end{equation*}
-  In computable form,
-  \begin{equation*}
-    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{\omega_{Q}} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
-  \end{equation*}
-  where
-  \begin{equation*}
-    (\vect{P}_{\alpha})_{ia} = -2 \braket{ i | \hat{P}_{\alpha} | a }
-  \end{equation*}
-  is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted orbital Hessian. The key step is forming the response vector
-  \begin{equation*}
-    X_{ia} = G_{ia,jb}^{-1} Q_{jb}.
-  \end{equation*}
-  \(X_{ia}\) is equivalent to the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
-\end{frame}
 
 % \begin{frame}[fragile]
 %   \frametitle{An Algorithm For Finding Primes Numbers.}
@@ -520,6 +524,21 @@
 % \begin{frame}
 % \end{frame}
 
+\begin{frame}
+  \centering
+  \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_response_equations.pdf}}
+  \begin{figure}
+    \begin{subfigure}[c]{0.30\linewidth}
+      \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_mat_01_frz.pdf}}
+    \end{subfigure}
+    \begin{subfigure}[c]{0.30\linewidth}
+      \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_mat_02_pol.pdf}}
+    \end{subfigure}
+    \begin{subfigure}[c]{0.30\linewidth}
+      \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_mat_03_ct.pdf}}
+    \end{subfigure}
+  \end{figure}
+\end{frame}
 
 \begin{frame}
   \frametitle{Example: Static polarizability}
@@ -531,6 +550,12 @@
   \begin{equation*}
     \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}.
   \end{equation*}
+  ALMO is BSSE-free:
+  {\scriptsize
+  \begin{equation*}
+    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
+    \label{eq:bsse-corrected-polarizability}
+  \end{equation*}}
 \end{frame}
 
 \begin{frame}
@@ -564,38 +589,6 @@
 \end{frame}
 
 % \begin{frame}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
-%     \caption*{\arlidimer{}, HF/def2-SVP}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
-%     \caption*{\arlidimer{}, HF/def2-SVP}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
-%     \caption*{\arlidimer{}, HF/def2-SVPD}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}
-%   \begin{figure}
-%     \centering
-%     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
-%     \caption*{\arlidimer{}, HF/def2-SVPD}
-%   \end{figure}
-% \end{frame}
-
-% \begin{frame}
 %   \frametitle{Acknowledgements}
 %   \begin{columns}
 %     \column{0.65\textwidth}
@@ -624,23 +617,76 @@
 % \end{frame}
 
 \begin{frame}
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{../paper_05/fig1.png}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_1.png}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_2.png}
+\end{frame}
+
+\begin{frame}
+  \centering
+  \includegraphics[scale=0.20]{./figures/psi4numpy_github.png}
+  {\scriptsize \url{https://github.com/psi4/psi4numpy/}}
+\end{frame}
+
+\begin{frame}
   \frametitle{Thank you}
   \scriptsize
   \begin{enumerate}
   \item \fullcite{Berquist2014}
   \item \fullcite{Shao2015}
-  \item {\setbeamercolor{bibliography entry author}{fg=green}\fullcite{Brinzer2015}}
+  \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Brinzer2015}}
   \item \fullcite{Daly2016}
   \item \fullcite{Berquist2017}
   \item \fullcite{Brinzer2017}
   \item \fullcite{Smith2018}
-  \item {\setbeamercolor{bibliography entry author}{fg=green}\fullcite{Berquist2018}}
+  \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Berquist2018}}
   \item \fullcite{Jakubek2018}
   \end{enumerate}
 \end{frame}
 
 \begin{frame}
   \frametitle{Extra slides}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVP}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVP}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVPD}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVPD}
+  \end{figure}
 \end{frame}
 
 \begin{frame}
