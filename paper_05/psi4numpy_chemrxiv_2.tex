@@ -126,7 +126,7 @@ Here we present \pfn, a framework for the creation of clear, readable reference 
 Several of the reference implementations have been augmented by tutorial-style introductions to the relevant theory.  The \pfn tutorial collection includes self-consistent field (SCF), DFT,\cite{Parr:1989} many-body perturbation theory (MBPT),\cite{Bartlett:1981:359} symmetry-adapted perturbation theory (SAPT)\cite{Jeziorski:1994:1887, Szalewicz:2012:254}, coupled-cluster (CC)\cite{Purvis:1982}, and configuration interaction (CI)\cite{Shavitt:1977,Sherrill:1999:CI} theories, with additional sections detailing the theory and implementation of linear response, geometry optimizations, and Verlet integrators.  It is our hope that \pfn and the accompanying reference code will lower the barrier to implementing quantum chemical methods.
 
 \begin{figure}
-  \includegraphics[width=\textwidth]{fig1.png}
+  \includegraphics[width=\linewidth,keepaspectratio]{fig1-oval-org.pdf}
   \caption{\pfn draws linear algebra tools from \numpy and fundamental quantum chemistry structures from \pfour to bring together a practical and convenient environment for code development, verification, and exploration. The most important data structures and functions are shown for \numpy and \pfour as well as representative tutorial and reference implementations presently in \pfn.\label{fig:ovalorg}}
 \end{figure}
 
@@ -409,7 +409,7 @@ Current reference implementations include
 As a service to the community, some of the reference implementations have been augmented by additional, tutorial-style background information on various subfields of quantum chemistry.  We found it convenient to add this additional information using the Jupyter notebook web application,\cite{Granger:1521-9615} a popular Integrated Development Environment (IDE) for interactive computing in several programming languages that is starting to be adopted by chemists \cite{charles:2017:592}.  An example for restricted Hartree--Fock can be found in Fig.~\ref{fig:ipython}.
 
 \begin{figure}[H]
-  \includegraphics[scale=0.25]{fig2.png}
+  \includegraphics[width=\linewidth,keepaspectratio]{fig2-ipython-rhf.png}
   \caption{Extract from a Jupyter notebook demonstrating the construction of a SCF Fock matrix where {\tt I} is the 4-index electron repulsion integral array and {\tt Cocc} is the occupied orbital matrix.}
   \label{fig:ipython}
 \end{figure}
