@@ -4,6 +4,9 @@ all:
 chemfig:
 	latexmk -pdf -xelatex -shell-escape chemfig_examples.tex
 
+faraday:
+	latexmk -pdf faraday.tex
+
 clean:
 	latexmk -c
 	rm -f *.bbl

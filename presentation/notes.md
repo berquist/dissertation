@@ -28,3 +28,16 @@ http://wps.prenhall.com/wps/media/objects/724/741576/Instructor_Resources/Chapte
 - use vibrational frequency calculations to help understand CO2 solvation by ionic liquids
 - a key part of this analysis was energy decomposition analysis
 - outcomes: what to do in the future
+
+# Overlap of basis functions/AOs/MOs with comparison to SAPT
+
+## Ramos-Cordoba/Lambrecht 2011
+
+> By imposing the condition that the molecular orbitals on fragment A have contributions only from the atomic orbitals on fragment A, the physical effect of charge transfer between the fragments is prohibited, as is the unphysical artifact of basis set superposition error.
+
+> The principal limitation to bear in mind about the ALMO approximation is that it depends on the basis functions being well-localized to the fragments to which they belong. Accordingly, the ALMO approximation is ill-defined when the AO basis set is linearly dependent in the sense that (basis) functions on one fragment can represent those on another.
+
+How to determine linear dependence? A set of vectors is linearly dependent if its determinant is zero. Since the determinant is non-zero only if a matrix is invertible, which requires all non-zero eigenvalues, a set of vectors is linearly dependent if one or more eigenvalues are nearly zero.
+
+# Pauli repulsion
+

@@ -1,0 +1,58 @@
+\documentclass{article}
+
+\RequirePackage{booktabs}
+\RequirePackage[version=4]{mhchem}
+\RequirePackage{microtype}
+\RequirePackage[%
+    separate-uncertainty = false,%
+    uncertainty-separator = {\,},%
+    multi-part-units = single,%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
+\DeclareSIUnit\Molar{M}
+\DeclareSIUnit\au{a.u.}
+\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
+\DeclareSIUnit\debye{D}
+\DeclareSIUnit\electron{e^{-}}
+\DeclareSIUnit\kcal{\kilo\cal}
+\DeclareSIUnit\kj{\kilo\joule}
+\DeclareSIUnit\micron{\micro\metre}
+\DeclareSIUnit\torr{Torr}
+\DeclareSIUnit\wavenumber{\per\centi\metre}
+
+\begin{document}
+
+\begin{table}
+  \centering
+  \caption{Binding energy decompositions, geometry, and harmonic vibrational frequencies (\si{\wavenumber}) and infrared intensities (\si{\km\per\mole}) for the global minimum (min) of the water dimer, computed at the B3LYP/aug-cc-pVTZ level of theory with and without the ALMO approximation}
+  \begin{tabular}{lSS}
+    \toprule
+    & {ALMO (min)} & {Full (min)} \\
+    \midrule
+    \(\Delta E\)/\si{\kj\per\mole}              & -13.7 & -18.9 \\
+    \(\Delta E_{\text{frz}}\)/\si{\kj\per\mole} & -10.5 & -6.2 \\
+    \(\Delta E_{\text{pol}}\)/\si{\kj\per\mole} & -3.2 & -5.8 \\
+    \(\Delta E_{\text{CT}}\)/\si{\kj\per\mole}  & 0.0 & -7.0 \\
+    \(\mu\)/\si{\debye}                         & 2.7 & 2.6 \\
+    \ce{R(O\bond{...}H)}/\si{\angstrom}         & 2.15 & 1.95 \\
+    \ce{R(O\bond{...}O)}/\si{\angstrom}         & 3.11 & 2.92 \\
+    \ce{R(OH_{D})}/\si{\angstrom}               & 0.96 & 0.97 \\
+    \(\omega_{1}\) \((\mathrm{I}_{1})\)         & 100 (28) & 143 (147) \\
+    \(\omega_{2}\) \((\mathrm{I}_{2})\)         & 114 (187) & 159 (66) \\
+    \(\omega_{3}\) \((\mathrm{I}_{3})\)         & 129 (121) & 164 (20) \\
+    \(\omega_{4}\) \((\mathrm{I}_{4})\)         & 145 (59) & 190 (215) \\
+    \(\omega_{5}\) \((\mathrm{I}_{5})\)         & 277 (77) & 365 (51) \\
+    \(\omega_{6}\) \((\mathrm{I}_{6})\)         & 492 (122) & 625 (94) \\
+    \(\omega_{7}\) \((\mathrm{I}_{7})\)         & 1631 (85) & 1628 (92) \\
+    \(\omega_{8}\) \((\mathrm{I}_{8})\)         & 1646 (54) & 1647 (39) \\
+    % 9-10 are the symmetric stretches; red shift is caused by charge transfer
+    \(\omega_{9}\) \((\mathrm{I}_{9})\)         & 3787 (82) & 3675 (335) \\
+    \(\omega_{10}\) \((\mathrm{I}_{10})\)       & 3796 (6) & 3791 (10) \\
+    \(\omega_{11}\) \((\mathrm{I}_{11})\)       & 3890 (125) & 3870 (85) \\
+    \(\omega_{12}\) \((\mathrm{I}_{12})\)       & 3895 (79) & 3890 (84) \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{document}
