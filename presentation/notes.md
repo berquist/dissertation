@@ -81,11 +81,11 @@ Slide 23
 
 ## Regular meeting
 
-- [ ] quantum chemistry connects frequencies to structure
+- [x] quantum chemistry connects frequencies to structure
 - [ ] can help those _who use_ screening
 - [ ] desirable properties of ionic liquids -> solvation energy, reversible
 - [ ] point out nomenclature...these are the example ILs studied
-- [ ] put cluster on nu3 trend slide
+- [x] put cluster on nu3 trend slide
 - [ ] **Driving forces**
 - [ ] Define ALMO
 - [ ] Is within an SCF procedure
