@@ -1,4 +1,5 @@
 all:
+	latexmk -pdf -xelatex -shell-escape presentation_outline.tex
 	latexmk -pdf -xelatex -shell-escape presentation.tex
 
 chemfig:

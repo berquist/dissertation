@@ -47,6 +47,7 @@ presentation/presentation.pdf
 *.xdv
 
 # beamer
+*.lbf
 *.nav
 *.snm
 

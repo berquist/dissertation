@@ -1,0 +1,173 @@
+\documentclass[xcolor=usenames,dvipsnames,svgnames]{beamer}
+
+\RequirePackage{xparse}
+
+%% https://www.quora.com/Presentations-What-are-the-best-beamer-themes
+\setbeamertemplate{frametitle}
+  {\begin{centering}\smallskip
+   \insertframetitle\par
+   \smallskip\end{centering}}
+\setbeamertemplate{itemize item}{\(\bullet\)}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[text line]{%
+    \hfill\strut{%
+        \scriptsize\sf\color{black!60}%
+        \quad\insertframenumber
+    }%
+    \hfill
+}
+
+\definecolor{NoteBrown}{RGB}{152,101,47}
+\definecolor{NoteBlue}{RGB}{31,91,255}
+\definecolor{NoteGreen}{RGB}{62,195,74}
+\definecolor{NoteRed}{RGB}{191,0,0}
+\definecolor{NotePurple}{RGB}{151,54,208}
+\definecolor{NoteDarkGreen}{RGB}{0,121,62}
+\definecolor{NoteGrey}{RGB}{150,150,150}
+\definecolor{NoteOrange}{RGB}{255,155,0}
+
+% Define some colors:
+\definecolor{PittBlue}{RGB}{0,43,94}
+\definecolor{PittGold}{RGB}{197,168,118}
+\definecolor{DarkFern}{HTML}{407428}
+\definecolor{DarkCharcoal}{HTML}{4D4944}
+\colorlet{Fern}{DarkFern!85!white}
+\colorlet{Charcoal}{DarkCharcoal!85!white}
+\colorlet{LightCharcoal}{Charcoal!50!white}
+\colorlet{AlertColor}{orange!80!black}
+\colorlet{DarkRed}{red!70!black}
+\colorlet{DarkBlue}{blue!70!black}
+\colorlet{DarkGreen}{green!70!black}
+% Use the colors:
+\setbeamercolor{title}{fg=PittBlue}
+\setbeamercolor{frametitle}{fg=PittBlue}
+\setbeamercolor{normal text}{fg=DarkCharcoal}
+\setbeamercolor{block title}{fg=black,bg=Fern!25!white}
+\setbeamercolor{block body}{fg=black,bg=Fern!25!white}
+\setbeamercolor{alerted text}{fg=AlertColor}
+\setbeamercolor{itemize item}{fg=Charcoal}
+
+\usepackage[%
+    backend    = biber,%
+    style      = chem-acs,%
+    autocite   = superscript,%
+    backref    = true,%
+    biblabel   = brackets,%
+    doi        = true,%
+    minnames   = 1,%
+    maxnames   = 10,%
+]{biblatex}
+\addbibresource{../library.bib}
+\addbibresource{../library2.bib}
+\addbibresource{../paper_04/paper.bib}
+\addbibresource{../paper_05/psi4numpy.bib}
+\addbibresource{../paper_05/tutorial.bib}
+\addbibresource{../5746059.bib}
+\addbibresource{../5773968.bib}
+\addbibresource{../in_preparation.bib}
+\addbibresource{./presentation.bib}
+
+\AtEveryCitekey{\iffootnote{\color{PittBlue}\tiny}{}}
+\NewDocumentCommand{\nmfootfullcite}{m}{%
+    \AtNextCite{%
+        \let\thefootnote\relax
+        \let\mkbibfootnote\mkbibfootnotetext
+    }{%
+        \footfullcite{#1}
+    }
+}
+
+\RequirePackage{appendixnumberbeamer}
+\RequirePackage{booktabs}
+\RequirePackage{braket}
+\RequirePackage{caption}
+\RequirePackage{graphicx}
+\RequirePackage{microtype}
+\RequirePackage{minted}
+\RequirePackage[version=4]{mhchem}
+\newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
+\RequirePackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
+\RequirePackage{subcaption}
+\RequirePackage{tabulary}
+
+\NewDocumentCommand{\vect}{m}{%
+        \ensuremath{\boldsymbol{\mathbf{#1}}}%
+}%
+
+% \newcommand*{\phnum}[2][]{%
+%   \begingroup
+%     \protected\def\X{\phantom{0}}%
+%     \num[
+%       input-digits=0123456789\X,%
+%       #1%
+%     ]{#2}%
+%   \endgroup
+% }
+
+\newcommand\pfour{\textsc{Psi4}}
+\newcommand\pfn{\textsc{Psi4NumPy}}
+
+\title{Decomposition of Intermolecular Interactions in \textit{Ab Initio} Spectroscopy}
+\author{Eric Berquist}
+% \institute[Pitt]{Lambrecht Research Group \\ Dissertation Defense \\ \vspace{6pt} \includegraphics[width=1in]{./figures/pitt_logo.pdf}}
+\institute{\includegraphics[width=1in]{./figures/pitt_logo.pdf}}
+\date{March 23th, 2018}
+
+\begin{document}
+
+\frame{
+  \titlepage
+}
+
+\frame{
+  \frametitle{Outline}
+  \tableofcontents
+}
+
+\section{Decomposition of harmonic vibrational frequencies}
+
+\section{Decomposition of general linear response properties}
+
+\begin{frame}
+  \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference results at short range}
+  \note{This shows the correctness of our implementation}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
+\end{frame}
+
+\section{Reference and tutorial implementations of quantum chemical methods}
+
+\begin{frame}
+  \frametitle{\pfn{} provides a modern ecosystem for quantum chemical method development}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\pfn{} is an ideal environment for teaching about \textit{ab initio} spectroscopy}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Future goals}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Acknowledgements}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Thank you}
+\end{frame}
+
+\appendix
+
+\end{document}
