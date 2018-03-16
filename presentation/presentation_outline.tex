@@ -109,8 +109,10 @@
 %   \endgroup
 % }
 
-\newcommand\pfour{\textsc{Psi4}}
-\newcommand\pfn{\textsc{Psi4NumPy}}
+% \newcommand\pfour{\textsc{Psi4}}
+\newcommand\pfour{Psi4}
+% \newcommand\pfn{\textsc{Psi4NumPy}}
+\newcommand\pfn{Psi4NumPy}
 
 \title{Decomposition of Intermolecular Interactions in \textit{Ab Initio} Spectroscopy}
 \author{Eric Berquist}
@@ -134,6 +136,10 @@
 \section{Decomposition of general linear response properties}
 
 \begin{frame}
+  \frametitle{Numerical benchmarks using static electric dipole polarizabilities}
+\end{frame}
+
+\begin{frame}
   \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference results at short range}
   \note{This shows the correctness of our implementation}
 \end{frame}
@@ -142,22 +148,36 @@
   \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
 \end{frame}
 
+\begin{frame}
+  \frametitle{libresponse is available as an open-source library}
+\end{frame}
+
 \section{Reference and tutorial implementations of quantum chemical methods}
 
 \begin{frame}
   \frametitle{\pfn{} provides a modern ecosystem for quantum chemical method development}
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_ecosystem2.pdf}
 \end{frame}
 
 \begin{frame}
-  \frametitle{\pfn{} is an ideal environment for teaching about \textit{ab initio} spectroscopy}
+  \frametitle{\pfn{} is an ideal platform for teaching about \textit{ab initio} spectroscopy}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Conclusions}
+  \frametitle{Jupyter Notebooks allow mixing of concepts, equations, and code in an exploratory environment}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\pfn{} is welcoming to new contributors}
 \end{frame}
 
 \begin{frame}
   \frametitle{Future goals}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions}
 \end{frame}
 
 \begin{frame}
@@ -169,5 +189,9 @@
 \end{frame}
 
 \appendix
+
+\begin{frame}
+  \frametitle{LR(MI) is BSSE-free by construction}
+\end{frame}
 
 \end{document}
