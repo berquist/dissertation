@@ -1,4 +1,9 @@
-\documentclass[xcolor=usenames,dvipsnames,svgnames]{beamer}
+\documentclass[%
+    draft,%
+    xcolor=usenames,dvipsnames,svgnames%
+]{beamer}
+
+\setbeameroption{show notes}
 
 \RequirePackage{xparse}
 
@@ -7,6 +12,16 @@
   {\begin{centering}\smallskip
    \insertframetitle\par
    \smallskip\end{centering}}
+% https://tex.stackexchange.com/a/56541/94717
+% https://tex.stackexchange.com/q/125540/94717
+\makeatletter
+\newcommand\listofframes{\@starttoc{lbf}}
+\makeatother
+\addtobeamertemplate{frametitle}{}{%
+  \addcontentsline{lbf}{section}{\protect\makebox[2em][l]{%
+    \protect\usebeamercolor[fg]{structure}\insertframenumber\hfill}%
+  \insertframetitle\par}%
+}
 \setbeamertemplate{itemize item}{\(\bullet\)}
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{footline}[text line]{%
@@ -109,6 +124,15 @@
 %   \endgroup
 % }
 
+% https://tex.stackexchange.com/q/252586/94717
+\newwrite\tempfile
+\immediate\openout\tempfile=slidelist.txt
+\newcounter{SlideNumber}
+\addtobeamertemplate{frametitle}{}{%
+  \stepcounter{SlideNumber}
+  \immediate\write\tempfile{\theSlideNumber [\insertframenumber] \insertframetitle}
+}
+
 % \newcommand\pfour{\textsc{Psi4}}
 \newcommand\pfour{Psi4}
 % \newcommand\pfn{\textsc{Psi4NumPy}}
@@ -131,9 +155,23 @@
   \tableofcontents
 }
 
+\note{\tiny\listofframes}
+
 \section{Decomposition of harmonic vibrational frequencies}
 
+\begin{frame}
+  \frametitle{Spectroscopy is a probe of changes in a molecule's electronic and geometric state using electromagnetic radiation}
+  \centering
+  \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
+  {\tiny\url{http://hrsbstaff.ednet.ns.ca/benoitn/chem11/units/1.\%20Atomic\%20Theory/e_config/spectra/electromagnetic-spectrum.jpg}}
+\end{frame}
+
 \section{Decomposition of general linear response properties}
+
+\begin{frame}
+  \frametitle{Many important molecular properties are calculated within the framework of linear response}
+  \note{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
+\end{frame}
 
 \begin{frame}
   \frametitle{Numerical benchmarks using static electric dipole polarizabilities}
@@ -193,5 +231,7 @@
 \begin{frame}
   \frametitle{LR(MI) is BSSE-free by construction}
 \end{frame}
+
+\immediate\closeout\tempfile
 
 \end{document}

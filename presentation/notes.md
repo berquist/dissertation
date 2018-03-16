@@ -51,7 +51,7 @@ Slide 23
 - [ ] How did you do this? (ALMO EDA decomp) [you later went through this to some degree]
 - [ ] What's a COVP?
 - [ ] Did you ever define an ALMO?
-- [ ] Do people know what a Linear Response is? 
+- [x] Do people know what a Linear Response is? 
 - [ ] **What's the usefulness of being able to calculate any arbitrary linear response and decompose it like this?**
 
 ## Notebook
