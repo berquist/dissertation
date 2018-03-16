@@ -5,14 +5,14 @@ http://wps.prenhall.com/wps/media/objects/724/741576/Instructor_Resources/Chapte
 ## Shiv
 
 Slide 8
-- [ ] Title? "Ionic liquids" for CO2 capture
-- [ ] Togo question - Why these? Water tolerant, fairly good CO2 capture already
+- [x] Title? "Ionic liquids" for CO2 capture
+- [x] Togo question - Why these? Water tolerant, fairly good CO2 capture already
 
 Slide 11
-- [ ] My question - how does this modeling help make better ionic liquids?
+- [x] My question - how does this modeling help make better ionic liquids?
 
 Slide 12
-- [ ] Some labels?
+- [x] Some labels?
 
 Slide 13
 - [ ] Pauli repulsion
@@ -42,22 +42,22 @@ Slide 23
 - [ ] major spectroscopic challenge -- inhomogeneous environments
 - [x] **suggestion: assertion-evidence style**
 - [ ] **give me more explanation on method**
-- [ ] "not excited states, just looking at polarizability" -- this statement did not make sense to me
+- [x] "not excited states, just looking at polarizability" -- this statement did not make sense to me
 - [ ] What is an IL? What makes it useful?
 - [ ] Why these ILs?
 - [ ] "Screening" -- how long does it take to run your calculation?
 - [ ] Suggest reordering slides to put some more method background first
-- [ ] slide 16: method? basis? very unclear
+- [x] slide 16: method? basis? very unclear
 - [ ] How did you do this? (ALMO EDA decomp) [you later went through this to some degree]
-- [ ] What's a COVP?
+- [x] What's a COVP?
 - [ ] Did you ever define an ALMO?
 - [x] Do people know what a Linear Response is? 
 - [ ] **What's the usefulness of being able to calculate any arbitrary linear response and decompose it like this?**
 
 ## Notebook
 
-- [ ] green CO2 spectrum color is too light
-- [ ] why these ILs? experimentally studied/validated
+- [x] green CO2 spectrum color is too light
+- [x] why these ILs? experimentally studied/validated
 - [ ] switch from water dimer in ALMO-EDA example introduction with eqn/sums
 - [ ] Pauli repulsion antisymmetry
 - [ ] dipole-dipole ACF

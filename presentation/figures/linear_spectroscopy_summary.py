@@ -42,8 +42,8 @@ plot_settings = {
     'linewidth': 0.75,
 }
 
-ax.plot(data_4_CO2.freq, data_4_CO2.abs, label=r'with $\ce{CO2}$', color='#009e73', **plot_settings)
-ax.plot(data_4_neat.freq, data_4_neat.abs, label='neat', color='black', **plot_settings)
+ax.plot(data_4_CO2.freq, data_4_CO2.abs, label=r'$\ce{[C4C1im][TfO]}$ with $\ce{CO2}$', color='red', **plot_settings)
+ax.plot(data_4_neat.freq, data_4_neat.abs, label=r'$\ce{[C4C1im][TfO]}$ neat', color='#898c8a', **plot_settings)
 
 ax.set_xlim(left=1000, right=3500)
 ax.set_ylim(bottom=-0.25, top=1.75)
@@ -69,42 +69,42 @@ plot_settings = {
 
 ax.plot(data_5_CO2.freq,
         data_5_CO2.normed_subbed,
-        label=r'$\ce{PF6}$',
+        label=r'$\ce{[PF6]-}$',
         linestyle='-.',
         color='orange',
         **plot_settings)
 
 ax.plot(data_2_CO2.freq,
         data_2_CO2.normed_subbed,
-        label=r'$\ce{Tf2N}$',
+        label=r'$\ce{[Tf2N]-}$',
         linestyle='--',
         color='green',
         **plot_settings)
 
 ax.plot(data_4_CO2.freq,
         data_4_CO2.normed_subbed,
-        label=r'$\ce{TfO}$',
+        label=r'$\ce{[TfO]-}$',
         linestyle='-',
         color='black',
         **plot_settings)
 
 ax.plot(data_1_CO2.freq,
         data_1_CO2.normed_subbed,
-        label=r'$\ce{TFA}$',
+        label=r'$\ce{[TFA]-}$',
         linestyle='-.',
         color='blue',
         **plot_settings)
 
 ax.plot(data_3_CO2.freq.transpose(),
         data_3_CO2.normed_subbed.transpose(),
-        label=r'$\ce{DCA}$',
+        label=r'$\ce{[DCA]-}$',
         linestyle='--',
         color='red',
         **plot_settings)
 
 ax.plot(data_6_CO2.freq,
         data_6_CO2.normed_subbed,
-        label=r'$\ce{SCN}$',
+        label=r'$\ce{[SCN]-}$',
         linestyle='-',
         color='purple',
         **plot_settings)
