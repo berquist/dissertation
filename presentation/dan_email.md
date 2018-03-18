@@ -57,3 +57,17 @@ Oddly, the `+ CT(Ar -> all)` result in the larger basis set is slightly smaller 
 ---
 
 If you're interested, I'm going to give an updated and much shorter practice talk in 655 Chevron this coming Tuesday at 2 PM.
+
+# 4
+
+Dear Eric,
+
+Thank you for the response. I'll certainly be there for your next practice talk.
+
+You mentioned the following statement:
+
+> As stated above, frz + pol + CT(all -> all) [blocked] is not really physical, and I am probably of the minority opinion that it is valuable in terms of methodology rather than some physical result.
+
+I completely agree with this. For myself, I would just like to hear this as it would keep me from trying to understand the physical origin of any of the relevant results. But, I understand that the talk has to focus more on the science and not so much the methodology.
+
+Best Regards, Dan
