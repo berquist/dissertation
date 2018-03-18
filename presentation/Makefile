@@ -10,12 +10,5 @@ faraday:
 
 clean:
 	latexmk -c
-	rm -f *.bbl
-	rm -f *.etd
-	rm -f *.loa
-	rm -f *.lol
-	rm -f *.pyg
-	rm -f *.run.xml
-	rm -f *.stp
-	rm -f *.xdv
+	rm -f *.bbl *.etd *.html *.lbf *.loa *.lol *.nav *.pyg *.run.xml *.snm *.stp *.vrb *.xdv
 	rm -rf ./_minted*
