@@ -114,6 +114,46 @@ Slide 23
 - [ ] a key part of this analysis was energy decomposition analysis
 - [ ] outcomes: what to do in the future
 
+# OneNote
+
+## Context: CO2 solvation by ionic liquids
+
+outline approach
+
+spectra <-> MD <-> quantum
+            ^
+            |
+            v
+            molecular picture (Eint, rai, diff)
+
+"Example of power of computational sim of spectra and more specifically decomposition"
+
+## Lewis structures
+
+_screening?_ for "optimal" ionic liquid
+-> define figure(s) of merit
+understanding, molecular picture
+
+## expt. solvatochromic shift
+
+define c4c1im again
+
+## expt. vs calc.
+
+encouraging initial results
+
+1. box(spectrum) <-> box(MD traj.
+                         RDF, vib, PES)
+2. Now go deeper and learn about molecular interactions
+
+## slide with electrocatalysis fig
+
+_explain_
+
+3-4 slides about CO2
+punchlines
+summary
+
 # Overlap of basis functions/AOs/MOs with comparison to SAPT
 
 ## Ramos-Cordoba/Lambrecht 2011
