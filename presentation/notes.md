@@ -51,7 +51,7 @@ Slide 23
 - [ ] How did you do this? (ALMO EDA decomp) [you later went through this to some degree]
 - [x] What's a COVP?
 - [ ] Did you ever define an ALMO?
-- [x] Do people know what a Linear Response is? 
+- [x] Do people know what a Linear Response is?
 - [ ] **What's the usefulness of being able to calculate any arbitrary linear response and decompose it like this?**
 
 ## Notebook
@@ -83,8 +83,8 @@ Slide 23
 
 - [x] quantum chemistry connects frequencies to structure
 - [ ] can help those _who use_ screening
-- [ ] desirable properties of ionic liquids -> solvation energy, reversible
-- [ ] point out nomenclature...these are the example ILs studied
+- [x] desirable properties of ionic liquids -> solvation energy, reversible
+- [x] point out nomenclature...these are the example ILs studied
 - [x] put cluster on nu3 trend slide
 - [ ] **Driving forces**
 - [ ] Define ALMO
@@ -95,19 +95,19 @@ Slide 23
     - [ ] (dis)prove importance of electrostatics such as in Start spectroscopy
 - [ ] E -> w -> <<P;Q>> after tables
 - [ ] Empirical map for response property, determine importance of incorporating gd, pol, CT, disp, ...
-- [ ] ~~Example: Static polarizability~~ Numerical benchmarks, mention _why_ static pol
-    - [ ] **well, why static pol?**
-    - [ ] _can compare to finite difference numerical derivatives_
-    - [ ] static helps provide the connection between analytic derivatives and response theory
-1. Confirm correctness before scientific results
-   **branding** <- outcomes
-2. r -> infty
-3. Physics _introduced_ by model
+- [x] ~~Example: Static polarizability~~ Numerical benchmarks, mention _why_ static pol
+    - [x] **well, why static pol?**
+    - [x] _can compare to finite difference numerical derivatives_
+    - [x] static helps provide the connection between analytic derivatives and response theory
+1. [x] Confirm correctness before scientific results
+2. [x] r -> infty
+3. [ ] Physics _introduced_ by model
+- [ ] **branding** <- outcomes
 - [ ] bar graph at equil. rather than table
 - [ ] Epol, CT vs. basis set size
 - [ ] **def2-SVPD only** not SVP, bar graph first then chart/plot
 - [ ] start w/ abs of free, plus delta, plus delta, ...
-- [ ] not trying to approach/approximate canonical result: trying to 
+- [ ] not trying to approach/approximate canonical result: trying to
 - [ ] "although written as a sum, not trying to..."
 
 - [ ] use vibrational frequency calculations to help understand CO2 solvation by ionic liquids

@@ -4,6 +4,7 @@
 ]{beamer}
 
 % \setbeameroption{show notes}
+% \setbeameroption{show only notes}
 
 \RequirePackage{xparse}
 
@@ -164,33 +165,35 @@
   \centering
   \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
   {\tiny\url{http://hrsbstaff.ednet.ns.ca/benoitn/chem11/units/1.\%20Atomic\%20Theory/e_config/spectra/electromagnetic-spectrum.jpg}}
-  \note{Tom comment: "not excited states, just looking at polarizability" -- this statement did not make sense to me}
-  \note{Response: wavelengths associated with frequency-dependent polarizability are also associated with UV/vis; probably don't need to mention this}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{\protect{Understanding \ce{CO2} solvation by ionic liquids is important for carbon capture}}
-  \note{Lewis structures go here}
-  \note{Example ionic liquids for carbon capture}
-  \note{Why these? Water tolerant, fairly good CO2 capture already, experimentally studied/validated}
+  \note[item]{Tom comment: "not excited states, just looking at polarizability" -- this statement did not make sense to me}
+  \note[item]{Response: wavelengths associated with frequency-dependent polarizability are also associated with UV/vis; probably don't need to mention this}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{\protect{Infrared spectroscopy is sensitive to the presence of \ce{CO2} in ionic liquids}}
-  \note{FTIR IL spectra with and without CO2 goes here}
+  \note[item]{FTIR IL spectra with and without CO2 goes here}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\protect{Understanding \ce{CO2} solvation by ionic liquids is important for carbon capture}}
+  \note[item]{Lewis structures go here}
+  \note[item]{Example ionic liquids for carbon capture}
+  \note[item]{Why these? Water tolerant, fairly good CO2 capture already, experimentally studied/validated}
+  \note[item]{desirable properties of ionic liquids: solvation energy, reversible absorption}
+  \note[item]{point out nomenclature}
 \end{frame}
 
 \begin{frame}
   \frametitle{Solvatochromic shift originates from varying the ionic liquid anion}
-  \note{shift as function of anion goes here}
+  \note[item]{shift as function of anion goes here}
 \end{frame}
 
 \begin{frame}
   \frametitle{Model calculations qualitatively reproduce trends in the solvatochromic shift}
-  \note{Experiment/calculation trends go here}
-  \note{Put image of TFA cluster in plot whitespace}
-  \note{Experimental cation is C4C1im, computational cation is C1C1im}
-  \note{quantum chemistry connects frequencies to structure}
+  \note[item]{Experiment/calculation trends go here}
+  \note[item]{Put image of TFA cluster in plot whitespace}
+  \note[item]{Experimental cation is C4C1im, computational cation is C1C1im}
+  \note[item]{quantum chemistry connects frequencies to structure}
 \end{frame}
 
 \begin{frame}
@@ -222,23 +225,27 @@
 
 \begin{frame}
   \frametitle{Numerical differentiation can give unphysical results}
-  \note{this is where the polarizability asymmetry figure goes}
+  \note[item]{this is where the polarizability asymmetry figure goes}
 \end{frame}
 
 \section{Decomposition of general linear response properties}
 
 \begin{frame}
   \frametitle{Many important molecular properties are calculated within the framework of linear response}
-  \note{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
+  \note[item]{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
 \end{frame}
 
 \begin{frame}
   \frametitle{Numerical benchmarks using static electric dipole polarizabilities}
+  \note[item]{Why polarizability? can compare to finite difference numerical derivatives}
+  \note[item]{Why static? static helps provide the connection between analytic derivatives and response theory}
 \end{frame}
 
 \begin{frame}
   \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference results at short range}
-  \note{This shows the correctness of our implementation}
+  \note[item]{This shows the correctness of our implementation}
+  \note[item]{Confirm correctness before scientific result}
+  \note[item]{deviation between implementations occurs in the electron density penetration region, where ALMO is not expected to be valid anyway}
 \end{frame}
 
 \begin{frame}
@@ -247,6 +254,8 @@
 
 \begin{frame}
   \frametitle{libresponse is available as an open-source library}
+  \note[item]{Github repo link}
+  \note[item]{working on Psi4 plugin}
 \end{frame}
 
 \section{Reference and tutorial implementations of quantum chemical methods}
@@ -266,7 +275,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{\pfn{} is welcoming to new contributors}
+  \frametitle{\pfn{} is welcoming to external contributors}
 \end{frame}
 
 \begin{frame}
