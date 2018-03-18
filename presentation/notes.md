@@ -15,19 +15,19 @@ Slide 12
 - [x] Some labels?
 
 Slide 13
-- [ ] Pauli repulsion
-- [ ] signs of terms
+- [x] Pauli repulsion
+- [x] signs of terms
 
-Slide 14
-- [ ] <mu(0),mu(t)> autocorrelation function
-- [ ] information about MD
-- [ ] citation
+Slide 14 (not going to include this at all)
+- [x] <mu(0),mu(t)> autocorrelation function
+- [x] information about MD
+- [x] citation
 
 Slide 15
-- [ ] its unclear that you are getting intermediate wavefunctions and thus properties instead of just energy
+- [x] its unclear that you are getting intermediate wavefunctions and thus properties instead of just energy
 
 Slide 20
-- [ ] ALMO definition -> MO of only 1 fragment
+- [x] ALMO definition -> MO of only 1 fragment
 
 Slide 23
 - [ ] get rid of derivative table
@@ -35,7 +35,7 @@ Slide 23
 
 ## Dan
 
-- [ ] Didn't understand Dan's question about "building up"
+- [x] Didn't understand Dan's question about "building up"
 
 ## Tom
 
