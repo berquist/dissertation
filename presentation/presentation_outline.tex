@@ -157,7 +157,7 @@
 
 \note{\tiny\listofframes}
 
-\section{Decomposition of harmonic vibrational frequencies}
+\section{Decomposition of harmonic vibrational frequencies into physically-intuitive terms}
 
 \begin{frame}
   \frametitle{Spectroscopy is a probe of changes in a molecule's electronic and geometric state using electromagnetic radiation}
@@ -236,28 +236,59 @@
   \frametitle{Problem: the approach for decomposing vibrational frequencies is not generally applicable to other properties}
   \note[item]{What's the value of spectroscopy decomposition?}
   \note[item]{Want the ability to build structure-spectra relationships for any type of spectroscopy, leading to spectra-property relationships}
-  \note[item]{The derivative table and/or series expansion example + e-field terms should go here}
+  \note[item]{A series expansion example + e-field terms should go here}
 \end{frame}
 
 \begin{frame}
-  \frametitle{}
+  \frametitle{Spectroscopic properties are directly connected to energy derivatives}
+  \note[item]{The derivative table should go here}
 \end{frame}
 
 \begin{frame}
   \frametitle{Numerical differentiation can give unphysical results}
   \note[item]{this is where the polarizability asymmetry figure goes}
+  \note[item]{One example why the original approach is not generally applicable...}
+  \note[item]{One problem with numerical differentiation is...}
+  \note[item]{Mention other issues with numerical differentiation}
 \end{frame}
 
 \section{Decomposition of general linear response properties}
 
 \begin{frame}
+  \frametitle{Solution: start from the framework of response theory}
+  \note[item]{Many important molecular properties are calculated within the framework of linear response}
+  Spectroscopic properties are directly connected to (linear) response functions:
+  \note[item]{the linear response table should go here}
+  \note[item]{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The language of energy decomposition analysis can be applied to general response properties}
+  We have already successfully translated
+  \begin{equation*}
+    \Delta E_{\text{int}} = \Delta E_{\text{geom}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
+  \end{equation*}
+  into
+  \begin{equation*}
+    \omega_{\text{tot}} = \omega_{\text{free}} + \Delta \omega_{\text{geom}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}}
+  \end{equation*}
+  Now do the same for linear response:
+  \begin{equation*}
+    \begin{aligned}
+      \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{tot}} = &\braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{free}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{geom}} \\
+      &+ \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{frz}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{pol}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{CT}}
+    \end{aligned}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
   \frametitle{Linear response in a nutshell}
+  \note[item]{this is where the quick-and-dirty slide goes}
   \note[item]{Walk us through the equations}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Many important molecular properties are calculated within the framework of linear response}
-  \note[item]{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
+  \frametitle{Approach: take idea behind SCF(MI) and apply it to linear response}
 \end{frame}
 
 \begin{frame}
