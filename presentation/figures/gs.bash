@@ -1,9 +1,14 @@
 #!/bin/bash
 
+# gs.bash: Keynote outputs malformed PDF 1.3 files which LaTeX can't
+# incorporate without visual glitches. Processing them with
+# ghostscript first seems to fix any problems.
+
 inputs=(
     ../../diff_overlay.pdf
     application_of_ct.pdf
     frequencies_calc_vs_expt1_combined.pdf
+    psi4numpy_ecosystem2.pdf
 )
 
 for input in ${inputs[@]}; do
@@ -11,5 +16,3 @@ for input in ${inputs[@]}; do
     echo ${stub}
     gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dBATCH -sOutputFile=${stub}2.pdf ${stub}.pdf
 done
-# gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dBATCH -sOutputFile=application_of_ct2.pdf application_of_ct.pdf
-# gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.5 -dNOPAUSE -dBATCH -sOutputFile=frequencies_calc_vs_expt1_combined2.pdf frequencies_calc_vs_expt1_combined.pdf
