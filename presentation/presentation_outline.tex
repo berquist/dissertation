@@ -273,11 +273,9 @@
 
 \begin{frame}
   % \frametitle{ALMO-EDA enables understanding the physical basis for the solvatochromic shift}
-  \frametitle{What is the physical basis for the solvatochromic shift?}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Energy decomposition analysis provides an intuitive assignment of intermolecular interactions to physical terms}
+  % \frametitle{What is the physical basis for the solvatochromic shift?}
+  % \frametitle{Energy decomposition analysis provides an intuitive assignment of intermolecular interactions to physical terms}
+  \frametitle{Energy decomposition analysis can explain the physical basis for the solvatochromic shift}
   \note[item]{Performed using absolutely localized molecular orbitals (ALMO-EDA), a ``bottom-up'' localization technique that prevents charge transfer by construction}
   \note[item]{How an ALMO is constructed}
   \note[item]{Intermediate wavefunction!}
@@ -335,6 +333,26 @@
   Spectroscopic properties are directly connected to (linear) response functions:
   \note[item]{the linear response table should go here}
   \note[item]{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
+  \begin{table}
+    \centering
+    \begin{tabular}{ll}
+      \toprule
+      \textbf{Molecular property}       & \textbf{Linear response function} \\
+      \midrule
+      polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \) \\
+      magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \) \\
+      optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \) \\
+      electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \) \\
+      IR intensities                    & \( \braket{\braket{\hat{\mu};\partial\hat{H}_{0}/\partial R}}_{\omega} \) \\
+      NMR spin-spin coupling constants  & \( \braket{\braket{\hat{h}_{\text{SD}};\hat{h}_{\text{SD}}}}_{0} \), \\
+                                        & \( \braket{\braket{\hat{h}_{\text{FC}};\hat{h}_{\text{FC}}}}_{0} \), \\
+                                        & \( \braket{\braket{\hat{h}_{\text{PSO}};\hat{h}_{\text{PSO}}}}_{0} \) \\
+      NMR chemical shifts               & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{PSO}}}}_{0} \) \\
+      EPR \textit{g}-tensor             & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{SOC}}}}_{0} \) \\
+      ... & ... \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
 \end{frame}
 
 \begin{frame}
@@ -373,7 +391,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference results at short range}
+  \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference}
   \note[item]{This shows the correctness of our implementation}
   \note[item]{Confirm correctness before scientific result}
   \note[item]{deviation between implementations occurs in the electron density penetration region, where ALMO is not expected to be valid anyway}
