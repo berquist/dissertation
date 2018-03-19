@@ -98,6 +98,9 @@
 \usepackage{booktabs}
 \usepackage{braket}
 \usepackage{caption}
+% \usepackage{showframe}
+% \renewcommand\ShowFrameLinethickness{0.15pt}
+% \renewcommand*\ShowFrameColor{\color{red}}
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{minted}
@@ -115,6 +118,11 @@
 \NewDocumentCommand{\vect}{m}{%
         \ensuremath{\boldsymbol{\mathbf{#1}}}%
 }%
+
+% https://tex.stackexchange.com/a/98893/94717
+\newenvironment{nscenter}
+ {\parskip=0pt\par\nopagebreak\centering}
+ {\par\noindent\ignorespacesafterend}
 
 % \newcommand*{\phnum}[2][]{%
 %   \begingroup
@@ -161,8 +169,9 @@
 
 \begin{frame}
   \frametitle{Spectroscopy is a probe of changes in a molecule's electronic and geometric state using electromagnetic radiation}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
+  \end{nscenter}
   {\tiny\url{http://hrsbstaff.ednet.ns.ca/benoitn/chem11/units/1.\%20Atomic\%20Theory/e_config/spectra/electromagnetic-spectrum.jpg}}
   \note[item]{Tom comment: "not excited states, just looking at polarizability" -- this statement did not make sense to me}
   \note[item]{Response: wavelengths associated with frequency-dependent polarizability are also associated with UV/vis; probably don't need to mention this}
@@ -175,8 +184,9 @@
   \note[item]{For example, ...}
   \note[item]{FTIR IL spectra with and without CO2 goes here}
   % \frametitle{\ce{CO2} asymmetric stretch lies in an isolated spectral window}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_TfO.pdf}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_TfO.pdf}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -239,8 +249,9 @@
 \begin{frame}
   \frametitle{Solvatochromic shift originates from varying the ionic liquid anion}
   \note[item]{shift as function of anion goes here}
-  \centering
-  \includegraphics[scale=0.65]{./figures/experimental_spectra_shifting.pdf}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/experimental_spectra_shifting.pdf}
+  \end{nscenter}
   \scriptsize
   experiment, \ce{[C4C1im]+}
 \end{frame}
@@ -251,9 +262,10 @@
   \note[item]{Put image of TFA cluster in plot whitespace}
   \note[item]{Experimental cation is C4C1im, computational cation is C1C1im}
   \note[item]{quantum chemistry connects frequencies to structure}
-  \centering
   % \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1.pdf}
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1_combined2.pdf}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1_combined2.pdf}
+  \end{nscenter}
   % \nmfootfullcite{Brinzer2015}
 \end{frame}
 
@@ -275,10 +287,9 @@
 
 \begin{frame}[fragile]
   \frametitle{\protect{The \ce{CO2} asymmetric stretch solvatochromic shift is caused by charge transfer-driven geometric distortion}}
-  \begin{figure}
-    \centering
-    \includegraphics[scale=0.25]{./figures/ionic_liquid_geometry_dependence_on_ct_combined.pdf}
-  \end{figure}
+  \begin{nscenter}
+    \includegraphics[scale=0.27]{./figures/ionic_liquid_geometry_dependence_on_ct_combined.pdf}
+  \end{nscenter}
   % B3LYP/6-31G(d,p); cation is \ce{[C1C1im]+}
 \end{frame}
 
@@ -368,6 +379,10 @@
 
 \begin{frame}
   \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVPD.pdf}
+  \end{nscenter}
+  {\tiny HF/def2-SVPD}
 \end{frame}
 
 \begin{frame}
@@ -380,8 +395,9 @@
 
 \begin{frame}
   \frametitle{\pfn{} provides a modern ecosystem for quantum chemical method development}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_ecosystem22.pdf}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_ecosystem22.pdf}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
