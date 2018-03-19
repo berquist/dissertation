@@ -375,13 +375,14 @@
   \note[item]{This shows the correctness of our implementation}
   \note[item]{Confirm correctness before scientific result}
   \note[item]{deviation between implementations occurs in the electron density penetration region, where ALMO is not expected to be valid anyway}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVPD.pdf}
+  \end{nscenter}
+  {\tiny HF/def2-SVPD}
 \end{frame}
 
 \begin{frame}
   \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
-  \begin{nscenter}
-    \includegraphics[scale=0.65]{./figures/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVPD.pdf}
-  \end{nscenter}
   {\tiny HF/def2-SVPD}
 \end{frame}
 
@@ -432,6 +433,22 @@
 
 \begin{frame}
   \frametitle{LR(MI) is BSSE-free by construction}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference results at short range}
+  \note[item]{This shows the correctness of our implementation}
+  \note[item]{Confirm correctness before scientific result}
+  \note[item]{deviation between implementations occurs in the electron density penetration region, where ALMO is not expected to be valid anyway}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVP.pdf}
+  \end{nscenter}
+  {\tiny HF/def2-SVP}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
+  {\tiny HF/def2-SVP}
 \end{frame}
 
 \immediate\closeout\tempfile
