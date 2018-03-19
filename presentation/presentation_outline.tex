@@ -6,7 +6,7 @@
 % \setbeameroption{show notes}
 % \setbeameroption{show only notes}
 
-\RequirePackage{xparse}
+\usepackage{xparse}
 
 %% https://www.quora.com/Presentations-What-are-the-best-beamer-themes
 \setbeamertemplate{frametitle}
@@ -32,7 +32,7 @@
     }%
     \hfill
 }
-\setbeamertemplate{section in toc}[ball unnumbered]
+\setbeamertemplate{section in toc}[circle]
 
 \definecolor{NoteBrown}{RGB}{152,101,47}
 \definecolor{NoteBlue}{RGB}{31,91,255}
@@ -94,23 +94,23 @@
     }
 }
 
-\RequirePackage{appendixnumberbeamer}
-\RequirePackage{booktabs}
-\RequirePackage{braket}
-\RequirePackage{caption}
-\RequirePackage{graphicx}
-\RequirePackage{microtype}
-\RequirePackage{minted}
-\RequirePackage[version=4]{mhchem}
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage{caption}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{minted}
+\usepackage[version=4]{mhchem}
 \newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
-\RequirePackage[%
+\usepackage[%
     separate-uncertainty = true,%
     multi-part-units = single,%
     range-units = single,%
     retain-explicit-plus = true,%
 ]{siunitx}
-\RequirePackage{subcaption}
-\RequirePackage{tabulary}
+\usepackage{subcaption}
+\usepackage{tabulary}
 
 \NewDocumentCommand{\vect}{m}{%
         \ensuremath{\boldsymbol{\mathbf{#1}}}%
@@ -252,7 +252,8 @@
   \note[item]{Experimental cation is C4C1im, computational cation is C1C1im}
   \note[item]{quantum chemistry connects frequencies to structure}
   \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1.pdf}
+  % \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1.pdf}
+  \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1_combined.pdf}
   % \nmfootfullcite{Brinzer2015}
 \end{frame}
 
