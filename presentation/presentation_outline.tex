@@ -315,6 +315,38 @@
 \begin{frame}
   \frametitle{Spectroscopic properties are directly connected to energy derivatives}
   \note[item]{The derivative table should go here}
+  \begin{nscenter}
+    \scriptsize
+    \begin{tabulary}{1.00\linewidth}{rL}
+      \toprule
+      \textbf{Derivative} & \textbf{Molecular property} \\
+      \midrule
+      \(\frac{dE}{dF_{i}}\)                          & dipole moment; similarly,  multipole moments, electric field gradients, etc. \\
+      \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
+      \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+      \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
+      \textcolor{AlertColor}{\(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)}       & \textcolor{AlertColor}{polarizability} \\
+      \textcolor{AlertColor}{\(\frac{d^{2}E}{dX_{i}dX_{j}}\)}                & \textcolor{AlertColor}{harmonic force constants and vibrational frequencies} \\
+      \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
+      \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
+      \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
+      \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
+      \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+      \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+      \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
+      % \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
+      % \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
+      % \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
+      % \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
+      % \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
+      ... & ... \\
+      \bottomrule
+    \end{tabulary}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
@@ -323,6 +355,9 @@
   \note[item]{One example why the original approach is not generally applicable...}
   \note[item]{One problem with numerical differentiation is...}
   \note[item]{Mention other issues with numerical differentiation}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
+  \end{nscenter}
 \end{frame}
 
 \section{Decomposition of general linear response properties}
@@ -378,6 +413,23 @@
   \frametitle{Linear response in a nutshell}
   \note[item]{this is where the quick-and-dirty slide goes}
   \note[item]{Walk us through the equations}
+  The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
+  \begin{equation*}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{\Psi_{0}|\hat{P}|\Psi_{n}}\braket{\Psi_{n}|\hat{Q}|\Psi_{0}}}{E_{n} - E_{0} - \omega_{Q}} + \frac{\braket{\Psi_{0}|\hat{Q}|\Psi_{n}}\braket{\Psi_{n}|\hat{P}|\Psi_{0}}}{E_{n} - E_{0} + \omega_{Q}} \right]
+  \end{equation*}
+  In computable form,
+  \begin{equation*}
+    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{\omega_{Q}} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
+  \end{equation*}
+  where
+  \begin{equation*}
+    (\vect{P}_{\alpha})_{ia} = -2 \braket{ i | \hat{P}_{\alpha} | a }
+  \end{equation*}
+  is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted orbital Hessian. The key step is forming the response vector
+  \begin{equation*}
+    X_{ia} = G_{ia,jb}^{-1} Q_{jb}.
+  \end{equation*}
+  \(X_{ia}\) is equivalent to the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
 \end{frame}
 
 \begin{frame}
@@ -388,6 +440,14 @@
   \frametitle{Numerical benchmarks using static electric dipole polarizabilities}
   \note[item]{Why polarizability? can compare to finite difference numerical derivatives}
   \note[item]{Why static? static helps provide the connection between analytic derivatives and response theory}
+    As an energy derivative,
+  \begin{equation*}
+    \alpha_{rs} = - \left. \frac{\text{d}^{2}E}{\text{d}F_{r}\text{d}F_{s}} \right|_{\mathbf{F}=\mathbf{0}}
+  \end{equation*}
+  which is equivalent to the response theory formulation
+  \begin{equation*}
+    \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}.
+  \end{equation*}
 \end{frame}
 
 \begin{frame}
@@ -410,6 +470,11 @@
   \frametitle{libresponse is available as an open-source library}
   \note[item]{Github repo link}
   \note[item]{working on Psi4 plugin}
+  \scriptsize
+  \begin{itemize}
+  \item \url{https://github.com/LambrechtLab/libresponse}
+  \item \url{https://github.com/berquist/pyresponse}
+  \end{itemize}
 \end{frame}
 
 \section{Reference and tutorial implementations of quantum chemical methods}
@@ -423,14 +488,24 @@
 
 \begin{frame}
   \frametitle{\pfn{} is an ideal platform for teaching about \textit{ab initio} spectroscopy}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_1.png}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
   \frametitle{Jupyter Notebooks allow mixing of concepts, equations, and code in an exploratory environment}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_2.png}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
   \frametitle{\pfn{} is welcoming to external contributors}
+  \begin{nscenter}
+    \includegraphics[scale=0.20]{./figures/psi4numpy_github.png}
+    {\scriptsize \url{https://github.com/psi4/psi4numpy/}}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
@@ -447,12 +522,30 @@
 
 \begin{frame}
   \frametitle{Thank you}
+  \scriptsize
+  \begin{enumerate}
+  \item \fullcite{Berquist2014}
+  \item \fullcite{Shao2015}
+  % \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Brinzer2015}}
+  \item \fullcite{Brinzer2015}
+  \item \fullcite{Daly2016}
+  \item \fullcite{Berquist2017}
+  \item \fullcite{Brinzer2017}
+  \item \fullcite{Smith2018}
+  % \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Berquist2018}}
+  \item \fullcite{Berquist2018}
+  \item \fullcite{Jakubek2018}
+  \end{enumerate}
 \end{frame}
 
 \appendix
 
 \begin{frame}
   \frametitle{LR(MI) is BSSE-free by construction}
+  \begin{equation*}
+    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
+    \label{eq:bsse-corrected-polarizability}
+  \end{equation*}
 \end{frame}
 
 \begin{frame}
