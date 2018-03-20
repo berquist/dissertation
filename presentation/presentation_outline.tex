@@ -87,7 +87,7 @@
 \title{Decomposition of Intermolecular Interactions in \textit{Ab Initio} Spectroscopy}
 \author{Eric Berquist}
 \institute{\includegraphics[width=1in]{./figures/pitt_logo.pdf}}
-\date{March 23th, 2018}
+\date{March 23rd, 2018}
 
 \begin{document}
 
@@ -621,6 +621,181 @@
 \begin{frame}
   \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
   {\tiny HF/def2-SVP}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVP}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVP}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVPD}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVPD}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation: working equations (RHF)}
+  \begin{align*}
+    \Delta_{ia} &= \epsilon_{a} - \epsilon_{i} \\
+    A_{ia,jb}^{s} &= \Delta_{ia}\delta_{ia,jb} + 2(ia|jb) - (ij|ab) \\
+    B_{ia,jb}^{s} &= 2(ia|jb) - (ib|ja) \\
+    A_{ia,jb}^{t} &= \Delta_{ia}\delta_{ia,jb} - (ij|ab) \\
+    B_{ia,jb}^{t} &= - (ib|ja) \\
+    ^{\text{RR}}\vect{G}^{uu} &= (\vect{A}^{u} + \vect{B}^{u}) \\
+    ^{\text{II}}\vect{G}^{uu} &= (\vect{A}^{u} - \vect{B}^{u})
+  \end{align*}
+  \scriptsize
+  \begin{itemize}
+  \item \(\vect{G}\) gives orbital rotation Hessians, equivalen to the random phase approximation (RPA) equations \\
+  \item R, I: real, imaginary perturbations \(\rightarrow\) electric and magnetic Hessians \\
+  \item setting \(\vect{B} = \vect{0}\) gives the Tamm-Dancoff approximation (TDA) \\
+  \item setting \( G_{ia,jb} = \Delta_{ia}\delta_{ia,jb} \) gives uncoupled Hartree-Fock \\
+  \item \(s,t\): singlet (spin-conserving) and triplet (altering) operators \\
+  \item \(i,j\): occupied MOs, \(a,b\): virtual MOs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation: AO-direct algorithm}
+  Rather than explicitly forming \(G_{ia,jb}\), inverting it, and contracting with \(Q_{jb}\) to form the response vector \(X_{ia}\), the solution is found iteratively (example is RPA/singlet):
+  \begin{equation*}
+    X_{ia}^{(\zeta+1)} \leftarrow \frac{Q_{jb} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}}{\Delta_{ia}}
+  \end{equation*}
+  The uncoupled result comes from the initial guess, when \(X_{ia}^{(0)} = 0\):
+  \begin{equation*}
+    X_{ia}^{(1)} = \frac{Q_{ia}}{\Delta_{ia}}
+  \end{equation*}
+  Convergence is usually accelerated with CG, DIIS, ...
+\end{frame}
+
+\begin{frame}
+  \frametitle{Implementation: AO-direct algorithm}
+  \scriptsize
+  The key step in each iteration is forming the matrix-vector product
+  \begin{equation*}
+    (\vect{A}+\vect{B})_{ia,jb}X_{jb} = \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}
+  \end{equation*}
+  which is found through back-transforming to the AO basis, starting from the generalized density:
+  \begin{equation*}
+    D_{\lambda\sigma}^{X} \equiv C_{\lambda j} X_{jb} C_{\sigma b}
+  \end{equation*}
+  which is contracted with two-electron integrals formed either exactly or through approximate methods (RI, ...):
+  \begin{align*}
+    (\vect{A}+\vect{B})_{ia,jb}X_{jb} &= C_{\mu i} \left\{ 4(\mu\nu|\lambda\sigma)D_{\lambda\sigma}^{X} - (\mu\lambda|\nu\sigma)D_{\lambda\sigma}^{X} - (\mu\sigma|\lambda\nu)D_{\lambda\sigma}^{X} \right\} C_{\nu a} \\
+    &= C_{\mu i} \left\{ 4J_{\mu\nu}^{X} - K_{\mu\nu}^{X} - K_{\nu\mu}^{X} \right\} C_{\nu a}
+  \end{align*}
+  In \texttt{libint}, this is \texttt{JobNum = 30}.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Implementation: library usage}
+  \texttt{responseman} is a thin wrapper around \texttt{libresponse}, and is not meant to calculate final properties (similar to \texttt{**RESPONSE} vs. \texttt{**PROPERTIES} in DALTON). \\
+  \begin{minted}[linenos,gobble=0,mathescape]{c++}
+    void solve_linear_response(
+        arma::cube &results,
+        MatVec_i *matvec,
+        arma::cube &C,
+        arma::mat &moene,
+        arma::uvec &occupations,
+        std::vector<double> &omega,
+        arma::cube &V,
+        std::vector<int> &b_prefactors,
+        libresponse::configurable &cfg
+    );
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Implementation: integral engine}
+  \scriptsize
+  \begin{minted}[linenos,gobble=0,mathescape]{c++}
+if (ints_engine == "libfock" || ints_engine == "both") {
+    matvec_libfock = new MatVec_libfock();
+    libqints::basis_1e1c_cgto<double> b1;
+    libqints::qchem::bagen_1e1c_cgto_qchem(b1);
+    matvec_libfock->init(b1, mem_mb);
+    matvec = matvec_libfock;
+} else if (ints_engine == "qchem" || ints_engine == "both") {
+    matvec_qchem = new MatVec_qchem();
+    matvec_qchem->init();
+    matvec = matvec_qchem;
+} else
+    ...
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Hardware and software}
+  \begin{itemize}
+  \item CPU: Intel Xeon E5-2670 (Sandy Bridge), 2.60 GHz, 16 cores
+  \item DALTON 2015.0; Intel 2013.0
+  \item ORCA 3.0.3
+  \item Q-Chem \texttt{branches/libresponse r21370} with \texttt{libresponse r72}, \texttt{libqints r1058}, \texttt{libfock r198}; Intel 2015.1
+  \item \texttt{scf\_convergence = 9}, \texttt{thresh = 12}, \texttt{cpscf\_max\_error\_norm = 14}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Current capabilities}
+  QC methods:
+  \begin{itemize}
+  \item RHF, UHF references \(\rightarrow\) DALTON is ROHF, is this the first true general UHF linear response code?
+  \item Hartree-Fock via \texttt{libfock/libqints} or \texttt{libint}
+  \end{itemize}
+  Operators (\texttt{libint}):
+  \begin{itemize}
+  \item dipole (length), quadrupole at arbitrary origin
+  \item Fermi contact at nuclear positions
+  \item dipole velocity/linear momentum
+  \item angular momentum at arbitrary origin
+  \item one-electron spin-orbit over all nuclei w/ arbitrary charges
+  \end{itemize}
+  Properties via \texttt{responseman}:
+  \begin{itemize}
+  \item static polarizability
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Planned capabilities}
+  \begin{itemize}
+  \item Convergence acceleration (DIIS via \texttt{libsolve})
+  \item DFT via \texttt{libint/dftman} \(\rightarrow\) all functionals should work
+  \item Operators: two-electron spin-orbit, arbitrary-order electric field multipoles at arbitrary origin, spin dipole at nuclear positions
+  \item time-dependent/dynamic properties
+  \item residues \(\rightarrow\) transition moments
+    \begin{equation*}
+      \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
+    \end{equation*}
+  \item complex response via \texttt{gen\_scfman}
+    \begin{equation*}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = \sum_{n>0} \left[ \frac{\braket{0|\hat{P}|n}\braket{n|\hat{Q}|0}}{\omega_{n} - \omega_{Q} - i\gamma_{n0}} + \frac{\braket{0|\hat{Q}|n}\braket{n|\hat{P}|0}}{\omega_{n} + \omega_{Q} + i\gamma_{n0}} \right]
+    \end{equation*}
+  \item quadratic response \(\braket{\braket{\hat{P};\hat{Q},\hat{R}}}_{\omega_{Q},\omega_{R}}\)
+  \item ALMO...
+  \end{itemize}
 \end{frame}
 
 \immediate\closeout\tempfile
