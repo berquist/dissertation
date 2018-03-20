@@ -1,52 +1,14 @@
-\documentclass[xcolor=usenames,dvipsnames,svgnames]{beamer}
+\documentclass[%
+    % draft,%
+    xcolor=usenames,dvipsnames,svgnames%
+]{beamer}
 
-\RequirePackage{xparse}
+% \setbeameroption{show notes}
+% \setbeameroption{show only notes}
 
-%% https://www.quora.com/Presentations-What-are-the-best-beamer-themes
-\setbeamertemplate{frametitle}
-  {\begin{centering}\smallskip
-   \insertframetitle\par
-   \smallskip\end{centering}}
-\setbeamertemplate{itemize item}{\(\bullet\)}
-\setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[text line]{%
-    \hfill\strut{%
-        \scriptsize\sf\color{black!60}%
-        \quad\insertframenumber
-    }%
-    \hfill
-}
-\setbeamertemplate{section in toc}[ball unnumbered]
+\usetheme{eric}
 
-\definecolor{NoteBrown}{RGB}{152,101,47}
-\definecolor{NoteBlue}{RGB}{31,91,255}
-\definecolor{NoteGreen}{RGB}{62,195,74}
-\definecolor{NoteRed}{RGB}{191,0,0}
-\definecolor{NotePurple}{RGB}{151,54,208}
-\definecolor{NoteDarkGreen}{RGB}{0,121,62}
-\definecolor{NoteGrey}{RGB}{150,150,150}
-\definecolor{NoteOrange}{RGB}{255,155,0}
-
-% Define some colors:
-\definecolor{PittBlue}{RGB}{0,43,94}
-\definecolor{PittGold}{RGB}{197,168,118}
-\definecolor{DarkFern}{HTML}{407428}
-\definecolor{DarkCharcoal}{HTML}{4D4944}
-\colorlet{Fern}{DarkFern!85!white}
-\colorlet{Charcoal}{DarkCharcoal!85!white}
-\colorlet{LightCharcoal}{Charcoal!50!white}
-\colorlet{AlertColor}{orange!80!black}
-\colorlet{DarkRed}{red!70!black}
-\colorlet{DarkBlue}{blue!70!black}
-\colorlet{DarkGreen}{green!70!black}
-% Use the colors:
-\setbeamercolor{title}{fg=PittBlue}
-\setbeamercolor{frametitle}{fg=PittBlue}
-\setbeamercolor{normal text}{fg=DarkCharcoal}
-\setbeamercolor{block title}{fg=black,bg=Fern!25!white}
-\setbeamercolor{block body}{fg=black,bg=Fern!25!white}
-\setbeamercolor{alerted text}{fg=AlertColor}
-\setbeamercolor{itemize item}{fg=Charcoal}
+\usepackage{xparse}
 
 \usepackage[%
     backend    = biber,%
@@ -78,43 +40,54 @@
     }
 }
 
-\RequirePackage{appendixnumberbeamer}
-\RequirePackage{booktabs}
-\RequirePackage{braket}
-\RequirePackage{caption}
-\RequirePackage{graphicx}
-\RequirePackage{microtype}
-\RequirePackage{minted}
-\RequirePackage[version=4]{mhchem}
+\usepackage{booktabs}
+\usepackage{braket}
+\usepackage{caption}
+% \usepackage{showframe}
+% \renewcommand\ShowFrameLinethickness{0.15pt}
+% \renewcommand*\ShowFrameColor{\color{red}}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{minted}
+\usepackage[version=4]{mhchem}
 \newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
-\RequirePackage[%
+\usepackage[%
     separate-uncertainty = true,%
     multi-part-units = single,%
     range-units = single,%
     retain-explicit-plus = true,%
 ]{siunitx}
-\RequirePackage{subcaption}
-\RequirePackage{tabulary}
+\usepackage{subcaption}
+\usepackage{tabulary}
+\usepackage{textcomp}
 
 \NewDocumentCommand{\vect}{m}{%
         \ensuremath{\boldsymbol{\mathbf{#1}}}%
 }%
 
-% \newcommand*{\phnum}[2][]{%
-%   \begingroup
-%     \protected\def\X{\phantom{0}}%
-%     \num[
-%       input-digits=0123456789\X,%
-%       #1%
-%     ]{#2}%
-%   \endgroup
-% }
+% https://tex.stackexchange.com/a/98893/94717
+\newenvironment{nscenter}
+ {\parskip=0pt\par\nopagebreak\centering}
+ {\par\noindent\ignorespacesafterend}
+
+% https://tex.stackexchange.com/q/252586/94717
+\newwrite\tempfile
+\immediate\openout\tempfile=slidelist.txt
+\newcounter{SlideNumber}
+\addtobeamertemplate{frametitle}{}{%
+  \stepcounter{SlideNumber}
+  \immediate\write\tempfile{\theSlideNumber [\insertframenumber] \insertframetitle}
+}
+
+% \newcommand\pfour{\textsc{Psi4}}
+\newcommand\pfour{Psi4}
+% \newcommand\pfn{\textsc{Psi4NumPy}}
+\newcommand\pfn{Psi4NumPy}
 
 \title{Decomposition of Intermolecular Interactions in \textit{Ab Initio} Spectroscopy}
 \author{Eric Berquist}
-% \institute[Pitt]{Lambrecht Research Group \\ Dissertation Defense \\ \vspace{6pt} \includegraphics[width=1in]{./figures/pitt_logo.pdf}}
 \institute{\includegraphics[width=1in]{./figures/pitt_logo.pdf}}
-\date{March 23th, 2018}
+\date{March 23rd, 2018}
 
 \begin{document}
 
@@ -122,303 +95,323 @@
   \titlepage
 }
 
-\begin{frame}
+\frame{
   \frametitle{Goal of this work}
-  It is possible to identify the contribution of specific molecular interactions to spectroscopic response
-\end{frame}
+  It is possible to identify the contribution of specific molecular interactions to spectroscopic response.
+  \tableofcontents
+}
+
+\note{\tiny\listofframes}
 
 \begin{frame}
-  \frametitle{What is spectroscopy?}
-  \begin{itemize}
-  \item The basic goal of spectroscopy is to unravel the properties of a molecule (nuclear structure, electronic structure, reactivity) by interpreting the absorption (and emission) of electromagnetic radiation in terms of molecular properties
-  \item Different parts of the electromagnetic spectrum probe different parts of the molecular wave function
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
+  \frametitle{Spectroscopy is a probe of changes in a molecule's electronic and geometric state using electromagnetic radiation}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
+  \end{nscenter}
   {\tiny\url{http://hrsbstaff.ednet.ns.ca/benoitn/chem11/units/1.\%20Atomic\%20Theory/e_config/spectra/electromagnetic-spectrum.jpg}}
+  \note[item]{Tom comment: "not excited states, just looking at polarizability" -- this statement did not make sense to me}
+  \note[item]{Response: wavelengths associated with frequency-dependent polarizability are also associated with UV/vis; probably don't need to mention this}
 \end{frame}
 
-\begin{frame}
-  \frametitle{What is molecular response?}
-  \begin{itemize}
-  \item The experimentalist works at the \textcolor{Green}{macroscopic level} and typically records the \textcolor{blue}{response of the electromagnetic field}.
-  \item The theoretician works at the \textcolor{Green}{microscopic level} and typically calculates the \textcolor{blue}{molecular response}.
-  % \item In order to connect experiment and theory we must reconcile these two different approaches.
-  \end{itemize}
-  \centering
-  \includegraphics[scale=0.25]{./figures/computational_chemistry.pdf}
-\end{frame}
+\section{Decomposition of harmonic vibrational frequencies into physically-intuitive terms}
 
-\begin{frame}
-  \frametitle{Context: \ce{CO2} solvation by ionic liquids}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \begin{figure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_C4C1im.pdf}
-      \caption*{\ce{[C4C1im]+}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_C1C1im.pdf}
-      \caption*{\ce{[C1C1im]+}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_BF4.pdf}
-      \caption*{\ce{[BF4]-}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_DCA.pdf}
-      \caption*{\ce{[DCA]-}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_PF6.pdf}
-      \caption*{\ce{[PF6]-}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_SCN.pdf}
-      \caption*{\ce{[SCN]-}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_TFA.pdf}
-      \caption*{\ce{[TFA]-}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_Tf2N.pdf}
-      \caption*{\ce{[Tf2N]-}}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.25\linewidth}
-      \centering
-      \includegraphics[scale=1.00]{./figures/lewis_TfO.pdf}
-      \caption*{\ce{[TfO]-}}
-    \end{subfigure}
-  \end{figure}
-\end{frame}
-
-% 0.35 for two side by side
-\begin{frame}
+\begin{frame}[fragile]
+  \frametitle{\protect{Infrared spectroscopy is sensitive to the presence of \ce{CO2} in ionic liquids}}
+  \note[item]{For example, ...}
+  \note[item]{FTIR IL spectra with and without CO2 goes here}
   % \frametitle{\ce{CO2} asymmetric stretch lies in an isolated spectral window}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_TfO.pdf}
-  \scriptsize
-  experiment, \ce{[C4C1im][TfO]}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_TfO.pdf}
+  \end{nscenter}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{\protect{Understanding \ce{CO2} solvation by ionic liquids is important for carbon capture}}
+  \note[item]{Lewis structures go here}
+  \note[item]{Example ionic liquids for carbon capture}
+  \note[item]{Why these? Water tolerant, fairly good CO2 capture already, experimentally studied/validated}
+  \note[item]{desirable properties of ionic liquids: solvation energy, reversible absorption}
+  \note[item]{point out nomenclature}
+\end{frame}
+
+% method 1
+  % \begin{figure}
+  %   \centering
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_C4C1im.pdf}
+  %     \caption*{\ce{[C4C1im]+}}
+  %   \end{subfigure}
+  %   % \begin{subfigure}[b]{0.25\linewidth}
+  %   %   \centering
+  %   %   \includegraphics[scale=1.00]{./figures/lewis_C1C1im.pdf}
+  %   %   \caption*{\ce{[C1C1im]+}}
+  %   % \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_BF4.pdf}
+  %     \caption*{\ce{[BF4]-}}
+  %   \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_DCA.pdf}
+  %     \caption*{\ce{[DCA]-}}
+  %   \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_PF6.pdf}
+  %     \caption*{\ce{[PF6]-}}
+  %   \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_SCN.pdf}
+  %     \caption*{\ce{[SCN]-}}
+  %   \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_TFA.pdf}
+  %     \caption*{\ce{[TFA]-}}
+  %   \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_Tf2N.pdf}
+  %     \caption*{\ce{[Tf2N]-}}
+  %   \end{subfigure}
+  %   \begin{subfigure}[b]{0.25\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_TfO.pdf}
+  %     \caption*{\ce{[TfO]-}}
+  %   \end{subfigure}
+  % \end{figure}
+% method 2
+  % \begin{columns}
+  %   \column{0.25\linewidth}
+  %   \begin{minipage}[c]{1.0\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_C4C1im.pdf}
+  %     \ce{[C4C1im]+}
+  %     \includegraphics[scale=1.00]{./figures/lewis_SCN.pdf}
+  %     \ce{[SCN]-}
+  %   \end{minipage}
+  %   \column{0.25\linewidth}
+  %   \begin{minipage}[c]{1.0\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_BF4.pdf}
+  %     \ce{[BF4]-}
+  %     \includegraphics[scale=1.00]{./figures/lewis_TFA.pdf}
+  %     \ce{[TFA]-}
+  %   \end{minipage}
+  %   \column{0.25\linewidth}
+  %   \begin{minipage}[c]{1.0\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_DCA.pdf}
+  %     \ce{[DCA]-}
+  %     \includegraphics[scale=1.00]{./figures/lewis_Tf2N.pdf}
+  %     \ce{[Tf2N]-}
+  %   \end{minipage}
+  %   \column{0.25\linewidth}
+  %   \begin{minipage}[c]{1.0\linewidth}
+  %     \centering
+  %     \includegraphics[scale=1.00]{./figures/lewis_PF6.pdf}
+  %     \ce{[PF6]-}
+  %     \includegraphics[scale=1.00]{./figures/lewis_TfO.pdf}
+  %     \ce{[TfO]-}
+  %   \end{minipage}
+  % \end{columns}
+% method 3
+  % \begin{table}
+  %   \centering
+  %   \begin{tabulary}{1.00\linewidth}{CCCC}
+  %     \includegraphics[scale=1.00]{./figures/lewis_C4C1im.pdf} & \includegraphics[scale=1.00]{./figures/lewis_BF4.pdf} & \includegraphics[scale=1.00]{./figures/lewis_DCA.pdf} & \includegraphics[scale=1.00]{./figures/lewis_PF6.pdf} \\
+  %     \ce{[C4C1im]+} & \ce{[BF4]-} & \ce{[DCA]-} & \ce{[PF6]-} \\
+  %     \includegraphics[scale=1.00]{./figures/lewis_SCN.pdf} & \includegraphics[scale=1.00]{./figures/lewis_TFA.pdf} & \includegraphics[scale=1.00]{./figures/lewis_Tf2N.pdf} & \includegraphics[scale=1.00]{./figures/lewis_TfO.pdf} \\
+  %     \ce{[SCN]-} & \ce{[TFA]-} & \ce{[Tf2N]-} & \ce{[TfO]-}
+  %   \end{tabulary}
+  % \end{table}
 \begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_shifting.pdf}
+  \frametitle{Solvatochromic shift originates from varying the ionic liquid anion}
+  \note[item]{shift as function of anion goes here}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/experimental_spectra_shifting.pdf}
+  \end{nscenter}
   \scriptsize
   experiment, \ce{[C4C1im]+}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1.pdf}
+  \frametitle{Model calculations qualitatively reproduce trends in the solvatochromic shift}
+  \note[item]{Experiment/calculation trends go here}
+  \note[item]{Put image of TFA cluster in plot whitespace}
+  \note[item]{Experimental cation is C4C1im, computational cation is C1C1im}
+  \note[item]{quantum chemistry connects frequencies to structure}
+  % \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1.pdf}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1_combined2.pdf}
+  \end{nscenter}
   % \nmfootfullcite{Brinzer2015}
 \end{frame}
 
-% https://tex.stackexchange.com/q/157222/94717
 \begin{frame}
-  \begin{columns}
-    \column{0.25\textwidth}
-    \uncover<+->{\includegraphics[scale=0.08]{./figures/cluster_BF4.png}}
-    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_DCA.png}}
-    \column{0.25\textwidth}
-    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_PF6.png}}
-    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_SCN.png}}
-    \column{0.25\textwidth}
-    \uncover<.->{\includegraphics[scale=0.07]{./figures/cluster_TFA.png}}
-    \uncover<.->{\includegraphics[scale=0.08]{./figures/cluster_Tf2N.png}}
-    \column{0.25\textwidth}
-    \uncover<.->{\includegraphics[scale=0.09]{./figures/cluster_TfO.png}}
-  \end{columns}
-  \uncover<+->{What is the connection between our molecular models and the spectra?}
-\end{frame}
-% This is great, we have these very simple molecular models that
-
-% Reminder that TFA may be off because it is possibly chemisorbing and
-% not physisorbing
-
-\begin{frame}
-  \frametitle{Energy decomposition analysis with absolutely localized molecular orbitals (ALMO-EDA)}
-  \centering
-  \begin{equation*}
-    \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
-  \end{equation*}
-  \uncover<+->{\includegraphics[scale=0.25]{./figures/almo_eda_00.pdf}}
-  \uncover<+->{\includegraphics[scale=0.25]{./figures/almo_eda_02_frz.pdf}}
-  \uncover<+->{\includegraphics[scale=0.25]{./figures/almo_eda_03_pol.pdf}} % intermediate polarized wavefunction that is variational, unlike for SAPT
-  \uncover<+->{\includegraphics[scale=0.25]{./figures/almo_eda_04_ct.pdf}}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_water_combined.pdf}
-  {\tiny from dipole-dipole autocorrelation function, QCT-MD, B3LYP/6-31+G(d,p)}
-  \nmfootfullcite{Ramos-Cordoba2011}
-\end{frame}
-
-\begin{frame}
-  \frametitle{ALMO-EDA}
-  Translate from
-  \begin{equation*}
-    \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
-  \end{equation*}
-  to
-  \begin{equation*}
-    \begin{aligned}
-      \omega_{\text{tot}} &= \omega_{\text{free}} + \Delta \omega_{\text{int}} \\
-      \Delta \omega_{\text{int}} &= \Delta \omega_{\text{gd}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}}
-    \end{aligned}
-  \end{equation*}
-\end{frame}
-
-\begin{frame}
-  \centering
-  \includegraphics[scale=0.35]{./figures/ionic_liquid_geometry_dependence_on_ct.pdf}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Complementary occupied-virtual pairs (COVPs)}
-  \centering
-  \begin{figure}
-    \begin{subfigure}[b]{0.50\linewidth}
-      \includegraphics[width=\linewidth,keepaspectratio,natwidth=601,natheight=535]{./figures/PF6.to_CO2.1.png}
-      \caption*{From \ce{[PF6]-} to \ce{CO2}}
-    \end{subfigure}%
-    \begin{subfigure}[b]{0.50\linewidth}
-      \includegraphics[width=\linewidth,keepaspectratio,natwidth=586,natheight=538]{./figures/PF6.from_CO2.1.png}
-      \caption*{From \ce{CO2} to \ce{[C1C1im]+}}
-    \end{subfigure}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{\ce{CO2} deviation from linearity is caused by CT from anion}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/angle_vs_ct_to_from.pdf}
-  \scriptsize
-  B3LYP/6-31G(d,p)
-\end{frame}
-
-\begin{frame}
-  % Electrocatalysis, directly related to charge transfer
-  % \includegraphics[scale=0.50]{./figures/overpotential.pdf}
-  \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/application_of_ct2.pdf}
-  % \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/application_of_ct.png}
-  \nmfootfullcite{Rosen643}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Why do analytic derivatives?}
-  \scriptsize
-  \begin{itemize}
-  \item The easiest way to calculate energy derivatives would be to use numerical differentiation
-    \begin{itemize}\scriptsize
-    \item \(6N\) calculations for first derivatives
-    \item \(36N^{2}\) calculations for second derivatives
-    \item \(208N^{3}\) calculations for third derivatives
-    \end{itemize}
-  \end{itemize}
+  % \frametitle{ALMO-EDA enables understanding the physical basis for the solvatochromic shift}
+  % \frametitle{What is the physical basis for the solvatochromic shift?}
+  % \frametitle{Energy decomposition analysis provides an intuitive assignment of intermolecular interactions to physical terms}
+  \frametitle{Energy decomposition analysis can explain the physical basis for the solvatochromic shift}
+  \note[item]{Performed using absolutely localized molecular orbitals (ALMO-EDA), a ``bottom-up'' localization technique that prevents charge transfer by construction}
+  \note[item]{How an ALMO is constructed}
+  \note[item]{Intermediate wavefunction!}
+  \note[item]{Can move on the ALMO potential energy surface}
+  \note[item]{Explanation of Pauli repulsion, signs of terms}
+  For two arbitrary fragments A and B (such as a \ce{CO2} molecule and a combined IL cation and anion), construct \alert{absolutely localized molecular orbitals} (ALMOs) on each fragment:
   \begin{table}
     \centering
-    \tiny
-    \begin{tabular}{llllll}
-      \toprule
-      Computed from & \(\Delta R\) & \(\left(\frac{d\mu_{Z}}{dR}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{2}\mu_{Z}}{dR^{2}}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{3}\mu_{Z}}{dR^{3}}\right)_{R=R_{\text{eq}}}\) & \(\left(\frac{d^{4}\mu_{Z}}{dR^{4}}\right)_{R=R_{\text{eq}}}\) \\
-      \midrule
-      \(\mu_{Z}\) & \num{e-2} & -0.317\textcolor{red}{36764} & 0.1787\textcolor{red}{1386} & 0.76\textcolor{red}{3567} & 0.0750 \\
-      \(\mu_{Z}\) & \num{e-3} & -0.31741\textcolor{red}{264} & 0.1787\textcolor{red}{12} & 0.76\textcolor{red}{4} & \dots \\
-      \(\mu_{Z}\) & \num{e-4} & -0.3174130\textcolor{red}{9} & 0.1787 & \dots & \dots \\
-      \(\mu_{Z}\) & \num{e-5} & -0.317413\textcolor{red}{1} & 0.1\textcolor{red}{8} & \dots & \dots \\
-      & & & & & \\
-      \(d\mu_{Z}/dR\) & \num{e-2} & \dots & 0.17871\textcolor{red}{606} & 0.763\textcolor{red}{69391} & 0.07\textcolor{red}{48442} \\
-      \(d\mu_{Z}/dR\) & \num{e-3} & \dots & 0.178711\textcolor{red}{65} & 0.763\textcolor{red}{745} & 0.07\textcolor{red}{14} \\
-      \(d\mu_{Z}/dR\) & \num{e-4} & \dots & 0.1787115\textcolor{red}{7} & 0.76\textcolor{red}{56} & \dots \\
-      \(d\mu_{Z}/dR\) & \num{e-5} & \dots & 0.17871\textcolor{red}{39} & 0.77 & \dots \\
-      & & & & & \\
-      Fully analytic value & & -0.317413034 & 0.17811155 & \dots & \dots \\
-      \bottomrule
+    \begin{tabular}{ccc}
+      \includegraphics[scale=0.30]{./figures/block_1.pdf} & \includegraphics[scale=0.30]{./figures/block_2.pdf} & \includegraphics[scale=0.30]{./figures/block_3.pdf} \\
+      frozen interaction (frz) & polarization (pol) & charge transfer (CT) \\
+      \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H} (\vect{1} - \vect{\sigma})\) & \(\vect{H}\)
     \end{tabular}
-    T.-C. Jagau, J. Gauss and K. Ruud, J. Chem. Phys. 139, 154106 (2013)
   \end{table}
-  \begin{itemize}
-  \item Numerical derivatives have limited and (non-systematic) numerical precision
-  \item Scaling for higher-order derivatives unfavorable
-  \end{itemize}
-  % {\tiny Adapted from K. Ruud, Molecular Properties Summer School 2015}
+  \uncover<2->{Translate}
+  \begin{equation*}
+    \Delta E_{\text{int}} = \Delta E_{\text{geom}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
+  \end{equation*}
+  \uncover<2->{%
+  into
+  \begin{equation*}
+    \omega_{\text{tot}} = \omega_{\text{free}} + \Delta \omega_{\text{geom}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}}
+  \end{equation*}
+  }%
+\end{frame}
+
+\note{If going to talk about the geometry mechanism and the curvature mechanism, it should go here?}
+
+\begin{frame}[fragile]
+  \frametitle{\protect{The \ce{CO2} asymmetric stretch solvatochromic shift is caused by charge transfer-driven geometric distortion}}
+  \begin{nscenter}
+    \includegraphics[scale=0.27]{./figures/ionic_liquid_geometry_dependence_on_ct_combined.pdf}
+  \end{nscenter}
+  % B3LYP/6-31G(d,p); cation is \ce{[C1C1im]+}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
+  \frametitle{Conclusion: spectra decomposition is an integral part of the experimental-computational workflow}
+  \note[item]{cite Daly papers}
+  \begin{columns}
+    \column{0.35\linewidth}
+    TODO I am a filler line
+    \column{0.65\linewidth}
+    % \includegraphics[scale=0.15]{./figures/workflow.pdf}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/workflow.pdf}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Problem: the approach for decomposing vibrational frequencies is not generally applicable to other properties}
+  \note[item]{What's the value of spectroscopy decomposition?}
+  \note[item]{Want the ability to build structure-spectra relationships for any type of spectroscopy, leading to spectra-property relationships}
+  \note[item]{A series expansion example + e-field terms should go here}
 \end{frame}
 
 \begin{frame}
   \frametitle{Spectroscopic properties are directly connected to energy derivatives}
-  \centering
-  \scriptsize
-  \begin{tabulary}{1.00\textwidth}{rL}
-    \toprule
-    \textbf{Derivative} & \textbf{Molecular property} \\
-    \midrule
-    \(\frac{dE}{dF_{i}}\)                          & dipole moment; similarly,  multipole moments, electric field gradients, etc. \\
-    \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
-    \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
-    \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
-    \textcolor{AlertColor}{\(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)}       & \textcolor{AlertColor}{polarizability} \\
-    \textcolor{AlertColor}{\(\frac{d^{2}E}{dX_{i}dX_{j}}\)}                & \textcolor{AlertColor}{harmonic force constants and vibrational frequencies} \\
-    \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
-    \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
-    \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
-    \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
-    \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
-    \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
-    \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
-    % \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
-    % \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
-    % \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
-    % \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
-    % \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
-    % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
-    ... & ... \\
-    \bottomrule
-  \end{tabulary}
+  \note[item]{The derivative table should go here}
+  \begin{nscenter}
+    \scriptsize
+    \begin{tabulary}{1.00\linewidth}{rL}
+      \toprule
+      \textbf{Derivative} & \textbf{Molecular property} \\
+      \midrule
+      \(\frac{dE}{dF_{i}}\)                          & dipole moment; similarly,  multipole moments, electric field gradients, etc. \\
+      \(\frac{dE}{dB_{\alpha}}\)                     & magnetic dipole moment and higher-order magnetic multipoles \\
+      \(\frac{dE}{dX_{i}}\)                          & forces on nuclei; stationary points on potential energy surfaces, equilibrium and transition state structures \\
+      \(\frac{dE}{dm_{K_{j}}}\)                      & spin density; hyperfine interaction constants \\
+      \textcolor{AlertColor}{\(\frac{d^{2}E}{dF_{\alpha}dF_{\beta}}\)}       & \textcolor{AlertColor}{polarizability} \\
+      \textcolor{AlertColor}{\(\frac{d^{2}E}{dX_{i}dX_{j}}\)}                & \textcolor{AlertColor}{harmonic force constants and vibrational frequencies} \\
+      \(\frac{d^{2}E}{dX_{i}dF_{\alpha}}\)           & dipole derivatives; harmonic infrared intensities \\
+      \(\frac{d^{2}E}{dB_{\alpha}dB_{\beta}}\)       & magnetizability \\
+      \(\frac{d^{2}E}{dm_{K_{j}}dB_{\alpha}}\)       & nuclear magnetic shielding tensor; relative NMR shifts \\
+      \(\frac{d^{2}E}{dI_{K_{i}}dI_{L_{j}}}\)        & indirect spin-spin coupling constant \\
+      \(\frac{d^{2}E}{dB_{\alpha}dJ_{\beta}}\)       & rotational \textit{g}-tensor; rotational spectra in magnetic field \\
+      \(\frac{d^{2}E}{dI_{K_{i}}dB_{\alpha}}\)       & nuclear spin-rotation tensor; fine structure in rotational spectra \\
+      \(\frac{d^{2}E}{dS_{i}dB_{\alpha}}\)           & electronic \textit{g}-tensor \\
+      % \(\frac{d^{3}E}{dX_{i}dF_{\alpha}dF_{\beta}}\) & polarizability derivative; Raman intensities \\
+      % \(\frac{d^{3}E}{dF_{\alpha}d^{2}F_{\beta}}\)   & (first) electric hyperpolarizability \\
+      % \(\frac{d^{3}E}{dX_{i}dX_{j}dX_{k}}\)          & cubic force constants; vibrational corrections to distances and rotational constants \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dF_{\delta}}\) & (second) electric hyperpolarizability \\
+      % \(\frac{d^{4}E}{dB_{\alpha}dB_{\beta}dB_{\gamma}dB_{\delta}}\) & (second) hypermagnetizability \\
+      % \(\frac{d^{4}E}{dX_{i}dX_{j}dX_{k}dX_{l}}\)                    & quartic force constants; anharmonic corrections to vibrational frequencies \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dF_{\gamma}dX_{i}}\)      & hyper-Raman effects \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dX_{i}dX_{j}}\)           & Raman intensities for overtone and combination bands \\
+      % \(\frac{d^{4}E}{dF_{\alpha}dF_{\beta}dB_{\gamma}dB_{\delta}}\) & Cotton\textendash{}Mutton effect \\
+      ... & ... \\
+      \bottomrule
+    \end{tabulary}
+  \end{nscenter}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Numerical differentiation can give unphysical results}
+  \note[item]{this is where the polarizability asymmetry figure goes}
+  \note[item]{One example why the original approach is not generally applicable...}
+  \note[item]{One problem with numerical differentiation is...}
+  \note[item]{Mention other issues with numerical differentiation}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
+  \end{nscenter}
+\end{frame}
+
+\section{Decomposition of general linear response properties}
 
 \begin{frame}
-  \uncover<1->{\begin{equation*}
-      \Delta E_{\text{int}} = \Delta E_{\text{gd}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
-  \end{equation*}}
-  \uncover<2->{\begin{equation*}
-    \omega_{\text{tot}} = \omega_{\text{free}} + \Delta \omega_{\text{gd}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}}
-  \end{equation*}}
-  \uncover<3->{\begin{equation*}
-      \begin{aligned}
-        \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{tot}} = &\braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{free}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{gd}} \\
-        &+ \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{frz}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{pol}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{CT}}
+  \frametitle{Solution: start from the framework of response theory}
+  \note[item]{Many important molecular properties are calculated within the framework of linear response}
+  Spectroscopic properties are directly connected to (linear) response functions:
+  \note[item]{the linear response table should go here}
+  \note[item]{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
+  \begin{table}
+    \centering
+    \begin{tabular}{ll}
+      \toprule
+      \textbf{Molecular property}       & \textbf{Linear response function} \\
+      \midrule
+      polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \) \\
+      magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \) \\
+      optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \) \\
+      electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \) \\
+      IR intensities                    & \( \braket{\braket{\hat{\mu};\partial\hat{H}_{0}/\partial R}}_{\omega} \) \\
+      NMR spin-spin coupling constants  & \( \braket{\braket{\hat{h}_{\text{SD}};\hat{h}_{\text{SD}}}}_{0} \), \\
+                                        & \( \braket{\braket{\hat{h}_{\text{FC}};\hat{h}_{\text{FC}}}}_{0} \), \\
+                                        & \( \braket{\braket{\hat{h}_{\text{PSO}};\hat{h}_{\text{PSO}}}}_{0} \) \\
+      NMR chemical shifts               & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{PSO}}}}_{0} \) \\
+      EPR \textit{g}-tensor             & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{SOC}}}}_{0} \) \\
+      ... & ... \\
+      \bottomrule
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The language of energy decomposition analysis can be applied to general response properties}
+  We have already successfully translated
+  \begin{equation*}
+    \Delta E_{\text{int}} = \Delta E_{\text{geom}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
+  \end{equation*}
+  into
+  \begin{equation*}
+    \omega_{\text{tot}} = \omega_{\text{free}} + \Delta \omega_{\text{geom}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}}
+  \end{equation*}
+  Now do the same for linear response:
+  \begin{equation*}
+    \begin{aligned}
+      \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{tot}} = &\braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{free}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{geom}} \\
+      &+ \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{frz}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{pol}} + \Delta \braket{\braket{\hat{P};\hat{Q}^{\omega}}}_{\text{CT}}
     \end{aligned}
-  \end{equation*}}
+  \end{equation*}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Quick-and-dirty linear response}
+  \frametitle{Linear response in a nutshell}
+  \note[item]{this is where the quick-and-dirty slide goes}
+  \note[item]{Walk us through the equations}
   The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
   \begin{equation*}
     \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \sum_{n>0} \left[ \frac{\braket{\Psi_{0}|\hat{P}|\Psi_{n}}\braket{\Psi_{n}|\hat{Q}|\Psi_{0}}}{E_{n} - E_{0} - \omega_{Q}} + \frac{\braket{\Psi_{0}|\hat{Q}|\Psi_{n}}\braket{\Psi_{n}|\hat{P}|\Psi_{0}}}{E_{n} - E_{0} + \omega_{Q}} \right]
@@ -433,123 +426,133 @@
   \end{equation*}
   is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted orbital Hessian. The key step is forming the response vector
   \begin{equation*}
-    X_{ia} = G_{ia,jb}^{-1} Q_{jb}.
+    X_{ia} = G_{ia,jb}^{-1} Q_{jb}
   \end{equation*}
-  \(X_{ia}\) is equivalent to the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
+  \(X_{ia}\) is part of the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
 \end{frame}
 
 \begin{frame}
-  \frametitle{Spectroscopic properties are directly connected to response functions}
-  \centering
-  \begin{tabular}{ll}
-    \toprule
-    \textbf{Molecular property}       & \textbf{Linear response function} \\
-    \midrule
-    polarizability                    & \( \braket{\braket{\hat{\mu};\hat{\mu}}}_{\omega} \) \\
-    magnetizability                   & \( \braket{\braket{\hat{m};\hat{m}}}_{0} \) \\
-    optical rotation                  & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega} \) \\
-    electronic circular dichroism     & \( \braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}} \) \\
-    IR intensities                    & \( \braket{\braket{\hat{\mu};\partial\hat{H}_{0}/\partial R}}_{\omega} \) \\
-    NMR spin-spin coupling constants  & \( \braket{\braket{\hat{h}_{\text{SD}};\hat{h}_{\text{SD}}}}_{0} \), \\
-                                      & \( \braket{\braket{\hat{h}_{\text{FC}};\hat{h}_{\text{FC}}}}_{0} \), \\
-                                      & \( \braket{\braket{\hat{h}_{\text{PSO}};\hat{h}_{\text{PSO}}}}_{0} \) \\
-    NMR chemical shifts               & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{PSO}}}}_{0} \) \\
-    EPR \textit{g}-tensor             & \( \braket{\braket{\hat{l}_{O};\hat{h}_{\text{SOC}}}}_{0} \) \\
-    ... & ... \\
-    \bottomrule
-  \end{tabular}
+  \frametitle{Approach: take idea behind SCF(MI) and apply it to linear response \textrightarrow{} \textcolor{AlertColor}{LR(MI)}}
+  Remove charge transfer: restrict excitations to only MOs within a fragment
+  \begin{table}
+    \centering
+    \begin{tabular}{ll}
+      Static response: & \(\braket{\braket{\hat{P};\hat{Q}}}_{0} = -(\vect{P})_{\textcolor{red}{ia}}(\vect{Q})_{\textcolor{red}{ia}}\) \\
+      Response vector update: & \((\vect{X})_{ia} = (\vect{E}^{-1})_{ia,\textcolor{red}{jb}} \left[ (\vect{Q})_{\textcolor{red}{jb}} - (\vect{R})_{\textcolor{red}{jb}} \right]\)
+    \end{tabular}
+  \end{table}
+  Work with the response vector in a similar fashion to the Hamiltonian:
+  \begin{table}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[scale=0.30]{./figures/block_1.pdf} & \includegraphics[scale=0.30]{./figures/block_2.pdf} & \includegraphics[scale=0.30]{./figures/block_3.pdf} \\
+      frozen interaction & polarization & charge transfer \\
+      \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H} (\vect{1} - \vect{\sigma})\) & \(\vect{H}\) \\
+      \((\vect{1} - \vect{\sigma})^{\dagger} \vect{X}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{X} (\vect{1} - \vect{\sigma})\) & \(\vect{X}\)
+    \end{tabular}
+  \end{table}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_response_equations.pdf}}
-  \begin{figure}
-    \begin{subfigure}[c]{0.30\linewidth}
-      \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_mat_01_frz.pdf}}
-    \end{subfigure}
-    \begin{subfigure}[c]{0.30\linewidth}
-      \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_mat_02_pol.pdf}}
-    \end{subfigure}
-    \begin{subfigure}[c]{0.30\linewidth}
-      \uncover<+->{\includegraphics[width=\linewidth,keepaspectratio]{./figures/almo_mat_03_ct.pdf}}
-    \end{subfigure}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Example: Static polarizability}
-  As an energy derivative,
+  \frametitle{Numerical benchmarks using static electric dipole polarizabilities}
+  \note[item]{Why polarizability? can compare to finite difference numerical derivatives}
+  \note[item]{Why static? static helps provide the connection between analytic derivatives and response theory}
+    As an energy derivative,
   \begin{equation*}
     \alpha_{rs} = - \left. \frac{\text{d}^{2}E}{\text{d}F_{r}\text{d}F_{s}} \right|_{\mathbf{F}=\mathbf{0}}
   \end{equation*}
   which is equivalent to the response theory formulation
   \begin{equation*}
-    \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}.
+    \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}
   \end{equation*}
-  ALMO is BSSE-free:
-  {\scriptsize
-  \begin{equation*}
-    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
-    \label{eq:bsse-corrected-polarizability}
-  \end{equation*}}
+  The test system is the argon\textemdash{}lithium cation dimer, \arlidimer{}.
 \end{frame}
 
 \begin{frame}
-  \begin{figure}
-    \centering
-    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVP.pdf}
-    \caption*{\arlidimer{}, HF/def2-SVP}
-  \end{figure}
+  \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference}
+  \note[item]{This shows the correctness of our implementation}
+  \note[item]{Confirm correctness before scientific result}
+  \note[item]{deviation between implementations occurs in the electron density penetration region, where ALMO is not expected to be valid anyway}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVPD.pdf}
+  \end{nscenter}
+  {\tiny HF/def2-SVPD}
 \end{frame}
 
 \begin{frame}
-  \begin{figure}
-    \centering
-    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVPD.pdf}
-    \caption*{\arlidimer{}, HF/def2-SVPD}
-  \end{figure}
+  \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
+  {\tiny HF/def2-SVPD}
 \end{frame}
 
 \begin{frame}
-  \begin{figure}
-    \centering
-    \begin{subfigure}[b]{0.49\linewidth}
-      \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVP.pdf}
-      \caption*{\scriptsize def2-SVP}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.49\linewidth}
-      \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVPD.pdf}
-      \caption*{\scriptsize def2-SVPD}
-    \end{subfigure}
-  \end{figure}
+  \frametitle{LR(MI) is in libresponse, an open-source library}
+  \note[item]{Github repo link}
+  \note[item]{working on Psi4 plugin}
+  \scriptsize
+  \begin{nscenter}
+    \includegraphics[scale=0.30]{./figures/libresponse_top.pdf} \\
+    \includegraphics[scale=0.32]{./figures/libresponse_bottom.pdf} \\
+    BSD 3-clause license \\
+    \url{https://github.com/LambrechtLab/libresponse} \\
+    \url{https://github.com/berquist/pyresponse}
+  \end{nscenter}
+\end{frame}
+
+\section{Reference and tutorial implementations of quantum chemical methods}
+
+\begin{frame}
+  \frametitle{\pfn{} provides a modern ecosystem for quantum chemical method development}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_ecosystem22.pdf}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{../paper_05/fig1-oval-org.pdf}
+  \frametitle{\pfn{} is an ideal platform for teaching about \textit{ab initio} spectroscopy}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_1.png}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_1.png}
+  \frametitle{Jupyter Notebooks allow mixing of concepts, equations, and code in an exploratory environment}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_2.png}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_notebook_2.png}
+  \frametitle{\pfn{} is welcoming to external contributors}
+  \begin{nscenter}
+    \includegraphics[scale=0.20]{./figures/psi4numpy_github.png}
+    {\scriptsize \url{https://github.com/psi4/psi4numpy/}}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
-  \centering
-  \includegraphics[scale=0.20]{./figures/psi4numpy_github.png}
-  {\scriptsize \url{https://github.com/psi4/psi4numpy/}}
+  \frametitle{Future extensions}
+  \begin{itemize}
+  \item Incorporate dispersion via 2nd-generation ALMO-EDA
+  \item Non-linear response: \(\beta(-(\omega_{1}+\omega_{2});\omega_{1},\omega_{2})\) is quadratic response, \(\gamma(-(\omega_{1}+\omega_{2}+\omega_{3});\omega_{1},\omega_{2},\omega_{3})\) is cubic response, \dots
+  \item Automatic response equation generation followed by code generation: symengine, SymPy, \dots
+  \item Second-order polarization propagator approximation (SOPPA)
+  \item \dots
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conclusions}
+  \begin{itemize}
+  \item Open-source development is a valid path forward for quantum chemical method development
+  \end{itemize}
 \end{frame}
 
 % \begin{frame}
-%   \frametitle{Acknowledgements}
+%   \frametitle{Acknowledgments}
 %   \begin{columns}
 %     \column{0.65\textwidth}
 %     \begin{minipage}{1.0\linewidth}
+%       \scriptsize
 %       \begin{itemize}
 %       \item Prof. Daniel Lambrecht
 %       \item Prof. Sean Garrett-Roe
@@ -557,7 +560,9 @@
 %       \item Evgeny Epifanovsky (Q-Chem)
 %       \item Thomas Brinzer (Pitt)
 %       \item Daniel Smith (MolSSI, Psi4)
+%       \item Clyde Daly (Notre Dame)
 %       \end{itemize}
+%       \includegraphics[scale=0.38]{./figures/lambrecht_group.png}
 %     \end{minipage}
 %     \column{0.35\textwidth}
 %     \begin{minipage}{1.0\linewidth}
@@ -579,12 +584,14 @@
   \begin{enumerate}
   \item \fullcite{Berquist2014}
   \item \fullcite{Shao2015}
-  \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Brinzer2015}}
+  % \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Brinzer2015}}
+  \item \fullcite{Brinzer2015}
   \item \fullcite{Daly2016}
   \item \fullcite{Berquist2017}
   \item \fullcite{Brinzer2017}
   \item \fullcite{Smith2018}
-  \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Berquist2018}}
+  % \item {\setbeamercolor{bibliography entry author}{fg=Green}\fullcite{Berquist2018}}
+  \item \fullcite{Berquist2018}
   \item \fullcite{Jakubek2018}
   \end{enumerate}
 \end{frame}
@@ -592,7 +599,28 @@
 \appendix
 
 \begin{frame}
-  \frametitle{Extra slides}
+  \frametitle{LR(MI) is BSSE-free by construction}
+  \scriptsize
+  \begin{equation*}
+    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
+    \label{eq:bsse-corrected-polarizability}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) analytic static polarizabilities are quantitatively correct compared to finite difference results at short range}
+  \note[item]{This shows the correctness of our implementation}
+  \note[item]{Confirm correctness before scientific result}
+  \note[item]{deviation between implementations occurs in the electron density penetration region, where ALMO is not expected to be valid anyway}
+  \begin{nscenter}
+    \includegraphics[scale=0.65]{./figures/almo_analytic_vs_numerical_onaxis_projected_short_def2-SVP.pdf}
+  \end{nscenter}
+  {\tiny HF/def2-SVP}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) polarizabilities have physically-correct long-range asymptotic behavior}
+  {\tiny HF/def2-SVP}
 \end{frame}
 
 \begin{frame}
@@ -769,5 +797,7 @@ if (ints_engine == "libfock" || ints_engine == "both") {
   \item ALMO...
   \end{itemize}
 \end{frame}
+
+\immediate\closeout\tempfile
 
 \end{document}
