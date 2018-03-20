@@ -83,6 +83,7 @@
 \newcommand\pfour{Psi4}
 % \newcommand\pfn{\textsc{Psi4NumPy}}
 \newcommand\pfn{Psi4NumPy}
+\newcommand\libresponse{\texttt{libresponse}}
 
 \title{Decomposition of Intermolecular Interactions in \textit{Ab Initio} Spectroscopy}
 \author{Eric Berquist}
@@ -117,9 +118,8 @@
 
 \begin{frame}[fragile]
   \frametitle{\protect{Infrared spectroscopy is sensitive to the presence of \ce{CO2} in ionic liquids}}
-  \note[item]{For example, ...}
-  \note[item]{FTIR IL spectra with and without CO2 goes here}
   % \frametitle{\ce{CO2} asymmetric stretch lies in an isolated spectral window}
+  \note[item]{For example, ...}
   \begin{nscenter}
     \includegraphics[width=\linewidth,keepaspectratio]{./figures/experimental_spectra_TfO.pdf}
   \end{nscenter}
@@ -127,11 +127,10 @@
 
 \begin{frame}[fragile]
   \frametitle{\protect{Understanding \ce{CO2} solvation by ionic liquids is important for carbon capture}}
-  \note[item]{Lewis structures go here}
-  \note[item]{Example ionic liquids for carbon capture}
   \note[item]{Why these? Water tolerant, fairly good CO2 capture already, experimentally studied/validated}
   \note[item]{desirable properties of ionic liquids: solvation energy, reversible absorption}
   \note[item]{point out nomenclature}
+  Example ionic liquids (ILs) studied experimentally:
   \begin{table}
     \centering
     \begin{tabulary}{1.00\linewidth}{CCCC}
@@ -239,7 +238,6 @@
   % \end{table}
 \begin{frame}
   \frametitle{Solvatochromic shift originates from varying the ionic liquid anion}
-  \note[item]{shift as function of anion goes here}
   \begin{nscenter}
     \includegraphics[scale=0.65]{./figures/experimental_spectra_shifting.pdf}
   \end{nscenter}
@@ -249,8 +247,6 @@
 
 \begin{frame}
   \frametitle{Model calculations qualitatively reproduce trends in the solvatochromic shift}
-  \note[item]{Experiment/calculation trends go here}
-  \note[item]{Put image of TFA cluster in plot whitespace}
   \note[item]{Experimental cation is C4C1im, computational cation is C1C1im}
   \note[item]{quantum chemistry connects frequencies to structure}
   % \includegraphics[width=\linewidth,keepaspectratio]{./figures/frequencies_calc_vs_expt1.pdf}
@@ -296,7 +292,7 @@
 \begin{frame}[fragile]
   \frametitle{\protect{The \ce{CO2} asymmetric stretch solvatochromic shift is caused by charge transfer-driven geometric distortion}}
   \begin{nscenter}
-    \includegraphics[scale=0.27]{./figures/ionic_liquid_geometry_dependence_on_ct_combined.pdf}
+    \includegraphics[scale=0.28]{./figures/ionic_liquid_geometry_dependence_on_ct_combined.pdf}
   \end{nscenter}
   % B3LYP/6-31G(d,p); cation is \ce{[C1C1im]+}
 \end{frame}
@@ -304,9 +300,13 @@
 \begin{frame}
   \frametitle{Conclusion: spectra decomposition is an integral part of the experimental-computational workflow}
   \note[item]{cite Daly papers}
-  \begin{columns}
+  \begin{columns} % TODO fix spacing/sizing
     \column{0.35\linewidth}
-    TODO I am a filler line
+    \scriptsize
+    \begin{itemize}
+    \item Construct empirical spectra-property relationships based on most significant interactions
+    \item Test physical basis for experimental hypotheses (Stark effect, electrocatalysis)
+    \end{itemize}
     \column{0.65\linewidth}
     % \includegraphics[scale=0.15]{./figures/workflow.pdf}
     \includegraphics[width=\linewidth,keepaspectratio]{./figures/workflow.pdf}
@@ -317,12 +317,39 @@
   \frametitle{Problem: the approach for decomposing vibrational frequencies is not generally applicable to other properties}
   \note[item]{What's the value of spectroscopy decomposition?}
   \note[item]{Want the ability to build structure-spectra relationships for any type of spectroscopy, leading to spectra-property relationships}
-  \note[item]{A series expansion example + e-field terms should go here}
+  Originally based on numerical differentiation using finite difference. Starting from a perturbation expansion
+  \begin{equation*}
+    \label{eq:maclaurin-expansion}
+    \begin{aligned}
+      E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = 0} \cdot P^{n} \\
+      % &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\
+      &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \dots,
+    \end{aligned}
+  \end{equation*}
+  if the perturbation is an applied electric field \(\mathbf{F}\),
+  \begin{equation*}
+    \label{eq:electric-field-expansion}
+    E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
+  \end{equation*}
+  a component of the polarizability from 1st-order finite difference is
+  \begin{equation*}
+    \label{eq:finite-difference-polarizability}
+    \alpha_{xz}(h_{x}) = \frac{\mu_{z}(\frac{1}{2}h_{x}) - \mu_{z}(\frac{1}{2}h_{x})}{h_{x}}.
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Numerical differentiation can give unphysical results}
+  \note[item]{One example why the original approach is not generally applicable...}
+  \note[item]{One problem with numerical differentiation is...}
+  \note[item]{Mention other issues with numerical differentiation}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
+  \end{nscenter}
 \end{frame}
 
 \begin{frame}
   \frametitle{Spectroscopic properties are directly connected to energy derivatives}
-  \note[item]{The derivative table should go here}
   \begin{nscenter}
     \scriptsize
     \begin{tabulary}{1.00\linewidth}{rL}
@@ -357,24 +384,12 @@
   \end{nscenter}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Numerical differentiation can give unphysical results}
-  \note[item]{this is where the polarizability asymmetry figure goes}
-  \note[item]{One example why the original approach is not generally applicable...}
-  \note[item]{One problem with numerical differentiation is...}
-  \note[item]{Mention other issues with numerical differentiation}
-  \begin{nscenter}
-    \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
-  \end{nscenter}
-\end{frame}
-
 \section{Decomposition of general linear response properties}
 
 \begin{frame}
   \frametitle{Solution: start from the framework of response theory}
   \note[item]{Many important molecular properties are calculated within the framework of linear response}
   Spectroscopic properties are directly connected to (linear) response functions:
-  \note[item]{the linear response table should go here}
   \note[item]{Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent.}
   \begin{table}
     \centering
@@ -419,7 +434,6 @@
 
 \begin{frame}
   \frametitle{Linear response in a nutshell}
-  \note[item]{this is where the quick-and-dirty slide goes}
   \note[item]{Walk us through the equations}
   The response of the property \(\hat{P}\) to the perturbation \(\hat{Q}\); for exact (orthogonal) states:
   \begin{equation*}
@@ -515,6 +529,7 @@
 \end{frame}
 
 \begin{frame}
+  % \frametitle{LR(MI) is in \libresponse{}, an open-source library}
   \frametitle{LR(MI) is in libresponse, an open-source library}
   \note[item]{Github repo link}
   \note[item]{working on Psi4 plugin}
@@ -562,8 +577,9 @@
 \begin{frame}
   \frametitle{Future extensions}
   \begin{itemize}
+  \item Frozen interaction in \libresponse{}
   \item Incorporate dispersion via 2nd-generation ALMO-EDA
-  \item Non-linear response: \(\beta(-(\omega_{1}+\omega_{2});\omega_{1},\omega_{2})\) is quadratic response, \(\gamma(-(\omega_{1}+\omega_{2}+\omega_{3});\omega_{1},\omega_{2},\omega_{3})\) is cubic response, \dots
+  \item Non-linear response: \(\beta(-(\omega_{1}+\omega_{2});\omega_{1},\omega_{2})\) is from quadratic response, \(\gamma(-(\omega_{1}+\omega_{2}+\omega_{3});\omega_{1},\omega_{2},\omega_{3})\) is from cubic response, \dots
   \item Automatic response equation generation followed by code generation: symengine, SymPy, \dots
   \item ALMO/SCF(MI) in \pfn{}
   \item Second-order polarization propagator approximation (SOPPA) in \pfn{}
@@ -574,8 +590,8 @@
 \begin{frame}
   \frametitle{Conclusions}
   \begin{itemize}
-  \item (TODO something about the IL project goes here)
-  \item (TODO something about LR(MI)/libresponse goes here)
+  \item Charge transfer is a primary contributor to the infrared signature of \ce{CO2} in ILs
+  \item \libresponse{} is a general (linear) response library that allows decomposition of complex molecular \& materials functions into well-defined chemical contributions derived from first principles
   \item Open-source development is a valid path forward for quantum chemical method development
   \end{itemize}
 \end{frame}
