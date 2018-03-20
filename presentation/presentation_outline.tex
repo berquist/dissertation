@@ -59,6 +59,7 @@
 ]{siunitx}
 \usepackage{subcaption}
 \usepackage{tabulary}
+\usepackage{textcomp}
 
 \NewDocumentCommand{\vect}{m}{%
         \ensuremath{\boldsymbol{\mathbf{#1}}}%
@@ -269,14 +270,16 @@
       \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H} (\vect{1} - \vect{\sigma})\) & \(\vect{H}\)
     \end{tabular}
   \end{table}
-  Translate
+  \uncover<2->{Translate}
   \begin{equation*}
     \Delta E_{\text{int}} = \Delta E_{\text{geom}} + \Delta E_{\text{frz}} + \Delta E_{\text{pol}} + \Delta E_{\text{CT}}
   \end{equation*}
+  \uncover<2->{%
   into
   \begin{equation*}
     \omega_{\text{tot}} = \omega_{\text{free}} + \Delta \omega_{\text{geom}} + \Delta \omega_{\text{frz}} + \Delta \omega_{\text{pol}} + \Delta \omega_{\text{CT}}
   \end{equation*}
+  }%
 \end{frame}
 
 \note{If going to talk about the geometry mechanism and the curvature mechanism, it should go here?}
@@ -423,13 +426,13 @@
   \end{equation*}
   is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted orbital Hessian. The key step is forming the response vector
   \begin{equation*}
-    X_{ia} = G_{ia,jb}^{-1} Q_{jb}.
+    X_{ia} = G_{ia,jb}^{-1} Q_{jb}
   \end{equation*}
-  \(X_{ia}\) is equivalent to the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
+  \(X_{ia}\) is part of the orbital rotation matrix \(U_{ia}\) from coupled perturbed SCF (CPHF, CPKS).
 \end{frame}
 
 \begin{frame}
-  \frametitle{Approach: take idea behind SCF(MI) and apply it to linear response}
+  \frametitle{Approach: take idea behind SCF(MI) and apply it to linear response \textrightarrow{} \textcolor{AlertColor}{LR(MI)}}
   Remove charge transfer: restrict excitations to only MOs within a fragment
   \begin{table}
     \centering
@@ -438,7 +441,7 @@
       Response vector update: & \((\vect{X})_{ia} = (\vect{E}^{-1})_{ia,\textcolor{red}{jb}} \left[ (\vect{Q})_{\textcolor{red}{jb}} - (\vect{R})_{\textcolor{red}{jb}} \right]\)
     \end{tabular}
   \end{table}
-  Work with the Hamiltonian and response vector in a similar fashion:
+  Work with the response vector in a similar fashion to the Hamiltonian:
   \begin{table}
     \centering
     \begin{tabular}{ccc}
@@ -482,7 +485,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{libresponse is available as an open-source library}
+  \frametitle{LR(MI) is in libresponse, an open-source library}
   \note[item]{Github repo link}
   \note[item]{working on Psi4 plugin}
   \scriptsize
@@ -528,15 +531,52 @@
 
 \begin{frame}
   \frametitle{Future extensions}
+  \begin{itemize}
+  \item Incorporate dispersion via 2nd-generation ALMO-EDA
+  \item Non-linear response: \(\beta(-(\omega_{1}+\omega_{2});\omega_{1},\omega_{2})\) is quadratic response, \(\gamma(-(\omega_{1}+\omega_{2}+\omega_{3});\omega_{1},\omega_{2},\omega_{3})\) is cubic response, \dots
+  \item Automatic response equation generation followed by code generation: symengine, SymPy, \dots
+  \item Second-order polarization propagator approximation (SOPPA)
+  \item \dots
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Conclusions}
+  \begin{itemize}
+  \item Open-source development is a valid path forward for quantum chemical method development
+  \end{itemize}
 \end{frame}
 
-\begin{frame}
-  \frametitle{Acknowledgments}
-\end{frame}
+% \begin{frame}
+%   \frametitle{Acknowledgments}
+%   \begin{columns}
+%     \column{0.65\textwidth}
+%     \begin{minipage}{1.0\linewidth}
+%       \scriptsize
+%       \begin{itemize}
+%       \item Prof. Daniel Lambrecht
+%       \item Prof. Sean Garrett-Roe
+%       \item Prof. Ken Jordan
+%       \item Evgeny Epifanovsky (Q-Chem)
+%       \item Thomas Brinzer (Pitt)
+%       \item Daniel Smith (MolSSI, Psi4)
+%       \item Clyde Daly (Notre Dame)
+%       \end{itemize}
+%       \includegraphics[scale=0.38]{./figures/lambrecht_group.png}
+%     \end{minipage}
+%     \column{0.35\textwidth}
+%     \begin{minipage}{1.0\linewidth}
+%       \centering
+%       \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/Qchem-logo.png}
+%       \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/PQI-Letter-Logo-black.png}
+%       \includegraphics[width=0.85\linewidth,keepaspectratio]{./figures/logo_crc.jpg}
+%       \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_novartis.png}
+%       \includegraphics[scale=0.15]{./figures/logo_cclib.png}
+%       \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/psi4numpybanner_eqn.png}
+%       \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_molssi_text.jpg}
+%     \end{minipage}
+%   \end{columns}
+% \end{frame}
 
 \begin{frame}
   \frametitle{Thank you}
@@ -560,6 +600,7 @@
 
 \begin{frame}
   \frametitle{LR(MI) is BSSE-free by construction}
+  \scriptsize
   \begin{equation*}
     \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
     \label{eq:bsse-corrected-polarizability}
