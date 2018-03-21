@@ -1,6 +1,10 @@
 from __future__ import print_function
 
+from itertools import cycle
 from collections import OrderedDict
+
+import pandas as pd
+
 import matplotlib as mpl
 mpl.rc('text', usetex=True)
 # mpl.rc('font', family='serif')
@@ -14,6 +18,26 @@ mpl.rcParams['text.latex.preamble'] = [
 ]
 mpl.use('Agg')
 import matplotlib.pyplot as plt
+
+
+markers = ['o', '*', 'v', 's', '^', '8', '<', '+', '>']
+markers = cycle(markers)
+
+method_map = {
+    'wB97X-D': r'$\omega$B97X-D',
+    'wB97X-D3': r'$\omega$B97X-D3',
+}
+
+order = [
+    'PF6',
+    'Tf2N',
+    'BF4',
+    'TfO',
+    'TFA',
+    'DCA',
+    'SCN.N',
+    'SCN.S',
+]
 
 label_map = OrderedDict([
     ('PF6', r'$\ce{[PF6]-}$'),
@@ -102,6 +126,57 @@ def main():
     return locals()
 
 
+def main_updated():
+    # rootdir = os.path.join(os.getenv('HOME'), 'Dropbox/research/calc.sgr/dissertation')
+    # for directory in os.listdir(rootdir):
+    #     method, basis_set = directory.split('_')
+    #     print(method, basis_set)
+    #     print(os.listdir(os.path.join(rootdir, directory, 'freq')))
+    df = pd.read_csv('updated_methods.csv', index_col=0)
+    df = df.loc[:, order]
+    # SCN.N gets dropped
+    # SCN.S -> SCN
+    df = df.drop('SCN.N', axis=1)
+    df = df.rename({'SCN.S': 'SCN'}, axis=1)
+    # add unscaled B3LYP results
+    freq_calc = [results_calc.get(cluster) for cluster in label_map]
+    # df.loc['B3LYP/6-31G(d,p)', :] = freq_calc
+
+    labels = list(label_map.values())
+    ticks = list(range(len(labels)))
+    fig, ax = plt.subplots()
+
+    plot_settings = {
+        'markersize': 10,
+        # 'linestyle': '-',
+        'linewidth': 2,
+    }
+
+    for method_basis_set, row in df.iterrows():
+        method, basis_set = method_basis_set.split('/')
+        label = r'{}/{}'.format(method_map.get(method, method), basis_set)
+        print(label)
+        print(row)
+        marker = next(markers)
+        ax.plot(ticks,
+                row,
+                marker=marker,
+                label=label,
+                **plot_settings)
+
+    ax.tick_params(direction='out', top=False, right=False, labelsize='large')
+    ax.set_xlabel('ionic liquid anion', fontsize='x-large')
+    ax.set_ylabel(r'$\nu_{3}$ frequency [unscaled] ($\si{\wavenumber}$)', fontsize='x-large')
+    ax.set_xlim((ticks[0], ticks[-1]))
+    ax.set_xticklabels(labels)
+
+    ax.legend(loc='upper right', fancybox=True, framealpha=0.5, numpoints=1)
+    fig.savefig('updated_methods.pdf', bbox_inches='tight')
+
+    return df
+
+
 if __name__ == '__main__':
 
-    main_locals = main()
+    # main_locals = main()
+    df = main_updated()
