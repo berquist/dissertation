@@ -60,8 +60,8 @@ Slide 23
 - [x] why these ILs? experimentally studied/validated
 - [ ] switch from water dimer in ALMO-EDA example introduction with eqn/sums
 - [ ] Pauli repulsion antisymmetry
-- [ ] dipole-dipole ACF
-- [ ] key statements on AIMD slide
+- [x] dipole-dipole ACF
+- [x] key statements on AIMD slide
 - [ ] mention earlier this will be turned into frequency decomp
 - [ ] overview slide
 - [ ] How is the frequen decom done <- separate slide
@@ -174,13 +174,13 @@ By slide #
 
 8. [x] "bottom up" [versus "top down"?] I wasn't entirely sure what you meant by this. Do you have an example of the comparison and why it's relevant?
 
-9. [ ] What do these COVP pictures mean? [we discussed] Frequencies don't match those on slide 7.
+9. [x] What do these COVP pictures mean? [we discussed] Frequencies don't match those on slide 7.
 
 10. [ ] "Spectroscopic map" ... We miss some context here on the story.
 
-16. [ ] Able to apply to piezo systems [we discussed]? Be careful with description of Hessian. You said it was the curvature of the electronic surface of the molecule. You could get some confusion there.
+16. [x] Able to apply to piezo systems [we discussed]? Be careful with description of Hessian. You said it was the curvature of the electronic surface of the molecule. You could get some confusion there.
 
-17. [ ] Did you attempt to reanalyze CO2 with this new method? [we discussed]
+17. [x] Did you attempt to reanalyze CO2 with this new method? [we discussed]
 
 20. [x] Hard to tell colors apart. Be clear about the distinction between your two asymptotes.
 

@@ -142,6 +142,18 @@ def main_updated():
     freq_calc = [results_calc.get(cluster) for cluster in label_map]
     df.loc['B3LYP/6-31G(d,p)', :] = freq_calc
 
+    method_order = [
+        'B3LYP/6-31G(d,p)',
+        'B3LYP/def2-SVP',
+        'B3LYP-D3(BJ)/def2-SVP',
+        'wB97X-D/def2-SVP',
+        'wB97X-D/def2-TZVP',
+        'wB97X-D/def2-QZVP',
+        'wB97X-D3/def2-SVP',
+        'wB97X-D3/def2-QZVP',
+    ]
+    df = df.loc[method_order, :]
+
     labels = list(label_map.values())
     ticks = list(range(len(labels)))
     fig, ax = plt.subplots()
