@@ -35,17 +35,24 @@ def main(do_plot=False, dump_pd=False):
 
     systems = ('cation', 'BF4', 'DCA', 'PF6', 'SCN', 'TFA', 'Tf2N', 'TfO')
     calc_types = ('free', 'geometry', 'point\ncharges', 'ALMO', 'full')
+    calc_types_no_pc = OrderedDict([
+        ('free', r'$\omega_{\mathrm{free}}$'),
+        ('geometry', r'$+\omega_{\mathrm{geom}}$'),
+        ('ALMO', r'$\begin{aligned}&+\omega_{\mathrm{frz}}\\&+\omega_{\mathrm{pol}}\end{aligned}$'),
+        ('full', r'$+\omega_{\mathrm{CT}}$'),
+    ])
+    xticks = np.asarray(range(len(calc_types_no_pc)))
 
     system_label_map = {
         'cation': r'''cation
 alone''',
-        'BF4': r'[BF$_{4}$]$^{-}$',
-        'DCA': r'[DCA]$^{-}$',
-        'PF6': r'[PF$_{6}$]$^{-}$',
-        'SCN': r'[SCN]$^{-}$',
-        'TFA': r'[TFA]$^{-}$',
-        'Tf2N': r'[Tf$_{2}$N]$^{-}$',
-        'TfO': r'[TfO]$^{-}$'
+        'PF6': r'$\ce{[PF6]-}$',
+        'Tf2N': r'$\ce{[Tf2N]-}$',
+        'BF4': r'$\ce{[BF4]-}$',
+        'TfO': r'$\ce{[TfO]-}$',
+        'TFA': r'$\ce{[TFA]-}$',
+        'DCA': r'$\ce{[DCA]-}$',
+        'SCN': r'$\ce{[SCN]-}$'
     }
 
     system_color_map = {
@@ -68,57 +75,57 @@ alone''',
     # 1. CO2, free geometry
     freq_CO2_free = {'a': 2436.10, 's': 1371.93}
     for system in systems:
-        freq_dict[system][calc_types[0]] = freq_CO2_free
-        freq_noCT_dict[system][calc_types[0]] = freq_CO2_free
+        freq_dict[system]['free'] = freq_CO2_free
+        freq_noCT_dict[system]['free'] = freq_CO2_free
 
     # 2. CO2, cluster geometry, free
-    freq_dict['cation'][calc_types[1]] = {'a': 2443.07, 's': 1372.12}
-    freq_dict['BF4'][calc_types[1]] = {'a': 2434.71, 's': 1372.96}
-    freq_dict['DCA'][calc_types[1]] = {'a': 2430.85, 's': 1370.71}
-    freq_dict['PF6'][calc_types[1]] = {'a': 2437.48, 's': 1373.95}
-    freq_dict['SCN'][calc_types[1]] = {'a': 2430.27, 's': 1370.35}
-    freq_dict['TFA'][calc_types[1]] = {'a': 2429.81, 's': 1371.68}
-    freq_dict['Tf2N'][calc_types[1]] = {'a': 2437.74, 's': 1372.68}
-    freq_dict['TfO'][calc_types[1]] = {'a': 2433.89, 's': 1371.14}
+    freq_dict['cation']['geometry'] = {'a': 2443.07, 's': 1372.12}
+    freq_dict['BF4']['geometry'] = {'a': 2434.71, 's': 1372.96}
+    freq_dict['DCA']['geometry'] = {'a': 2430.85, 's': 1370.71}
+    freq_dict['PF6']['geometry'] = {'a': 2437.48, 's': 1373.95}
+    freq_dict['SCN']['geometry'] = {'a': 2430.27, 's': 1370.35}
+    freq_dict['TFA']['geometry'] = {'a': 2429.81, 's': 1371.68}
+    freq_dict['Tf2N']['geometry'] = {'a': 2437.74, 's': 1372.68}
+    freq_dict['TfO']['geometry'] = {'a': 2433.89, 's': 1371.14}
 
     # 3. CO2, cluster geometry, electrostatics from point charges (PC)
-    freq_dict['cation'][calc_types[2]] = {'a': 2447.34, 's': 1373.96}
-    freq_dict['BF4'][calc_types[2]] = {'a': 2438.87, 's': 1374.04}
-    freq_dict['DCA'][calc_types[2]] = {'a': 2436.12, 's': 1371.88}
-    freq_dict['PF6'][calc_types[2]] = {'a': 2441.30, 's': 1375.02}
-    freq_dict['SCN'][calc_types[2]] = {'a': 2434.23, 's': 1371.33}
-    freq_dict['TFA'][calc_types[2]] = {'a': 2434.60, 's': 1372.69}
-    freq_dict['Tf2N'][calc_types[2]] = {'a': 2441.30, 's': 1373.69}
-    freq_dict['TfO'][calc_types[2]] = {'a': 2438.87, 's': 1372.16}
+    # freq_dict['cation']['point\ncharges'] = {'a': 2447.34, 's': 1373.96}
+    # freq_dict['BF4']['point\ncharges'] = {'a': 2438.87, 's': 1374.04}
+    # freq_dict['DCA']['point\ncharges'] = {'a': 2436.12, 's': 1371.88}
+    # freq_dict['PF6']['point\ncharges'] = {'a': 2441.30, 's': 1375.02}
+    # freq_dict['SCN']['point\ncharges'] = {'a': 2434.23, 's': 1371.33}
+    # freq_dict['TFA']['point\ncharges'] = {'a': 2434.60, 's': 1372.69}
+    # freq_dict['Tf2N']['point\ncharges'] = {'a': 2441.30, 's': 1373.69}
+    # freq_dict['TfO']['point\ncharges'] = {'a': 2438.87, 's': 1372.16}
 
     # 4. CO2, cluster geometry, electrostatics from ALMO
-    freq_dict['cation'][calc_types[3]] = {'a': 2445.99, 's': 1376.27}
-    freq_dict['BF4'][calc_types[3]] = {'a': 2437.69, 's': 1374.51}
-    freq_dict['DCA'][calc_types[3]] = {'a': 2434.75, 's': 1372.58}
-    freq_dict['PF6'][calc_types[3]] = {'a': 2440.03, 's': 1375.55}
-    freq_dict['SCN'][calc_types[3]] = {'a': 2433.14, 's': 1371.40}
-    freq_dict['TFA'][calc_types[3]] = {'a': 2432.93, 's': 1372.90}
-    freq_dict['Tf2N'][calc_types[3]] = {'a': 2439.46, 's': 1374.21}
-    freq_dict['TfO'][calc_types[3]] = {'a': 2436.75, 's': 1372.68}
+    freq_dict['cation']['ALMO'] = {'a': 2445.99, 's': 1376.27}
+    freq_dict['BF4']['ALMO'] = {'a': 2437.69, 's': 1374.51}
+    freq_dict['DCA']['ALMO'] = {'a': 2434.75, 's': 1372.58}
+    freq_dict['PF6']['ALMO'] = {'a': 2440.03, 's': 1375.55}
+    freq_dict['SCN']['ALMO'] = {'a': 2433.14, 's': 1371.40}
+    freq_dict['TFA']['ALMO'] = {'a': 2432.93, 's': 1372.90}
+    freq_dict['Tf2N']['ALMO'] = {'a': 2439.46, 's': 1374.21}
+    freq_dict['TfO']['ALMO'] = {'a': 2436.75, 's': 1372.68}
 
     # 5. CO2, cluster geometry, full system
-    freq_dict['cation'][calc_types[4]] = {'a': 2442.19, 's': 1374.38}
-    freq_dict['BF4'][calc_types[4]] = {'a': 2434.69, 's': 1372.55}
-    freq_dict['DCA'][calc_types[4]] = {'a': 2430.47, 's': 1368.48}
-    freq_dict['PF6'][calc_types[4]] = {'a': 2437.74, 's': 1374.45}
-    freq_dict['SCN'][calc_types[4]] = {'a': 2430.24, 's': 1368.38}
-    freq_dict['TFA'][calc_types[4]] = {'a': 2429.31, 's': 1369.09}
-    freq_dict['Tf2N'][calc_types[4]] = {'a': 2435.80, 's': 1372.81}
-    freq_dict['TfO'][calc_types[4]] = {'a': 2431.91, 's': 1370.02}
+    freq_dict['cation']['full'] = {'a': 2442.19, 's': 1374.38}
+    freq_dict['BF4']['full'] = {'a': 2434.69, 's': 1372.55}
+    freq_dict['DCA']['full'] = {'a': 2430.47, 's': 1368.48}
+    freq_dict['PF6']['full'] = {'a': 2437.74, 's': 1374.45}
+    freq_dict['SCN']['full'] = {'a': 2430.24, 's': 1368.38}
+    freq_dict['TFA']['full'] = {'a': 2429.31, 's': 1369.09}
+    freq_dict['Tf2N']['full'] = {'a': 2435.80, 's': 1372.81}
+    freq_dict['TfO']['full'] = {'a': 2431.91, 's': 1370.02}
 
-    freqs_cation = [freq_dict['cation'][calc_type]['a'] for calc_type in calc_types]
-    freqs_BF4 = [freq_dict['BF4'][calc_type]['a'] for calc_type in calc_types]
-    freqs_DCA = [freq_dict['DCA'][calc_type]['a'] for calc_type in calc_types]
-    freqs_PF6 = [freq_dict['PF6'][calc_type]['a'] for calc_type in calc_types]
-    freqs_SCN = [freq_dict['SCN'][calc_type]['a'] for calc_type in calc_types]
-    freqs_TFA = [freq_dict['TFA'][calc_type]['a'] for calc_type in calc_types]
-    freqs_Tf2N = [freq_dict['Tf2N'][calc_type]['a'] for calc_type in calc_types]
-    freqs_TfO = [freq_dict['TfO'][calc_type]['a'] for calc_type in calc_types]
+    freqs_cation = [freq_dict['cation'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_BF4 = [freq_dict['BF4'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_DCA = [freq_dict['DCA'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_PF6 = [freq_dict['PF6'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_SCN = [freq_dict['SCN'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_TFA = [freq_dict['TFA'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_Tf2N = [freq_dict['Tf2N'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_TfO = [freq_dict['TfO'][calc_type]['a'] for calc_type in calc_types_no_pc]
     freqs = {
         'cation': freqs_cation,
         'BF4': freqs_BF4,
@@ -131,53 +138,53 @@ alone''',
     }
 
     # 2b. CO2, cluster geometry (no CT), free
-    freq_noCT_dict['cation'][calc_types[1]] = {'a': 2439.86, 's': 1371.47}
-    freq_noCT_dict['BF4'][calc_types[1]] = {'a': 2438.56, 's': 1373.31}
-    freq_noCT_dict['DCA'][calc_types[1]] = {'a': 2439.10, 's': 1373.44}
-    freq_noCT_dict['PF6'][calc_types[1]] = {'a': 2438.47, 's': 1373.33}
-    freq_noCT_dict['SCN'][calc_types[1]] = {'a': 2438.78, 's': 1373.14}
-    freq_noCT_dict['TFA'][calc_types[1]] = {'a': 2438.39, 's': 1373.65}
-    freq_noCT_dict['Tf2N'][calc_types[1]] = {'a': 2438.76, 's': 1373.06}
-    freq_noCT_dict['TfO'][calc_types[1]] = {'a': 2439.37, 's': 1373.45}
+    freq_noCT_dict['cation']['geometry'] = {'a': 2439.86, 's': 1371.47}
+    freq_noCT_dict['BF4']['geometry'] = {'a': 2438.56, 's': 1373.31}
+    freq_noCT_dict['DCA']['geometry'] = {'a': 2439.10, 's': 1373.44}
+    freq_noCT_dict['PF6']['geometry'] = {'a': 2438.47, 's': 1373.33}
+    freq_noCT_dict['SCN']['geometry'] = {'a': 2438.78, 's': 1373.14}
+    freq_noCT_dict['TFA']['geometry'] = {'a': 2438.39, 's': 1373.65}
+    freq_noCT_dict['Tf2N']['geometry'] = {'a': 2438.76, 's': 1373.06}
+    freq_noCT_dict['TfO']['geometry'] = {'a': 2439.37, 's': 1373.45}
 
     # 3b. CO2, cluster geometry (no CT), electrostatics from point charges (PC)
-    freq_noCT_dict['cation'][calc_types[2]] = {'a': 2443.70, 's': 1373.03}
-    freq_noCT_dict['BF4'][calc_types[2]] = {'a': 2442.50, 's': 1374.36}
-    freq_noCT_dict['DCA'][calc_types[2]] = {'a': 2443.61, 's': 1374.39}
-    freq_noCT_dict['PF6'][calc_types[2]] = {'a': 2441.94, 's': 1374.25}
-    freq_noCT_dict['SCN'][calc_types[2]] = {'a': 2442.66, 's': 1373.96}
-    freq_noCT_dict['TFA'][calc_types[2]] = {'a': 2442.20, 's': 1374.48}
-    freq_noCT_dict['Tf2N'][calc_types[2]] = {'a': 2442.07, 's': 1373.80}
-    freq_noCT_dict['TfO'][calc_types[2]] = {'a': 2444.06, 's': 1374.41}
+    # freq_noCT_dict['cation']['point\ncharges'] = {'a': 2443.70, 's': 1373.03}
+    # freq_noCT_dict['BF4']['point\ncharges'] = {'a': 2442.50, 's': 1374.36}
+    # freq_noCT_dict['DCA']['point\ncharges'] = {'a': 2443.61, 's': 1374.39}
+    # freq_noCT_dict['PF6']['point\ncharges'] = {'a': 2441.94, 's': 1374.25}
+    # freq_noCT_dict['SCN']['point\ncharges'] = {'a': 2442.66, 's': 1373.96}
+    # freq_noCT_dict['TFA']['point\ncharges'] = {'a': 2442.20, 's': 1374.48}
+    # freq_noCT_dict['Tf2N']['point\ncharges'] = {'a': 2442.07, 's': 1373.80}
+    # freq_noCT_dict['TfO']['point\ncharges'] = {'a': 2444.06, 's': 1374.41}
 
     # 4b. CO2, cluster geometry (no CT), electrostatics from ALMO
-    freq_noCT_dict['cation'][calc_types[3]] = {'a': 2442.67, 's': 1374.13}
-    freq_noCT_dict['BF4'][calc_types[3]] = {'a': 2441.62, 's': 1374.81}
-    freq_noCT_dict['DCA'][calc_types[3]] = {'a': 2442.59, 's': 1374.74}
-    freq_noCT_dict['PF6'][calc_types[3]] = {'a': 2441.03, 's': 1374.61}
-    freq_noCT_dict['SCN'][calc_types[3]] = {'a': 2441.37, 's': 1374.20}
-    freq_noCT_dict['TFA'][calc_types[3]] = {'a': 2441.06, 's': 1374.71}
-    freq_noCT_dict['Tf2N'][calc_types[3]] = {'a': 2440.85, 's': 1374.07}
-    freq_noCT_dict['TfO'][calc_types[3]] = {'a': 2442.54, 's': 1374.84}
+    freq_noCT_dict['cation']['ALMO'] = {'a': 2442.67, 's': 1374.13}
+    freq_noCT_dict['BF4']['ALMO'] = {'a': 2441.62, 's': 1374.81}
+    freq_noCT_dict['DCA']['ALMO'] = {'a': 2442.59, 's': 1374.74}
+    freq_noCT_dict['PF6']['ALMO'] = {'a': 2441.03, 's': 1374.61}
+    freq_noCT_dict['SCN']['ALMO'] = {'a': 2441.37, 's': 1374.20}
+    freq_noCT_dict['TFA']['ALMO'] = {'a': 2441.06, 's': 1374.71}
+    freq_noCT_dict['Tf2N']['ALMO'] = {'a': 2440.85, 's': 1374.07}
+    freq_noCT_dict['TfO']['ALMO'] = {'a': 2442.54, 's': 1374.84}
 
     # 5b. CO2, cluster geometry (no CT), full system
-    freq_noCT_dict['cation'][calc_types[4]] = {'a': 2440.19, 's': 1373.05}
-    freq_noCT_dict['BF4'][calc_types[4]] = {'a': 2439.36, 's': 1373.79}
-    freq_noCT_dict['DCA'][calc_types[4]] = {'a': 2438.95, 's': 1372.50}
-    freq_noCT_dict['PF6'][calc_types[4]] = {'a': 2438.69, 's': 1373.77}
-    freq_noCT_dict['SCN'][calc_types[4]] = {'a': 2438.45, 's': 1372.67}
-    freq_noCT_dict['TFA'][calc_types[4]] = {'a': 2438.78, 's': 1373.07}
-    freq_noCT_dict['Tf2N'][calc_types[4]] = {'a': 2438.37, 's': 1373.23}
-    freq_noCT_dict['TfO'][calc_types[4]] = {'a': 2438.52, 's': 1373.08}
+    freq_noCT_dict['cation']['full'] = {'a': 2440.19, 's': 1373.05}
+    freq_noCT_dict['BF4']['full'] = {'a': 2439.36, 's': 1373.79}
+    freq_noCT_dict['DCA']['full'] = {'a': 2438.95, 's': 1372.50}
+    freq_noCT_dict['PF6']['full'] = {'a': 2438.69, 's': 1373.77}
+    freq_noCT_dict['SCN']['full'] = {'a': 2438.45, 's': 1372.67}
+    freq_noCT_dict['TFA']['full'] = {'a': 2438.78, 's': 1373.07}
+    freq_noCT_dict['Tf2N']['full'] = {'a': 2438.37, 's': 1373.23}
+    freq_noCT_dict['TfO']['full'] = {'a': 2438.52, 's': 1373.08}
 
-    freqs_noCT_cation = [freq_noCT_dict['cation'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_BF4 = [freq_noCT_dict['BF4'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_DCA = [freq_noCT_dict['DCA'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_PF6 = [freq_noCT_dict['PF6'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_SCN = [freq_noCT_dict['SCN'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_TFA = [freq_noCT_dict['TFA'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_Tf2N = [freq_noCT_dict['Tf2N'][calc_type]['a'] for calc_type in calc_types]
-    freqs_noCT_TfO = [freq_noCT_dict['TfO'][calc_type]['a'] for calc_type in calc_types]
+    freqs_noCT_cation = [freq_noCT_dict['cation'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_BF4 = [freq_noCT_dict['BF4'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_DCA = [freq_noCT_dict['DCA'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_PF6 = [freq_noCT_dict['PF6'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_SCN = [freq_noCT_dict['SCN'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_TFA = [freq_noCT_dict['TFA'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_Tf2N = [freq_noCT_dict['Tf2N'][calc_type]['a'] for calc_type in calc_types_no_pc]
+    freqs_noCT_TfO = [freq_noCT_dict['TfO'][calc_type]['a'] for calc_type in calc_types_no_pc]
     freqs_noCT = {
         'cation': freqs_noCT_cation,
         'BF4': freqs_noCT_BF4,
@@ -189,8 +196,8 @@ alone''',
         'TfO': freqs_noCT_TfO
     }
 
-    make_alpha_beta(freq_dict, systems, calc_types)
-    make_alpha_beta(freq_noCT_dict, systems, calc_types)
+    make_alpha_beta(freq_dict, systems, calc_types_no_pc)
+    make_alpha_beta(freq_noCT_dict, systems, calc_types_no_pc)
 
     results['freq_dict'] = freq_dict
     results['freq_noCT_dict'] = freq_noCT_dict
@@ -226,37 +233,39 @@ alone''',
             'linewidth': 0.5,
         }
         import matplotlib as mpl
-        # mpl.rc('text', usetex=True)
-        mpl.rc('font', **mpl_font_dict)
-        mpl.rc('mathtext', **mpl_mathtext_dict)
+        mpl.rc('text', usetex=True)
+        # mpl.rc('font', **mpl_font_dict)
+        # mpl.rc('mathtext', **mpl_mathtext_dict)
         mpl.rc('xtick', **mpl_tick_dict)
         mpl.rc('ytick', **mpl_tick_dict)
         mpl.rc('axes', **mpl_axes_dict)
+        mpl.rcParams['text.latex.preamble'] = [
+            r'\usepackage{sfmath}',
+            r'\usepackage[version=4]{mhchem}',
+            r'\mhchemoptions{font=sf}',
+            r'\usepackage{siunitx}',
+            r'\sisetup{detect-all}',
+            r'\DeclareSIUnit\wavenumber{\per\centi\metre}',
+        ]
+        mpl.use('Agg')
         import matplotlib.pyplot as plt
 
         ######
         # Compare absolute results for all methods.
 
-        fig0, (ax0, ax0_noCT) = plt.subplots(nrows=2, ncols=1, sharex=True,
-                                             figsize=(3.3, 4.5), dpi=600)
+        fig0, (ax0, ax0_noCT) = plt.subplots(nrows=1, ncols=2,
+                                             sharex=False, sharey=True,
+                                             figsize=(6, 4),
+                                             dpi=600)
 
         axes = [ax0, ax0_noCT]
 
         plot_common_settings = {
             'marker' : 'o',
-            'markersize': 2.5,
+            # 'markersize': 2.5,
             'markeredgewidth': 0.0,
-            'linewidth': 0.5,
+            # 'linewidth': 0.5,
         }
-
-        calc_types_no_pc = OrderedDict([
-            ('free', r'\omega_{\mathrm{free}}'),
-            ('geometry', r'+\omega_{\mathrm{GEOM}}'),
-            ('ALMO', r'+\omega_{\mathrm{FRZ}}\n+\omega_{\mathrm{POL}}'),
-            ('full', r'+\omega_{\mathrm{CT}}'),
-        ])
-        xticks = list(range(len(calc_types_no_pc)))
-        # freqs_no_pc =
 
         xytext_CT_offset_map = {
             'cation': 0.0,
@@ -270,6 +279,9 @@ alone''',
         }
 
         for system in systems:
+            print(system)
+            print(xticks)
+            print(freqs[system])
             ax0.plot(xticks,
                      freqs[system],
                      label=system_label_map[system],
@@ -283,10 +295,10 @@ alone''',
             # Add a label to the rightmost side of the plot. For now,
             # only do the CT one; no_CT is too hard to tell.
             xy_CT = [xticks[-1], freqs[system][-1]]
-            xytext_CT = [xy_CT[0] + 0.10, xy_CT[1] + xytext_CT_offset_map[system]]
+            xytext_CT = [xy_CT[0] + 0.20, xy_CT[1] + xytext_CT_offset_map[system]]
             print(xy_CT, xytext_CT)
             ax0.annotate(system_label_map[system], xy=xy_CT, xytext=xytext_CT,
-                         fontsize=7,
+                         fontsize='medium',
                          ha='left', va='center')
 
         ylim_start = 2428
@@ -298,11 +310,26 @@ alone''',
             axis.yaxis.set_ticks(np.arange(ylim_start, ylim_stop + ytickstep, ytickstep))
             axis.yaxis.set_major_formatter(y_formatter)
             axis.set_xticks(xticks)
-            axis.tick_params(top='off', direction='out', labelsize=7)
-        ax0_noCT.set_xticklabels(calc_types_no_pc, fontsize=7)
-        fig0.text(0.00, 0.50, r'$\nu_{3}$ frequency (cm$^{-1}$)',
-                  ha='center', va='center', rotation='vertical', fontsize=8,
-                  transform=fig0.transFigure)
+            axis.set_xticklabels(calc_types_no_pc.values(), fontsize='large')
+            axis.tick_params(top=False, direction='out')
+        # fig0.text(0.00, 0.50, r'$\nu_{3}$ frequency [unscaled] ($\si{\wavenumber}$)',
+        #           ha='center', va='center', rotation='vertical', fontsize='large',
+        #           transform=fig0.transFigure)
+        ax0.set_ylabel(r'$\nu_{3}$ frequency [unscaled] ($\si{\wavenumber}$)', fontsize='large')
+
+        ax0.text(0.10, 0.90,
+                 'conventional\ngeometry',
+                 ha='left',
+                 va='center',
+                 fontsize='medium',
+                 transform=ax0.transAxes)
+        ax0_noCT.text(0.10, 0.90,
+                      'geometry without\ncharge transfer',
+                      ha='left',
+                      va='center',
+                      fontsize='medium',
+                      transform=ax0_noCT.transAxes)
+
         fig0.savefig('00_all.pdf', bbox_inches='tight')
 
     covp_dict = dict()
@@ -379,9 +406,8 @@ alone''',
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    # Don't make the plots or export data by default.
-    parser.add_argument('--do_plot', action='store_true')
-    parser.add_argument('--dump_pd', action='store_true')
+    parser.add_argument('--do-plot', action='store_true')
+    parser.add_argument('--dump-pd', action='store_true')
     args = parser.parse_args()
 
     results = main(args.do_plot, args.dump_pd)
