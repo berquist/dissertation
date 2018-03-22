@@ -148,9 +148,9 @@ def main_updated():
         'B3LYP-D3(BJ)/def2-SVP',
         'wB97X-D/def2-SVP',
         'wB97X-D/def2-TZVP',
-        'wB97X-D/def2-QZVP',
+        # 'wB97X-D/def2-QZVP',
         'wB97X-D3/def2-SVP',
-        'wB97X-D3/def2-QZVP',
+        # 'wB97X-D3/def2-QZVP',
     ]
     df = df.loc[method_order, :]
 
