@@ -97,15 +97,16 @@
 }
 
 \frame{
-  \frametitle{Goal of this work}
-  It is possible to identify the contribution of specific molecular interactions to spectroscopic response.
+  \frametitle{Outcomes of this work}
+  \note[item]{Why do we generally care about decomposing spectra? A sentence or two (spoken) about the bigger picture could serve as motivation for the methods development.}
+  Thesis: It is possible to identify the contribution of specific molecular interactions to spectroscopic response.
   \tableofcontents
 }
 
 \note{\tiny\listofframes}
 
 \begin{frame}
-  \frametitle{Spectroscopy is a probe of changes in a molecule's electronic and geometric state using electromagnetic radiation}
+  \frametitle{Molecular spectroscopy is a probe of changes in a molecule's electronic and geometric state using electromagnetic radiation}
   \begin{nscenter}
     \includegraphics[width=\linewidth,keepaspectratio]{./figures/electromagnetic-spectrum.jpg}
   \end{nscenter}
@@ -130,6 +131,8 @@
   \note[item]{Why these? Water tolerant, fairly good CO2 capture already, experimentally studied/validated}
   \note[item]{desirable properties of ionic liquids: solvation energy, reversible absorption}
   \note[item]{point out nomenclature}
+  \note[item]{room temperature}
+  \note[item]{experimentally interesting to change the anion because of correlation with solubility, viscosity}
   Example ionic liquids (ILs) studied experimentally:
   \begin{table}
     \centering
@@ -534,6 +537,7 @@
 \begin{frame}
   \frametitle{LR(MI) is in libresponse, an open-source library}
   \note[item]{working on Psi4 plugin}
+  \note[item]{"Is available online" -- **you** put these online, right? The way you described it makes it sound like someone else already had them up. Use the active voice (even if it's 1st person plural "we placed these online ...")}
   \scriptsize
   \begin{nscenter}
     \includegraphics[scale=0.30]{./figures/libresponse_top.pdf} \\
@@ -597,36 +601,37 @@
   \end{itemize}
 \end{frame}
 
-% \begin{frame}
-%   \frametitle{Acknowledgments}
-%   \begin{columns}
-%     \column{0.65\textwidth}
-%     \begin{minipage}{1.0\linewidth}
-%       \scriptsize
-%       \begin{itemize}
-%       \item Prof. Daniel Lambrecht
-%       \item Prof. Sean Garrett-Roe
-%       \item Prof. Ken Jordan
-%       \item Evgeny Epifanovsky (Q-Chem)
-%       \item Thomas Brinzer (Pitt)
-%       \item Daniel Smith (MolSSI, Psi4)
-%       \item Clyde Daly (Notre Dame)
-%       \end{itemize}
-%       \includegraphics[scale=0.38]{./figures/lambrecht_group.png}
-%     \end{minipage}
-%     \column{0.35\textwidth}
-%     \begin{minipage}{1.0\linewidth}
-%       \centering
-%       \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/Qchem-logo.png}
-%       \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/PQI-Letter-Logo-black.png}
-%       \includegraphics[width=0.85\linewidth,keepaspectratio]{./figures/logo_crc.jpg}
-%       \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_novartis.png}
-%       \includegraphics[scale=0.15]{./figures/logo_cclib.png}
-%       \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/psi4numpybanner_eqn.png}
-%       \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_molssi_text.jpg}
-%     \end{minipage}
-%   \end{columns}
-% \end{frame}
+\begin{frame}
+  \frametitle{Acknowledgments}
+  \begin{columns}
+    \column{0.65\textwidth}
+    \begin{minipage}{1.0\linewidth}
+      \scriptsize
+      \begin{itemize}
+      \item Prof. Daniel Lambrecht
+      \item Prof. Sean Garrett-Roe
+      \item Prof. Ken Jordan
+      \item Prof. David Yaron (CMU)
+      \item Evgeny Epifanovsky (Q-Chem)
+      \item Thomas Brinzer (Pitt)
+      \item Daniel Smith (MolSSI, Psi4)
+      \item Clyde Daly (Notre Dame)
+      \end{itemize}
+      \includegraphics[scale=0.38]{./figures/lambrecht_group.png}
+    \end{minipage}
+    \column{0.35\textwidth}
+    \begin{minipage}{1.0\linewidth}
+      \centering
+      \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/Qchem-logo.png}
+      \includegraphics[width=0.90\linewidth,keepaspectratio]{./figures/PQI-Letter-Logo-black.png}
+      \includegraphics[width=0.85\linewidth,keepaspectratio]{./figures/logo_crc.jpg}
+      \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_novartis.png}
+      \includegraphics[scale=0.15]{./figures/logo_cclib.png}
+      \includegraphics[width=1.00\linewidth,keepaspectratio]{./figures/psi4numpybanner_eqn.png}
+      \includegraphics[width=0.95\linewidth,keepaspectratio]{./figures/logo_molssi_text.jpg}
+    \end{minipage}
+  \end{columns}
+\end{frame}
 
 \begin{frame}
   \frametitle{Thank you}
@@ -647,6 +652,12 @@
 \end{frame}
 
 \appendix
+
+\begin{frame}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/updated_methods.pdf}
+  \end{nscenter}
+\end{frame}
 
 \begin{frame}
   \frametitle{LR(MI) is BSSE-free by construction}

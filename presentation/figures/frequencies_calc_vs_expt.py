@@ -140,7 +140,7 @@ def main_updated():
     df = df.rename({'SCN.S': 'SCN'}, axis=1)
     # add unscaled B3LYP results
     freq_calc = [results_calc.get(cluster) for cluster in label_map]
-    # df.loc['B3LYP/6-31G(d,p)', :] = freq_calc
+    df.loc['B3LYP/6-31G(d,p)', :] = freq_calc
 
     labels = list(label_map.values())
     ticks = list(range(len(labels)))

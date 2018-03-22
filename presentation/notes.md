@@ -154,6 +154,50 @@ _explain_
 punchlines
 summary
 
+# Comments/notes from defense practice talk 2
+
+## Tom
+
+Hi Eric,
+
+By slide #
+
+2. [x] "Goal_s_." [You listed multiple] Also, why do we generally care about decomposing spectra? Maybe a sentence or two (spoken) about the bigger picture could serve as motivation for your methods development.
+
+3. [x] Watch the title of your spectroscopy slide. You're a little under-general with your definition.
+
+5. [x] IL definition - include the "room temperature" part. NaCl is liquid at high enough temps. Some more motivation on why it is experimentally interesting to change the anion [I can send you refs if you want]
+
+6. [x] related to (5). Why is the \nu_3 shift a metric of interest?
+
+7. [x] Careful with your description of TFA. I don't know of any experimental evidence of chemisorption of CO2 by [bmim][TFA]. If you describe "chemisorption" -- know what reaction is thought to occur.
+
+8. [x] "bottom up" [versus "top down"?] I wasn't entirely sure what you meant by this. Do you have an example of the comparison and why it's relevant?
+
+9. [ ] What do these COVP pictures mean? [we discussed] Frequencies don't match those on slide 7.
+
+10. [ ] "Spectroscopic map" ... We miss some context here on the story.
+
+16. [ ] Able to apply to piezo systems [we discussed]? Be careful with description of Hessian. You said it was the curvature of the electronic surface of the molecule. You could get some confusion there.
+
+17. [ ] Did you attempt to reanalyze CO2 with this new method? [we discussed]
+
+20. [x] Hard to tell colors apart. Be clear about the distinction between your two asymptotes.
+
+24. [x] "Is available online" -- **you** put these online, right? The way you described it makes it sound like someone else already had them up. Use the active voice (even if it's 1st person plural "we placed these online ...")
+
+Potential questions could come up about peer review of open source, and the validity of contributions from randos. For example, could Tom Brinzer go and make a bunch of contributions, polluting the repo with his dirty experimentalist's code?
+
+Seems to be coming together, though what do I know. I'll be there on Friday. I'm going to have to leave immediately after your talk though, to drive cross state. Hopefully we can catch up sometime next week, and celebrate your successful defense.
+
+Best,
+
+Tom
+
+### Response
+
+
+
 # Overlap of basis functions/AOs/MOs with comparison to SAPT
 
 ## Ramos-Cordoba/Lambrecht 2011
