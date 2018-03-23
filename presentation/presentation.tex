@@ -40,6 +40,7 @@
     }
 }
 
+\usepackage[export]{adjustbox}
 \usepackage{booktabs}
 \usepackage{braket}
 \usepackage{caption}
@@ -147,7 +148,7 @@
   \begin{table}
     \centering
     \begin{tabulary}{1.00\linewidth}{CCCC}
-      \includegraphics[scale=1.00]{./figures/lewis_C4C1im.pdf} & \includegraphics[scale=1.00]{./figures/lewis_BF4.pdf} & \includegraphics[scale=1.00]{./figures/lewis_DCA.pdf} & \includegraphics[scale=1.00]{./figures/lewis_PF6.pdf} \\
+      \includegraphics[scale=1.00,frame]{./figures/lewis_C4C1im.pdf} & \includegraphics[scale=1.00]{./figures/lewis_BF4.pdf} & \includegraphics[scale=1.00]{./figures/lewis_DCA.pdf} & \includegraphics[scale=1.00]{./figures/lewis_PF6.pdf} \\
       \ce{[C4C1im]+} & \ce{[BF4]-} & \ce{[DCA]-} & \ce{[PF6]-} \\
       \includegraphics[scale=1.00]{./figures/lewis_SCN.pdf} & \includegraphics[scale=1.00]{./figures/lewis_TFA.pdf} & \includegraphics[scale=1.00]{./figures/lewis_Tf2N.pdf} & \includegraphics[scale=1.00]{./figures/lewis_TfO.pdf} \\
       \ce{[SCN]-} & \ce{[TFA]-} & \ce{[Tf2N]-} & \ce{[TfO]-}
@@ -280,7 +281,7 @@
   \note[item]{Intermediate wavefunction!}
   \note[item]{Can move on the ALMO potential energy surface}
   \note[item]{Explanation of Pauli repulsion, signs of terms}
-  For two arbitrary fragments A and B (such as a \ce{CO2} molecule and a combined IL cation and anion), construct \alert{absolutely localized molecular orbitals} (ALMOs) on each fragment, then perform projected SCF for molecular interactions, SCF(MI):
+  For two arbitrary fragments A and B (such as a \ce{CO2} molecule and a combined IL pair), construct \alert{absolutely localized molecular orbitals} (ALMOs) on each fragment, then perform projected SCF for molecular interactions, SCF(MI):
   \begin{table}
     \centering
     \begin{tabular}{ccc}
@@ -331,41 +332,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Problem: the approach for decomposing vibrational frequencies is not generally applicable to other properties}
-  \note[item]{What's the value of spectroscopy decomposition?}
-  \note[item]{Want the ability to build structure-spectra relationships for any type of spectroscopy, leading to spectra-property relationships}
-  Originally based on numerical differentiation using finite difference. Starting from a perturbation expansion
-  \begin{equation*}
-    \label{eq:maclaurin-expansion}
-    \begin{aligned}
-      E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = 0} \cdot P^{n} \\
-      % &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\
-      &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \dots,
-    \end{aligned}
-  \end{equation*}
-  if the perturbation is an applied electric field \(\mathbf{F}\),
-  \begin{equation*}
-    \label{eq:electric-field-expansion}
-    E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
-  \end{equation*}
-  a component of the polarizability from 1st-order finite difference is
-  \begin{equation*}
-    \label{eq:finite-difference-polarizability}
-    \alpha_{xz}(h_{x}) = \frac{\mu_{z}(\frac{1}{2}h_{x}) - \mu_{z}(\frac{1}{2}h_{x})}{h_{x}}.
-  \end{equation*}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Numerical differentiation can give unphysical results}
-  \note[item]{One example why the original approach is not generally applicable...}
-  \note[item]{One problem with numerical differentiation is...}
-  \note[item]{Mention other issues with numerical differentiation}
-  \begin{nscenter}
-    \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
-  \end{nscenter}
-\end{frame}
-
-\begin{frame}
   \frametitle{Spectroscopic properties are directly connected to energy derivatives}
   \begin{nscenter}
     \scriptsize
@@ -398,6 +364,41 @@
       ... & ... \\
       \bottomrule
     \end{tabulary}
+  \end{nscenter}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Problem: the approach for decomposing vibrational frequencies is not generally applicable to other properties}
+  \note[item]{What's the value of spectroscopy decomposition?}
+  \note[item]{Want the ability to build structure-spectra relationships for any type of spectroscopy, leading to spectra-property relationships}
+  Originally based on numerical differentiation using finite difference. Starting from a perturbation expansion
+  \begin{equation*}
+    \label{eq:maclaurin-expansion}
+    \begin{aligned}
+      E(P) &= \sum_{n = 0}^{\infty} \frac{1}{n!} \left. \frac{\partial^{n} E}{\partial P^{n}} \right|_{P = 0} \cdot P^{n} \\
+      % &= \sum_{n = 0}^{\infty} \frac{1}{n!} E^{(n)} \cdot P^{n} \\
+      &= E^{(0)} + E^{(1)} \cdot P + \frac{1}{2} E^{(2)} \cdot P^{2} + \frac{1}{6} E^{(3)} \cdot P^{3} + \dots,
+    \end{aligned}
+  \end{equation*}
+  if the perturbation is an applied electric field \(\mathbf{F}\),
+  \begin{equation*}
+    \label{eq:electric-field-expansion}
+    E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
+  \end{equation*}
+  a component of the polarizability from 1st-order finite difference is
+  \begin{equation*}
+    \label{eq:finite-difference-polarizability}
+    \alpha_{xz}(h_{x}) = \frac{\mu_{z}(\frac{1}{2}h_{x}) - \mu_{z}(\frac{1}{2}h_{x})}{h_{x}}.
+  \end{equation*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Numerical differentiation can give unphysical results}
+  \note[item]{One example why the original approach is not generally applicable...}
+  \note[item]{One problem with numerical differentiation is...}
+  \note[item]{Mention other issues with numerical differentiation}
+  \begin{nscenter}
+    \includegraphics[width=\linewidth,keepaspectratio]{../diff_overlay2.pdf}
   \end{nscenter}
 \end{frame}
 
@@ -458,11 +459,11 @@
   \end{equation*}
   In computable form,
   \begin{equation*}
-    \braket{\braket{\hat{P}_{\alpha};\hat{Q}_{\beta}}}_{\omega_{Q}} = - \vect{P}_{\alpha}^{\dagger} \vect{G}^{-1} \vect{Q}_{\beta}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = - \vect{P}^{\dagger} \vect{G}^{-1} \vect{Q}
   \end{equation*}
   where
   \begin{equation*}
-    (\vect{P}_{\alpha})_{ia} = -2 \braket{ i | \hat{P}_{\alpha} | a }
+    (\vect{P})_{ia} = -2 \braket{ i | \hat{P} | a }
   \end{equation*}
   is a vector of property integrals in the occupied-virtual MO basis and \(\vect{G}^{-1}\) is the inverted \emph{orbital} Hessian. The key step is forming the response vector
   \begin{equation*}
@@ -478,7 +479,7 @@
   \begin{table}
     \centering
     \begin{tabular}{ll}
-      Static response: & \(\braket{\braket{\hat{P};\hat{Q}}}_{0} = -(\vect{P})_{\textcolor{red}{ia}}(\vect{Q})_{\textcolor{red}{ia}}\) \\
+      Linear response: & \(\braket{\braket{\hat{P};\hat{Q}}}_{0} = -(\vect{P})_{\textcolor{red}{ia}}(\vect{X}^{\hat{Q}})_{\textcolor{red}{ia}}\) \\
       Response vector update: & \((\vect{X})_{ia} = (\vect{E}^{-1})_{ia,\textcolor{red}{jb}} \left[ (\vect{Q})_{\textcolor{red}{jb}} - (\vect{R})_{\textcolor{red}{jb}} \right]\)
     \end{tabular}
   \end{table}
@@ -624,12 +625,11 @@
 \begin{frame}
   \frametitle{Future extensions}
   \begin{itemize}
-  \item Geometric perturbations: applications for piezoelectric materials
+  \item Geometric perturbations: applications for piezoelectric materials, \dots
   \item Frozen interaction in \libresponse{}
   \item Incorporate dispersion via 2nd-generation ALMO-EDA
   \item Non-linear response: \(\beta(-(\omega_{1}+\omega_{2});\omega_{1},\omega_{2})\) is from quadratic response, \(\gamma(-(\omega_{1}+\omega_{2}+\omega_{3});\omega_{1},\omega_{2},\omega_{3})\) is from cubic response, \dots
   \item ALMO/SCF(MI) in \pfn{}
-  \item Second-order polarization propagator approximation (SOPPA) in \pfn{}
   \item \dots
   \end{itemize}
 \end{frame}
