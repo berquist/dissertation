@@ -727,7 +727,8 @@
 \begin{frame}
   \frametitle{Implementation: working equations (RHF)}
   \begin{align*}
-    \Delta_{ia} &= \epsilon_{a} - \epsilon_{i} \\
+    \Delta_{ia} &= \epsilon_{a} - \epsilon_{i} \tag{for orthogonal MOs}\\
+    E_{ia,jb} &= F_{ab}S_{ij} - F_{ij}S_{ab} \tag{for nonorthogonal MOs}\\
     A_{ia,jb}^{s} &= \Delta_{ia}\delta_{ia,jb} + 2(ia|jb) - (ij|ab) \\
     B_{ia,jb}^{s} &= 2(ia|jb) - (ib|ja) \\
     A_{ia,jb}^{t} &= \Delta_{ia}\delta_{ia,jb} - (ij|ab) \\
