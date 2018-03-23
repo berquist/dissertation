@@ -49,6 +49,16 @@
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{minted}
+\setminted{%
+  autogobble=false,%
+  breaklines=true,%
+  fontsize=\footnotesize,%
+  frame=none,%
+  linenos=true,%
+  mathescape=true,%
+  python3=true,%
+  texcomments=false,%
+}
 \usepackage[version=4]{mhchem}
 \newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
 \usepackage[%
@@ -472,7 +482,7 @@
       Response vector update: & \((\vect{X})_{ia} = (\vect{E}^{-1})_{ia,\textcolor{red}{jb}} \left[ (\vect{Q})_{\textcolor{red}{jb}} - (\vect{R})_{\textcolor{red}{jb}} \right]\)
     \end{tabular}
   \end{table}
-  Work with the response vector in a similar fashion to the Hamiltonian:
+  Work with the blocked response vector in a similar fashion to the Hamiltonian:
   \begin{table}
     \centering
     \begin{tabular}{ccc}
@@ -480,6 +490,27 @@
       frozen interaction & polarization & charge transfer \\
       \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H} (\vect{1} - \vect{\sigma})\) & \(\vect{H}\) \\
       \((\vect{1} - \vect{\sigma})^{\dagger} \vect{X}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{X} (\vect{1} - \vect{\sigma})\) & \(\vect{X}\)
+    \end{tabular}
+  \end{table}
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) identifies which fragments are important for charge transfer}
+  \begin{table}
+    \centering
+    \begin{tabular}{ccc}
+      \includegraphics[scale=0.30]{./figures/block_1.pdf} & \includegraphics[scale=0.30]{./figures/block_2.pdf} & \includegraphics[scale=0.30]{./figures/block_3.pdf} \\
+      frozen interaction & polarization & charge transfer \\
+      \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{H} (\vect{1} - \vect{\sigma})\) & \(\vect{H}\) \\
+      \((\vect{1} - \vect{\sigma})^{\dagger} \vect{X}^{(0)} (\vect{1} - \vect{\sigma})\) & \((\vect{1} - \vect{\sigma})^{\dagger} \vect{X} (\vect{1} - \vect{\sigma})\) & \(\vect{X}\)
+    \end{tabular}
+  \end{table}
+  Selectively allow charge transfer from a single fragment to all others:
+  \begin{table}
+    \centering
+    \begin{tabular}{cc}
+      \includegraphics[scale=0.30]{./figures/block_ab_0.pdf} & \includegraphics[scale=0.30]{./figures/block_ba_0.pdf} \\
+      frz + pol + CT(A \(\rightarrow\) all) & frz + pol + CT(B\(\rightarrow\) all)
     \end{tabular}
   \end{table}
 \end{frame}
@@ -497,6 +528,11 @@
     \alpha_{rs} = - \braket{\braket{\hat{\mu}_{r};\hat{\mu}_{s}}}_{0}
   \end{equation*}
   The test system is the argon\textemdash{}lithium cation dimer, \arlidimer{}.
+  \begin{figure}
+    \centering
+    \includegraphics[scale=0.15]{./figures/Qchem-logo.png}
+  \end{figure}
+  \nmfootfullcite{Berquist2018}
 \end{frame}
 
 \begin{frame}
@@ -526,7 +562,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{LR(MI) identifies which fragments are important for charge transfer}
+  \frametitle{LR(MI) confirms charge transfer is more significant from argon than lithium}
   \begin{nscenter}
     \includegraphics[scale=0.70]{./figures/bar_virtual_combined.pdf}
   \end{nscenter}
@@ -578,19 +614,20 @@
 
 \begin{frame}
   \frametitle{\pfn{} is welcoming to external contributors}
-  \begin{nscenter}
-    \includegraphics[scale=0.20]{./figures/psi4numpy_github.png}
+  \begin{nscenter} % < 0.20
+    \includegraphics[width=\linewidth,keepaspectratio]{./figures/psi4numpy_github.png}
     {\scriptsize \url{https://github.com/psi4/psi4numpy/}}
   \end{nscenter}
+  \nmfootfullcite{Smith2018}
 \end{frame}
 
 \begin{frame}
   \frametitle{Future extensions}
   \begin{itemize}
+  \item Geometric perturbations: applications for piezoelectric materials
   \item Frozen interaction in \libresponse{}
   \item Incorporate dispersion via 2nd-generation ALMO-EDA
   \item Non-linear response: \(\beta(-(\omega_{1}+\omega_{2});\omega_{1},\omega_{2})\) is from quadratic response, \(\gamma(-(\omega_{1}+\omega_{2}+\omega_{3});\omega_{1},\omega_{2},\omega_{3})\) is from cubic response, \dots
-  \item Automatic response equation generation followed by code generation: symengine, SymPy, \dots
   \item ALMO/SCF(MI) in \pfn{}
   \item Second-order polarization propagator approximation (SOPPA) in \pfn{}
   \item \dots
@@ -686,11 +723,235 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{LR(MI) is BSSE-free by construction}
+  \frametitle{Implementation: working equations (RHF)}
+  \begin{align*}
+    \Delta_{ia} &= \epsilon_{a} - \epsilon_{i} \\
+    A_{ia,jb}^{s} &= \Delta_{ia}\delta_{ia,jb} + 2(ia|jb) - (ij|ab) \\
+    B_{ia,jb}^{s} &= 2(ia|jb) - (ib|ja) \\
+    A_{ia,jb}^{t} &= \Delta_{ia}\delta_{ia,jb} - (ij|ab) \\
+    B_{ia,jb}^{t} &= - (ib|ja) \\
+    ^{\text{RR}}\vect{G}^{uu} &= (\vect{A}^{u} + \vect{B}^{u}) \\
+    ^{\text{II}}\vect{G}^{uu} &= (\vect{A}^{u} - \vect{B}^{u})
+  \end{align*}
   \scriptsize
+  \begin{itemize}
+  \item \(\vect{G}\) gives orbital rotation Hessians, equivalen to the random phase approximation (RPA) equations \\
+  \item R, I: real, imaginary perturbations \(\rightarrow\) electric and magnetic Hessians \\
+  \item setting \(\vect{B} = \vect{0}\) gives the Tamm-Dancoff approximation (TDA) \\
+  \item setting \( G_{ia,jb} = \Delta_{ia}\delta_{ia,jb} \) gives uncoupled Hartree-Fock \\
+  \item \(s,t\): singlet (spin-conserving) and triplet (altering) operators \\
+  \item \(i,j\): occupied MOs, \(a,b\): virtual MOs
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{libresponse implementation: AO-direct algorithm}
+  Rather than explicitly forming \(G_{ia,jb}\), inverting it, and contracting with \(Q_{jb}\) to form the response vector \(X_{ia}\), the solution is found iteratively (example is RPA/singlet):
   \begin{equation*}
-    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
-    \label{eq:bsse-corrected-polarizability}
+    X_{ia}^{(\zeta+1)} \leftarrow \frac{Q_{jb} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}}{\Delta_{ia}}
+  \end{equation*}
+  The uncoupled result comes from the initial guess, when \(X_{ia}^{(0)} = 0\):
+  \begin{equation*}
+    X_{ia}^{(1)} = \frac{Q_{ia}}{\Delta_{ia}}
+  \end{equation*}
+  Convergence is usually accelerated with CG, DIIS, ...
+\end{frame}
+
+\begin{frame}
+  \frametitle{libresponse implementation: AO-direct algorithm}
+  \scriptsize
+  The key step in each iteration is forming the matrix-vector product
+  \begin{equation*}
+    (\vect{A}+\vect{B})_{ia,jb}X_{jb} = \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}
+  \end{equation*}
+  which is found through back-transforming to the AO basis, starting from the generalized density:
+  \begin{equation*}
+    D_{\lambda\sigma}^{X} \equiv C_{\lambda j} X_{jb} C_{\sigma b}
+  \end{equation*}
+  which is contracted with two-electron integrals formed either exactly or through approximate methods (RI, ...):
+  \begin{align*}
+    (\vect{A}+\vect{B})_{ia,jb}X_{jb} &= C_{\mu i} \left\{ 4(\mu\nu|\lambda\sigma)D_{\lambda\sigma}^{X} - (\mu\lambda|\nu\sigma)D_{\lambda\sigma}^{X} - (\mu\sigma|\lambda\nu)D_{\lambda\sigma}^{X} \right\} C_{\nu a} \\
+    &= C_{\mu i} \left\{ 4J_{\mu\nu}^{X} - K_{\mu\nu}^{X} - K_{\nu\mu}^{X} \right\} C_{\nu a}
+  \end{align*}
+  In \texttt{libint}, this is \texttt{JobNum = 30}.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{libresponse/Q-Chem implementation: library usage}
+  \texttt{responseman} is a thin wrapper around \texttt{libresponse}, and is not meant to calculate final properties (similar to \texttt{**RESPONSE} vs. \texttt{**PROPERTIES} in DALTON). \\
+  \begin{minted}[autogobble]{c++}
+void solve_linear_response(
+    arma::cube &results,
+    MatVec_i *matvec,
+    SolverIterator_nonorthogonal *solver_iterator,
+    const arma::cube &C,
+    const arma::umat &fragment_occupations,
+    const arma::uvec &occupations,
+    const arma::cube &F,
+    const arma::mat &S,
+    const std::vector<double> &omega,
+    std::vector<operator_spec> &operators,
+    const configurable &cfg
+    );
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{libresponse/Q-Chem implementation: integral engine}
+  \scriptsize
+  \begin{minted}[linenos,gobble=0,mathescape]{c++}
+if (ints_engine == "libfock" || ints_engine == "both") {
+    matvec_libfock = new MatVec_libfock();
+    libqints::basis_1e1c_cgto<double> b1;
+    libqints::qchem::bagen_1e1c_cgto_qchem(b1);
+    matvec_libfock->init(b1, mem_mb);
+    matvec = matvec_libfock;
+} else if (ints_engine == "qchem" || ints_engine == "both") {
+    matvec_qchem = new MatVec_qchem();
+    matvec_qchem->init();
+    matvec = matvec_qchem;
+} else
+    ...
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{libresponse/Q-Chem current capabilities}
+  QC methods:
+  \begin{itemize}
+  \item RHF, UHF references \(\rightarrow\) DALTON is ROHF, is this the first true general UHF linear response code?
+  \item All SCF-based methods excluding perturbative corrections (no double-hybrid DFT)
+  \end{itemize}
+  Operators (\texttt{libint}):
+  \begin{itemize}
+  \item dipole (length), quadrupole at arbitrary origin
+  \item Fermi contact at nuclear positions
+  \item dipole velocity/linear momentum
+  \item angular momentum at arbitrary origin
+  \item one-electron spin-orbit over all nuclei w/ arbitrary charges
+  \item arbitrary-order electric field multipoles at arbitrary origin
+  \item spin dipole at nuclear positions
+  \end{itemize}
+  Properties via \texttt{responseman}:
+  \begin{itemize}
+  \item static polarizability
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{libresponse/Q-Chem planned capabilities}
+  \begin{itemize}
+  \item Convergence acceleration beyond DIIS
+  \item Density functionals with nonlocal dispersion
+  \item Operators: two-electron spin-orbit
+  \item time-dependent/dynamic properties
+  \item residues \(\rightarrow\) transition moments
+    \begin{equation*}
+      \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
+    \end{equation*}
+  \item complex response via \texttt{gen\_scfman}
+    \begin{equation*}
+    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = \sum_{n>0} \left[ \frac{\braket{0|\hat{P}|n}\braket{n|\hat{Q}|0}}{\omega_{n0} - \omega_{Q} - i\gamma_{n0}} + \frac{\braket{0|\hat{Q}|n}\braket{n|\hat{P}|0}}{\omega_{n0} + \omega_{Q} + i\gamma_{n0}} \right]
+    \end{equation*}
+  \item quadratic response \(\braket{\braket{\hat{P};\hat{Q},\hat{R}}}_{\omega_{Q},\omega_{R}}\)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{minted}[gobble=4]{python}
+    def solve_dynamic_iterative(self, omega=0.0, maxiter=20, conv=1.e-9, use_diis=True):
+
+        # Init JK object
+        jk = psi4.core.JK.build(self.scf_wfn.basisset())
+        jk.initialize()
+
+        # Add blank matrices to the JK object and NumPy hooks to
+        # C_right; there are 6 sets of matrices to account for X and Y
+        # vectors separately.
+        npC_right = []
+        for xyz in range(6):
+            jk.C_left_add(self.Co)
+            mC = psi4.core.Matrix(self.nbf, self.nocc)
+            npC_right.append(np.asarray(mC))
+            jk.C_right_add(mC)
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Psi4NumPy reference implementation is ``pseudocode'' that exactly mirrors the response equations}
+  \begin{minted}[gobble=4]{python}
+        # Build initial guess, previous vectors, diis object, and C_left updates
+        x_l, x_r = [], []
+        x_l_old, x_r_old = [], []
+        diis_l, diis_r = [], []
+        ia_denom_l = self.epsilon[self.nocc:] - self.epsilon[:self.nocc].reshape(-1, 1) - omega
+        ia_denom_r = self.epsilon[self.nocc:] - self.epsilon[:self.nocc].reshape(-1, 1) + omega
+        for xyz in range(3):
+            x_l.append(self.dipoles_xyz[xyz] / ia_denom_l)
+            x_r.append(self.dipoles_xyz[xyz] / ia_denom_r)
+            x_l_old.append(np.zeros(ia_denom_l.shape))
+            x_r_old.append(np.zeros(ia_denom_r.shape))
+  \end{minted}
+  \begin{align*}
+    X_{ia}^{\text{left};(0)} &= Q_{ia} / (E_{a} - E_{i} - \omega) \\
+    X_{ia}^{\text{right};(0)} &= Q_{ia} / (E_{a} - E_{i} + \omega)
+  \end{align*}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Psi4NumPy: iterative static linear response}
+  \begin{minted}[gobble=4]{python}
+        for CPHF_ITER in range(1, maxiter + 1):
+
+            # Update jk's C_right
+            for xyz in range(3):
+                npC_right[xyz][:] = Cv.dot(self.x[xyz].T)
+
+            # Compute JK objects
+            jk.compute()
+
+            # Update amplitudes
+            for xyz in range(3):
+                # Build J and K objects
+                J = np.asarray(jk.J()[xyz])
+                K = np.asarray(jk.K()[xyz])
+
+                # Bulid new guess
+                X = self.dipoles_xyz[xyz].copy()
+                X -= (Co.T).dot(4 * J - K.T - K).dot(Cv)
+                X /= ia_denom
+  \end{minted}
+  \begin{equation*}
+    X_{ia}^{(\zeta+1)} \leftarrow \frac{Q_{jb} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}}{\Delta_{ia}}
+  \end{equation*}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Psi4NumPy: iterative dynamic linear response}
+  \begin{minted}[gobble=4]{python}
+        for CPHF_ITER in range(1, maxiter + 1):
+            # Update jk's C_right; ordering is Xx, Xy, Xz, Yx, Yy, Yz
+            for xyz in range(3):
+                npC_right[xyz][:] = Cv.dot(x_l[xyz].T)
+                npC_right[xyz + 3][:] = Cv.dot(x_r[xyz].T)
+
+            # Perform generalized J/K build
+            jk.compute()
+
+            # Update amplitudes
+            for xyz in range(3):
+                # Build J and K objects
+                J_l = np.asarray(jk.J()[xyz]); J_r = np.asarray(jk.J()[xyz + 3])
+                K_l = np.asarray(jk.K()[xyz]); K_r = np.asarray(jk.K()[xyz + 3])
+
+                # Bulid new guess
+                X_l = self.dipoles_xyz[xyz].copy(); X_r = self.dipoles_xyz[xyz].copy()
+                X_l -= (Co.T).dot(2 * J_l - K_l).dot(Cv)
+                X_r -= (Co.T).dot(2 * J_r - K_r).dot(Cv)
+                X_l /= ia_denom_l; X_r /= ia_denom_r
+  \end{minted}
+  \begin{equation*}
+    X_{ia}^{(\zeta+1)} \leftarrow \frac{Q_{jb} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}}{\Delta_{ia}}
   \end{equation*}
 \end{frame}
 
@@ -714,6 +975,31 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{LR(MI) is BSSE-free by construction: def2-SVP}
+  \begin{nscenter}
+    \includegraphics[scale=0.50]{./figures/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVP.pdf}
+  \end{nscenter}
+  \scriptsize
+  \begin{equation*}
+    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
+  \end{equation*}
+  HF/def2-SVP
+\end{frame}
+
+\begin{frame}
+  \frametitle{LR(MI) is BSSE-free by construction: def2-SVPD}
+  \begin{nscenter}
+    \includegraphics[scale=0.50]{./figures/almo_vs_bsse_canonical_onaxis_projected_short_def2-SVPD.pdf}
+  \end{nscenter}
+  \scriptsize
+  \begin{equation*}
+    \alpha^{\text{BSSE-corrected}} = \alpha^{AB}(AB) - \left[ \left( \alpha^{A}(AB) - \alpha^{A}(A) \right) + \left( \alpha^{B}(AB) - \alpha^{B}(B) \right) \right]
+  \end{equation*}
+  HF/def2-SVPD
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polarizability at short distance, def2-SVP}
   \begin{figure}
     \centering
     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVP.pdf}
@@ -722,14 +1008,7 @@
 \end{frame}
 
 \begin{frame}
-  \begin{figure}
-    \centering
-    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
-    \caption*{\arlidimer{}, HF/def2-SVP}
-  \end{figure}
-\end{frame}
-
-\begin{frame}
+  \frametitle{Polarizability at short distance, def2-SVPD}
   \begin{figure}
     \centering
     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_short_def2-SVPD.pdf}
@@ -738,154 +1017,21 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Polarizability at long distance, def2-SVP}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVP.pdf}
+    \caption*{\arlidimer{}, HF/def2-SVP}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Polarizability at long distance, def2-SVPD}
   \begin{figure}
     \centering
     \includegraphics[width=\linewidth,keepaspectratio]{../paper_04/polar_onaxis_projected_long_def2-SVPD.pdf}
     \caption*{\arlidimer{}, HF/def2-SVPD}
   \end{figure}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Implementation: working equations (RHF)}
-  \begin{align*}
-    \Delta_{ia} &= \epsilon_{a} - \epsilon_{i} \\
-    A_{ia,jb}^{s} &= \Delta_{ia}\delta_{ia,jb} + 2(ia|jb) - (ij|ab) \\
-    B_{ia,jb}^{s} &= 2(ia|jb) - (ib|ja) \\
-    A_{ia,jb}^{t} &= \Delta_{ia}\delta_{ia,jb} - (ij|ab) \\
-    B_{ia,jb}^{t} &= - (ib|ja) \\
-    ^{\text{RR}}\vect{G}^{uu} &= (\vect{A}^{u} + \vect{B}^{u}) \\
-    ^{\text{II}}\vect{G}^{uu} &= (\vect{A}^{u} - \vect{B}^{u})
-  \end{align*}
-  \scriptsize
-  \begin{itemize}
-  \item \(\vect{G}\) gives orbital rotation Hessians, equivalen to the random phase approximation (RPA) equations \\
-  \item R, I: real, imaginary perturbations \(\rightarrow\) electric and magnetic Hessians \\
-  \item setting \(\vect{B} = \vect{0}\) gives the Tamm-Dancoff approximation (TDA) \\
-  \item setting \( G_{ia,jb} = \Delta_{ia}\delta_{ia,jb} \) gives uncoupled Hartree-Fock \\
-  \item \(s,t\): singlet (spin-conserving) and triplet (altering) operators \\
-  \item \(i,j\): occupied MOs, \(a,b\): virtual MOs
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Implementation: AO-direct algorithm}
-  Rather than explicitly forming \(G_{ia,jb}\), inverting it, and contracting with \(Q_{jb}\) to form the response vector \(X_{ia}\), the solution is found iteratively (example is RPA/singlet):
-  \begin{equation*}
-    X_{ia}^{(\zeta+1)} \leftarrow \frac{Q_{jb} - \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}}{\Delta_{ia}}
-  \end{equation*}
-  The uncoupled result comes from the initial guess, when \(X_{ia}^{(0)} = 0\):
-  \begin{equation*}
-    X_{ia}^{(1)} = \frac{Q_{ia}}{\Delta_{ia}}
-  \end{equation*}
-  Convergence is usually accelerated with CG, DIIS, ...
-\end{frame}
-
-\begin{frame}
-  \frametitle{Implementation: AO-direct algorithm}
-  \scriptsize
-  The key step in each iteration is forming the matrix-vector product
-  \begin{equation*}
-    (\vect{A}+\vect{B})_{ia,jb}X_{jb} = \left[4(ia|jb) - (ij|ab) - (ib|ja)\right] X_{jb}^{(\zeta)}
-  \end{equation*}
-  which is found through back-transforming to the AO basis, starting from the generalized density:
-  \begin{equation*}
-    D_{\lambda\sigma}^{X} \equiv C_{\lambda j} X_{jb} C_{\sigma b}
-  \end{equation*}
-  which is contracted with two-electron integrals formed either exactly or through approximate methods (RI, ...):
-  \begin{align*}
-    (\vect{A}+\vect{B})_{ia,jb}X_{jb} &= C_{\mu i} \left\{ 4(\mu\nu|\lambda\sigma)D_{\lambda\sigma}^{X} - (\mu\lambda|\nu\sigma)D_{\lambda\sigma}^{X} - (\mu\sigma|\lambda\nu)D_{\lambda\sigma}^{X} \right\} C_{\nu a} \\
-    &= C_{\mu i} \left\{ 4J_{\mu\nu}^{X} - K_{\mu\nu}^{X} - K_{\nu\mu}^{X} \right\} C_{\nu a}
-  \end{align*}
-  In \texttt{libint}, this is \texttt{JobNum = 30}.
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Implementation: library usage}
-  \texttt{responseman} is a thin wrapper around \texttt{libresponse}, and is not meant to calculate final properties (similar to \texttt{**RESPONSE} vs. \texttt{**PROPERTIES} in DALTON). \\
-  \begin{minted}[linenos,gobble=0,mathescape]{c++}
-    void solve_linear_response(
-        arma::cube &results,
-        MatVec_i *matvec,
-        arma::cube &C,
-        arma::mat &moene,
-        arma::uvec &occupations,
-        std::vector<double> &omega,
-        arma::cube &V,
-        std::vector<int> &b_prefactors,
-        libresponse::configurable &cfg
-    );
-  \end{minted}
-\end{frame}
-
-\begin{frame}[fragile]
-  \frametitle{Implementation: integral engine}
-  \scriptsize
-  \begin{minted}[linenos,gobble=0,mathescape]{c++}
-if (ints_engine == "libfock" || ints_engine == "both") {
-    matvec_libfock = new MatVec_libfock();
-    libqints::basis_1e1c_cgto<double> b1;
-    libqints::qchem::bagen_1e1c_cgto_qchem(b1);
-    matvec_libfock->init(b1, mem_mb);
-    matvec = matvec_libfock;
-} else if (ints_engine == "qchem" || ints_engine == "both") {
-    matvec_qchem = new MatVec_qchem();
-    matvec_qchem->init();
-    matvec = matvec_qchem;
-} else
-    ...
-  \end{minted}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Hardware and software}
-  \begin{itemize}
-  \item CPU: Intel Xeon E5-2670 (Sandy Bridge), 2.60 GHz, 16 cores
-  \item DALTON 2015.0; Intel 2013.0
-  \item ORCA 3.0.3
-  \item Q-Chem \texttt{branches/libresponse r21370} with \texttt{libresponse r72}, \texttt{libqints r1058}, \texttt{libfock r198}; Intel 2015.1
-  \item \texttt{scf\_convergence = 9}, \texttt{thresh = 12}, \texttt{cpscf\_max\_error\_norm = 14}
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Current capabilities}
-  QC methods:
-  \begin{itemize}
-  \item RHF, UHF references \(\rightarrow\) DALTON is ROHF, is this the first true general UHF linear response code?
-  \item Hartree-Fock via \texttt{libfock/libqints} or \texttt{libint}
-  \end{itemize}
-  Operators (\texttt{libint}):
-  \begin{itemize}
-  \item dipole (length), quadrupole at arbitrary origin
-  \item Fermi contact at nuclear positions
-  \item dipole velocity/linear momentum
-  \item angular momentum at arbitrary origin
-  \item one-electron spin-orbit over all nuclei w/ arbitrary charges
-  \end{itemize}
-  Properties via \texttt{responseman}:
-  \begin{itemize}
-  \item static polarizability
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
-  \frametitle{Planned capabilities}
-  \begin{itemize}
-  \item Convergence acceleration (DIIS via \texttt{libsolve})
-  \item DFT via \texttt{libint/dftman} \(\rightarrow\) all functionals should work
-  \item Operators: two-electron spin-orbit, arbitrary-order electric field multipoles at arbitrary origin, spin dipole at nuclear positions
-  \item time-dependent/dynamic properties
-  \item residues \(\rightarrow\) transition moments
-    \begin{equation*}
-      \lim_{\omega_{1} \to \omega_{n0}} (\omega_{n0} - \omega_{1}) \braket{\braket{\hat{P};\hat{Q}^{\omega_{1}}}} = \braket{0|\hat{P}|n} \braket{n|\hat{Q}^{\omega_{1}}|0}
-    \end{equation*}
-  \item complex response via \texttt{gen\_scfman}
-    \begin{equation*}
-    \braket{\braket{\hat{P};\hat{Q}}}_{\omega_{Q}} = \sum_{n>0} \left[ \frac{\braket{0|\hat{P}|n}\braket{n|\hat{Q}|0}}{\omega_{n} - \omega_{Q} - i\gamma_{n0}} + \frac{\braket{0|\hat{Q}|n}\braket{n|\hat{P}|0}}{\omega_{n} + \omega_{Q} + i\gamma_{n0}} \right]
-    \end{equation*}
-  \item quadratic response \(\braket{\braket{\hat{P};\hat{Q},\hat{R}}}_{\omega_{Q},\omega_{R}}\)
-  \item ALMO...
-  \end{itemize}
 \end{frame}
 
 \immediate\closeout\tempfile

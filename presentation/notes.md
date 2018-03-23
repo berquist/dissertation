@@ -30,8 +30,8 @@ Slide 20
 - [x] ALMO definition -> MO of only 1 fragment
 
 Slide 23
-- [ ] get rid of derivative table
-- [ ] move other table forward?
+- [x] get rid of derivative table
+- [x] move other table forward?
 
 ## Dan
 
@@ -39,37 +39,37 @@ Slide 23
 
 ## Tom
 
-- [ ] major spectroscopic challenge -- inhomogeneous environments
+- [x] major spectroscopic challenge -- inhomogeneous environments
 - [x] **suggestion: assertion-evidence style**
-- [ ] **give me more explanation on method**
+- [x] **give me more explanation on method**
 - [x] "not excited states, just looking at polarizability" -- this statement did not make sense to me
-- [ ] What is an IL? What makes it useful?
-- [ ] Why these ILs?
-- [ ] "Screening" -- how long does it take to run your calculation?
-- [ ] Suggest reordering slides to put some more method background first
+- [x] What is an IL? What makes it useful?
+- [x] Why these ILs?
+- [x] "Screening" -- how long does it take to run your calculation?
+- [x] Suggest reordering slides to put some more method background first
 - [x] slide 16: method? basis? very unclear
-- [ ] How did you do this? (ALMO EDA decomp) [you later went through this to some degree]
+- [x] How did you do this? (ALMO EDA decomp) [you later went through this to some degree]
 - [x] What's a COVP?
-- [ ] Did you ever define an ALMO?
+- [x] Did you ever define an ALMO?
 - [x] Do people know what a Linear Response is?
-- [ ] **What's the usefulness of being able to calculate any arbitrary linear response and decompose it like this?**
+- [x] **What's the usefulness of being able to calculate any arbitrary linear response and decompose it like this?**
 
 ## Notebook
 
 - [x] green CO2 spectrum color is too light
 - [x] why these ILs? experimentally studied/validated
-- [ ] switch from water dimer in ALMO-EDA example introduction with eqn/sums
-- [ ] Pauli repulsion antisymmetry
+- [x] switch from water dimer in ALMO-EDA example introduction with eqn/sums
+- [x] Pauli repulsion antisymmetry
 - [x] dipole-dipole ACF
 - [x] key statements on AIMD slide
-- [ ] mention earlier this will be turned into frequency decomp
-- [ ] overview slide
-- [ ] How is the frequen decom done <- separate slide
-- [ ] get rid of derivative table and move LR table earlier
-- [ ] separate ALMO + canonical result
+- [x] mention earlier this will be turned into frequency decomp
+- [x] overview slide
+- [x] How is the frequen decom done <- separate slide
+- [x] get rid of derivative table and move LR table earlier
+- [x] separate ALMO + canonical result
 - [ ] plots on same scale
-- [ ] long tail convergence slides <- move to main
-- [ ] overlap of wavefunctions ALMO tails
+- [x] long tail convergence slides <- move to main
+- [x] overlap of wavefunctions ALMO tails
 - [ ] differentiation b/w model systems -> choice of model
 - [ ] potential application _second_
 - [ ] single message for each slide + orientation text
@@ -93,7 +93,7 @@ Slide 23
 - [ ] Differences b/w spectra due to CT, not electrostatics
     - [ ] importance for CT-dependent properties such as electrocatalysis
     - [ ] (dis)prove importance of electrostatics such as in Start spectroscopy
-- [ ] E -> w -> <<P;Q>> after tables
+- [x] E -> w -> <<P;Q>> after tables
 - [ ] Empirical map for response property, determine importance of incorporating gd, pol, CT, disp, ...
 - [x] ~~Example: Static polarizability~~ Numerical benchmarks, mention _why_ static pol
     - [x] **well, why static pol?**
