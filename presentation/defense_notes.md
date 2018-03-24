@@ -1,0 +1,4 @@
+- large canceling effect maybe means that the separation of terms is invalid
+- polarization step is self-consistent density embedding
+- freeze and thaw for frozen interaction
+- polarization with attenuated Coulomb operator
