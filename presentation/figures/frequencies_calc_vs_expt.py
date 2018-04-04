@@ -148,9 +148,9 @@ def main_updated():
         'B3LYP-D3(BJ)/def2-SVP',
         'wB97X-D/def2-SVP',
         'wB97X-D/def2-TZVP',
-        # 'wB97X-D/def2-QZVP',
+        'wB97X-D/def2-QZVP',
         'wB97X-D3/def2-SVP',
-        # 'wB97X-D3/def2-QZVP',
+        'wB97X-D3/def2-QZVP',
     ]
     df = df.loc[method_order, :]
 
@@ -168,8 +168,16 @@ def main_updated():
         method, basis_set = method_basis_set.split('/')
         label = r'{}/{}'.format(method_map.get(method, method), basis_set)
         print(label)
-        print(row)
+        # print(row)
         marker = next(markers)
+
+        # shift everything down so that BF4 is equal with
+        # B3LYP/6-31G(d,p)
+        offset = row['BF4'] - df.loc['B3LYP/6-31G(d,p)', 'BF4']
+        print('offset: {:.2f}'.format(offset))
+        # print(row - offset)
+        row -= offset
+
         ax.plot(ticks,
                 row,
                 marker=marker,
@@ -178,11 +186,11 @@ def main_updated():
 
     ax.tick_params(direction='out', top=False, right=False, labelsize='large')
     ax.set_xlabel('ionic liquid anion', fontsize='x-large')
-    ax.set_ylabel(r'$\nu_{3}$ frequency [unscaled] ($\si{\wavenumber}$)', fontsize='x-large')
+    ax.set_ylabel(r'$\nu_{3}$ frequency [shifted down by B3LYP/6-31G(d,p) $\ce{[BF4]-}$] ($\si{\wavenumber}$)', fontsize='medium')
     ax.set_xlim((ticks[0], ticks[-1]))
     ax.set_xticklabels(labels)
 
-    ax.legend(loc='upper right', fancybox=True, framealpha=0.5, numpoints=1)
+    ax.legend(loc='upper right', fancybox=True, framealpha=0.5, numpoints=1, fontsize='small')
     fig.savefig('updated_methods.pdf', bbox_inches='tight')
 
     return df
