@@ -46,13 +46,15 @@
 \usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{braket}
-% \usepackage[%
-%     inline = true,%
-%     margin = false,%
-%     status = draft,%
-%     author =%
-% ]{fixme}
-% \fxusetheme{color}
+\usepackage[%
+    inline = true,%
+    margin = false,%
+    status = draft,%
+    author = EJB%
+]{fixme}
+\fxusetheme{colorsig}
+\FXRegisterAuthor{dsl}{adsl}{DSL}
+\FXRegisterAuthor{kdj}{akdj}{KDJ}
 \usepackage{graphicx}
 \usepackage{longtable}
 \usepackage{makecell}
@@ -152,18 +154,19 @@
 \tableofcontents
 \listoftables
 \listoffigures
+\listoffixmes
 %
 \preface
 \input{./preface}
 %
-\graphicspath{{introduction/}{paper_01/}{paper_02/}{paper_03/}{paper_04/}{paper_05/}}
+\graphicspath{{paper_01/}{paper_02/}{paper_03/}{paper_04/}{paper_05/}}
 \input{./introduction}
 \input{./paper_01/anions}
 \input{./paper_02/AbInitio_revised}
 \input{./paper_03/SpectroscopicMap}
-\input{./paper_04/ALMO_LR}
-\input{./paper_05/psi4numpy}
-\input{./other_contributions}
+% \input{./paper_04/ALMO_LR}
+% \input{./paper_05/psi4numpy}
+% \input{./other_contributions}
 %
 \printbibliography[title=\caps{Bibliography}]
 %

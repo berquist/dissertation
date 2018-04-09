@@ -64,7 +64,7 @@ preview = false,%
 \label{ch:introduction}
 \newcommand{\ks}{Kohn\textendash{}Sham}
 
-A great strength of quantum chemistry is that it enables construction of molecular models using the building blocks of chemical intuition, such as interactions between functional groups, which can in theory be correlated with any information present in the wavefunction. Furthermore, the ability to calculate spectroscopic parameters from wavefunctions makes it possible to connect the features of a molecular model with molecular properties. This is of paramount importance to experimental spectroscopy, where there is not always an obvious ``signature'' that connects features in complex molecular systems to a distinct spectroscopic response. As a result, it is often not possible to draw conclusions from experimental results without the aid of quantum chemical calculations.
+A great strength of quantum chemistry is that it enables construction of molecular models using the building blocks of chemical intuition, such as interactions between functional groups, that can in theory be correlated with any information present in the wavefunction. Furthermore, the ability to calculate spectroscopic parameters from wavefunctions makes it possible to connect the features of a molecular model with molecular properties. This is of paramount importance to experimental spectroscopy, where there is not always an obvious ``signature'' that connects features in complex molecular systems to a distinct spectroscopic response. As a result, it is often not possible to draw conclusions from experimental results without the aid of quantum chemical calculations.
 
 Finding correlation between molecular models and spectra is of great value, but there is also difficulty from the computational side in terms of identifying the \emph{correct} molecular models and \emph{why} they are correct in explaining experimental spectra. To form true structure-spectra relationships, the most desirable connection is through the building blocks of chemistry, functional groups, and identifying the impact of their interactions. A common approach in both the wet lab and computationally is to remove or modify functional groups in some systematic way, resulting in a qualitative connection between structural components and changes in spectra. The drawbacks of such chemical transformations are the inability to quantify the physics behind these chemically-intuitive changes, and potential side-effects of perturbing a molecular model's electronic and geometric structure due to cooperativity. One path to quantifying intermolecular interactions without such drastic chemical modifications is by fragmenting the system into groups of interest and decomposing their interaction energy into physically-motivated terms through a procedure called \emph{energy decomposition analysis} (EDA). If EDA can be applied to spectra prediction, then the underlying causes of spectral changes due to specific chemical motifs can be quantified. More importantly, spectra-property relationships can be formed, where changes in spectral response can be tied directly back to types of physical interactions, such as electrostatics, charge transfer, and dispersion.
 
@@ -74,20 +74,20 @@ The majority of this work presents applications of response theory to calculatin
 
 The remainder of this introduction will cover the basic language of molecular response theory and its connection to macroscopic spectroscopic observables, with examples of which observables are related to which microscopic terms (section~\ref{sec:connection-between-macroscopic-and-microscopic}). It will also cover more general cases of how those microscopic terms appear in different forms of derivation, all of which are related and give identical final answers. Specifically, a connection will be made between phenomenological Hamiltonians (section~\ref{ssec:phenomenological-approach}), series expansions (section~\ref{ssec:series-expansion}), energy derivatives (sections~\ref{ssec:derivative-evaluation},~\ref{ssec:finite-difference-for-numerical-derivatives},~and~\ref{ssec:analytic-derivative-theory}), perturbation theory (section~\ref{ssec:perturbation-theory}), and quasienergy derivatives (section~\ref{sec:dynamic-properties}), of which the latter two are appropriate for incorporation of time dependence, leading to dynamic properties.
 
-For more background literature on the theoretical development and applications of response theory to molecular properties, see reviews by Gauss\cite{gauss2000}, Neese\cite{NEESE2009526}, Norman\cite{C1CP21951K}, Helgaker\cite{doi:10.1021/cr2002239} and books by Szabo\cite{szabo1989modern}, McWeeny\cite{mcweeny1989methods}, Yamaguchi\cite{Yamaguchi1994}, and Barron\cite{barron2004molecular}.
+For more background literature on the theoretical development and applications of response theory to molecular properties, see reviews by Gauss\cite{gauss2000}, Neese\cite{NEESE2009526}, Norman\cite{C1CP21951K}, Helgaker\cite{doi:10.1021/cr2002239} and books by Szabo and Ostlund\cite{szabo1989modern}, McWeeny\cite{mcweeny1989methods}, Yamaguchi\cite{Yamaguchi1994}, and Barron\cite{barron2004molecular}.
 
 \section{\texorpdfstring{\caps{Terms and Fundamental Definitions}}{Terms and Fundamental Definitions}}
 \label{sec:terms-and-fundamental-definitions}
 
-Throughout the introduction and the remainder of this work, a number of terms appear and may seem to be used interchangeably. In quantum chemistry literature, the phrase \emph{molecular property} is used to denote any quantity that can be calculated from the wavefunction. By this definition, not all molecular properties are \emph{observables}, as they do not necessarily correspond to experimentally-measurable quantities. Such molecular properties may not also be uniquely defined. One of the most prominent examples of non-observable molecular properties is the calculation of atomic partial charges, with Mulliken and L{\"{o}}wdin population analyses being the two most commonly-known partitioning schemes for dividing the electron density into atomic contributions. However, this work associates molecular properties with observables, which may also be synonymous with \emph{physical properties}. The term \emph{chemical property} is avoided as it is more closely associated with reactivity than observable quantities.
+Throughout the introduction and the remainder of this work, a number of terms appear and may seem to be used interchangeably. In quantum chemistry literature, the phrase \emph{molecular property} is used to denote any quantity that can be calculated from the wavefunction. By this definition, not all molecular properties are \emph{observables}, as they do not necessarily correspond to experimentally-measurable quantities. Such molecular properties may not also be uniquely defined. One of the most prominent examples of non-observable molecular properties is the calculation of atomic partial charges, with Mulliken \kdjnote{ref} and L{\"{o}}wdin \kdjnote{ref} population analyses being the two most commonly-known partitioning schemes for dividing the electron density into atomic contributions. However, this work associates molecular properties with observables, which may also be synonymous with \emph{physical properties}. The term \emph{chemical property} is avoided as it is more closely associated with reactivity than observable quantities.
 
-The term \emph{response} also requires disambiguation. Experimentally, \emph{molecular response} refers to changes in a molecule's electronic and geometric state due to incident electromagnetic radiation (spectroscopy) or physical manipulation (such as structural deformation leading to piezoelectric response)\cite{doi:10.1021/jz400355v,doi:10.1021/jp412740j,doi:10.1021/acs.jpcb.7b10085}. Computationally, within the Born-Oppenheimer approximation, molecular response encompasses how the electronic state is altered due to both external and internal perturbations. Examples of external perturbations are electric or magnetic fields whose strengths may or man not fluctuate with time, and examples of internal perturbations are nuclear displacements, nuclear magnetic moments, and the total electronic spin. Although external perturbations have a clear correspondence to spectroscopy, internal perturbations are more a description of a molecule's intrinsic structure.
+The term \emph{response} also requires disambiguation. Experimentally, \emph{molecular response} refers to changes in a molecule's electronic and geometric state due to incident electromagnetic radiation (spectroscopy) or physical manipulation (such as structural deformation leading to piezoelectric response)\cite{doi:10.1021/jz400355v,doi:10.1021/jp412740j,doi:10.1021/acs.jpcb.7b10085}. Computationally, within the Born-Oppenheimer approximation, molecular response encompasses how the electronic state is altered due to both external and internal perturbations. Examples of external perturbations are electric or magnetic fields whose strengths may or may not fluctuate with time, and examples of internal perturbations are nuclear displacements, nuclear magnetic moments, and the total electronic spin. Although external perturbations have a clear correspondence to spectroscopy, internal perturbations are more a description of a molecule's intrinsic structure.
 
 However, in the context of this work, molecular response is sometimes used interchangeably with \emph{response property}, which is intuitively a property associated with external applied fields, but here refers to any molecular property arising from the solution of the \emph{response equations} or \emph{response functions}.
 
 The response equations relevant for this work are the coupled perturbed \hf{} (CPHF), coupled perturbed \ks{} (CPKS), or coupled perturbed self-consistent field (CPSCF) equations. These terms may be used interchangeably, as the equations are structurally identical, with the only difference being the machinery of how the exchange-like terms are formed. These sets of equations are similar to those from time-dependent HF and KS (TDHF and TDKS/TDDFT) theory. In the TD equations, a non-Hermitian eigenvalue problem is solved for \((\mathbf{G} - \mathbf{\omega\Delta})\mathbf{U} = \mathbf{0}\), where \(\mathbf{G}\) is the orbital Hessian, the eigenvectors \(\mathbf{U}\) describe the transitions between the states of the system in the given molecular orbital (MO) basis, and the eigenvalues \(\omega\) are the system's excitation energies (poles)\footnote{\(\mathbf{\Delta}\) is an identity matrix, except the lower diagonal is negated, see \eqref{eq:paper_05-neese-107}.}. In the CP equations, a set of linear equations are solved for \(\mathbf{GU} = -\mathbf{V}\), where \(\mathbf{V}\) represents the perturbation, and \(\mathbf{U}\) describes the modification to the unperturbed state's orbitals caused by the perturbation. A basic implementation of the CPHF equations is given in section~\ref{paper_05:ssec:hyperpolarizability_reference_implementation} using the electric dipole operator as the perturbation. Although the remainder of this work will be concerned with the properties arising from solution of the CP equations not the TD equations, their combination gives rise to other important molecular properties, namely the residues of the response function (eigenvectors from the TD equation combined with the operator of interest), describe the perturbation-mediated transitions between states (their moments).
 
-The solution of the CPSCF equations to calculate the parameters that describe the wavefunction's response to the perturbation \(\hat{V}\) determines the \emph{linear response} of the system. Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent. This work is primarily concerned with static response properties, however an introduction to dynamic response is presented. The most common formulation of these equations is single-particle in nature, with both particle-hole and hole-particle terms, giving the \emph{random phase approximation} (RPA). If not the external perturbation but the response equations themselves are expanded using order analysis, the \hf{} equations give the zeroth-order \emph{polarization propagator}, RPA corresponds to the first-order polarization propagator, and the full two-particle terms are part of the second-order polarization propagator (SOPPA)\cite{ODDERSHEDE198433}.
+The solution of the CPSCF equations to calculate the parameters that describe the wavefunction's response to the perturbation \(\hat{V}\) determines the \emph{linear response} of the system. Linear response is named as such not due to the linear form of the equations, but because the perturbation is linear in strength. This strength may be constant, static, or time-independent, or it may be oscillating, dynamic, frequency-, or time-dependent. This work is primarily concerned with static response properties, however an introduction to dynamic response is presented. The most common formulation of these equations is single-particle in nature, with both particle-hole and hole-particle terms, giving the \emph{random phase approximation} (RPA) \kdjnote{ref}. If not the external perturbation but the response equations themselves are expanded using order analysis, the \hf{} equations give the zeroth-order \emph{polarization propagator}, RPA corresponds to the first-order polarization propagator, and the full two-particle terms are part of the second-order polarization propagator (SOPPA)\cite{ODDERSHEDE198433}.
 
 % \fxnote{minus sign in front of series expansion terms}
 
@@ -181,7 +181,7 @@ For a one-dimensional spring connecting a ball to a fixed object, Hooke's law is
   \label{eq:hooke_1d}
   F = -k x,
 \end{equation}
-where \(x\) is the displacement of the spring from equilibrium in meters, \(k\) is the spring constant in units of \si{\newton\per\meter}, and \(F\) is the restoring force in units of newtons acting on the displaced spring by the object it is attached to. If the sign is reversed, then the equation can be viewed as describing the force of spring acting on the attached object; it is a direction change and a matter of convention.
+where \(x\) is the displacement of the spring from equilibrium in meters, \(k\) is the spring constant in units of \si{\newton\per\meter}, and \(F\) is the restoring force in units of \kdjerror{n}ewtons acting on the displaced spring by the object it is attached to. If the sign is reversed, then the equation can be viewed as describing the force of spring acting on the attached object; it is a direction change and a matter of convention. For convenience, the positive will be used.
 
 Hooke's law can be generalized to multiple dimensions. For example, in three-dimensional space it can be written as
 \begin{equation}
@@ -189,7 +189,7 @@ Hooke's law can be generalized to multiple dimensions. For example, in three-dim
   \begin{bmatrix}
     F_{1} \\ F_{2} \\ F_{3}
   \end{bmatrix}
-  = -
+  =
   \begin{bmatrix}
     k_{11} & k_{12} & k_{13} \\
     k_{21} & k_{22} & k_{23} \\
@@ -202,22 +202,22 @@ Hooke's law can be generalized to multiple dimensions. For example, in three-dim
 which can represent either a single object or three one-dimensional springs. It can also be made \(3N\)-dimensional when describing the forces on \(N\) atoms (each with 3 Cartesian components) given their relative positions \(\mathbf{x}\) and the ``stiffness'' of their connectivity \(\mathbf{k}\). In the most general \(N\)-dimensional form, it can be written as
 \begin{equation}
   \label{eq:force_hooke_sum}
-  F_{i} = - \sum_{j}^{N} k_{ij} x_{j},
+  F_{i} = \sum_{j}^{N} k_{ij} x_{j},
 \end{equation}
 or in Einstein summation notation where repeated indices are implicitly summed (contracted) over as
 \begin{equation}
   \label{eq:force_hooke_einstein}
-  F_{i} = -k_{ij} x_{j},
+  F_{i} = k_{ij} x_{j},
 \end{equation}
-where both \(i,j\) range from 1 to \(N\), leading to vectors \(\mathbf{F}\) and \(\mathbf{x}\) of shape \([N]\) and a matrix \(\mathbf{k}\) of shape \([N,N]\). From \eqref{eq:force_hooke_matrix}, \eqref{eq:force_hooke_sum}, and \eqref{eq:force_hooke_einstein}, if off-diagonal elements of \(k\) are allowed to be nonzero, there can be coupling between springs. For example, if \(i \leftarrow 1\), in the case of coupling,
+where both \(i,j\) range from 1 to \(N\), leading to vectors \(\mathbf{F}\) and \(\mathbf{x}\) of shape \([N]\) and a matrix \(\mathbf{k}\) of shape \([N,N]\). From \eqref{eq:force_hooke_matrix}, \eqref{eq:force_hooke_sum}, and \eqref{eq:force_hooke_einstein}, if off-diagonal elements of \(k\) are allowed to be nonzero, there can be coupling between springs. For example, if \(i = 1\), in the case of coupling,
 \begin{equation}
   \label{eq:force_hooke_example}
-  F_{1} = -(k_{11}x_{1} + k_{12}x_{2} + k_{13}x_{3}),
+  F_{1} = k_{11}x_{1} + k_{12}x_{2} + k_{13}x_{3},
 \end{equation}
 which reduces to
 \begin{equation}
   \label{eq:force_hooke_example_nocoupling}
-  F_{1} = -k_{11}x_{1}
+  F_{1} = k_{11}x_{1}
 \end{equation}
 in the absence of coupling, or the same result obtained in \eqref{eq:hooke_1d}.
 
@@ -227,7 +227,7 @@ The force is also related to the energy. In one dimension,
   F &= \nabla E \\
   &= \frac{\partial E}{\partial x},
 \end{align}
-where \(\nabla \equiv \partial/\partial x\). For convenience, the negative sign will be dropped from the remainder of the derivation. In \(N\) dimensions, like \eqref{eq:force_hooke_einstein}, \eqref{eq:energy_derivative_1d} is (using vector calculus)
+where \(\nabla \equiv \partial/\partial x\). In \(N\) dimensions, like \eqref{eq:force_hooke_einstein}, \eqref{eq:energy_derivative_1d} is (using vector calculus)
 \begin{equation}
   \label{eq:force_partial_derivative}
   F_{i} = \frac{\partial E}{\partial x_{i}}.
@@ -285,19 +285,24 @@ This is the most general case, where anisotropy may be present in the polarizabi
 Another definition of the molecular dipole moment induced by an external (applied) electric field is
 \begin{equation}
   \label{eq:dipole_from_derivative}
-  \mu_{i} = \frac{\partial E}{\partial F_{i}}.
+  \mu_{i} = -\frac{\partial E}{\partial F_{i}},
+\end{equation}
+which originates from the energy of a neutral dipole in an electric field,
+\begin{equation}
+  \label{eq:dipole_energy}
+  E = - \mu_{i} F_{i}.
 \end{equation}
 Following \eqref{eq:equated_force}, equating \eqref{eq:polarizability_einstein} and \eqref{eq:dipole_from_derivative} gives
 \begin{equation}
   \label{eq:equated_polarizability}
-  \alpha_{ij} F_{j} = \frac{\partial E}{\partial F_{i}}
+  \alpha_{ij} F_{j} = -\frac{\partial E}{\partial F_{i}}
 \end{equation}
 The remaining steps follow identically to \eqref{eq:hooke_derivation_1}, \eqref{eq:hooke_derivation_2}, and \eqref{eq:hooke_derivation_3}:
 \begin{align}
-  \left( \frac{\partial}{\partial F_{j}} \right) \left( \alpha_{ij} F_{j} \right) &= \left( \frac{\partial}{\partial F_{j}} \right) \left( \frac{\partial E}{\partial F_{i}} \right) \\
-  \Ccancelto[carmine]{0}{\left( \frac{\partial \alpha_{ij}}{\partial F_{j}} \right)} F_{j} + \alpha_{ij} \Ccancelto[Green]{1}{\left( \frac{\partial F_{j}}{\partial F_{j}} \right)} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}} \\
+  \left( \frac{\partial}{\partial F_{j}} \right) \left( \alpha_{ij} F_{j} \right) &= \left( \frac{\partial}{\partial F_{j}} \right) \left( -\frac{\partial E}{\partial F_{i}} \right) \\
+  \Ccancelto[carmine]{0}{\left( \frac{\partial \alpha_{ij}}{\partial F_{j}} \right)} F_{j} + \alpha_{ij} \Ccancelto[Green]{1}{\left( \frac{\partial F_{j}}{\partial F_{j}} \right)} &= -\frac{\partial^{2} E}{\partial F_{j} \partial F_{i}} \\
   \label{eq:polarizability-derivative-definition}
-  \alpha_{ij} &= \frac{\partial^{2} E}{\partial F_{j} \partial F_{i}}
+  \alpha_{ij} &= -\frac{\partial^{2} E}{\partial F_{j} \partial F_{i}}
 \end{align}
 
 \subsection{\texorpdfstring{\href{https://chemistry.stackexchange.com/q/74683/194}{\color{black}{Series expansion}}}{Series expansion}}
@@ -336,7 +341,7 @@ The perturbation \(P\) may have multiple components. For example, there are 3 po
 Considering specific examples, using \eqref{eq:maclaurin-expansion-vector}, replacing \(\mathbf{P}\) with an external electric field \(\mathbf{F}\), and switching to Einstein notation gives
 \begin{equation}
   \label{eq:electric-field-expansion}
-  E(\mathbf{F}) = E_{0} + \mu_{i} \cdot F_{i} + \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} + \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} + \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} + \dots,
+  E(\mathbf{F}) = E_{0} - \mu_{i} \cdot F_{i} - \frac{1}{2} \alpha_{ij} \cdot F_{i}F_{j} - \frac{1}{6} \beta_{ijk} \cdot F_{i}F_{j}F_{k} - \frac{1}{24} \gamma_{ijkl} \cdot F_{i}F_{j}F_{k}F_{l} - \dots,
 \end{equation}
 where \(\mu_{i}\) is a component of the \href{https://chemistry.stackexchange.com/a/74733/194}{\color{black}{dipole (moment)}}, expressed in operator form as
 \begin{equation}
@@ -353,7 +358,7 @@ It is also possible to consider multiple perturbations simultaneously. Adding an
 where \(E^{(n,m)}\) refers to the energy correction that is simultaneously \(n\)th-order in the perturbation \(\mathbf{P}\) and \(m\)th-order in the perturbation \(\mathbf{Q}\). The expected terms from both independent series expansions occur, but there is also a cross-term \(E^{(1,1)}\). All mixed derivatives in Table~\ref{tab:gauss} that are at least 2nd-order total correspond to such cross-terms. For example, consider adding an external magnetic field to \eqref{eq:electric-field-expansion}:
 \begin{equation}
   \label{eq:electric-and-magnetic-field-expansion}
-  E(\mathbf{F}, \mathbf{B}) = E_{0} + \mu_{i} \cdot F_{i} + m_{i} \cdot B_{i} + \frac{1}{2} \left( \alpha_{ij} \cdot F_{i}F_{j} + \xi_{ij} \cdot B_{i}B_{j} + G_{ij} \cdot F_{i}B_{j} \right) \dots,
+  E(\mathbf{F}, \mathbf{B}) = E_{0} - \mu_{i} \cdot F_{i} - m_{i} \cdot B_{i} - \frac{1}{2} \left( \alpha_{ij} \cdot F_{i}F_{j} + \xi_{ij} \cdot B_{i}B_{j} + G_{ij} \cdot F_{i}B_{j} \right) - \dots,
 \end{equation}
 where the magnetic field has introduced \(m_{i}\) as a component of the magnetic (dipole) moment, \(\xi_{ij}\) as a component of the magnetizability, and the mixed electric dipole\textendash{}magnetic dipole polarizability \(G_{ij}\), which is directly related to the optical rotation\footnote{See Eq. (2) in Ref.~\parencite{WCMS:WCMS55}, specifically the \(G\) term.}, given as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega}\) in Table~\ref{tab:norman}. The residues of the same response function give the rotatory strengths needed for electronic circular dichroism (ECD), shown as \(\braket{\braket{\hat{\mu};\hat{m}}}_{\omega_{f}}\) in Table~\ref{tab:norman}. Section~\ref{sec:dynamic-properties} will show how frequency dependence can be properly introduced to this term and in general.
 
@@ -501,7 +506,7 @@ Notice that the MO coefficient derivatives do not appear in the final HF gradien
 \begin{quote}
   When the wavefunction is determined up to the \(n\)th order, the expectation value (electronic energy) of the the system is resolved, according to the results of perturbation theory, up to the \((2n+1)\)st order. This principle is called Wigner's \(2n+1\) theorem\cite{doi:10.1063/1.1668053,EPSTEIN1980311}.
 \end{quote}
-More explicitly, we have the zeroth-order wavefunction, so we must be able to calculate the first-order correction to the energy. Worded differently, any first derivative of the energy must be easily calculated without differentiating MO coefficients, which is only required for second derivatives, such as the molecular Hessian or the dipole polarizability.
+More explicitly, we have the zeroth-order wavefunction, so we must be able to calculate the first-order correction to the energy. Worded differently, \kdjwarning{any first derivative of the energy must be easily calculated without differentiating MO coefficients}, which is only required for second derivatives, such as the molecular Hessian or the dipole polarizability.
 
 Differentiating \eqref{eq:yamaguchi-4.1} with respect to \(X_{A}\) collecting terms with \(\mathbf{U}\) gives
 \begin{equation}
@@ -516,7 +521,7 @@ where the Fock matrix is defined as
     &= h_{pq} + 2J_{pq} - K_{pq},
   \end{aligned}
 \end{equation}
-and the Coulomb and exchange matrices \(\mathbf{J}\) and \(\mathbf{K}\) have also been introduced. Using the RHF variational conditions, the Fock matrix from a converged calculation is diagonal in the MO basis, corresponding to the MO energies
+and the Coulomb and exchange matrices \(\mathbf{J}\) and \(\mathbf{K}\) have also been introduced. Using the RHF variational conditions, the Fock matrix from a converged calculation is diagonal in the MO basis, corresponding to the MO energies \kdjnote{what about ROHF?}
 \begin{equation}
   F_{pq} = \delta_{pq} \epsilon_{pq}, \tag{Yamaguchi eq. 4.7}
 \end{equation}
@@ -536,9 +541,9 @@ S_{pq} = \delta_{pq}, \tag{Yamaguchi eq. 3.44}
 we must have
 \begin{equation}
   \label{eq:yamaguchi-3.45}\tag{Yamaguchi eq. 3.45}
-  \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0.
+  \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0,
 \end{equation}
-Expanding the left-hand side of \eqref{eq:yamaguchi-3.45} in a manner identical to \eqref{3.81} gives
+where the notation \(x \overset{!}{=} y\) means that \(x\) must be equal to \(y\) by definition. Expanding the left-hand side of \eqref{eq:yamaguchi-3.45} in a manner identical to \eqref{3.81} gives
 \begin{align*}
 \frac{\partial S_{pq}}{\partial X_{A}} &= \sum_{\mu\nu}^{\text{AO}} C_{\mu p} C_{\mu q} \frac{\partial S_{\mu\nu}}{\partial X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right) \tag{Yamaguchi eqs. 3.40 + 3.43} \\
                                        &= S_{pq}^{X_{A}} + \sum_{m}^{\text{all}} \left( U_{mp}^{X_{A}} S_{mq} + U_{mq}^{X_{A}} S_{pm} \right). \tag{Yamaguchi eq. 3.43}
@@ -576,7 +581,7 @@ to use the energy-weighted density matrix \(\mathbf{W}\), also sometimes called 
   \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{\mu\nu}^{\text{AO}} P_{\mu\nu} h_{\mu\nu}^{X_{A}} + \sum_{\mu\nu\lambda\sigma}^{\text{AO}} P_{\mu\nu}P_{\lambda\sigma} \left\{ 2(\mu\nu|\lambda\sigma)^{X_{A}} - (\mu\lambda|\nu\sigma)^{X_{A}} \right\} - 2 \sum_{\mu\nu}^{\text{AO}} Q_{\mu\nu} S_{\mu\nu}^{X_{A}} + V_{NN}^{X_{A}}
 \end{equation}
 
-Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why density or MO coefficient derivatives are not present in the gradient expression.
+Again, the elimination of the \(\mathbf{U}\) matrix is one of the most important results in quantum chemistry, \kdjwarning{as it means the coupled-perturbed SCF equations do not need to be solved for first derivatives of SCF wavefunctions. This is why density or MO coefficient derivatives are not present in the gradient expression.}
 
 Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another nuclear displacement \(Y_{B}\) is
 \begin{equation}
@@ -591,19 +596,25 @@ Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another n
 \end{equation}
 where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable.
 
-However, the case of the molecular Hessian is an exceptional one, because the AOs are perturbation-dependent: for a fixed electron position, the amplitude of a basis function will change if it moved, and they are typically atom-centered. In the case that the basis set is \textit{not} perturbation dependent, as is most often in the case in electric field perturbations, \eqref{eq:yamaguchi-4.54-and-4.55-and-3.127} reduces to
+However, the case of \kdjwarning{the molecular Hessian is an exceptional one, because the AOs are perturbation-dependent}: for a fixed electron position, the amplitude of a basis function will change if it moved, and they are typically atom-centered. In the case that the basis set is \kdjwarning{\textit{not} perturbation dependent, as is most often in the case in electric field perturbations} \kdjnote{?}, \eqref{eq:yamaguchi-4.54-and-4.55-and-3.127} reduces to
 \begin{equation}
   \label{eq:yamaguchi-17.54} \tag{Yamaguchi eq. 17.54}
   \frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}} = -4 \sum_{a}^{\text{virt}} \sum_{i}^{\text{d.o.}} U_{ai}^{F_{\beta}} h_{ai}^{F_{\alpha}},
 \end{equation}
-where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see the \(\mathbf{P}/\mathbf{Q}\) matrix elements in section~\ref{ssec:linear-response-formalism} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}). In general, when the AO basis is perturbation independent, the energy derivative with respect to two arbitrary perturbations \(\lambda\) and \(\theta\) can be written as
+where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see the \(\mathbf{P}/\mathbf{Q}\) matrix elements in section~\ref{ssec:linear-response-formalism} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}). In general, \kdjwarning{when the AO basis is perturbation independent}, the energy derivative with respect to two arbitrary perturbations \(\lambda\) and \(\theta\) can be written as
 \begin{equation}
   \label{eq:neese-77} \tag{Neese eq. 77}
   \frac{\partial^{2} E}{\partial \lambda \partial \theta} = \sum_{\mu\nu} \left( P_{\mu\nu} \frac{\partial^{2} h_{\mu\nu}}{\partial \lambda \partial \theta} + \frac{\partial P_{\mu\nu}}{\partial \theta} \frac{\partial h_{\mu\nu}}{\partial \lambda} \right),
 \end{equation}
-where the first term is an expectation value and the second term requires solution of the response equations.
+\kdjwarning{where the first term is an expectation value and the second term requires solution of the response equations.}
+\begin{anfxnote}{density derivative}
+  Show how the perturbed density is related to \(U\):
+  \begin{equation}
+    \frac{\partial P}{\partial \lambda} = C (C^{\lambda})^{T} + C^{\lambda} C^{T}; C^{\lambda} = C (U^{\lambda})^{T}
+  \end{equation}
+\end{anfxnote}
 
-The form of \eqref{eq:yamaguchi-17.54} and \eqref{eq:neese-77} should make it clear that for a second derivative of an HF wavefunction, only one set \(\mathbf{U}\) matrices is needed. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices, but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) would only require \(3\) \(\mathbf{U}\) matrices.
+The form of \kdjwarning{\eqref{eq:yamaguchi-17.54} and \eqref{eq:neese-77}} should make it clear that for a second derivative of an HF wavefunction, \kdjwarning{only one set of \(\mathbf{U}\) matrices is needed}. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices, but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) \kdjwarning{would only require \(3\) \(\mathbf{U}\) matrices}.
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
@@ -613,7 +624,7 @@ In Rayleigh\textendash{}\schrod{} perturbation theory\footnote{See Szabo \& Ostl
   \label{eq:perturbed-hamiltonian}
   \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
 \end{equation}
-where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\Psi_{i}}\) and its energy \(\mathcal{E}_{i}\) for a given state \(i\), where increasing orders account for better approximations to the exact (perturbed) energy:
+where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\Psi_{i}}\) and its energy \(\mathcal{E}_{i}\) for a given state \(i\), \kdjwarning{where increasing orders account for better approximations to the exact (perturbed) energy}: \kdjnote{does not necessarily converge}
 \begin{align}
   \label{eq:expansion-wavefunction}
   \ket{\Psi_{i}} &= \ket{\psi_{i}^{(0)}} + \lambda\ket{\psi_{i}^{(1)}} + \lambda^{2}\ket{\psi_{i}^{(2)}} + \dots \\
@@ -693,14 +704,14 @@ The final form of \eqref{eq:first-order-terms-bra} is now
   \label{eq:first-order-terms-final}
   \braket{\psi_{i}^{(0)} | \hat{V} | \psi_{i}^{(0)}} = E_{i}^{(1)},
 \end{equation}
-revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf{} and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:yamaguchi-4.21}, and is similar to the \hefe{} theorem when the AO basis is not dependent on the perturbation.
+revealing that the first-order correction to the energy is the expectation value of the perturbation operator over the zeroth-order wavefunction. For context, when using perturbation theory to approximate the correlation energy of system on top of the mean-field wavefunction, \(\hat{V} \equiv \frac{1}{|\vec{r}_{1} - \vec{r}_{2}|} = \frac{1}{r_{12}}\), the electron-electron repulsion operator. However, the perturbation operator may be any one- or two-electron operator, and \eqref{eq:first-order-terms-final} is exact as long as \(\ket{\psi_{i}^{(0)}}\) is a variationally-optimized state\footnote{\hf{} and most density functional approximations that do not contain a perturbative correction (such as double hybrids) satisfy this criterion. Additionally, it is important for ALMO-EDA, where the polarized but CT-disallowed intermediate state \(\ket{\psi_{\text{pol}}}\) is variational, but the frozen density state \(\ket{\psi_{\text{frz}}}\) is \emph{not}. All the work found in chapter~\ref{ch:paper_04} starts from \(\ket{\psi_{\text{pol}}}\), so the use of a Lagrangian to account for orbital relaxation (leading to additional terms) is unnecessary.}. The key insight is that to calculate the first-order correction to the energy, only the zeroth-order wavefunction is required. This means that if \(\hat{V}\) is replaced with an operator related to a molecular property, it can be calculated as an expectation value without needing the perturbed wavefunction. This is the same result as in \eqref{eq:yamaguchi-4.21}, \kdjwarning{and is similar to the \hefe{} theorem when the AO basis is not dependent on the perturbation.}
 
 The generalization of \eqref{eq:first-order-terms-final} is that for \(n > 0\), the \(n\)th order correction to the energy is given by
 \begin{equation}
   \label{eq:general-energy-correction}
   E_{i}^{(n)} = \braket{\psi_{i}^{(0)}|\hat{V}|\psi_{i}^{(n-1)}},
 \end{equation}
-so to find the second-order correction to the energy, the first-order correction to the wavefunction is finally required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}). From \eqref{eq:general-energy-correction}, the first form of the second-order correction is
+so to find the second-order correction to the energy, the first-order correction to the wavefunction is required. The general rule is that given the \(n\)th order correction to the wavefunction, the \(2n+1\)th order correction to the energy can be calculated. This is known as Wigner's \(2n+1\) rule (see section~\ref{wigners-2n-1-rule}). From \eqref{eq:general-energy-correction}, the first form of the second-order correction is
 \begin{equation}
   \label{eq:second-order-correction-first-form}
   E_{i}^{(2)} = \braket{\psi_{i}^{(0)}|\hat{V}|\psi_{i}^{(1)}},
@@ -771,7 +782,7 @@ Inserting \eqref{eq:first-order-wavefunction} into \eqref{eq:second-order-correc
 In the case where \(\hat{V}\) is operator with multiple components, such as the dipole operator in \eqref{eq:dipole-operator}, the energy becomes a rank-2 tensor, the polarizability matrix:
 \begin{equation}
   \label{eq:static-polarizability-from-perturbation-theory}
-  \alpha_{ab}= \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{\mu}_{a}|k}\braket{k|\hat{\mu}_{b}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}}.
+  \alpha_{ab}= - \sum_{k \neq i} \frac{\braket{\psi_{i}^{(0)}|\hat{\mu}_{a}|k}\braket{k|\hat{\mu}_{b}|\psi_{i}^{(0)}}}{E_{i}^{(0)} - E_{k}^{(0)}}.
 \end{equation} % \fxnote{TODO This expression is still incomplete regarding time-varying perturbations and mixed-operator properties.}
 \eqref{eq:static-polarizability-from-perturbation-theory} is called a \emph{sum-over-states} expansion due to the explicit summation over the set of excited states \(\ket{\psi_{k}^{(0)}}\). Although the derivation assumes that all states are exact and the summation is infinite, the actual states are formed from the basis of excited Slater determinants using the converged SCF wavefunction as the reference state \(\ket{\psi_{i}^{(0)}}\).
 
@@ -789,7 +800,7 @@ The starting point is the now the time-dependent \schrod{} equation (TDSE),
   \label{eq:tdse}
   \hat{H}(t) \ket{\Psi(t)} = i\frac{\partial}{\partial t} \ket{\Psi(t)},
 \end{equation}
-which, unlike \eqref{eq:schrodinger-equation} does not have the energy on the right-hand side due to the lack of stationary solutions. It is useful to factor out the time-dependent phase of the wavefunction,
+which, unlike \eqref{eq:schrodinger-equation} \kdjwarning{does not have the energy on the right-hand side due to the lack of stationary solutions}. \kdjnote{Is that the reason?} It is useful to factor out the time-dependent phase of the wavefunction,
 \begin{equation}
   \label{eq:phase-isolated-wavefunction}
   \ket{\Psi(t)} = e^{-i\mathcal{F}(t)} \ket{\tilde{\Psi}(t)},
@@ -804,14 +815,14 @@ and use the phase-isolated wavefunction\footnote{\(\dot{A}(t) = \mathrm{d}A(t)/\
   \label{eq:phase-isolated-tdse}
   \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)} = \dot{\mathcal{F}}(t) \ket{\tilde{\Psi}(t)},
 \end{equation}
-where \(\dot{\mathcal{F}}(t)\) now looks likes the energy from the time-independent \schrod{} equation (TISE). This ``energy'' is still not stationary with time, however it can be made stationary through integration over the time coordinate.
+\kdjwarning{where \(\dot{\mathcal{F}}(t)\) now looks likes the energy} from the time-independent \schrod{} equation (TISE). This ``energy'' is still not stationary with time, \kdjwarning{however it can be made stationary through integration over the time coordinate.}
 
 Before going further, the Hamiltonian must be specified. The partitioning introduced in \eqref{eq:perturbed-hamiltonian} is modified:
 \begin{equation}
   \label{eq:perturbed-hamiltonian-time-dependent}
   \hat{H}(t) = \hat{H}^{(0)} + \hat{V}(t),
 \end{equation}
-so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is slowly turned on and oscillates with time at a characteristic frequency. Representing the perturbation in terms of Fourier components:
+so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is \kdjwarning{slowly turned on} \kdjnote{why slowly?} and oscillates with time at a characteristic frequency. Representing the perturbation in terms of Fourier components:
 \begin{equation}
   \label{eq:fourier-components}
   \hat{V}(t) = x_{1} \hat{B} e^{-i\omega t} + x_{2} \hat{A} e^{+i\omega t}
