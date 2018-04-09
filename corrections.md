@@ -1,7 +1,5 @@
-- fix preface hyperlink/bookmark
 - list of algorithms following list of figures
 - list of listings following list of algorithms
 - list of footnotes?
 - read through paper 3 for exact correctness
 - update paper 5
-- switch alignment of bibliography numbers from left to right
