@@ -1,6 +1,6 @@
 # Most important things
 
-* [`pittetd`](https://github.com/berquist/pittetd) is a submodule. When cloning the repo, do `git clone --recurse-submodules https://github.com/berquist/dissertation.git` (see [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules)) for help.
+* [`pittetd`](https://github.com/berquist/pittetd) is a submodule. When cloning the repo, do `git clone --recurse-submodules https://github.com/berquist/dissertation.git` (see [here](https://git-scm.com/book/en/v2/Git-Tools-Submodules) for help).
 * [Tex.SE is your friend!](https://tex.stackexchange.com)
 
 ## Compilation
