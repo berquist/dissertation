@@ -1,5 +1,3 @@
-- list of algorithms following list of figures
-- list of listings following list of algorithms
 - list of footnotes?
 - read through paper 3 for exact correctness
 - update paper 5
