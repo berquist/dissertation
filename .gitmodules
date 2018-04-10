@@ -1,0 +1,3 @@
+[submodule "pittetd"]
+	path = pittetd
+	url = https://github.com/berquist/pittetd.git

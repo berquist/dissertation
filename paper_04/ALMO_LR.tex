@@ -6,20 +6,37 @@
   preview = false,%
 ]{standalone}
 \usepackage[%
-    backend    = biber,%
-    style      = chem-acs,%
-    autocite   = superscript,%
-    backref    = true,%
-    biblabel   = brackets,%
-    doi        = true,%
-    minnames   = 1,%
-    maxnames   = 999,%
+    backend      = biber,%
+    style        = chem-acs,%
+    autocite     = superscript,%
+    backref      = true,%
+    doi          = true,%
+    articletitle = true,%
+    chaptertitle = true,%
+    biblabel     = brackets,%
+    minnames     = 1,%
+    maxnames     = 999,%
 ]{biblatex}
 \let\cite\autocite
 \DefineBibliographyStrings{english}{%
   backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},
+  backrefpages = {pages},%
 }
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{labelprefix}%
+        \printfield{labelnumber}}}
+     {%
+      \setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{##1}}
+  {\endlist}
+  {\item}
 \addbibresource{./paper.bib}
 \addbibresource{../5773968.bib}
 \addbibresource{../paper_05/psi4numpy.bib}

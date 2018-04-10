@@ -1,7 +1,4 @@
-\let\oldyear\year
 \documentclass[final]{pittetd}
-\let\setyear\year
-\let\year\oldyear
 %
 % This is first because otherwise references won't get added properly
 % to the main document.
@@ -19,20 +16,37 @@
 % \setmonofont[Scale=0.75]{Panic Sans}
 %
 \usepackage[%
-    backend    = biber,%
-    style      = chem-acs,%
-    autocite   = superscript,%
-    backref    = true,%
-    biblabel   = brackets,%
-    doi        = true,%
-    minnames   = 1,%
-    maxnames   = 999,%
+    backend      = biber,%
+    style        = chem-acs,%
+    autocite     = superscript,%
+    backref      = true,%
+    doi          = true,%
+    articletitle = true,%
+    chaptertitle = true,%
+    biblabel     = brackets,%
+    minnames     = 1,%
+    maxnames     = 999,%
 ]{biblatex}
 \let\cite\autocite
 \DefineBibliographyStrings{english}{%
   backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},
+  backrefpages = {pages},%
 }
+\defbibenvironment{bibliography}
+  {\list
+     {\printtext[labelnumberwidth]{%
+        \printfield{labelprefix}%
+        \printfield{labelnumber}}}
+     {%
+      \setlength{\labelwidth}{\labelnumberwidth}%
+      \setlength{\leftmargin}{\labelwidth}%
+      \setlength{\labelsep}{\biblabelsep}%
+      \addtolength{\leftmargin}{\labelsep}%
+      \setlength{\itemsep}{\bibitemsep}%
+      \setlength{\parsep}{\bibparsep}}%
+      \renewcommand*{\makelabel}[1]{##1}}
+  {\endlist}
+  {\item}
 \addbibresource{./library.bib}
 \addbibresource{./library2.bib}
 \addbibresource{./paper_04/paper.bib}
@@ -99,6 +113,7 @@
   breakatwhitespace=true,%
   breaklines=false,%
   frame=none,%
+  numberbychapter=false,%
 }
 %
 \usepackage{minted}
@@ -134,7 +149,7 @@
 \raggedbottom
 %
 \hypersetup{%
-  backref,%
+  colorlinks=true,%
   citecolor=black,%
   linkcolor=black,%
   urlcolor=carmine,%
@@ -154,6 +169,8 @@
 \tableofcontents
 \listoftables
 \listoffigures
+\listofalgos
+\listoflistings
 \listoffixmes
 %
 \preface
