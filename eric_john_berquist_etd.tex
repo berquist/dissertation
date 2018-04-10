@@ -155,13 +155,6 @@
   urlcolor=carmine,%
 }
 %
-\makeatletter
-\patchcmd{\listof}% <cmd>
-  {\float@listhead}% <search>
-  {\@namedef{l@#1}{\l@figure}\float@listhead}% <replace>
-  {}{}% <success><failure>
-  \makeatother
-%
 \input{./preamble}
 \begin{document}
 %
@@ -187,10 +180,10 @@
 \input{./introduction}
 \input{./paper_01/anions}
 \input{./paper_02/AbInitio_revised}
-% \input{./paper_03/SpectroscopicMap}
-% \input{./paper_04/ALMO_LR}
-% \input{./paper_05/psi4numpy}
-% \input{./other_contributions}
+\input{./paper_03/SpectroscopicMap}
+\input{./paper_04/ALMO_LR}
+\input{./paper_05/psi4numpy}
+\input{./other_contributions}
 %
 \printbibliography[title=\caps{Bibliography}]
 %
