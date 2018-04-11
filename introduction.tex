@@ -584,7 +584,7 @@ In Rayleigh\textendash{}\schrod{} perturbation theory\footnote{See \szabo{}\cite
   \label{eq:perturbed-hamiltonian}
   \hat{H} = \hat{H}^{(0)} + \lambda\hat{V},
 \end{equation}
-where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\Psi_{i}}\) and its energy \(\mathcal{E}_{i}\) for a given state \(i\), \kdjwarning{where increasing orders account for better approximations to the exact (perturbed) energy}: \kdjnote{does not necessarily converge}
+where \(\hat{H}^{(0)}\) is the Hamiltonian in the absence of the perturbation and \(\lambda \in [0,1]\) controls the strength of the perturbation. Note that it is not yet necessary to specify the exact form of \(\hat{V}\). The main assumption in perturbation theory, worded in two ways, is that the unperturbed Hamiltonian is an acceptable approximation to the exact Hamiltonian, and the perturbation is small. This assumption allows for a power (Maclaurin) series expansion of the wavefunction \(\ket{\Psi_{i}}\) and its energy \(\mathcal{E}_{i}\) for a given state \(i\), where increasing orders account for better approximations to the exact (perturbed) energy:\footnote{While one hopes the series is convergent, it is often not the case, so the series is often truncated at the second-order correction to the energy, which may still be useful. See Ref.~\parencite{NOBES1987481} for a series convergence study.}
 \begin{align}
   \label{eq:expansion-wavefunction}
   \ket{\Psi_{i}} &= \ket{\psi_{i}^{(0)}} + \lambda\ket{\psi_{i}^{(1)}} + \lambda^{2}\ket{\psi_{i}^{(2)}} + \dots \\
@@ -707,7 +707,7 @@ and multiply \eqref{eq:first-order-terms-group-kets} on the left with \(\bra{k}\
   \label{eq:first-order-terms-group-kets-cancelled}
   E_{i}^{(0)} \braket{k|\psi_{i}^{(1)}} - \braket{k|\hat{H}^{(0)}|\psi_{i}^{(1)}} = \braket{k|\hat{V}|\psi_{i}^{(0)}} - E_{i}^{(1)} \Ccancelto[carmine]{0}{\braket{k|\psi_{i}^{(0)}}},
 \end{equation}
-where the last term cancels due to \(\braket{a|b} = \delta_{ab}, \{a,b\}\in k\), and \(\ket{k} \neq \ket{\psi_{i}^{(0)}}\) from \eqref{eq:orthogonal-to-reference-state}. To deal with the second term, use \eqref{eq:orthonormal-eigenfunction-expansion}, cancelling terms again due to orthonormality, and finally inserting \eqref{eq:coefficient-selection}:
+where the last term cancels due to \(\braket{a|b} = \delta_{ab}, \{a,b\}\in k\), and \(\ket{k} \neq \ket{\psi_{i}^{(0)}}\) from \eqref{eq:orthogonal-to-reference-state}. To deal with the second term, use \eqref{eq:orthonormal-eigenfunction-expansion}, canceling terms again due to orthonormality, and finally inserting \eqref{eq:coefficient-selection}:
 \begin{equation}
   \label{eq:something-something-expansion}
   \begin{aligned}
