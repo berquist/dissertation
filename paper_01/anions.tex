@@ -151,7 +151,7 @@ For temperature-dependent measurements, the sample was temperature-controlled by
 
 The experiments utilize a commercial Ti:Sapphire chirped pulse amplifier laser system (\(\lambda = \SI{805}{\nm}\), \SI{5}{\kilo\hertz} repetition rate, \SI{120}{\fs} pulse duration) (Coherent Vitesse / Coherent Legend Elite).
 
-A home-built optical parametric amplifier (OPA) generates the mid-IR pulses (\(\lambda = \SIrange{12}{2}{\micron}\)) \fxnote{siunitx in math mode problem}, corresponding to around \SIrange{830}{5000}{\wavenumber}. The OPA design leads to noise suppression in the resulting mid-IR pulses.\cite{Hamm2000} The spectral bandwidth after the OPA is about \SI{200}{\wavenumber}. For these experiments, we tune the OPA wavelength to \SI{4.3}{\micron}. Mid-IR pulse energy entering the 2D spectrometer is approximately \SI{2.2}{\micro\joule} per pulse.
+A home-built optical parametric amplifier (OPA) generates the mid-IR pulses (\(\lambda = \SIrange{12}{2}{\micron}\)), corresponding to around \SIrange{830}{5000}{\wavenumber}. The OPA design leads to noise suppression in the resulting mid-IR pulses.\cite{Hamm2000} The spectral bandwidth after the OPA is about \SI{200}{\wavenumber}. For these experiments, we tune the OPA wavelength to \SI{4.3}{\micron}. Mid-IR pulse energy entering the 2D spectrometer is approximately \SI{2.2}{\micro\joule} per pulse.
 
 \subsubsection{2D Spectrometer}
 \label{sec:anions_methods_tdir_spectrometer}
@@ -296,7 +296,7 @@ Charge transfer to the \ce{CO2} originates from occupied orbitals on the anions.
   \end{tabular}
 \end{table}
 
-\ce{CO2} also donates charge back to the ionic liquid cluster, primarily to the cation. The amount of charge donated by the \ce{CO2} to the cation (\SIrange{-1}{-2}{\milli\elementarycharge}) is typically less than the charge donated from the anion, but nevertheless has specific consequences for the resulting geometry. The donor orbital from the \ce{CO2} is a mixture of \(\sigma\)-bonding and \(\pi\)-nonbonding character. The charge donation from the \ce{CO2} is linearly correlated to the carbonyl bond length differences (\(R^2 = 0.85\)). For the \ce{[Im_{1,1}][TfO]} cluster, which has the highest charge transfer from \ce{CO2} to the cation (\SI{2.32}{\milli\electron}), the \(\sigma\) character of the donating orbital causes the carbonyl nearest the cation to lengthen from the gas-phase \SI{1.169}{\angstrom} to \SI{1.175}{\angstrom} while the distal carbonyl contracts to \SI{1.163}{\angstrom}.
+\ce{CO2} also donates charge back to the ionic liquid cluster, primarily to the cation. The amount of charge donated by the \ce{CO2} to the cation (\SIrange{-1}{-2}{\milli\electron}) is typically less than the charge donated from the anion, but nevertheless has specific consequences for the resulting geometry. The donor orbital from the \ce{CO2} is a mixture of \(\sigma\)-bonding and \(\pi\)-nonbonding character. The charge donation from the \ce{CO2} is linearly correlated to the carbonyl bond length differences (\(R^2 = 0.85\)). For the \ce{[Im_{1,1}][TfO]} cluster, which has the highest charge transfer from \ce{CO2} to the cation (\SI{2.32}{\milli\electron}), the \(\sigma\) character of the donating orbital causes the carbonyl nearest the cation to lengthen from the gas-phase \SI{1.169}{\angstrom} to \SI{1.175}{\angstrom} while the distal carbonyl contracts to \SI{1.163}{\angstrom}.
 
 The effects of charge transfer to and from the \ce{CO2} can be incorporated into a simple model of the vibrational frequencies. The model is constructed in a vibrational local-mode basis. The effective one exciton vibrational Hamiltonian is
 
@@ -649,7 +649,7 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
   \begin{table}
     \centering
     % \resizebox{1\textwidth}{!}{
-    \caption{\texorpdfstring{\cotil}{Carbon dioxide-IL} geometries optimized allowing charge transfer}
+    \caption{\texorpdfstring{\cotil{}}{Carbon dioxide-IL} geometries optimized allowing charge transfer}
     \label{paper_01:tab:S1}
     \small
     \tabcolsep=0.11cm
@@ -662,9 +662,9 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
       \(\beta\) (\si{\wavenumber}) & -532.085 & -535.475 & -530.875 & -530.07 & -531.765 & -529.96 & -529.065 & -532.43 & -531.375 \\
       \(\alpha\) (\si{\wavenumber}) & 1904.015 & 1907.595 & 1903.835 & 1900.7 & 1905.715 & 1900.31 & 1900.745 & 1905.31 & 1902.515 \\
       \hline
-      CT: \ce{CO2} to IL (\si{\milli\elementarycharge}) & 0 & 2.251 & 1.264 & 2.259 & 1.012 & 1.323 & 1.618 & 1.603 & 2.339 \\
-      CT: IL to \ce{CO2} (\si{\milli\elementarycharge}) & 0 & 0.079 & 4.558 & 3.376 & 3.336 & 3.317 & 5.131 & 2.493 & 3.009 \\
-      CT: net (\si{\milli\elementarycharge}) & 0 & -2.172 & 3.294 & 1.117 & 2.324 & 1.994 & 3.513 & 0.89 & 0.67 \\
+      CT: \ce{CO2} to IL (\si{\milli\electron}) & 0 & 2.251 & 1.264 & 2.259 & 1.012 & 1.323 & 1.618 & 1.603 & 2.339 \\
+      CT: IL to \ce{CO2} (\si{\milli\electron}) & 0 & 0.079 & 4.558 & 3.376 & 3.336 & 3.317 & 5.131 & 2.493 & 3.009 \\
+      CT: net (\si{\milli\electron}) & 0 & -2.172 & 3.294 & 1.117 & 2.324 & 1.994 & 3.513 & 0.89 & 0.67 \\
       \hline
       geom: angle (\si{\degree}) & 179.96 & 179.93 & 175.49 & 175.01 & 176.21 & 175.65 & 174.78 & 177.36 & 175.99 \\
       geom: \(\theta\) (\si{\degree}) & 0.042 & 0.07 & 4.51 & 4.99 & 3.79 & 4.35 & 5.22 & 2.64 & 4.01 \\
@@ -681,7 +681,7 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
   \begin{table}
     \centering
     % \resizebox{1\textwidth}{!}{
-    \caption{\texorpdfstring{\cotil}{Carbon dioxide-IL} geometries optimized without allowing charge transfer}
+    \caption{\texorpdfstring{\cotil{}}{Carbon dioxide-IL} geometries optimized without allowing charge transfer}
     \label{paper_01:tab:S2}
     \small
     \tabcolsep=0.11cm
@@ -694,9 +694,9 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
       \(\beta\) (\si{\wavenumber}) & -532.085 & -534.195 & -532.625 & -532.83 & -532.57 & -532.82 & -532.37 & -532.85 & -532.96 \\
       \(\alpha\) (\si{\wavenumber}) & 1904.015 & 1905.665 & 1905.935 & 1906.27 & 1905.9 & 1905.96 & 1906.027 & 1905.91 & 1906.41 \\
       \hline
-      CT: \ce{CO2} to IL (\si{\milli\elementarycharge} \kdjnote{is this a standard unit}) & 0 & 1.743 & 1.038 & 1.836 & 1.154 & 1.302 & 1.023 & 1.246 & 1.941 \\
-      CT: IL to \ce{CO2} (\si{\milli\elementarycharge}) & 0 & 0.039 & 3.053 & 2.266 & 2.221 & 1.64 & 2.916 & 1.274 & 2.048 \\
-      CT: net (\si{\milli\elementarycharge}) & 0 & -1.704 & 2.015 & 0.43 & 1.067 & 0.338 & 1.893 & 0.028 & 0.107 \\
+      CT: \ce{CO2} to IL (\si{\milli\electron}) & 0 & 1.743 & 1.038 & 1.836 & 1.154 & 1.302 & 1.023 & 1.246 & 1.941 \\
+      CT: IL to \ce{CO2} (\si{\milli\electron}) & 0 & 0.039 & 3.053 & 2.266 & 2.221 & 1.64 & 2.916 & 1.274 & 2.048 \\
+      CT: net (\si{\milli\electron}) & 0 & -1.704 & 2.015 & 0.43 & 1.067 & 0.338 & 1.893 & 0.028 & 0.107 \\
       \hline
       geom: angle (\si{\degree}) & 179.96 & 179.97 & 177.30 & 177.29 & 177.58 & 177.78 & 178.30 & 177.19 & 177.39 \\
       geom: \(\theta\) (\si{\degree}) & 0.04 & 0.03 & 2.70 & 2.70 & 2.42 & 2.22 & 1.70 & 2.81 & 2.61 \\
