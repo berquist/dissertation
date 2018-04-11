@@ -21,7 +21,7 @@ The text in this chapter has been adapted from \fullcite{Brinzer2015}, and its e
 \section{\texorpdfstring{\caps{Summary}}{Summary}}
 \label{sec:anions_summary}
 
-The \ce{CO2} \(\nu_3\) \href{https://chemistry.stackexchange.com/q/45138/194}{\color{black}{asymmetric stretching mode}} is established as a vibrational chromophore for ultrafast two-dimensional infrared (2D-IR) spectroscopic studies of local structure and dynamics in ionic liquids, which are of interest for carbon capture applications. \ce{CO2} is dissolved in a series of 1-butyl-3-methylimidazolium-based ionic liquids (\ce{[Im_{4,1}}][X]), where \ce{[X]-} is the anion from the series hexafluorophosphate (\ce{PF6-}), tetrafluoroborate (\ce{BF4-}), bis-(trifluoromethylsulfonyl)imide (\ce{Tf2N-}), triflate (\ce{TfO-}), trifluoroacetate (\ce{TFA-}), dicyanamide (\ce{DCA-}), and thiocyanate (\ce{SCN-}). In the ionic liquids studied, the \(\nu_3\) center frequency is sensitive to the local solvation environment and reports on the timescales for local structural relaxation. Density functional theory calculations predict charge transfer from the anion to the \ce{CO2} and from \ce{CO2} to the cation. The charge transfer drives geometrical distortion of \ce{CO2}, which in turn changes the \(\nu_3\) frequency. The observed structural relaxation timescales vary by up to an order of magnitude between ionic liquids. Shoulders in the 2D-IR spectra arise from anharmonic coupling of the \(\nu_2\) and \(\nu_3\) normal modes of \ce{CO2}. Thermal fluctuations in the \(\nu_2\) population stochastically modulate the \(\nu_3\) frequency and generate dynamic cross-peaks. These timescales are attributed to the breakup of ion cages that create a well-defined local environment for \ce{CO2}. The results suggest that the picosecond dynamics of \ce{CO2} are gated by local diffusion of anions and cations.
+The \ce{CO2} \(\nu_3\) \href{https://chemistry.stackexchange.com/q/45138/194}{\color{black}{asymmetric stretching mode}} is established as a vibrational chromophore for ultrafast two-dimensional infrared (2D-IR) spectroscopic studies of local structure and dynamics in ionic liquids, which are of interest for carbon capture applications. \ce{CO2} is dissolved in a series of 1-butyl-3-methylimidazolium-based ionic liquids (\ce{[Im_{4,1}][X]}), where \ce{[X]-} is the anion from the series hexafluorophosphate (\ce{PF6-}), tetrafluoroborate (\ce{BF4-}), bis-(trifluoromethylsulfonyl)imide (\ce{Tf2N-}), triflate (\ce{TfO-}), trifluoroacetate (\ce{TFA-}), dicyanamide (\ce{DCA-}), and thiocyanate (\ce{SCN-}). In the ionic liquids studied, the \(\nu_3\) center frequency is sensitive to the local solvation environment and reports on the timescales for local structural relaxation. Density functional theory calculations predict charge transfer from the anion to the \ce{CO2} and from \ce{CO2} to the cation. The charge transfer drives geometrical distortion of \ce{CO2}, which in turn changes the \(\nu_3\) frequency. The observed structural relaxation timescales vary by up to an order of magnitude between ionic liquids. Shoulders in the 2D-IR spectra arise from anharmonic coupling of the \(\nu_2\) and \(\nu_3\) normal modes of \ce{CO2}. Thermal fluctuations in the \(\nu_2\) population stochastically modulate the \(\nu_3\) frequency and generate dynamic cross-peaks. These timescales are attributed to the breakup of ion cages that create a well-defined local environment for \ce{CO2}. The results suggest that the picosecond dynamics of \ce{CO2} are gated by local diffusion of anions and cations.
 
 \section{\texorpdfstring{\caps{Introduction}}{Introduction}}
 \label{sec:anions_intro}
@@ -595,24 +595,23 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
 \begin{landscape}
   \begin{table}
     \centering
-    % \resizebox{1\textwidth}{!}{
-    \caption{\texorpdfstring{\cotil{}}{Carbon dioxide-IL} geometries optimized allowing charge transfer}
+    \caption[\texorpdfstring{\cotil{}}{Carbon dioxide-IL} geometries optimized allowing charge transfer]{\cotil{} geometries optimized allowing charge transfer. ``Free \ce{CO2}'' is \ce{CO2} not in the presence of the IL, ``cation'' is \ce{CO2} only in the presence of the IL cation (no anion), and all other columns specify the IL anion identity. The cation is \ce{[Im_{1,1}]+} or \ce{[C1C1im]+}.}
     \label{paper_01:tab:S1}
     \small
     \tabcolsep=0.11cm
     \begin{tabular}{rcccccccccc}
-      \hline
-      & Free \ce{CO2} & Cation & \ce{BF4} & \ce{DCA} & \ce{PF6} & \ce{SCN} & \ce{TFA} & \ce{Tf2N} & \ce{TfO} \\
-      \hline
+      \toprule
+      & Free \ce{CO2} & Cation & \ce{[BF4]-} & \ce{[DCA]-} & \ce{[PF6]-} & \ce{[SCN]-} & \ce{[TFA]-} & \ce{[Tf2N]-} & \ce{[TfO]-} \\
+      \midrule
       \(\nu_1\) (\si{\wavenumber}) & 1371.93 & 1372.12 & 1372.96 & 1370.71 & 1373.95 & 1370.35 & 1371.68 & 1372.88 & 1371.14 \\
       \(\nu_3\) (\si{\wavenumber}) & 2436.1 & 2443.07 & 2434.71 & 2430.85 & 2437.48 & 2430.27 & 2429.81 & 2437.74 & 2433.89 \\
       \(\beta\) (\si{\wavenumber}) & -532.085 & -535.475 & -530.875 & -530.07 & -531.765 & -529.96 & -529.065 & -532.43 & -531.375 \\
       \(\alpha\) (\si{\wavenumber}) & 1904.015 & 1907.595 & 1903.835 & 1900.7 & 1905.715 & 1900.31 & 1900.745 & 1905.31 & 1902.515 \\
-      \hline
+      \midrule
       CT: \ce{CO2} to IL (\si{\milli\electron}) & 0 & 2.251 & 1.264 & 2.259 & 1.012 & 1.323 & 1.618 & 1.603 & 2.339 \\
       CT: IL to \ce{CO2} (\si{\milli\electron}) & 0 & 0.079 & 4.558 & 3.376 & 3.336 & 3.317 & 5.131 & 2.493 & 3.009 \\
       CT: net (\si{\milli\electron}) & 0 & -2.172 & 3.294 & 1.117 & 2.324 & 1.994 & 3.513 & 0.89 & 0.67 \\
-      \hline
+      \midrule
       geom: angle (\si{\degree}) & 179.96 & 179.93 & 175.49 & 175.01 & 176.21 & 175.65 & 174.78 & 177.36 & 175.99 \\
       geom: \(\theta\) (\si{\degree}) & 0.042 & 0.07 & 4.51 & 4.99 & 3.79 & 4.35 & 5.22 & 2.64 & 4.01 \\
       geom: \(l_2 - l_1\) (\si{\angstrom}) & \num{1.9e-7} & 0.015 & 0.0087 & 0.011 & 0.0071 & 0.0089 & 0.0076 & 0.0076 & 0.011 \\
@@ -620,31 +619,30 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
       geom: \(l_2\) (\si{\angstrom}) & 1.169 & 1.161 & 1.165 & 1.164 & 1.165 & 1.174 & 1.166 & 1.173 & 1.164 \\
       geom: \ce{O_{12}}  (\si{\angstrom}) & 2.338 & 2.337 & 2.337 & 2.337 & 2.337 & 2.338 & 2.337 & 2.337 & 2.337 \\
       geom: \(L\) (\si{\angstrom}) & 2.338 & 2.337 & 2.338 & 2.339 & 2.338 & 2.339 & 2.339 & 2.338 & 2.339 \\
-      \hline
-    \end{tabular}%}
+      \bottomrule
+    \end{tabular}
     \normalsize
   \end{table}
 
   \begin{table}
     \centering
-    % \resizebox{1\textwidth}{!}{
-    \caption{\texorpdfstring{\cotil{}}{Carbon dioxide-IL} geometries optimized without allowing charge transfer}
+    \caption[\texorpdfstring{\cotil{}}{Carbon dioxide-IL} geometries optimized without allowing charge transfer]{\cotil{} geometries optimized without allowing charge transfer. ``Free \ce{CO2}'' is \ce{CO2} not in the presence of the IL, ``cation'' is \ce{CO2} only in the presence of the IL cation (no anion), and all other columns specify the IL anion identity. The cation is \ce{[Im_{1,1}]+} or \ce{[C1C1im]+}.}
     \label{paper_01:tab:S2}
     \small
     \tabcolsep=0.11cm
     \begin{tabular}{rcccccccccc}
-      \hline
-      & Free \ce{CO2} & \kdjnote{add co2 to each} Cation & \ce{BF4} & \ce{DCA} & \ce{PF6} & \ce{SCN} & \ce{TFA} & \ce{Tf2N} & \ce{TfO} \\
-      \hline
+      \toprule
+      & Free \ce{CO2} & Cation & \ce{[BF4]-} & \ce{[DCA]-} & \ce{[PF6]-} & \ce{[SCN]-} & \ce{[TFA]-} & \ce{[Tf2N]-} & \ce{[TfO]-} \\
+      \midrule
       \(\nu_1\) (\si{\wavenumber}) & 1371.93 & 1371.47 & 1373.31 & 1373.44 & 1373.33 & 1373.14 & 1373.65 & 1373.06 & 1373.45 \\
       \(\nu_3\) (\si{\wavenumber}) & 2436.1 & 2439.86 & 2438.56 & 2439.1 & 2438.47 & 2438.78 & 2438.39 & 2438.767 & 2439.37 \\
       \(\beta\) (\si{\wavenumber}) & -532.085 & -534.195 & -532.625 & -532.83 & -532.57 & -532.82 & -532.37 & -532.85 & -532.96 \\
       \(\alpha\) (\si{\wavenumber}) & 1904.015 & 1905.665 & 1905.935 & 1906.27 & 1905.9 & 1905.96 & 1906.027 & 1905.91 & 1906.41 \\
-      \hline
+      \midrule
       CT: \ce{CO2} to IL (\si{\milli\electron}) & 0 & 1.743 & 1.038 & 1.836 & 1.154 & 1.302 & 1.023 & 1.246 & 1.941 \\
       CT: IL to \ce{CO2} (\si{\milli\electron}) & 0 & 0.039 & 3.053 & 2.266 & 2.221 & 1.64 & 2.916 & 1.274 & 2.048 \\
       CT: net (\si{\milli\electron}) & 0 & -1.704 & 2.015 & 0.43 & 1.067 & 0.338 & 1.893 & 0.028 & 0.107 \\
-      \hline
+      \midrule
       geom: angle (\si{\degree}) & 179.96 & 179.97 & 177.30 & 177.29 & 177.58 & 177.78 & 178.30 & 177.19 & 177.39 \\
       geom: \(\theta\) (\si{\degree}) & 0.04 & 0.03 & 2.70 & 2.70 & 2.42 & 2.22 & 1.70 & 2.81 & 2.61 \\
       geom: \(l_2 - l_1\) (\si{\angstrom}) & $1.9\times 10^{-7}$ & 0.012 & 0.008 & 0.008 & 0.007 & 0.008 & 0.007 & 0.007 & 0.009 \\
@@ -652,8 +650,8 @@ In tables~\ref{paper_01:tab:S1}~and~\ref{paper_01:tab:S2}, `\(\nu_1\)' is the fr
       geom: \(l_2\) (\si{\angstrom}) & 1.169 & 1.163 & 1.165 & 1.165 & 1.166 & 1.173 & 1.172 & 1.166 & 1.165 \\
       geom: \ce{O_{12}} (\si{\angstrom}) & 2.338 & 2.338 & 2.337 & 2.337 & 2.337 & 2.337 & 2.338 & 2.337 & 2.337 \\
       geom: \(L\) (\si{\angstrom}) & 2.338 & 2.338 & 2.338 & 2.338 & 2.338 & 2.338 & 2.338 & 2.338 & 2.338 \\
-      \hline
-    \end{tabular}%}
+      \bottomrule
+    \end{tabular}
     \normalsize
   \end{table}
 \end{landscape}
