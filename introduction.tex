@@ -775,19 +775,24 @@ and use the phase-isolated wavefunction\footnote{\(\dot{A}(t) = \mathrm{d}A(t)/\
   \label{eq:phase-isolated-tdse}
   \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)} = \dot{\mathcal{F}}(t) \ket{\tilde{\Psi}(t)},
 \end{equation}
-\kdjwarning{where \(\dot{\mathcal{F}}(t)\) now looks likes the energy} from the time-independent \schrod{} equation (TISE). This ``energy'' is still not stationary with time, \kdjwarning{however it can be made stationary through integration over the time coordinate.}
+where \(\dot{\mathcal{F}}(t)\) now resembles the energy from the time-independent \schrod{} equation (TISE). This ``energy'' is still not stationary with time, however it will reappear later as part of a stationary theory.
 
 Before going further, the Hamiltonian must be specified. The partitioning introduced in \eqref{eq:perturbed-hamiltonian} is modified:
 \begin{equation}
   \label{eq:perturbed-hamiltonian-time-dependent}
   \hat{H}(t) = \hat{H}^{(0)} + \hat{V}(t),
 \end{equation}
-so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} This perturbation usually represents an external electric field that is \kdjwarning{slowly turned on} \kdjnote{why slowly?} and oscillates with time at a characteristic frequency. Representing the perturbation in terms of Fourier components:
+so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} The prototypical perturbation usually represents an external electric field that is slowly turned on in order for the system to gradually respond and may oscillate with time at a characteristic frequency.\footnote{In the case that the response of the system is slower than the speed of which the perturbation is turned on, a different (undesirable) solution may be found if the perturbation is strong enough.} Representing the perturbation in terms of Fourier components,
 \begin{equation}
   \label{eq:fourier-components}
-  \hat{V}(t) = x_{1} \hat{B} e^{-i\omega t} + x_{2} \hat{A} e^{+i\omega t}
+  \hat{V}(t) = x_{1} \hat{B} e^{-i\omega t} + x_{2} \hat{A} e^{+i\omega t},
 \end{equation} %TODO I am really not satisfied with this
-shows that the perturbation, and therefore the Hamiltonian, is periodic in time (\(\hat{H}(t + T) = \hat{H}(t)\)) with a period of \(T = 2\pi/\omega\) \kdjnote{why is it necessarily periodic?}. This gives the required integration bounds for \eqref{eq:phase-isolated-tdse}, leading to
+shows that the perturbation, and therefore the Hamiltonian, is periodic in time (\(\hat{H}(t + T) = \hat{H}(t)\)) with a period of \(T = 2\pi/\omega\). Other perturbation shapes, such as step functions, can be represented using a more general form of \eqref{eq:fourier-components} with more Fourier components:
+\begin{equation}
+  \label{eq:general-fourier-components-gauss-106}\tag{Gauss eq. 106}
+  \hat{V}(t) = \sum_{k=-N}^{N} e^{-i\omega_{k}t} \sum_{X} \epsilon_{X}(\omega_{k})\hat{X},
+\end{equation}
+where \(k\) is the Fourier component index, \(\omega_{k}\) are the frequencies, and \(\epsilon_{X}(\omega_{k})\) and \(\hat{X}\) are the corresponding perturbation strengths and operators. This gives the required integration bounds for \eqref{eq:phase-isolated-tdse}, leading to
 \begin{equation}
   \label{eq:quasienergy}
   \begin{aligned}
@@ -795,7 +800,7 @@ shows that the perturbation, and therefore the Hamiltonian, is periodic in time 
     &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \frac{\bra{\tilde{\Psi}(t)} \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)}}{\braket{\tilde{\Psi}(t)|\tilde{\Psi}(t)}},
   \end{aligned}
 \end{equation}
-where \kdjwarning{\(\mathcal{Q}\) is the \emph{time-averaged quasienergy}}. The second part of \eqref{eq:quasienergy} is the variational condition for \(\tilde{\Psi}(t)\), \kdjwarning{making \(\mathcal{Q}\) stationary with respect to fluctuations in \(\tilde{\Psi}(t)\)}. In the time-independent case, the quasienergy reduces to the (time-independent) energy, and the phase-isolated wavefunction reduces to the (time-independent) wavefunction.
+where \(\mathcal{Q}\) is the \emph{time-averaged quasienergy}. The second part of \eqref{eq:quasienergy} is the variational condition for \(\tilde{\Psi}(t)\), making \(\mathcal{Q}\) stationary with respect to fluctuations in \(\tilde{\Psi}(t)\). In the time-independent case, the quasienergy reduces to the (time-independent) energy, and the phase-isolated wavefunction reduces to the (time-independent) wavefunction.
 
 The time-averaged quasienergy can now be expanded with respect to the perturbation parameters,
 \begin{equation}
@@ -809,15 +814,19 @@ Using the time-dependent form of \eqref{eq:first-order-terms-final},
   \label{eq:quasienergy-10}
   \begin{aligned}
     \mathcal{Q}^{(10)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}} \\
-    &= \braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{0}} \delta(\omega).
+    &= \braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{0}} \delta[\omega].
 \end{aligned}
 \end{equation}
 The rule used in \eqref{eq:quasienergy-10} is
 \begin{equation}
   \label{eq:kronecker-delta-frequencies}
-  \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, e^{-i\omega t} = \delta(\omega),
+  \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, e^{-i\omega t} = \delta[\omega] =
+  \begin{cases}
+    \delta_{\omega,0} & |T| < \infty \\
+    \delta(\omega) & T \rightarrow \infty
+  \end{cases},
 \end{equation}
-where \kdjwarning{\(\delta(\omega)\) is the Kronecker delta for finite \(T\) and the Dirac delta for \(T \rightarrow \infty\)}. The conclusion is that only static first-order properties are non-zero, where the physical intuition is that absorption or emission of a photon with \(\omega \neq 0\) would violate energy conservation. Using \eqref{eq:second-order-correction-first-form} and \eqref{eq:intermediate-normalization},
+where we define \(\delta[\omega]\) as the Kronecker delta for finite \(T\) and the Dirac delta for \(T \rightarrow \infty\). More explicitly, \(\delta[\omega = 0] = (1/T) \int_{0}^{T} \mathrm{d}t \, e^{0} = 1\). \(\delta[\omega \neq 0]\) would lead a non-zero value for exponential inside \eqref{eq:kronecker-delta-frequencies}, which when expanded as sines and cosines, give rise to terms that are not physically admissible as Fourier components. The conclusion is that only static first-order properties are non-zero, where the physical intuition is that absorption or emission of a photon with \(\omega \neq 0\) would violate energy conservation. Using \eqref{eq:second-order-correction-first-form} and \eqref{eq:intermediate-normalization},
 \begin{equation}
   \label{eq:quasienergy-20}
   \mathcal{Q}^{(20)} = \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}^{(10)}(t)},
@@ -842,7 +851,7 @@ where the factor \(e^{\gamma t}\) is dropped from the numerator, but now supplie
   \label{eq:58}
   \begin{aligned}
     \mathcal{Q}^{(20)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \\
-    &= 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \delta(2\omega),
+    &= 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \delta[2\omega],
   \end{aligned}
 \end{equation}
 \kdjwarning{which is also nonzero only for the static case}. Performing the same steps for the mixed term,
