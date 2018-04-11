@@ -1,5 +1,12 @@
 # for minted, pygmentize is required: module load python/anaconda3
 
+# the latex file are not included as make dependencies because latexmk
+# is better at detecting dependency changes than make
+
+front_matter:
+	latexmk -pdf -xelatex -shell-escape abstract.tex
+	latexmk -pdf -xelatex -shell-escape introduction.tex
+
 all:
 	latexmk -pdf -xelatex -shell-escape eric_john_berquist_etd.tex
 
