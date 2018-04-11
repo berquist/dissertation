@@ -447,6 +447,7 @@ It is convenient to rewrite the MO coefficient derivatives,
 \end{equation}
 where the index \(m\) runs over all occupied and unoccupied/virtual MOs. Although \(X_{A}\) is being used for the perturbation, all parts of this derivation hold for any general perturbation. The key insight is that the effect of a perturbation on the MO coefficients can be written as the contraction of the unmodified MO coeffcients with a unitary matrix describing single-particle excitations from occupied to virtual MOs, as well as deexcitations from virtual to occupied MOs. In matrix form, this is
 \begin{equation}
+  \label{eq:mo-coefficient-derivatives}
   \mathbf{C}^{(X_{A})} = \mathbf{C}^{(0)} \left( \mathbf{U}^{(X_{A})} \right)^{T},
 \end{equation}
 where the dimension of \(\mathbf{U}\) is \([N_{\text{orb}}, N_{\text{orb}}]\).
@@ -557,25 +558,23 @@ Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another n
 \end{equation}
 where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted.} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable.
 
-However, the case of \kdjwarning{the molecular Hessian is an exceptional one, because the AOs are perturbation-dependent}: for a fixed electron position, the amplitude of a basis function will change if it moved, and they are typically atom-centered. In the case that the basis set is \kdjwarning{\textit{not} perturbation dependent, as is most often in the case in electric field perturbations} \kdjnote{?}, \eqref{eq:yamaguchi-4.54-and-4.55-and-3.127} reduces to
+However, the case of the molecular Hessian is a general one, because the AOs are perturbation-dependent: for a fixed electron position, the amplitude of a basis function will change if it moved, and they are typically atom-centered. In the case that the basis set is \textit{not} perturbation dependent, as is most often in the case in electric field perturbations\footnote{See Ref.~\parencite{doi:10.1021/j100074a008} for a discussion of using electric field-dependent functions.}, \eqref{eq:yamaguchi-4.54-and-4.55-and-3.127} reduces to
 \begin{equation}
   \label{eq:yamaguchi-17.54} \tag{Yamaguchi eq. 17.54}
   \frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}} = -4 \sum_{a}^{\text{virt}} \sum_{i}^{\text{d.o.}} U_{ai}^{F_{\beta}} h_{ai}^{F_{\alpha}},
 \end{equation}
-where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see the \(\mathbf{P}/\mathbf{Q}\) matrix elements in section~\ref{ssec:linear-response-formalism} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}). In general, \kdjwarning{when the AO basis is perturbation independent}, the energy derivative with respect to two arbitrary perturbations \(\lambda\) and \(\theta\) can be written as
+where \(\frac{\partial^{2} E_{\text{tot}}^{\text{RHF}}}{\partial F_{\alpha} \partial F_{\beta}}\) is the \(\alpha\beta\)-component of the static polarizability tensor \eqref{eq:polarizability-derivative-definition}, and the one-electron term \(h_{ai}^{F_{\alpha}}\) is the \(\alpha\)-component of the dipole operator in the occupied-virtual MO basis (the \emph{property gradient}, see the \(\mathbf{P}/\mathbf{Q}\) matrix elements in section~\ref{ssec:linear-response-formalism} and line~\ref{line:form_polarizability}). This specific term originates from the Fock matrix derivatives on line three, as the complete Hamiltonian now includes the perturbation (see \eqref{eq:perturbed-hamiltonian}), which is the only term that survives the differentiation. In general, when the AO basis is perturbation independent, the energy derivative with respect to two arbitrary perturbations \(\lambda\) and \(\theta\) can be written as\cite{NEESE2009526}
 \begin{equation}
   \label{eq:neese-77} \tag{Neese eq. 77}
   \frac{\partial^{2} E}{\partial \lambda \partial \theta} = \sum_{\mu\nu} \left( P_{\mu\nu} \frac{\partial^{2} h_{\mu\nu}}{\partial \lambda \partial \theta} + \frac{\partial P_{\mu\nu}}{\partial \theta} \frac{\partial h_{\mu\nu}}{\partial \lambda} \right),
 \end{equation}
-\kdjwarning{where the first term is an expectation value and the second term requires solution of the response equations.}
-\begin{anfxnote}{density derivative}
-  Show how the perturbed density is related to \(U\):
-  \begin{equation}
-    \frac{\partial P}{\partial \lambda} = C (C^{\lambda})^{T} + C^{\lambda} C^{T}; C^{\lambda} = C (U^{\lambda})^{T}
-  \end{equation}
-\end{anfxnote}
+where the first term is evaluated as an expectation value and the second term requires solution of the response equations. The derivative of the density matrix is related to the \(\mathbf{U}\) matrices via\footnote{\eqref{eq:neese-77} is for real perturbations; in the case of imaginary perturbations, the sum changes to a difference.}
+\begin{equation}
+  \frac{\partial \mathbf{P}}{\partial \theta} = \mathbf{C}^{(0)} \left( \mathbf{C}^{(\theta)} \right)^{T} + \mathbf{C}^{(\theta)} \left( \mathbf{C}^{(0)} \right)^{T}
+\end{equation}
+and \eqref{eq:mo-coefficient-derivatives}.
 
-The form of \kdjwarning{\eqref{eq:yamaguchi-17.54} and \eqref{eq:neese-77}} should make it clear that for a second derivative of an HF wavefunction, \kdjwarning{only one set of \(\mathbf{U}\) matrices is needed}. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices, but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) \kdjwarning{would only require \(3\) \(\mathbf{U}\) matrices}.
+The form of \eqref{eq:yamaguchi-17.54} and \eqref{eq:neese-77} as shown above should make it clear that for a second derivative of an HF wavefunction, only one set of \(\mathbf{U}\) matrices is needed. This leads to a potential computational savings. Considering the IR intensities \(\frac{d^{2}E}{dX_{A}dF_{\alpha}}\), calculating \(\frac{d}{d X_{A}} \left(\mu_{\alpha}\right)\) would require \(3N\) \(\mathbf{U}\) matrices (one for each nuclear displacement), but using \eqref{eq:youngs-theorem} to calculate \(\frac{d}{d F_{\alpha}} \left(\frac{d E}{d X_{A}}\right)\) would only require \(3\) \(\mathbf{U}\) matrices (one for each external field component).
 
 \subsection{Perturbation theory}
 \label{ssec:perturbation-theory}
