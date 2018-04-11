@@ -5,67 +5,15 @@
   multi = true,%
   preview = false,%
 ]{standalone}
-\usepackage[%
-    backend      = biber,%
-    style        = chem-acs,%
-    autocite     = superscript,%
-    backref      = true,%
-    doi          = true,%
-    articletitle = true,%
-    chaptertitle = true,%
-    biblabel     = brackets,%
-    minnames     = 1,%
-    maxnames     = 999,%
-]{biblatex}
-\let\cite\autocite
-\DefineBibliographyStrings{english}{%
-  backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},%
-}
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{labelprefix}%
-        \printfield{labelnumber}}}
-     {%
-      \setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\leftmargin}{\labelwidth}%
-      \setlength{\labelsep}{\biblabelsep}%
-      \addtolength{\leftmargin}{\labelsep}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-      \renewcommand*{\makelabel}[1]{##1}}
-  {\endlist}
-  {\item}
-\addbibresource{./paper.bib}
-\addbibresource{../5773968.bib}
-\addbibresource{../paper_05/psi4numpy.bib}
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{booktabs}
-\usepackage{braket}
-\onlyifstandalone{\usepackage[margin=1in]{geometry}}
+\onlyifstandalone{\usepackage{etoolbox}}
+\onlyifstandalone{\usepackage{setspace}}
+\onlyifstandalone{\input{../ejb-bibstuff.sty}}
+\onlyifstandalone{\addbibresource{./paper.bib}}
+\onlyifstandalone{\addbibresource{../5773968.bib}}
+\onlyifstandalone{\addbibresource{../paper_05/psi4numpy.bib}}
+\onlyifstandalone{\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}}
+\onlyifstandalone{\input{../ejb-dissertation.sty}}
 \onlyifstandalone{\raggedbottom}
-\usepackage{graphicx}
-\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
-\usepackage[version=4]{mhchem}
-\newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
-\usepackage[%
-    separate-uncertainty = true,%
-    multi-part-units = single,%
-    range-units = single,%
-    retain-explicit-plus = true,%
-]{siunitx}
-\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
-\DeclareSIUnit\kcal{\kilo\cal}
-\usepackage{listings}
-\lstset{%
-  basicstyle=\ttfamily\footnotesize,%
-  breakatwhitespace=true,%
-  breaklines=false,%
-  frame=none,%
-}
-\newcommand{\caps}[1]{\uppercase{#1}}
 \begin{document}
 \chapter[ALMO Linear Response]{A First Principles Approach for Partitioning Linear Response Properties into Additive and Cooperative Contributions}
 \label{ch:paper_04}

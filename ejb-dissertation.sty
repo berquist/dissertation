@@ -1,0 +1,95 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ejb-dissertation}
+
+\RequirePackage{algorithm}
+\RequirePackage{algpseudocode}
+\RequirePackage{booktabs}
+\RequirePackage{braket}
+
+\RequirePackage{graphicx}
+\RequirePackage{longtable}
+\RequirePackage{makecell}
+\renewcommand{\cellalign}{cl}
+\RequirePackage[version=4]{mhchem}
+\newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
+% \RequirePackage[final]{microtype}
+\RequirePackage{multirow}
+\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage[all,error]{onlyamsmath}
+\RequirePackage{pdflscape}
+\RequirePackage{tabulary}
+\RequirePackage[flushleft]{threeparttable}
+\RequirePackage{xspace}
+
+\RequirePackage[usenames,dvipsnames,svgnames,hyperref,table]{xcolor}
+\definecolor{caliblue}{HTML}{015482}
+\definecolor{carmine}{HTML}{960018}
+
+\RequirePackage{cancel}
+\newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
+
+\RequirePackage[%
+    separate-uncertainty = true,%
+    multi-part-units = single,%
+    range-phrase = {\text{ to }},%
+    range-units = single,%
+    retain-explicit-plus = true,%
+]{siunitx}
+\DeclareSIUnit\Molar{M}
+\DeclareSIUnit\au{a.u.}
+\DeclareSIUnit\cal{cal}
+\DeclareSIUnit\debye{D}
+\DeclareSIUnit\electron{e^{-}}
+\DeclareSIUnit\kcal{\kilo\cal}
+\DeclareSIUnit\micron{\micro\metre}
+\DeclareSIUnit\torr{Torr}
+\DeclareSIUnit\wavenumber{\per\centi\metre}
+
+\RequirePackage{listings}
+\lstset{%
+  basicstyle=\ttfamily\footnotesize,%
+  breakatwhitespace=true,%
+  breaklines=false,%
+  frame=none,%
+  numberbychapter=false,%
+}
+
+\RequirePackage{minted}
+\setminted{%
+  breaklines=true,%
+  fontsize=\footnotesize,%
+  frame=none,%
+  linenos=true,%
+  mathescape=true,%
+  python3=true,%
+  texcomments=false,%
+}
+
+% stop it, pittetd
+\BeforeBeginEnvironment{algorithmic}{\begin{singlespace}}
+\AfterEndEnvironment{algorithmic}{\end{singlespace}}
+\BeforeBeginEnvironment{minted}{\begin{singlespace}}
+\AfterEndEnvironment{minted}{\end{singlespace}}
+
+\newcommand{\cotil}{\ce{CO2}\textendash{}IL}
+\newcommand{\hefe}{Hellmann\textendash{}Feynman}
+\newcommand{\hf}{Hartree\textendash{}Fock}
+\newcommand{\qchem}{\textsc{Q-Chem}}
+\newcommand{\schrod}{Schr{\"{o}}dinger}
+\newcommand{\latin}[1]{\textit{#1}}
+
+% optionally don't use uppercase for document classes that aren't
+% garbage
+\newcommand{\caps}[1]{\uppercase{#1}}
+% \newcommand{\caps}[1]{{#1}}
+
+\hyphenation{im-id-a-zol-i-um meth-yl-im-id-a-zol-i-um hexa-fluoro-phos-phate tetra-fluoro-borate tri-fluoro-methyl-sulfonyl tri-fluoro-acetate di-cyan-amide red-shift red-shifts electro-statics wave-function}
+
+\hypersetup{%
+  colorlinks=true,%
+  citecolor=black,%
+  linkcolor=black,%
+  urlcolor=carmine,%
+}
+
+\endinput

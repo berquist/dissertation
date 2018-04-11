@@ -5,66 +5,13 @@
   multi = true,%
   preview = false,%
 ]{standalone}
-\usepackage[%
-    backend      = biber,%
-    style        = chem-acs,%
-    autocite     = superscript,%
-    backref      = true,%
-    doi          = true,%
-    articletitle = true,%
-    chaptertitle = true,%
-    biblabel     = brackets,%
-    minnames     = 1,%
-    maxnames     = 999,%
-]{biblatex}
-\let\cite\autocite
-\DefineBibliographyStrings{english}{%
-  backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},%
-}
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{labelprefix}%
-        \printfield{labelnumber}}}
-     {%
-      \setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\leftmargin}{\labelwidth}%
-      \setlength{\labelsep}{\biblabelsep}%
-      \addtolength{\leftmargin}{\labelsep}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-      \renewcommand*{\makelabel}[1]{##1}}
-  {\endlist}
-  {\item}
-\addbibresource{../library.bib}
-\addbibresource{../paper_04/paper.bib}
-\addbibresource{../paper_05/psi4numpy.bib}
-\usepackage{booktabs}
-\usepackage{braket}
-\usepackage{graphicx}
-\onlyifstandalone{\usepackage[margin=1in]{geometry}}
+\onlyifstandalone{\input{../ejb-bibstuff.sty}}
+\onlyifstandalone{\addbibresource{../library.bib}}
+\onlyifstandalone{\addbibresource{../paper_04/paper.bib}}
+\onlyifstandalone{\addbibresource{../paper_05/psi4numpy.bib}}
+\onlyifstandalone{\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}}
+\onlyifstandalone{\input{../ejb-dissertation.sty}}
 \onlyifstandalone{\raggedbottom}
-\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
-\usepackage[version=4]{mhchem}
-\usepackage{pdflscape}
-\usepackage[flushleft]{threeparttable}
-\usepackage{xspace}
-\usepackage[%
-    separate-uncertainty = true,%
-    multi-part-units = single,%
-    range-units = single,%
-    retain-explicit-plus = true,%
-]{siunitx}
-\DeclareSIUnit\Molar{M}
-\DeclareSIUnit\electron{e^{-}}
-\DeclareSIUnit\micron{\micro\metre}
-\DeclareSIUnit\torr{Torr}
-\DeclareSIUnit\wavenumber{\per\centi\metre}
-\newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
-\newcommand{\latin}[1]{\textit{#1}}
-\newcommand{\caps}[1]{\uppercase{#1}}
-\hyphenation{im-id-a-zol-i-um meth-yl-im-id-a-zol-i-um hexa-fluoro-phos-phate tetra-fluoro-borate tri-fluoro-methyl-sulfonyl tri-fluoro-acetate di-cyan-amide red-shift red-shifts}
 \begin{document}
 \chapter[\texorpdfstring{\ce{CO2}}{CO2}-IL Cluster Model Development]{Carbon Capture from Carbon Dioxide's Point-of-View}
 \label{ch:anions}

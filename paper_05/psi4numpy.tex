@@ -5,69 +5,22 @@
   multi = true,%
   preview = false,%
 ]{standalone}
-\usepackage[%
-    backend      = biber,%
-    style        = chem-acs,%
-    autocite     = superscript,%
-    backref      = true,%
-    doi          = true,%
-    articletitle = true,%
-    chaptertitle = true,%
-    biblabel     = brackets,%
-    minnames     = 1,%
-    maxnames     = 999,%
-]{biblatex}
-\let\cite\autocite
-\DefineBibliographyStrings{english}{%
-  backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},%
-}
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{labelprefix}%
-        \printfield{labelnumber}}}
-     {%
-      \setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\leftmargin}{\labelwidth}%
-      \setlength{\labelsep}{\biblabelsep}%
-      \addtolength{\leftmargin}{\labelsep}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-      \renewcommand*{\makelabel}[1]{##1}}
-  {\endlist}
-  {\item}
-\addbibresource{../5746059.bib}
-\addbibresource{./psi4numpy.bib}
-\addbibresource{./tutorial.bib}
-\addbibresource{../paper_04/paper.bib}
-\usepackage{amsmath}
-\usepackage{booktabs}
-\onlyifstandalone{\usepackage[margin=1in]{geometry}}
+\onlyifstandalone{\usepackage{etoolbox}}
+\onlyifstandalone{\usepackage{setspace}}
+\onlyifstandalone{\input{../ejb-bibstuff.sty}}
+\onlyifstandalone{\addbibresource{../5746059.bib}}
+\onlyifstandalone{\addbibresource{./psi4numpy.bib}}
+\onlyifstandalone{\addbibresource{./tutorial.bib}}
+\onlyifstandalone{\addbibresource{../paper_04/paper.bib}}
+\onlyifstandalone{\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}}
+\onlyifstandalone{\input{../ejb-dissertation.sty}}
 \onlyifstandalone{\raggedbottom}
-\usepackage{graphicx}
-\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
-\usepackage{setspace}
-\usepackage{xspace}
-\usepackage{minted}
-\setminted{%
-  breaklines=true,%
-  fontsize=\footnotesize,%
-  frame=none,%
-  linenos=true,%
-  mathescape=true,%
-  python3=true,%
-  texcomments=false,%
-}
-\newcommand{\caps}[1]{\uppercase{#1}}
-\hyphenation{wave-function}
 \begin{document}
 \newcommand{\numpy}{\textsc{NumPy}\xspace}
 \newcommand{\pfour}{\textsc{Psi4}\xspace}
 \newcommand{\pfn}{\textsc{Psi4NumPy}\xspace}
 \newcommand{\arrayint}{\texttt{array\_interface}\xspace}
 \newcommand{\einsum}{\texttt{einsum}\xspace}
-
 \chapter[\texorpdfstring{\caps{\pfn}}{\pfn}]{\texorpdfstring{\caps{\pfn: An Interactive Quantum Chemistry Programming Environment for Reference Implementations and Rapid Development}}{\pfn: An Interactive Quantum Chemistry Programming Environment for Reference Implementations and Rapid Development}}
 \label{ch:paper_05}
 

@@ -5,66 +5,12 @@
   multi = true,%
   preview = false,%
 ]{standalone}
-\usepackage[%
-    backend      = biber,%
-    style        = chem-acs,%
-    autocite     = superscript,%
-    backref      = true,%
-    doi          = true,%
-    articletitle = true,%
-    chaptertitle = true,%
-    biblabel     = brackets,%
-    minnames     = 1,%
-    maxnames     = 999,%
-]{biblatex}
-\let\cite\autocite
-\DefineBibliographyStrings{english}{%
-  backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},%
-}
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{labelprefix}%
-        \printfield{labelnumber}}}
-     {%
-      \setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\leftmargin}{\labelwidth}%
-      \setlength{\labelsep}{\biblabelsep}%
-      \addtolength{\leftmargin}{\labelsep}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-      \renewcommand*{\makelabel}[1]{##1}}
-  {\endlist}
-  {\item}
-\addbibresource{../library.bib}
-\addbibresource{../paper_04/paper.bib}
-\usepackage{booktabs}
-\usepackage{braket}
-\onlyifstandalone{\usepackage[margin=1in]{geometry}}
+\onlyifstandalone{\input{../ejb-bibstuff.sty}}
+\onlyifstandalone{\addbibresource{../library.bib}}
+\onlyifstandalone{\addbibresource{../paper_04/paper.bib}}
+\onlyifstandalone{\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}}
+\onlyifstandalone{\input{../ejb-dissertation.sty}}
 \onlyifstandalone{\raggedbottom}
-\usepackage{graphicx}
-\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
-\usepackage{makecell}
-\renewcommand{\cellalign}{cl}
-\usepackage[version=4]{mhchem}
-\usepackage{multirow}
-\usepackage{pdflscape}
-\usepackage[flushleft]{threeparttable}
-\usepackage{xspace}
-\usepackage[%
-    separate-uncertainty = true,%
-    multi-part-units = single,%
-    range-units = single,%
-    retain-explicit-plus = true,%
-]{siunitx}
-\DeclareSIUnit[number-unit-product = {\,}]\cal{cal}
-\DeclareSIUnit\kcal{\kilo\cal}
-\DeclareSIUnit\wavenumber{\per\centi\metre}
-\newcommand{\cotil}{\ce{CO2}\textendash{}IL\xspace}%
-\newcommand{\latin}[1]{\textit{#1}}
-\newcommand{\caps}[1]{\uppercase{#1}}
-\hyphenation{solvato-chromic}
 \begin{document}
 \chapter[\texorpdfstring{\ce{CO2}}{CO2}-IL Cluster Model Validation]{Modeling Carbon Dioxide Vibrational Frequencies in Ionic Liquids: I. \textit{Ab Initio} Calculations}
 \label{ch:paper_02}
@@ -93,7 +39,7 @@ First, we extend our previous results by analyzing both the convergence and stab
 
 Although our previous density functional theory (DFT) calculations provided excellent agreement of predicted vibrational solvation shifts compared to experiment, these employed a minimalistic gas-phase cluster model consisting of only one \ce{CO2} molecule together with a single cation/anion pair. Here we investigate the convergence of results with the size of the surrounding solvent shell both using a hybrid quantum mechanics molecular mechanics (QM/MM) approach with up to \num{195} atoms (\num{6} molecular ion pairs) in the QM region and up to \num{8192} solvent atoms (\num{256} molecular ion pairs) using classical point charges. In addition, we aim to assess the impact of solvent disorder by investigating different solvent geometries based on \num{85} statistically uncorrelated (\(R^2 = 0.0004\) for DVR-based vibrational frequency of snapshot \(N\) to vibrational frequency of snapshot \(N+1\)) snapshots sampled from a classical MD simulation (see paper II\cite{Daly2016} for details). We use 1-butyl-3-methylimidazolium hexafluorophosphate (\ce{[C4C1im][PF6]}) as a model IL in our calculations.
 
-We will further analyze the impact of anharmonic effects, which we neglected in our previous (harmonic) calculations and which are necessary for a fair comparison to experiment. Here, anharmonic vibrational frequencies are obtained using the discrete variable representation (DVR) approach. The DVR method numerically solves the vibrational Schr{\"{o}}dinger equation using a calculation of the \ce{CO2} stretch potential energy surface, resulting in vibrational frequencies that include anharmonicity to all orders. An additional advantage of DVR is that it can be applied rigorously to systems at non-equilibrium geometries, which allows us to include the disorder introduced by temperature for comparison with experiments carried out at temperatures above absolute zero.
+We will further analyze the impact of anharmonic effects, which we neglected in our previous (harmonic) calculations and which are necessary for a fair comparison to experiment. Here, anharmonic vibrational frequencies are obtained using the discrete variable representation (DVR) approach. The DVR method numerically solves the vibrational \schrod{} equation using a calculation of the \ce{CO2} stretch potential energy surface, resulting in vibrational frequencies that include anharmonicity to all orders. An additional advantage of DVR is that it can be applied rigorously to systems at non-equilibrium geometries, which allows us to include the disorder introduced by temperature for comparison with experiments carried out at temperatures above absolute zero.
 
 The energy decomposition approaches we use add new and valuable physical insight into the origin of the vibrational frequency shifts. Many groups have used QM/MM approaches to estimate the condensed phase effects of a solvent on the transition energies of a chromophore, which provide a rich interpretation of the experiments\cite{choiJCP-08,Lindquist2008,Terranova2014,liJPC-06,Schmidt2008}. Nevertheless, the interpretation for why the environment shifts the transition frequencies is difficult because many effects simultaneously determine the transition frequencies. The ALMO and symmetry-adapted perturbation theory (SAPT) energy decomposition approaches can separate the interactions of the vibrational chromophore with its environments into meaningful components allowing us to develop an empirical spectroscopic map and also understand its physical origins.
 
@@ -120,7 +66,7 @@ In order to reduce the number of the costliest calculations (harmonic frequencie
 \subsection{Anharmonic Vibrational Frequency Calculations}
 \label{paper_02:ssec:IIB}
 
-We calculated anharmonic vibrational frequencies for the asymmetric stretch of \ce{CO2} in each of \num{1000} statistically independent snapshots sampled from the dilute \ce{CO2}/\ce{[C4C1im][PF6]} MD simulations using an approach developed previously for \ce{CD2} and \ce{PO2} groups.\cite{levinson_phosphate_2011,Kinnaman2006} In this procedure, one numerically solves for the eigenvalues of the two-dimensional Schr{\"{o}}dinger equation with the Hamiltonian,
+We calculated anharmonic vibrational frequencies for the asymmetric stretch of \ce{CO2} in each of \num{1000} statistically independent snapshots sampled from the dilute \ce{CO2}/\ce{[C4C1im][PF6]} MD simulations using an approach developed previously for \ce{CD2} and \ce{PO2} groups.\cite{levinson_phosphate_2011,Kinnaman2006} In this procedure, one numerically solves for the eigenvalues of the two-dimensional \schrod{} equation with the Hamiltonian,
 \begin{equation}
   \label{paper_02:eq:1}
 H = \frac{p_{1}^{2}}{2\mu} + \frac{p_{2}^{2}}{2\mu} + \frac{p_{1}p_{2}\cos{(\theta)}}{m_{C}} + V\left( r_{1},r_{2} \right),

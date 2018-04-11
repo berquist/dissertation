@@ -15,38 +15,7 @@
 % \usepackage{fontspec}
 % \setmonofont[Scale=0.75]{Panic Sans}
 %
-\usepackage[%
-    backend      = biber,%
-    style        = chem-acs,%
-    autocite     = superscript,%
-    backref      = true,%
-    doi          = true,%
-    articletitle = false,%
-    chaptertitle = false,%
-    biblabel     = brackets,%
-    minnames     = 1,%
-    maxnames     = 999,%
-]{biblatex}
-\let\cite\autocite
-\DefineBibliographyStrings{english}{%
-  backrefpage = {page},% originally "cit. on p."
-  backrefpages = {pages},%
-}
-\defbibenvironment{bibliography}
-  {\list
-     {\printtext[labelnumberwidth]{%
-        \printfield{labelprefix}%
-        \printfield{labelnumber}}}
-     {%
-      \setlength{\labelwidth}{\labelnumberwidth}%
-      \setlength{\leftmargin}{\labelwidth}%
-      \setlength{\labelsep}{\biblabelsep}%
-      \addtolength{\leftmargin}{\labelsep}%
-      \setlength{\itemsep}{\bibitemsep}%
-      \setlength{\parsep}{\bibparsep}}%
-      \renewcommand*{\makelabel}[1]{##1}}
-  {\endlist}
-  {\item}
+\usepackage{ejb-bibstuff}
 \addbibresource{./library.bib}
 \addbibresource{./library2.bib}
 \addbibresource{./paper_04/paper.bib}
@@ -56,10 +25,8 @@
 \addbibresource{./5773968.bib}
 \addbibresource{./in_preparation.bib}
 %
-\usepackage{algorithm}
-\usepackage{algpseudocode}
-\usepackage{booktabs}
-\usepackage{braket}
+\usepackage{ejb-dissertation}
+%
 \usepackage[%
     inline = true,%
     margin = false,%
@@ -67,94 +34,9 @@
     author = EJB%
 ]{fixme}
 \fxusetheme{colorsig}
-\FXRegisterAuthor{dsl}{adsl}{DSL}
 \FXRegisterAuthor{kdj}{akdj}{KDJ}
-\usepackage{graphicx}
-\usepackage{longtable}
-\usepackage{makecell}
-\renewcommand{\cellalign}{cl}
-\usepackage[version=4]{mhchem}
-\newcommand{\arlidimer}{\ce{Ar\bond{....}Li+}}
-% \usepackage[final]{microtype}
-\usepackage{multirow}
-\RequirePackage[l2tabu, orthodox]{nag}
-\usepackage[all,error]{onlyamsmath}
-\usepackage{pdflscape}
-\usepackage{tabulary}
-\usepackage[flushleft]{threeparttable}
-\usepackage{xspace}
-%
-\usepackage[usenames,dvipsnames,svgnames,hyperref,table]{xcolor}
-\definecolor{caliblue}{HTML}{015482}
-\definecolor{carmine}{HTML}{960018}
-%
-\usepackage{cancel}
-\newcommand\Ccancelto[3][black]{\renewcommand\CancelColor{\color{#1}}\cancelto{#2}{#3}}
-%
-\usepackage[%
-    separate-uncertainty = true,%
-    multi-part-units = single,%
-    range-phrase = {\text{ to }},%
-    range-units = single,%
-    retain-explicit-plus = true,%
-]{siunitx}
-\DeclareSIUnit\Molar{M}
-\DeclareSIUnit\au{a.u.}
-\DeclareSIUnit\cal{cal}
-\DeclareSIUnit\debye{D}
-\DeclareSIUnit\electron{e^{-}}
-\DeclareSIUnit\kcal{\kilo\cal}
-\DeclareSIUnit\micron{\micro\metre}
-\DeclareSIUnit\torr{Torr}
-\DeclareSIUnit\wavenumber{\per\centi\metre}
-%
-\usepackage{listings}
-\lstset{%
-  basicstyle=\ttfamily\footnotesize,%
-  breakatwhitespace=true,%
-  breaklines=false,%
-  frame=none,%
-  numberbychapter=false,%
-}
-%
-\usepackage{minted}
-\setminted{%
-  breaklines=true,%
-  fontsize=\footnotesize,%
-  frame=none,%
-  linenos=true,%
-  mathescape=true,%
-  python3=true,%
-  texcomments=false,%
-}
-%
-% stop it, pittetd
-\BeforeBeginEnvironment{algorithmic}{\begin{singlespace}}
-\AfterEndEnvironment{algorithmic}{\end{singlespace}}
-\BeforeBeginEnvironment{minted}{\begin{singlespace}}
-\AfterEndEnvironment{minted}{\end{singlespace}}
-%
-\newcommand\cotil{\ce{CO2}\textendash{}IL}
-\newcommand\hefe{Hellmann\textendash{}Feynman}
-\newcommand\hf{Hartree\textendash{}Fock}
-\newcommand\qchem{\textsc{Q-Chem}}
-\newcommand\schrod{Schr{\"{o}}dinger}
-\newcommand{\latin}[1]{\textit{#1}}
-% optionally don't use uppercase for document classes that aren't
-% garbage
-\newcommand{\caps}[1]{\uppercase{#1}}
-% \newcommand{\caps}[1]{{#1}}
-%
-\hyphenation{im-id-a-zol-i-um meth-yl-im-id-a-zol-i-um hexa-fluoro-phos-phate tetra-fluoro-borate tri-fluoro-methyl-sulfonyl tri-fluoro-acetate di-cyan-amide red-shift red-shifts electro-statics wave-function}
 %
 \raggedbottom
-%
-\hypersetup{%
-  colorlinks=true,%
-  citecolor=black,%
-  linkcolor=black,%
-  urlcolor=carmine,%
-}
 %
 \input{./preamble}
 \begin{document}
