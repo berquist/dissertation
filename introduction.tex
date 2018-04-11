@@ -278,7 +278,7 @@ More generally, the derivative terms in section~\ref{ssec:phenomenological-appro
     &= E^{(0)}(a) + E^{(1)}(a) \cdot (P - a) + \frac{1}{2} E^{(2)}(a) \cdot (P - a)^{2} + \frac{1}{6} E^{(3)}(a) \cdot (P - a)^{3} + \dots ,
   \end{aligned}
 \end{equation}
-where \(a\) is the point at which the derivative is taken. Choosing \(a \overset{!}{=} 0\) (expanding around the perturbation at zero strength) turns the Taylor series into a Maclaurin series\footnote{The notation \(x \overset{!}{=} y\) means that \(x\) must be equal to \(y\) by definition.}:
+where \(a\) is the point at which the derivative is taken. Choosing \(a \overset{!}{=} 0\) (expanding around the perturbation at zero strength) turns the Taylor series into a Maclaurin series\footnote{\label{foot:overset}The notation \(x \overset{!}{=} y\) means that \(x\) must be equal to \(y\) by definition.}:
 \begin{equation}
   \label{eq:maclaurin-expansion}
   \begin{aligned}
@@ -499,7 +499,7 @@ Now one of the most important tricks in quantum chemistry is used. Given the ort
 \begin{equation}
 S_{pq} = \delta_{pq}, \tag{Yamaguchi eq. 3.44}
 \end{equation}
-we must have
+we must have (see \autoref{foot:overset})
 \begin{equation}
   \label{eq:yamaguchi-3.45}\tag{Yamaguchi eq. 3.45}
   \frac{\partial S_{pq}}{\partial X_{A}} \overset{!}{=} 0.
@@ -555,7 +555,7 @@ Differentiation of \eqref{eq:yamaguchi-4.21} once more with respect to another n
     &- 3\left(X_{A}-X_{B}\right)\left(Y_{A}-Y_{B}\right)\frac{Z_{A}Z_{B}}{R_{AB}^{5}},
   \end{aligned}
 \end{equation}
-where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable.
+where the nucleus-nucleus repulsion energy derivative is included for completeness. This is the final expression for the molecular Hessian\footnote{Not mass-weighted.} derived in \eqref{eq:hooke_derivation_3}. From here and Table~\ref{tutorial:tab:wigner}, we can see that evaluating the \(\mathbf{U}\) matrices (forming derivatives of the MO coefficients) is unavoidable.
 
 However, the case of \kdjwarning{the molecular Hessian is an exceptional one, because the AOs are perturbation-dependent}: for a fixed electron position, the amplitude of a basis function will change if it moved, and they are typically atom-centered. In the case that the basis set is \kdjwarning{\textit{not} perturbation dependent, as is most often in the case in electric field perturbations} \kdjnote{?}, \eqref{eq:yamaguchi-4.54-and-4.55-and-3.127} reduces to
 \begin{equation}
@@ -892,7 +892,7 @@ where the factor \(e^{\gamma t}\) is dropped from the numerator, but now supplie
 %   \label{eq:neese-79} \tag{Neese eq. 79}
 %   \sum_{\nu} \left( \frac{\partial F_{\mu\nu}}{\partial\lambda} C_{\nu i} + \left( F_{\mu\nu} - \epsilon_{i}S_{\mu\nu} \right) \frac{\partial C_{\nu i}}{\partial\lambda} \right) = \frac{\partial\epsilon_{i}}{\partial\lambda} \sum_{\nu} S_{\mu\nu} C_{\nu i} + \epsilon_{i} \sum_{\nu} \frac{\partial S_{\mu\nu}}{\partial\lambda} C_{\nu i},
 % \end{equation}
-% where the Fock or \ks{} matrix \(F_{\mu\nu}\) implicitly depends on the MO coefficients \(\mathbf{C}\). Given the \ks{} matrix\footnote{\(h\) is the one-electron matrix (footnote~\ref{foot:hf-basics}), \(P\) is the density matrix \eqref{eq:density-matrix}, \(J\) and \(K\) are the Coulomb and exchange matrices (\eqref{eq:yamaguchi-4.6}, \eqref{eq:psi4numpy-coulomb}, \eqref{eq:psi4numpy-exchange}) and \(V^{\text{XC}}[\rho]\) is the exchange-correlation potential (matrix) depending on a grid-based representation of the density. \(c_{\text{HF}}\) and \(c_{\text{DF}}\) are coefficients that control the fraction of exact exchange and the XC-contribution, respectively. \(\braket{pq|rs}\) is an MO-basis two-electron repulsion integral in physicist's notation before spin has been integrated out. See Ref.~\parencite{szabo1989modern}.},
+% where the Fock or \ks{} matrix \(F_{\mu\nu}\) implicitly depends on the MO coefficients \(\mathbf{C}\). Given the \ks{} matrix\footnote{\(h\) is the one-electron matrix (\autoref{foot:hf-basics}), \(P\) is the density matrix \eqref{eq:density-matrix}, \(J\) and \(K\) are the Coulomb and exchange matrices (\eqref{eq:yamaguchi-4.6}, \eqref{eq:psi4numpy-coulomb}, \eqref{eq:psi4numpy-exchange}) and \(V^{\text{XC}}[\rho]\) is the exchange-correlation potential (matrix) depending on a grid-based representation of the density. \(c_{\text{HF}}\) and \(c_{\text{DF}}\) are coefficients that control the fraction of exact exchange and the XC-contribution, respectively. \(\braket{pq|rs}\) is an MO-basis two-electron repulsion integral in physicist's notation before spin has been integrated out. See Ref.~\parencite{szabo1989modern}.},
 % \begin{equation}
 %   \label{eq:neese-50} \tag{Neese eq. 50}
 %   F_{\mu\nu} = h_{\mu\nu} + J_{\mu\nu}(P) - c_{\text{HF}}K_{\mu\nu}(P) + c_{\text{DF}}V_{\mu\nu}^{\text{XC}}[\rho],
