@@ -470,7 +470,7 @@ Notice that the MO coefficient derivatives do not appear in the final HF gradien
 \end{quote}
 More explicitly, we have the zeroth-order wavefunction, so we must be able to calculate the first-order correction to the energy. Worded differently, any first derivative of the energy can be calculated without differentiating MO coefficients, which is only required for second derivatives, such as the molecular Hessian or the dipole polarizability.
 
-Differentiating \eqref{eq:yamaguchi-4.1} with respect to \(X_{A}\) collecting terms with \(\mathbf{U}\) gives
+Differentiating \eqref{eq:yamaguchi-4.1} with respect to \(X_{A}\) and collecting terms with \(\mathbf{U}\) gives
 \begin{equation}
   \label{4.16}\tag{Yamaguchi eq. 4.16}
   \frac{\partial E_{\text{elec}}^{\text{RHF}}}{\partial X_{A}} = 2 \sum_{i}^{\text{d.o.}} h_{ii}^{X_{A}} + \sum_{ij}^{\text{d.o.}} \left\{ 2(ii|jj)^{X_{A}} - (ij|ij)^{X_{A}} \right\} + 4 \sum_{m}^{\text{all}} \sum_{i}^{\text{d.o.}} U_{mi}^{X_{A}} F_{im},
