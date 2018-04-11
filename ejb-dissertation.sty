@@ -42,6 +42,7 @@
 \DeclareSIUnit\micron{\micro\metre}
 \DeclareSIUnit\torr{Torr}
 \DeclareSIUnit\wavenumber{\per\centi\metre}
+\newcommand{\aud}{\si{\bohr\cubed}}
 
 \RequirePackage{listings}
 \lstset{%
@@ -76,7 +77,21 @@
 \newcommand{\qchem}{\textsc{Q-Chem}}
 \newcommand{\schrod}{Schr{\"{o}}dinger}
 \newcommand{\szabo}{Szabo \& Ostlund}
+
+\newcommand{\pdalton}{\textsc{Dalton}}
+\newcommand{\libresponse}{\texttt{libresponse}}
+\newcommand{\psif}{\textsc{Psi4}}
+\newcommand{\response}{\textsc{Response}}
+
 \newcommand{\latin}[1]{\textit{#1}}
+\newcommand{\op}[1]{\ensuremath{\hat{#1}}}
+\newcommand{\mat}[1]{\ensuremath{\mathbf{#1}}}
+\newcommand{\Order}[1]{\ensuremath{\mathcal{O}\left(#1\right)}}
+\newcommand{\tr}[1]{\ensuremath{{\mathrm{Tr}}\left\{#1\right\}}}
+\newcommand{\eq}[1]{eq.~(\ref{#1})}
+\newcommand{\citen}[1]{ref.~\parencite{#1}}
+\newcommand{\lr}[2]{\braket{\braket{\op{#1}; \op{#2}}}}
+\newcommand{\lrs}[4]{\braket{\braket{\op{#1}_{#2}; \op{#3}_{#4}}}}
 
 % optionally don't use uppercase for document classes that aren't
 % garbage

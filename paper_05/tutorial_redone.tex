@@ -16,7 +16,7 @@ __date__      = "2017-12-19"
 %   \subsection{Introduction}\label{introduction}}
 \subsubsection{Introduction}
 
-In \href{https://github.com/psi4/psi4numpy/blob/066f378f26240a4802371ef32849230853581329/Tutorials/06_Molecular_Properties/6a_CP-SCF.ipynb}{Tutorial 6a}, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed Hartree-Fock (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
+In \href{https://github.com/psi4/psi4numpy/blob/066f378f26240a4802371ef32849230853581329/Tutorials/06_Molecular_Properties/6a_CP-SCF.ipynb}{Tutorial 6a}, the calculation of linear response properties from analytic derivative theory is presented, the foundation of which are the coupled-perturbed \hf{} (CPHF) or coupled-perturbed self-consistent field (CPSCF) equations. Starting from analytic derivative theory provides a convenient physical picture: how does the total energy of a system change under the influence of one or more internal or external perturbations? Continuing the case of an external electric field, the total energy of a system can be represented with a series expansion:
 \begin{equation}
   E(\mathbf{E}) = \sum_{n=0}^{\infty} \frac{1}{n!}E^{(n)}(\mathbf{a})\cdot(\mathbf{E}-\mathbf{a})^{n},
 \end{equation}
@@ -30,10 +30,10 @@ Expanding the above to the first 4 explicit terms gives
 \end{equation}
 where we identify
 \begin{align}
-E^{(0)} &\rightarrow \textrm{the unperturbed ground-state energy} \\
-E_{a}^{(1)} &\rightarrow -\mu_{a},\textrm{the dipole moment} \\
-E_{ab}^{(2)} &\rightarrow -\alpha_{ab},\textrm{the polarizability} \\
-E_{abc}^{(3)} &\rightarrow -\beta_{abc},\textrm{the first hyperpolarizability}
+E^{(0)} &\rightarrow \text{the unperturbed ground-state energy} \\
+E_{a}^{(1)} &\rightarrow -\mu_{a},\text{the dipole moment} \\
+E_{ab}^{(2)} &\rightarrow -\alpha_{ab},\text{the polarizability} \\
+E_{abc}^{(3)} &\rightarrow -\beta_{abc},\text{the first hyperpolarizability}
 \end{align}
 The first hyperpolarizability is the leading-order term that describes the \emph{nonlinear} response of a system to an external electric field.  Each term in the series expansion increases the rank of the coefficient by one: the ground-state energy is a scalar, the dipole is a length 3 vector, the polarizability is a 3-by-3 matrix, and the first hyperpolarizability is a 3-by-3-by-3 tensor.
 

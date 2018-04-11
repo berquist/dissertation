@@ -15,27 +15,12 @@
 \onlyifstandalone{\input{../ejb-dissertation.sty}}
 \onlyifstandalone{\raggedbottom}
 \begin{document}
+\newcommand{\geomdeftsvp}{\SI{2.4106}{\angstrom}}
+\newcommand{\geomdeftsvpd}{\SI{2.4297}{\angstrom}}
 \chapter[ALMO Linear Response]{A First Principles Approach for Partitioning Linear Response Properties into Additive and Cooperative Contributions}
 \label{ch:paper_04}
 
 The text in this chapter has been adapted from \fullcite{Berquist2018}. The author's contribution to the work included deriving the equations, implementing the algorithm, performing all calculations, and writing the manuscript.
-
-\newcommand{\aud}{\si{\bohr\cubed}}
-\newcommand{\geomdeftsvp}{\SI{2.4106}{\angstrom}}
-\newcommand{\geomdeftsvpd}{\SI{2.4297}{\angstrom}}
-
-\newcommand{\pdalton}{\textsc{Dalton}}
-\newcommand{\libresponse}{\texttt{libresponse}}
-\newcommand{\psif}{\textsc{Psi4}}
-\newcommand{\response}{\textsc{Response}}
-\newcommand{\op}[1]{\ensuremath{\hat{#1}}}
-\newcommand{\mat}[1]{\ensuremath{\mathbf{#1}}}
-\newcommand{\Order}[1]{\ensuremath{\mathcal{O}\left(#1\right)}}
-\newcommand{\tr}[1]{\ensuremath{{\mathrm{Tr}}\left\{#1\right\}}}
-\newcommand{\eq}[1]{eq.~(\ref{#1})}
-\newcommand{\citen}[1]{ref.~\parencite{#1}}
-\newcommand{\lr}[2]{\braket{\braket{\op{#1}; \op{#2}}}}
-\newcommand{\lrs}[4]{\braket{\braket{\op{#1}_{#2}; \op{#3}_{#4}}}}
 
 \section{\texorpdfstring{\caps{Summary}}{Summary}}
 
@@ -86,7 +71,7 @@ This is not the first work to seek a fragment- or subsystem-based decomposition 
 
 The most related methods are those also built on top of ALMOs, specifically ALMO-CIS\cite{Closser_2015_5791}, ALMO-CIS+CT\cite{Ge_2017_44111}, TDDFT(MI)\cite{doi:10.1063/1.4926837}, and LEA-TDDFT\cite{doi:10.1021/acs.jctc.5b00828}. Compared to ALMO-CIS, our method is more consistent with the index restrictions in TDDFT(MI), and similarly to LEA-TDDFT, we can select individual fragments for allowing charge transfer. For this reason, our method is termed linear response for molecular interactions, or LR(MI).
 
-To this end, we have developed \libresponse{}, a molecular response library for non-orthogonal orbitals and arbitrary operators, in the spirit of the \response{} module of \pdalton{}\cite{daltonpaper}. It is capable of both singlet\cite{doi:10.1063/1.454885} and triplet\cite{doi:10.1063/1.457471} response for restricted and unrestricted wavefunctions using Hartree-Fock (HF) or density functional theory (DFT). Properties can be calculated using either the full time-dependent Hartree-Fock (TDHF) or random phase approximation (RPA) equations, or with the configuration interaction with singles (CIS) approximation\cite{doi:10.1021/j100180a030}. Our current implementation is limited to linear response and static properties (\(\omega = 0\)), with both non-linear response and dynamic properties under current development.
+To this end, we have developed \libresponse{}, a molecular response library for non-orthogonal orbitals and arbitrary operators, in the spirit of the \response{} module of \pdalton{}\cite{daltonpaper}. It is capable of both singlet\cite{doi:10.1063/1.454885} and triplet\cite{doi:10.1063/1.457471} response for restricted and unrestricted wavefunctions using \hf{} (HF) or density functional theory (DFT). Properties can be calculated using either the full time-dependent \hf{} (TDHF) or random phase approximation (RPA) equations, or with the configuration interaction with singles (CIS) approximation\cite{doi:10.1021/j100180a030}. Our current implementation is limited to linear response and static properties (\(\omega = 0\)), with both non-linear response and dynamic properties under current development.
 
 \section{\texorpdfstring{\caps{Theory}}{Theory}}
 \label{sec:theory}
@@ -373,7 +358,7 @@ ALMO-EDA results and analysis, additional ghost basis and point charge analysis,
 
 \begin{table}
   \centering
-  \caption[ALMO-EDA results for argon\textemdash{}lithium cation dimer]{ALMO-EDA results. Energy units are \si{\kcal\per\mol}. All calculations used Hartree-Fock with a bond length of \SI{2.4297}{\angstrom}.}
+  \caption[ALMO-EDA results for argon\textemdash{}lithium cation dimer]{ALMO-EDA results. Energy units are \si{\kcal\per\mol}. All calculations used \hf{} with a bond length of \SI{2.4297}{\angstrom}.}
   \label{tab:almo-eda-results}
   \IfStandalone{\input{eda_analysis_table}}{\input{paper_04/eda_analysis_table}}
 \end{table}
@@ -387,7 +372,7 @@ ALMO-EDA results and analysis, additional ghost basis and point charge analysis,
 
 \begin{table}
   \centering
-  \caption[Point charge and ghost function polarizability analysis]{Percentage of supermolecular result for point charge and ghost function polarizabilities. All calculations used Hartree-Fock with canonical MOs and a distance of \SI{2.4297}{\angstrom} from argon to the other center(s).}
+  \caption[Point charge and ghost function polarizability analysis]{Percentage of supermolecular result for point charge and ghost function polarizabilities. All calculations used \hf{} with canonical MOs and a distance of \SI{2.4297}{\angstrom} from argon to the other center(s).}
   \label{tab:basis-set-dependence-percentages}
   \IfStandalone{\input{point_charge_polarizabilities_percentages_table}}{\input{paper_04/point_charge_polarizabilities_percentages_table}}
 \end{table}

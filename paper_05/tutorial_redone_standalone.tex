@@ -1,38 +1,14 @@
 \documentclass{article}
 %
-\usepackage[%
-    backend    = biber,%
-    style      = chem-acs,%
-    autocite   = superscript,%
-    biblabel   = brackets,%
-    doi        = true,%
-    minnames   = 1,%
-    maxnames   = 999,%
-]{biblatex}
-\let\cite\autocite
-\let\citep\parencite
+\input{../ejb-bibstuff.sty}
 \addbibresource{../paper_04/paper.bib}
 \addbibresource{./tutorial.bib}
-%
-\usepackage{amsmath}
-\usepackage{booktabs}
-\usepackage[margin=1in]{geometry}
-\usepackage{hyperref}
-\usepackage{microtype}
+\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}
+\usepackage{setspace}
+\input{../ejb-dissertation.sty}
 %
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-%
-\usepackage{minted}
-\setminted{%
-  breaklines=true,%
-  fontsize=\footnotesize,%
-  frame=none,%
-  linenos=true,%
-  mathescape=true,%
-  python3=true,%
-  texcomments=false,%
-}
 %
 \begin{document}
 \include{tutorial_redone}
