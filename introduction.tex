@@ -14,14 +14,6 @@ preview = false,%
 \onlyifstandalone{\usepackage[bookmarks,hyperindex=true,pdfencoding=auto,psdextra]{hyperref}}
 \onlyifstandalone{\usepackage{ejb-dissertation}}
 \onlyifstandalone{\raggedbottom}
-\usepackage[%
-    inline = true,%
-    margin = false,%
-    status = draft,%
-    author = EJB%
-]{fixme}
-\fxusetheme{colorsig}
-\FXRegisterAuthor{kdj}{akdj}{KDJ}
 \begin{document}
 \onlyifstandalone{{\hypersetup{linkcolor=black}\tableofcontents{}}}
 \chapter{Introduction and Theoretical Background}
@@ -760,7 +752,7 @@ The starting point is the now the time-dependent \schrod{} equation (TDSE),
   \label{eq:tdse}
   \hat{H}(t) \ket{\Psi(t)} = i\frac{\partial}{\partial t} \ket{\Psi(t)},
 \end{equation}
-which, unlike \eqref{eq:schrodinger-equation} \kdjwarning{does not have the energy on the right-hand side due to the lack of stationary solutions}. \kdjnote{Is that the reason?} It is useful to factor out the time-dependent phase of the wavefunction,
+which, unlike \eqref{eq:schrodinger-equation} does not have the energy on the right-hand side. It is useful to factor out the time-dependent phase of the wavefunction,
 \begin{equation}
   \label{eq:phase-isolated-wavefunction}
   \ket{\Psi(t)} = e^{-i\mathcal{F}(t)} \ket{\tilde{\Psi}(t)},
