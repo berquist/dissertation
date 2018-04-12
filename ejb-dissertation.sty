@@ -16,6 +16,7 @@
 \RequirePackage[final]{microtype}
 \RequirePackage{multirow}
 \RequirePackage{pdflscape}
+\RequirePackage{soul}
 \RequirePackage{tabulary}
 \RequirePackage[flushleft]{threeparttable}
 \RequirePackage{xspace}
@@ -96,8 +97,8 @@
 
 % optionally don't use uppercase for document classes that aren't
 % garbage
-\newcommand{\caps}[1]{\uppercase{#1}}
-% \newcommand{\caps}[1]{{#1}}
+\renewcommand{\caps}[1]{\uppercase{#1}}
+% \renewcommand{\caps}[1]{{#1}}
 
 \hyphenation{im-id-a-zol-i-um meth-yl-im-id-a-zol-i-um hexa-fluoro-phos-phate tetra-fluoro-borate tri-fluoro-methyl-sulfonyl tri-fluoro-acetate di-cyan-amide red-shift red-shifts electro-statics wave-function}
 
