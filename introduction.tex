@@ -754,17 +754,17 @@ The starting point is the now the time-dependent \schrod{} equation (TDSE),
 \end{equation}
 which, unlike \eqref{eq:schrodinger-equation} does not have the energy on the right-hand side. It is useful to factor out the time-dependent phase of the wavefunction,
 \begin{equation}
-  \label{eq:phase-isolated-wavefunction}
+  \label{eq:phase-isolated-wavefunction} \tag{Toulouse eq. 48}
   \ket{\Psi(t)} = e^{-i\mathcal{F}(t)} \ket{\tilde{\Psi}(t)},
 \end{equation}
 where \(\Psi(t)\) is the original unfactored wavefunction, \(\mathcal{F}(t)\) is a phase factor, and \(\tilde{\Psi}(t)\) is the \emph{phase-isolated wavefunction}.\footnote{This notation is consistent with Ref.~\parencite{gauss2000}. In Ref.~\parencite{Toulouse2015}, \(\bar{\Psi}(t)\) is the total wavefunction and \(\Psi(t)\) is the phase-isolated wavefunction. In Ref.~\parencite{Christiansen1998}, \(\ket{\bar{0}}\) is the total wavefunction, \(\ket{\tilde{0}}\) is the phase-isolated wavefunction, and \(\ket{0}\) is the stationary wavefunction, recovered from \(\ket{\tilde{0}(t \rightarrow 0)}\).} Rearrange the TDSE \eqref{eq:tdse},
 \begin{equation}
-  \label{eq:tdse-rearranged}
+  \label{eq:tdse-rearranged} \tag{Toulouse eq. 47}
   \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\Psi(t)} = 0,
 \end{equation}
 and use the phase-isolated wavefunction\footnote{\(\dot{A}(t) = \mathrm{d}A(t)/\mathrm{d}t\)}
 \begin{equation}
-  \label{eq:phase-isolated-tdse}
+  \label{eq:phase-isolated-tdse} \tag{Toulouse eq. 49}
   \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)} = \dot{\mathcal{F}}(t) \ket{\tilde{\Psi}(t)},
 \end{equation}
 where \(\dot{\mathcal{F}}(t)\) now resembles the energy from the time-independent \schrod{} equation (TISE). This ``energy'' is still not stationary with time, however it will reappear later as part of a stationary theory.
@@ -776,7 +776,7 @@ Before going further, the Hamiltonian must be specified. The partitioning introd
 \end{equation}
 so that time-dependence is introduced only to the perturbation and not the standard molecular Hamiltonian.\footnote{Sometimes \(\hat{V}(t)\) is notated as \(\hat{H}'(t)\) or \(\hat{H}^{(1)}(t)\); all are equivalent as long as the perturbation and time partitioning in the full Hamiltonian are the same.} The prototypical perturbation usually represents an external electric field that is slowly turned on in order for the system to gradually respond and may oscillate with time at a characteristic frequency.\footnote{In the case that the response of the system is slower than the speed of which the perturbation is turned on, a different (undesirable) solution may be found if the perturbation is strong enough.} Representing the perturbation in terms of Fourier components,
 \begin{equation}
-  \label{eq:fourier-components}
+  \label{eq:fourier-components} \tag{Toulouse eq. 46 [modified]}
   \hat{V}(t) = x_{1} \hat{B} e^{-i\omega t} + x_{2} \hat{A} e^{+i\omega t},
 \end{equation} %TODO I am really not satisfied with this
 shows that the perturbation, and therefore the Hamiltonian, is periodic in time (\(\hat{H}(t + T) = \hat{H}(t)\)) with a period of \(T = 2\pi/\omega\). Other perturbation shapes, such as step functions, can be represented using a more general form of \eqref{eq:fourier-components} with more Fourier components:
@@ -786,7 +786,7 @@ shows that the perturbation, and therefore the Hamiltonian, is periodic in time 
 \end{equation}
 where \(k\) is the Fourier component index, \(\omega_{k}\) are the frequencies, and \(\epsilon_{X}(\omega_{k})\) and \(\hat{X}\) are the corresponding perturbation strengths and operators. This gives the required integration bounds for \eqref{eq:phase-isolated-tdse}, leading to
 \begin{equation}
-  \label{eq:quasienergy}
+  \label{eq:quasienergy} \tag{Toulouse eq. 50}
   \begin{aligned}
     \mathcal{Q} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \dot{\mathcal{F}}(t) \\
     &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \frac{\bra{\tilde{\Psi}(t)} \left[ \hat{H}(t) - i\frac{\partial}{\partial t} \right] \ket{\tilde{\Psi}(t)}}{\braket{\tilde{\Psi}(t)|\tilde{\Psi}(t)}},
@@ -796,14 +796,14 @@ where \(\mathcal{Q}\) is the \emph{time-averaged quasienergy}. The second part o
 
 The time-averaged quasienergy can now be expanded with respect to the perturbation parameters,
 \begin{equation}
-  \label{eq:quasienergy-expansion}
+  \label{eq:quasienergy-expansion} \tag{Toulouse eq. 51}
   \mathcal{Q}(x_{1},x_{2}) = \mathcal{Q}^{(0)} + \mathcal{Q}^{(10)}x_{1} + \mathcal{Q}^{(01)}x_{2} + \frac{1}{2}\mathcal{Q}^{(20)}x_{1}^{2} + \mathcal{Q}^{(11)}x_{1}x_{2} + \frac{1}{2}\mathcal{Q}^{(02)}x_{2}^{2} + \dots,
 \end{equation}
 analogous to the series expansion in Section~\ref{ssec:series-expansion}. However, the expansion coefficients \(\partial^{n}\mathcal{Q}/\partial x^{n}\) are still not in a position to be directly calculable for an approximate theory due to the presence of the integral in \eqref{eq:quasienergy}, unlike in the static case, so the time-dependent theory must be further derived for exact states.
 
 Using the time-dependent form of \eqref{eq:first-order-terms-final},
 \begin{equation}
-  \label{eq:quasienergy-10}
+  \label{eq:quasienergy-10} \tag{Toulouse eq. 53}
   \begin{aligned}
     \mathcal{Q}^{(10)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}} \\
     &= \braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{0}} \delta[\omega].
@@ -818,29 +818,29 @@ The rule used in \eqref{eq:quasienergy-10} is
     \delta(\omega) & T \rightarrow \infty
   \end{cases},
 \end{equation}
-where we define \(\delta[\omega]\) as the Kronecker delta for finite \(T\) and the Dirac delta for \(T \rightarrow \infty\). More explicitly, \(\delta[\omega = 0] = (1/T) \int_{0}^{T} \mathrm{d}t \, e^{0} = 1\). \(\delta[\omega \neq 0]\) would lead a non-zero value for exponential inside \eqref{eq:kronecker-delta-frequencies}, which when expanded as sines and cosines, give rise to terms that are not physically admissible as Fourier components. The conclusion is that only static first-order properties are non-zero, where the physical intuition is that absorption or emission of a photon with \(\omega \neq 0\) would violate energy conservation. Using \eqref{eq:second-order-correction-first-form} and \eqref{eq:intermediate-normalization},
+where we define \(\delta[\omega]\) as the Kronecker delta for finite \(T\) and the Dirac delta for \(T \rightarrow \infty\). More explicitly, \(\delta[\omega = 0] = (1/T) \int_{0}^{T} \mathrm{d}t \, e^{0} = 1\). \(\delta[\omega \neq 0]\) would lead a non-zero value for exponential inside \eqref{eq:kronecker-delta-frequencies}, which when expanded as sines and cosines, gives rise to terms that are not physically admissible as Fourier components. The conclusion is that only static first-order properties are non-zero, where the physical intuition is that absorption or emission of a photon with \(\omega \neq 0\) would violate energy conservation. Using \eqref{eq:second-order-correction-first-form} and \eqref{eq:intermediate-normalization},
 \begin{equation}
-  \label{eq:quasienergy-20}
+  \label{eq:quasienergy-20} \tag{Toulouse eq. 54}
   \mathcal{Q}^{(20)} = \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}^{(10)}(t)},
 \end{equation}
 where the first-order wavefunction correction is (similar to \eqref{eq:orthonormal-eigenfunction-expansion})
 \begin{equation}
-  \label{eq:first-order-wavefunction-td}
+  \label{eq:first-order-wavefunction-td} \tag{Toulouse eq. 55}
   \ket{\tilde{\Psi}^{(10)}(t)} = \sum_{n\neq 0} c_{n}^{(10)}(t) e^{-i\omega_{n0}t} \ket{\tilde{\Psi}_{n}},
 \end{equation}
 where \(\omega_{n0} = E_{n} - E_{0}\) are the unperturbed system excitation energies. The first-order wavefunction expansion coefficients are found similarly to \eqref{eq:coefficient-selection},
 \begin{equation}
-  \label{eq:56}
+  \label{eq:56} \tag{Toulouse eq. 56}
   c_{n}^{(10)}(t) = -i \int_{-\infty}^{t} \mathrm{d}t' \, \braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t'}e^{\gamma t'}|\tilde{\Psi}_{0}}e^{i\omega_{n0}t'},
 \end{equation}
 where a factor of \(e^{\gamma t}\) with \(\gamma \rightarrow 0^{+}\) adiabatically switches on the perturbation from \(t' \rightarrow -\infty\) and imposes the initial condition \(c_{n}^{(10)}(t \rightarrow -\infty) = 0\). Performing the integration in \eqref{eq:56} gives
 \begin{equation}
-  \label{eq:57}
+  \label{eq:57} \tag{Toulouse eq. 57}
   c_{n}^{(10)}(t) = \frac{\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}e^{i\omega_{n0}t}}{\omega - \omega_{n0} + i\gamma},
 \end{equation} % TODO why is it dropped from the numerator
-where the factor \(e^{\gamma t}\) is dropped from the numerator, but now supplies a damping factor for when the field oscillation comes close to a resonance (excitation energy). Now \eqref{eq:quasienergy-20}, \eqref{eq:first-order-wavefunction-td}, and \eqref{eq:57} are combined,
+where the factor \(e^{\gamma t}\) is dropped from the numerator, but now supplies a damping factor for when the field oscillation comes close to a resonance (excitation energy). Now \eqref{eq:quasienergy-20}, \eqref{eq:first-order-wavefunction-td}, and \eqref{eq:57} are combined to give
 \begin{equation}
-  \label{eq:58}
+  \label{eq:58} \tag{Toulouse eq. 58}
   \begin{aligned}
     \mathcal{Q}^{(20)} &= \frac{1}{T} \int_{0}^{T} \mathrm{d}t \, 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \\
     &= 2\sum_{n\neq 0} \frac{\braket{\tilde{\Psi}_{0}|\hat{B}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} \delta[2\omega],
@@ -848,7 +848,7 @@ where the factor \(e^{\gamma t}\) is dropped from the numerator, but now supplie
 \end{equation}
 which is only finite for \(\omega = 0\) similarly to \eqref{eq:quasienergy-10}. Performing the same steps for the mixed term,
 \begin{equation}
-  \label{eq:59}
+  \label{eq:59} \tag{Toulouse eq. 59}
   \begin{aligned}
     \mathcal{Q}^{(11)} = &\frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \left[ \braket{\tilde{\Psi}_{0}|\hat{A}e^{+i\omega t}|\tilde{\Psi}^{(10)}(t)} + \braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}^{(01)}(t)} \right] \\
     = &\frac{1}{T} \int_{0}^{T} \mathrm{d}t \, \left[ \frac{\braket{\tilde{\Psi}_{0}|\hat{A}e^{+i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{0}}}{\omega - \omega_{n0} + i\gamma} + \frac{\braket{\tilde{\Psi}_{0}|\hat{B}e^{-i\omega t}|\tilde{\Psi}_{n}}\braket{\tilde{\Psi}_{n}|\hat{A}e^{+i\omega t}|\tilde{\Psi}_{0}}}{-\omega - \omega_{n0} + i\gamma} \right]  \\
