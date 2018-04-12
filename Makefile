@@ -7,6 +7,7 @@ front_matter:
 	latexmk -pdf -xelatex -shell-escape abstract.tex
 	latexmk -pdf -xelatex -shell-escape preface.tex
 	latexmk -pdf -xelatex -shell-escape introduction.tex
+	latexmk -pdf administrative_abstract.tex
 
 dissertation:
 	latexmk -pdf -xelatex -shell-escape eric_john_berquist_etd.tex
