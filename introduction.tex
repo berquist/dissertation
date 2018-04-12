@@ -134,7 +134,7 @@ For a one-dimensional spring connecting a ball to a fixed object, Hooke's law is
   \label{eq:hooke_1d}
   F = -k x,
 \end{equation}
-where \(x\) is the displacement of the spring from equilibrium in meters, \(k\) is the spring constant in units of \si{\newton\per\meter}, and \(F\) is the restoring force in units of newtons acting on the displaced spring by the object it is attached to. If the sign is reversed, then the equation can be viewed as describing the force of spring acting on the attached object; it is a direction change and a matter of convention. For convenience, the positive convention will be used.
+where \(x\) is the displacement of the spring from equilibrium in meters, \(k\) is the spring constant in units of \si{\newton\per\meter}, and \(F\) is the restoring force in units of newtons acting on the displaced spring by the object it is attached to. If the sign is reversed, then the equation can be viewed as describing the force of spring acting on the attached object; it is a direction change and a matter of convention.
 
 Hooke's law can be generalized to multiple dimensions. For example, in three-dimensional space it can be written as
 \begin{equation}
@@ -142,7 +142,7 @@ Hooke's law can be generalized to multiple dimensions. For example, in three-dim
   \begin{bmatrix}
     F_{1} \\ F_{2} \\ F_{3}
   \end{bmatrix}
-  =
+  = -
   \begin{bmatrix}
     k_{11} & k_{12} & k_{13} \\
     k_{21} & k_{22} & k_{23} \\
@@ -155,42 +155,42 @@ Hooke's law can be generalized to multiple dimensions. For example, in three-dim
 which can represent either a single object or three one-dimensional springs. It can also be made \(3N\)-dimensional when describing the forces on \(N\) atoms (each with 3 Cartesian components) given their relative positions \(\mathbf{x}\) and the ``stiffness'' of their connectivity \(\mathbf{k}\). In the most general \(N\)-dimensional form, it can be written as
 \begin{equation}
   \label{eq:force_hooke_sum}
-  F_{i} = \sum_{j}^{N} k_{ij} x_{j},
+  F_{i} = - \sum_{j}^{N} k_{ij} x_{j},
 \end{equation}
 or in Einstein summation notation where repeated indices are implicitly summed (contracted) over as
 \begin{equation}
   \label{eq:force_hooke_einstein}
-  F_{i} = k_{ij} x_{j},
+  F_{i} = - k_{ij} x_{j},
 \end{equation}
 where both \(i,j\) range from 1 to \(N\), leading to vectors \(\mathbf{F}\) and \(\mathbf{x}\) of shape \([N]\) and a matrix \(\mathbf{k}\) of shape \([N,N]\). From \eqref{eq:force_hooke_matrix}, \eqref{eq:force_hooke_sum}, and \eqref{eq:force_hooke_einstein}, if off-diagonal elements of \(k\) are allowed to be nonzero, there can be coupling between springs. For example, if \(i = 1\), in the case of coupling,
 \begin{equation}
   \label{eq:force_hooke_example}
-  F_{1} = k_{11}x_{1} + k_{12}x_{2} + k_{13}x_{3},
+  F_{1} = -(k_{11}x_{1} + k_{12}x_{2} + k_{13}x_{3}),
 \end{equation}
 which reduces to
 \begin{equation}
   \label{eq:force_hooke_example_nocoupling}
-  F_{1} = k_{11}x_{1}
+  F_{1} = - k_{11}x_{1}
 \end{equation}
 in the absence of coupling, or the same result obtained in \eqref{eq:hooke_1d}.
 
 The force is also related to the energy. In one dimension,
 \begin{align}
   \label{eq:energy_derivative_1d}
-  F &= \nabla E \\
-  &= \frac{\partial E}{\partial x},
+  F &= - \nabla E \\
+  &= - \frac{\partial E}{\partial x},
 \end{align}
 where \(\nabla \equiv \partial/\partial x\). In \(N\) dimensions, like \eqref{eq:force_hooke_einstein}, \eqref{eq:energy_derivative_1d} is (using vector calculus)
 \begin{equation}
   \label{eq:force_partial_derivative}
-  F_{i} = \frac{\partial E}{\partial x_{i}}.
+  F_{i} = - \frac{\partial E}{\partial x_{i}}.
 \end{equation}
 Equating the \(F_{i}\) in \eqref{eq:force_hooke_einstein} and \eqref{eq:force_partial_derivative} gives
 \begin{equation}
   \label{eq:equated_force}
-  k_{ij} x_{j} = \frac{\partial E}{\partial x_{i}}.
+  - k_{ij} x_{j} = - \frac{\partial E}{\partial x_{i}},
 \end{equation}
-To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side:
+where the negative signs can be dropped. To solve for the stiffness coefficients, take the partial derivative of both sides with respect to \(x_{j}\), using the product rule on the left hand side:
 \begin{align}
   \label{eq:hooke_derivation_1}
   \left( \frac{\partial}{\partial x_{j}} \right) \left( k_{ij} x_{j} \right) &= \left( \frac{\partial}{\partial x_{j}} \right) \left( \frac{\partial E}{\partial x_{i}} \right) \\
