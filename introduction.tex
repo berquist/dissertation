@@ -329,6 +329,8 @@ Up to this point, it has not been necessary to specify which energy expression i
 It is also possible to combine numerical and analytic approaches to obtain higher-order derivatives. For example, in the calculation of Raman intensities, defined as \(\frac{\partial^{3} E}{\partial X_{A} \partial F_{i} \partial F_{j}}\), there are six unique ways to perform the derivative, shown in Table~\ref{tab:raman-unique-derivatives}.
 \begin{table}[htbp]
   \centering
+  \caption[Possible analytic and numerical permutations for Raman intensities]{Possible permutations of analytic (a) and numerical (n) differentiation for each perturbation term in calculating Raman intensities. The two cancelled entries are not unique due to permutational symmetry.}
+  \label{tab:raman-unique-derivatives}
   \begin{singlespace}
     \begin{tabular}{ccc}
       \toprule
@@ -345,8 +347,6 @@ It is also possible to combine numerical and analytic approaches to obtain highe
       \bottomrule
     \end{tabular}
   \end{singlespace}
-  \caption[Possible analytic and numerical permutations for Raman intensities]{Possible permutations of analytic (a) and numerical (n) differentiation for each perturbation term in calculating Raman intensities. The two cancelled entries are not unique due to permutational symmetry.}
-  \label{tab:raman-unique-derivatives}
 \end{table}
 More explicitly, the first row corresponds to a fully analytic third derivative, the next three rows correspond to first-order finite difference of analytic second derivatives, the next three rows correspond to second-order finite difference of analytic first derivatives, and the last row corresponds to the third-order finite difference of energies. Due to symmetry in the electric field perturbation indices, two of the eight permutations are identical to others already present; for example, a/a/n and a/n/a are functionally identical.
 
