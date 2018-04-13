@@ -54,7 +54,6 @@ Shortly before submission, we discovered the Quantum Chemistry Program Exchange 
 The basic premise of \pfn{} is to leverage \pfour{} to generate quantum chemistry-specific quantities and the \numpy{} library\cite{Varoquaux:1521-9615} for all other tensor manipulations.  The latest version of \pfour{} has added the capability to import \pfour{} as a Python module as well as continuing to be called in an executable fashion. In this way, both the \pfour{} and \numpy{} libraries can be loaded into a single Python script and used in cooperation.
 
 A key capacity in this enterprise is seamless translation between \numpy{} and \pfour{} data classes. For example, converting from a \numpy{} array to a \pfour{} matrix and back again can be easily accomplished:
-
 \begin{lstlisting}[label=snip:np2p42np,caption=Basic example of \pfour{}\(\longleftrightarrow\)\numpy{} interoperability]
 import numpy, psi4
 np_array = numpy.zeros((5, 5))
@@ -68,7 +67,6 @@ At the core of this procedure is \textsc{NumPy}'s \arrayint{} \cite{array_interf
 \item (c) the type of data involved (\texttt{double64}, \texttt{int32}, etc.)
 \end{enumerate}
 This specification is compact and widely used amongst the scientific Python community in a variety of scenarios. Using the \arrayint{}, it becomes straightforward to allow \numpy{} access to a \pfour{} data class, allowing both \pfour{} and \numpy{} to access and manipulate the same data. For example, the below will overwrite the \pfour{} Matrix class in place with a random \numpy{} array:
-
 \begin{lstlisting}[label=snip:numpy_set,caption=Mutating a \pfour{} Matrix directly from a \numpy{} routine]
 psi4_matrix.np[:] = numpy.random.rand(5, 5)
 \end{lstlisting}
@@ -79,7 +77,6 @@ A description of the full set of capabilities of the \arrayint{} is available in
 \subsection{Wavefunction Objects}
 
 In \pfour{} all built-in methodologies have the option to return a Wavefunction object that holds basic information about the previous computation or, in some cases, holds functions for readily computing advanced quantities. Obtaining the Wavefunction object in this manner is straightforward:
-
 \begin{lstlisting}[label=snip:scf_computation,caption=Initializing a \pfour{} computation from Python]
 mol = psi4.geometry("""
 O
@@ -90,7 +87,6 @@ hf_e, hf_wfn = psi4.energy("HF/cc-pVDZ", molecule=mol, return_wfn=True)
 \end{lstlisting}
 Once a Wavefunction object is obtained, a variety of attributes can be queried
 using standard Python syntax:
-
 \begin{lstlisting}[label=snip:wfn_data,caption=Obtaining \pfour{} wavefunction data in Python]
 # Number of doubly occupied orbitals
 docc = hf_wfn.ndocc()
@@ -140,7 +136,6 @@ In addition to generating useful information after a computation, a Wavefunction
 \subsection{Integrals}
 
 \pfour{} offers a wide selection of efficient C++ tools accessible directly in Python.  These tools are largely object-based and capable of storing quantities in memory or on disk.  One such object is the \texttt{libmints} library\cite{Psi41.1}, which is currently the primary interface for computing one- and two-electron integrals in \pfour{}.  This library is accessible through the \texttt{MintsHelper} class that directs the efficient computation and storage of molecular integrals Python-side:
-
 \begin{lstlisting}[label=snip:mints,caption=Computing atomic orbital-basis integrals from \pfour{} via Python]
 # Create instance of MintsHelper using primary basis set
 mints = psi4.core.MintsHelper(primary_basis)
@@ -161,7 +156,6 @@ In addition to computing molecular integrals, the \texttt{libmints} library also
   \label{eq:aomo}
 \end{equation}
 can be performed easily with:
-
 \begin{lstlisting}[label=snip:eri_trans,caption=Calling \pfour{}'s AO-to-MO transformation from Python]
 # Occupied and virtual subsets of SCF orbital coefficient matrices
 Ca_occ = hf_wfn.Ca_subset("AO", "OCC")
@@ -189,7 +183,6 @@ where \(p\) is a general MO index. For example, in canonical Restricted Hartree 
   D^{RHF}_{\mu\nu} = C_{\mu i} \chi_{ia} C_{\nu a},
 \end{equation}
 where \(i\) runs only over occupied orbitals. The computation of the RHF JK matrices can be translated directly to Python code with the following lines:
-
 \begin{lstlisting}[label=snip:jk,caption=Building two-electron Fock matrix components using \pfour{} via Python]
 # Create a JK object in the current primary basis set
 jk = psi4.core.JK.build(primary_basis)
@@ -208,7 +201,6 @@ To illustrate this point, the \pfour{} SCF program is compared against a \pfn{} 
 \section{\texorpdfstring{\caps{Rapid Development}}{Rapid Development}}
 
 A key component of the \pfn{} framework is to provide an easy-to-use development environment for rapid prototyping. Vital to this is \numpy{}'s \einsum{} function that performs arbitrary tensor contractions using Einstein summation syntax.  For example, the atomic orbital to molecular orbital 4-index transformation of Eq.~(\ref{eq:aomo}) and code snippet \ref{snip:eri_trans} could be accomplished by:
-
 \begin{lstlisting}[label=snip:aomo,caption=Performing an AO-to-MO transformation using \numpy{}'s \einsum{}]
 I_mo = numpy.einsum("pi,qa,pqrs,rj,sb->iajb",
                     Ca_occ, Ca_virt, I_ao,
@@ -223,7 +215,6 @@ As an example of rapid prototyping, we use a temporary CCSD quantity in the Dire
   W_{jaci} = \langle ja || ci \rangle + t^d_i \langle ja || cd \rangle - t^a_k \langle jk || ci \rangle - (\frac{1}{2}t^{da}_{ik} + t^d_it^a_k) \langle jk || cd \rangle,
 \end{equation}
 which can be directly translated into a function:
-
 \begin{lstlisting}[label=snip:cc_example,caption=Example of forming a coupled cluster intermediate using \numpy{} and \einsum{}]
 def build_Wjaci(T1, T2, MO):
     Wjaci = MO[o, v, v, o].copy()
