@@ -1,3 +1,0 @@
-- list of footnotes?
-- read through paper 3 for exact correctness
-- update paper 5
