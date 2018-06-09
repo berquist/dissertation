@@ -65,6 +65,10 @@ _minted*
 # pittetd
 *.etd
 
+# XMP stuff
+*.xmpdata
+*.xmpi
+
 ## Emacs
 *~
 \#*\#

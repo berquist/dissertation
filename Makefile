@@ -3,18 +3,18 @@
 # the latex file are not included as make dependencies because latexmk
 # is better at detecting dependency changes than make
 
+dissertation:
+	latexmk -pdf -shell-escape eric_john_berquist_etd.tex
+
 front_matter:
-	latexmk -pdf -xelatex -shell-escape abstract.tex
-	latexmk -pdf -xelatex -shell-escape preface.tex
-	latexmk -pdf -xelatex -shell-escape introduction.tex
+	latexmk -pdf -shell-escape abstract.tex
+	latexmk -pdf -shell-escape preface.tex
+	latexmk -pdf -shell-escape introduction.tex
 	latexmk -pdf administrative_abstract.tex
 	latexmk -pdf title_page.tex
 
-dissertation:
-	latexmk -pdf -xelatex -shell-escape eric_john_berquist_etd.tex
-
 library: library.bib
-	latexmk -pdf -xelatex test_bibliography.tex
+	latexmk -pdf test_bibliography.tex
 
 clean:
 	latexmk -c
