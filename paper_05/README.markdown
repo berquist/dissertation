@@ -1,0 +1,1 @@
+Since the official release of this dissertation, this chapter (the Psi4NumPy paper) has been published (https://doi.org/10.1021/acs.jctc.8b00286). There should be minimal difference between the final JCTC version and this chapter.
