@@ -79,3 +79,8 @@ you should do
 
     jupyter nbconvert --to markdown foo.md
     pandoc --listings -f markdown -t latex foo.md -o foo.tex
+
+# Metadata
+
+* See [here](https://creativecommons.org/choose/#metadata) for how metadata can be generated using the Creative Commons license chooser.
+* See the [`hyperxmp`](https://www.ctan.org/pkg/hyperxmp) package for how `hyperref` can be used to generate metadata instead.

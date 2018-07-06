@@ -6,6 +6,8 @@
 dissertation:
 	latexmk -pdf -shell-escape eric_john_berquist_etd.tex
 
+# This is useful for making all the things Pitt requires for its
+# administrative submission stuff.
 front_matter:
 	latexmk -pdf -shell-escape abstract.tex
 	latexmk -pdf -shell-escape preface.tex
