@@ -1,0 +1,29 @@
+---
+fail_fast: false
+repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: "v4.6.0"
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.(cdxml|key)$
+      - id: end-of-file-fixer
+        exclude: \.(cdxml|csv|key)$
+      - id: fix-byte-order-marker
+        exclude: \.csv$
+      - id: mixed-line-ending
+        exclude: \.(cdxml|key)$
+      - id: check-merge-conflict
+      # - id: check-json
+      - id: check-yaml
+  - repo: https://github.com/adrienverge/yamllint
+    rev: "v1.35.1"
+    hooks:
+      - id: yamllint
+  # - repo: https://github.com/Mateusz-Grzelinski/actionlint-py
+  #   rev: "v1.7.1.15"
+  #   hooks:
+  #     - id: actionlint
