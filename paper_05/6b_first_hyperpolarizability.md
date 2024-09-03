@@ -228,22 +228,22 @@ The helper encapsulates the solution of the ground-state wavefunction followed b
 $$
 \left[
 \begin{pmatrix}
-\mathbf{A} & \mathbf{B} \\ 
+\mathbf{A} & \mathbf{B} \\
 \mathbf{B}^{*} & \mathbf{A}^{*}
 \end{pmatrix}
 - \omega_{f}
 \begin{pmatrix}
-\mathbf{\Sigma} & \mathbf{\Delta} \\ 
+\mathbf{\Sigma} & \mathbf{\Delta} \\
 -\mathbf{\Delta}^{*} & -\mathbf{\Sigma}^{*}
 \end{pmatrix}
 \right]
 \begin{pmatrix}
-\mathbf{X} \\ 
+\mathbf{X} \\
 \mathbf{Y}
 \end{pmatrix}
 =
 \begin{pmatrix}
-\mathbf{V} \\ 
+\mathbf{V} \\
 -\mathbf{V}^{*}
 \end{pmatrix}
 ,
@@ -254,22 +254,22 @@ either directly (via matrix inversion in the MO basis) or iteratively (via repea
 $$
 \left[
 \begin{pmatrix}
-\mathbf{A} & \mathbf{B} \\ 
+\mathbf{A} & \mathbf{B} \\
 \mathbf{B} & \mathbf{A}
 \end{pmatrix}
 - \omega_{f}
 \begin{pmatrix}
-\mathbf{1} & \mathbf{0} \\ 
+\mathbf{1} & \mathbf{0} \\
 \mathbf{0} & -\mathbf{1}
 \end{pmatrix}
 \right]
 \begin{pmatrix}
-\mathbf{X} \\ 
+\mathbf{X} \\
 \mathbf{Y}
 \end{pmatrix}
 =
 \begin{pmatrix}
-\mathbf{V} \\ 
+\mathbf{V} \\
 -\mathbf{V}
 \end{pmatrix}
 .
@@ -283,18 +283,18 @@ solver = helper_CPHF(mol)
 solver.run()
 ```
 
-    
+
     Number of occupied orbitals: 5
     Number of basis functions: 41
-    
+
     Tensor sizes:
     ERI tensor           0.02 GB.
     oNNN MO tensor       0.00 GB.
     ovov Hessian tensor  0.00 GB.
-    
+
     Forming Hessian...
     ...formed Hessian in 0.473 seconds.
-    
+
     Inverting Hessian...
     ...inverted Hessian in 0.007 seconds.
 
@@ -434,7 +434,7 @@ print('\nFirst dipole hyperpolarizability (static):')
 print(hyperpolarizability)
 ```
 
-    
+
     First dipole hyperpolarizability (static):
     [[ -0.       -0.       -0.10826]
      [ -0.       -0.      -11.22412]

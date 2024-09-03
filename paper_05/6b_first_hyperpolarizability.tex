@@ -1,7 +1,7 @@
 
 % Default to the notebook output style
 
-    
+
 
 
 % Inherit from the specified cell style.
@@ -9,11 +9,11 @@
 
 
 
-    
+
 \documentclass[11pt]{article}
 
-    
-    
+
+
     \usepackage[T1]{fontenc}
     % Nicer default font (+ math font) than Computer Modern for most use cases
     \usepackage{mathpazo}
@@ -38,7 +38,7 @@
     \DeclareCaptionLabelFormat{nolabel}{}
     \captionsetup{labelformat=nolabel}
 
-    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{adjustbox} % Used to constrain images to a maximum size
     \usepackage{xcolor} % Allow colors to be defined
     \usepackage{enumerate} % Needed for markdown enumerations to work
     \usepackage{geometry} % Used to adjust the document margins
@@ -54,8 +54,8 @@
     \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
     \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
     \usepackage{fancyvrb} % verbatim replacement that allows latex
-    \usepackage{grffile} % extends the file name processing of package graphics 
-                         % to support a larger range 
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
     % The hyperref package gives us a pdf with properly built
     % internal navigation ('pdf bookmarks' for the table of contents,
     % internal cross-reference links, web links for URLs, etc.)
@@ -65,10 +65,10 @@
     \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
     \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
                                 % normalem makes italics be italics, not underlines
-    
 
-    
-    
+
+
+
     % Colors for the hyperref package
     \definecolor{urlcolor}{rgb}{0,.145,.698}
     \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
@@ -113,7 +113,7 @@
     \newcommand{\RegionMarkerTok}[1]{{#1}}
     \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
     \newcommand{\NormalTok}[1]{{#1}}
-    
+
     % Additional commands for more recent versions of Pandoc
     \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
     \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
@@ -132,8 +132,8 @@
     \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
     \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
     \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
-    
-    
+
+
     % Define a nice break command that doesn't care if a line doesn't already
     % exist.
     \def\br{\hspace*{\fill} \\* }
@@ -142,12 +142,12 @@
     \def\lt{<}
     % Document parameters
     \title{6b\_first\_hyperpolarizability}
-    
-    
-    
+
+
+
 
     % Pygments definitions
-    
+
 \makeatletter
 \def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
     \let\PY@ul=\relax \let\PY@tc=\relax%
@@ -255,9 +255,9 @@
 
 
 
-    
+
     % Prevent overflowing lines due to hard-to-break entities
-    \sloppy 
+    \sloppy
     % Setup hyperref package
     \hypersetup{
       breaklinks=true,  % so long urls are correctly broken across lines
@@ -267,25 +267,25 @@
       citecolor=citecolor,
       }
     % Slightly bigger margins than the latex defaults
-    
+
     \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
-    
-    
+
+
 
     \begin{document}
-    
-    
-    \maketitle
-    
-    
 
-    
+
+    \maketitle
+
+
+
+
     \begin{Verbatim}[commandchars=\\\{\}]
 {\color{incolor}In [{\color{incolor}1}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Tutorial: SCF first hyperpolarizability\PYZdq{}\PYZdq{}\PYZdq{}}
-        
+
         \PY{n}{\PYZus{}\PYZus{}author\PYZus{}\PYZus{}}    \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Eric J. Berquist}\PY{l+s+s2}{\PYZdq{}}
         \PY{n}{\PYZus{}\PYZus{}credit\PYZus{}\PYZus{}}    \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Eric J. Berquist}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
-        
+
         \PY{n}{\PYZus{}\PYZus{}copyright\PYZus{}\PYZus{}} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(c) 2014\PYZhy{}2017, The Psi4NumPy Developers}\PY{l+s+s2}{\PYZdq{}}
         \PY{n}{\PYZus{}\PYZus{}license\PYZus{}\PYZus{}}   \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{BSD\PYZhy{}3\PYZhy{}Clause}\PY{l+s+s2}{\PYZdq{}}
         \PY{n}{\PYZus{}\PYZus{}date\PYZus{}\PYZus{}}      \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2017\PYZhy{}12\PYZhy{}19}\PY{l+s+s2}{\PYZdq{}}
@@ -605,7 +605,7 @@ wavefunction.
             \PY{k+kn}{import} \PY{n+nn}{os}\PY{n+nn}{.}\PY{n+nn}{path}
             \PY{n}{dirname} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{dirname}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{abspath}\PY{p}{(}\PY{n+nv+vm}{\PYZus{}\PYZus{}file\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{)}
             \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{dirname}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../../Response\PYZhy{}Theory/Self\PYZhy{}Consistent\PYZhy{}Field}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
-        
+
         \PY{k+kn}{from} \PY{n+nn}{helper\PYZus{}CPHF} \PY{k}{import} \PY{n}{helper\PYZus{}CPHF}
 \end{Verbatim}
 
@@ -616,22 +616,22 @@ followed by the frequency-(in)dependent linear response equations,
 \[
 \left[
 \begin{pmatrix}
-\mathbf{A} & \mathbf{B} \\ 
+\mathbf{A} & \mathbf{B} \\
 \mathbf{B}^{*} & \mathbf{A}^{*}
 \end{pmatrix}
 - \omega_{f}
 \begin{pmatrix}
-\mathbf{\Sigma} & \mathbf{\Delta} \\ 
+\mathbf{\Sigma} & \mathbf{\Delta} \\
 -\mathbf{\Delta}^{*} & -\mathbf{\Sigma}^{*}
 \end{pmatrix}
 \right]
 \begin{pmatrix}
-\mathbf{X} \\ 
+\mathbf{X} \\
 \mathbf{Y}
 \end{pmatrix}
 =
 \begin{pmatrix}
-\mathbf{V} \\ 
+\mathbf{V} \\
 -\mathbf{V}^{*}
 \end{pmatrix}
 ,
@@ -644,22 +644,22 @@ reference with canonical orbitals, the above equations reduce to
 \[
 \left[
 \begin{pmatrix}
-\mathbf{A} & \mathbf{B} \\ 
+\mathbf{A} & \mathbf{B} \\
 \mathbf{B} & \mathbf{A}
 \end{pmatrix}
 - \omega_{f}
 \begin{pmatrix}
-\mathbf{1} & \mathbf{0} \\ 
+\mathbf{1} & \mathbf{0} \\
 \mathbf{0} & -\mathbf{1}
 \end{pmatrix}
 \right]
 \begin{pmatrix}
-\mathbf{X} \\ 
+\mathbf{X} \\
 \mathbf{Y}
 \end{pmatrix}
 =
 \begin{pmatrix}
-\mathbf{V} \\ 
+\mathbf{V} \\
 -\mathbf{V}
 \end{pmatrix}
 .
@@ -783,7 +783,7 @@ be calculated; as they are identical, this leads to the prefactor of
          \PY{n}{npR} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{R}\PY{p}{)}
          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{ncomp}\PY{p}{)}\PY{p}{:}
              \PY{n}{V} \PY{o}{=} \PY{n}{integrals\PYZus{}mo}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
-         
+
              \PY{c+c1}{\PYZsh{} eqn. (III\PYZhy{}1b)}
              \PY{c+c1}{\PYZsh{} Note: this simplified handling of the response vector}
              \PY{c+c1}{\PYZsh{} transformation for the Fock build is insufficient for}
@@ -796,11 +796,11 @@ be calculated; as they are identical, this leads to the prefactor of
              \PY{n}{jk}\PY{o}{.}\PY{n}{compute}\PY{p}{(}\PY{p}{)}
              \PY{n}{J} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{jk}\PY{o}{.}\PY{n}{J}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
              \PY{n}{K} \PY{o}{=} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{n}{jk}\PY{o}{.}\PY{n}{K}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
-         
+
              \PY{c+c1}{\PYZsh{} eqn. (21b)}
              \PY{n}{F} \PY{o}{=} \PY{p}{(}\PY{n}{C}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{l+m+mi}{4} \PY{o}{*} \PY{n}{J} \PY{o}{\PYZhy{}} \PY{n}{K}\PY{o}{.}\PY{n}{T} \PY{o}{\PYZhy{}} \PY{n}{K}\PY{p}{)}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{C}\PY{p}{)}
              \PY{n}{G}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{=} \PY{n}{V} \PY{o}{+} \PY{n}{F}
-         
+
          \PY{c+c1}{\PYZsh{} form epsilon matrices, eqn. (34)}
          \PY{n}{E} \PY{o}{=} \PY{n}{G}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
          \PY{n}{omega} \PY{o}{=} \PY{l+m+mi}{0}
@@ -808,7 +808,7 @@ be calculated; as they are identical, this leads to the prefactor of
              \PY{n}{eoU} \PY{o}{=} \PY{p}{(}\PY{n}{moenergies}\PY{p}{[}\PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]} \PY{o}{+} \PY{n}{omega}\PY{p}{)} \PY{o}{*} \PY{n}{U}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
              \PY{n}{Ue} \PY{o}{=} \PY{n}{U}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{*} \PY{n}{moenergies}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]}
              \PY{n}{E}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{o}{.}\PY{o}{.}\PY{o}{.}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{eoU} \PY{o}{\PYZhy{}} \PY{n}{Ue}\PY{p}{)}
-         
+
          \PY{c+c1}{\PYZsh{} Assume some symmetry and calculate only part of the tensor.}
          \PY{c+c1}{\PYZsh{} eqn. (VII\PYZhy{}4)}
          \PY{n}{hyperpolarizability} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
@@ -912,7 +912,7 @@ rule}{2n + 1 rule}}\label{n-1-rule}}
 
 
     % Add a bibliography block to the postdoc
-    
-    
-    
+
+
+
     \end{document}

@@ -209,4 +209,3 @@ Tom
 How to determine linear dependence? A set of vectors is linearly dependent if its determinant is zero. Since the determinant is non-zero only if a matrix is invertible, which requires all non-zero eigenvalues, a set of vectors is linearly dependent if one or more eigenvalues are nearly zero.
 
 # Pauli repulsion
-
