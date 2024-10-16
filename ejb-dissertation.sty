@@ -21,7 +21,7 @@
 \RequirePackage[flushleft]{threeparttable}
 \RequirePackage{xspace}
 
-\RequirePackage[usenames,dvipsnames,svgnames,hyperref,table]{xcolor}
+\RequirePackage[dvipsnames,svgnames,table]{xcolor}
 \definecolor{caliblue}{HTML}{015482}
 \definecolor{carmine}{HTML}{960018}
 
@@ -57,7 +57,7 @@
   numberstyle=\tiny,
 }
 
-\RequirePackage{minted}
+\RequirePackage[outputdir=.cache/latex]{minted}
 \setminted{%
   breaklines=true,%
   fontsize=\footnotesize,%
@@ -114,7 +114,7 @@
 % hyperxmp rather than the XMP file that can be generated through the
 % Creative Commons license chooser:
 % https://creativecommons.org/choose/#metadata
-\RequirePackage{hyperxmp}
+%% \RequirePackage{hyperxmp}
 % \RequirePackage{xmpincl}
 % \includexmp{CC_Attribution-NonCommercial-ShareAlike_4.0_International}
 \hypersetup{%
@@ -124,11 +124,11 @@
   linkcolor=caliblue,%
   anchorcolor=caliblue,%
   urlcolor=carmine,%
-  pdflicenseurl={https://creativecommons.org/licenses/by-nc-sa/4.0/},%
-  pdfcaptionwriter={Eric Berquist},%
-  pdfcontactemail={erb74@pitt.edu},%
-  pdfcontacturl={https://keybase.io/berquist},%
-  baseurl={https://github.com/berquist/dissertation},%
+  %% pdflicenseurl={https://creativecommons.org/licenses/by-nc-sa/4.0/},%
+  %% pdfcaptionwriter={Eric Berquist},%
+  %% pdfcontactemail={erb74@pitt.edu},%
+  %% pdfcontacturl={https://keybase.io/berquist},%
+  %% baseurl={https://github.com/berquist/dissertation},%
 }
 
 \renewcommand{\thefootnote}{\alph{footnote}}

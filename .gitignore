@@ -1,6 +1,7 @@
 # -*- mode: gitignore; -*-
 
 *.html
+.direnv/
 
 eric_john_berquist_etd.pdf
 eric_john_berquist_etd.xmp

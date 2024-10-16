@@ -1,3 +1,7 @@
+all: pdflatex xelatex chemrxiv
+	latexmk -pdf psi4numpy.tex
+
+
 pdflatex:
 	latexmk -pdf pandoc.tex
 	latexmk -pdf -shell-escape pandoc_minted.tex
@@ -13,4 +17,4 @@ chemrxiv:
 	latexmk -pdf psi4numpy_chemrxiv_2.tex
 
 clean:
-	latexmk -c
+	latexmk -C
